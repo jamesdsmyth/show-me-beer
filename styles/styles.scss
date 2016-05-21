@@ -1,0 +1,50 @@
+@import './reset.scss';
+
+#show-me-beer {
+    width: 100%;
+
+    .main-header {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        float: left;
+
+        .main-navigation {
+
+            li {
+                display: block;
+                float: left;
+                margin-right: 10px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    .split {
+        box-sizing: border-box;
+        padding: 15px;
+        float: left;
+        background: #cccccc;
+
+        &.half {
+            width: 100%;
+        }
+    }
+
+    @media only screen and (min-width : 768px) {
+        .split {
+
+            &.half {
+                width: 49%;
+                margin-right: 2%;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
