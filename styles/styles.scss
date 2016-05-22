@@ -1,5 +1,6 @@
 @import './reset.scss';
 
+
 #show-me-beer {
     width: 100%;
 
@@ -23,15 +24,28 @@
         }
     }
 
+    h1 {
+        font-size: 1.6em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
     .split {
         box-sizing: border-box;
         padding: 15px;
         float: left;
-        background: #cccccc;
+        background: #eeeeee;
 
         &.half {
             width: 100%;
         }
+    }
+
+
+    #mapid {
+        height: 80vh;
     }
 
     @media only screen and (min-width : 768px) {
