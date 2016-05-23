@@ -24,7 +24,13 @@ var Data = {
     "The Hunter S" : {
       "LocationPostCode" : "E8 4EH",
       "beers" : {
-        "London Pale Ale" : true
+        "London Pale Ale" : {
+            "alcoholContent" : 4,
+            "price" : 4.95,
+            "type" : "pale ale",
+            "countryOrigin" : "England",
+            "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
+        }
       },
       "description" : "Long description of The Hunter S",
       "locationCity" : "London",
@@ -42,6 +48,7 @@ var Data = {
           "alcoholContent" : 4,
           "price" : 4.95,
           "type" : "pale ale",
+          "countryOrigin" : "England",
           "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
       }
     },

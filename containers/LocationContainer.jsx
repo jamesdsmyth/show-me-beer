@@ -11,9 +11,14 @@ class LocationContainerView extends React.Component {
 
         console.log(currentLocation);
 
-        var beerslist = Object.keys(currentLocation.beers).map(function (beer) {
-            return <li>
+        var beerslist = Object.keys(currentLocation.beers).map(function (beer, i) {
+            console.log(currentLocation.beers[beer]);
+            return <li key={i}>
                         {beer}
+                        <p>Type: {currentLocation.beers[beer].type}</p>
+                        <p>Price: {currentLocation.beers[beer].price}</p>
+                        <p>Country origin: {currentLocation.beers[beer].countryOrigin}</p>
+                        <img src={currentLocation.beers[beer].photo} alt={beer} />
                         <Link to={"/beers/" + beer}>
                             View this beer
                         </Link>

@@ -19,8 +19,8 @@ class MapContainer extends React.Component {
         var LeafIcon = L.Icon.extend({
             options: {
                 iconUrl: '../node_modules/leaflet/dist/images/marker-icon.png',
-                iconSize: [25, 41],
-                iconAnchor: [25, 41],
+                iconSize:     [38, 95], // size of the icon
+                iconAnchor:   [22, 94],
                 popupAnchor:  [-15, -46]
             }
         });
