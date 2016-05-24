@@ -32,6 +32,4 @@ render((
     </Provider>
 ), document.getElementById('show-me-beer'));
 
-// download the https://babeljs.io/docs/plugins/transform-object-rest-spread/
-
-// Markers are not being placed in the correct place
+// get a post code api that will filter map markers and locations installed

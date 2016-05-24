@@ -42,17 +42,18 @@ class MapContainer extends React.Component {
 
         } else {
             for(var key in locations) {
-                console.log(locations[key].longitude);
+                console.log(locations[key])
+                console.log(locations[key].coords.longitude);
 
                 // var popupHTML = "<a href={'/locations/' + key}>{key}</a>"
-                L.marker([locations[key].longitude, locations[key].latitude],
+                L.marker([locations[key].coords.longitude, locations[key].coords.latitude],
                     {
                         icon: markerIcon
                     }
-                ).addTo(mymap).bindPopup(key);
+                ).addTo(mymap).bindPopup('<a href="/locations/' + key + '">' + key +'</a>');
             }
 
-            mymap.setView([51.505, -0.09], 13);
+            mymap.setView([51.505, -0.09], 8);
         }
     }
 

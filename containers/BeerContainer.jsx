@@ -18,6 +18,8 @@ class BeerContainerView extends React.Component {
                     </li>
         });
 
+        console.log(currentBeer.locations);
+
         return (
             <div>
                 <section className="split half">
