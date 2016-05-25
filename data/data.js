@@ -37,6 +37,7 @@ var Data = {
         }
       },
       "description" : "Long description of The Hunter S",
+      "locationBorough" : "Tower Hamlets",
       "locationCity" : "London",
       "locationCountry" : "England",
       "coords": {
@@ -57,6 +58,7 @@ var Data = {
           }
         },
         "description" : "Long description of The Fox",
+        "locationBorough" : "God Knows",
         "locationCity" : "Bristol",
         "locationCountry" : "England",
         "coords": {
@@ -69,6 +71,7 @@ var Data = {
    "shortLocations" : {
        "The Hunter S" : {
          "LocationPostCode" : "E8 4EH",
+         "locationBorough" : "Tower Hamlets",
          "locationCity" : "London",
          "locationCountry" : "England",
          "coords": {
@@ -79,6 +82,7 @@ var Data = {
          },
          "The Fox" : {
            "LocationPostCode" : "N1 4ES",
+           "locationBorough" : "God Knows",
            "locationCity" : "Bristol",
            "locationCountry" : "England",
            "coords": {

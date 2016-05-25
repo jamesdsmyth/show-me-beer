@@ -32,4 +32,4 @@ render((
     </Provider>
 ), document.getElementById('show-me-beer'));
 
-// get a post code api that will filter map markers and locations installed
+// need to remove the location if it has not been searched for in locations.
