@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import leaflet from 'leaflet'
 import { Link } from 'react-router'
 
 class MapContainer extends React.Component {
 
+    constructor (props) {
+        super (props);
+        this.state = {
+            locations: null
+        }
+    }
+
     componentDidMount () {
-        this.setLocationMarkers()
+        this.setLocationMarkers();
     }
 
     setLocationMarkers () {
+
+        this.setState({ locations: this.props.locations });
+
+        // var b = this.props.locations;
+        // console.log(b)
+        // this.setState({ locations: this.props.locations });
         var locations = this.props.locations;
+
+
+
+
+
+
+        console.log(this.props.locations)
+        console.log(this.state);
+
+        // struggling with adding the state here so it changes.
 
         var mymap = L.map('mapid');
         L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFtZXNkc215dGgiLCJhIjoiY2lvaXFlejRoMDA2eHV1a3gwMWJyOThiYSJ9.ZHj4u050E2Ta_YiWyRnOxA', {

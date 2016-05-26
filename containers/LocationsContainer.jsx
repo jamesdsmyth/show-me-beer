@@ -47,11 +47,14 @@ class LocationsContainerView extends React.Component {
         var locations = this.props.locations;
         var borough = this.state.borough;
         var locationsList = [];
+        var sss = {};
+
+        console.log('1', locations);
 
         if(borough == null) {
             locationsList = Object.keys(locations).map(function (location, i) {
 
-                console.log(location)
+                // console.log(location)
 
                 return <li key={i}>
                             <Link to={"/locations/" + location}>
@@ -61,16 +64,23 @@ class LocationsContainerView extends React.Component {
             });
         } else {
             locationsList = Object.keys(locations).map(function (location, i) {
-
-                if(locations[location].locationBorough == borough) {
+                if(locations[location].locationBorough === borough) {
                     return <li key={i}>
                                 <Link to={"/locations/" + location}>
                                     {location}
                                 </Link>
                             </li>
+                } else {
+                    delete locations[location];
                 }
             });
+
+
+
         }
+
+        console.log('locations list ', locationsList);
+        console.log('2', locations)
 
         var postcodeClick = this.searchPostcode.bind(this);
 
