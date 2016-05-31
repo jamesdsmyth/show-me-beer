@@ -32,4 +32,8 @@ render((
     </Provider>
 ), document.getElementById('show-me-beer'));
 
-// need to remove the location if it has not been searched for in locations.
+// - fix bug with removing location. This needs to be re-added
+// - filter beers type - http://www.thebeerstore.ca/beer-101/beer-types. Also add these fields to the beers and locations in the data.js
+// - filter location on city/borough
+// - get initial styling in
+// - send email out asking what beers people enjoy. Do this on Friday

@@ -91,7 +91,9 @@ var Data = {
            },
            "name" : "The Fox"
          }
-   }
+   },
+   "beerTypes" : ['ale', 'lager', 'stout'],
+   "beerStyles" : ['amber', 'blond', 'brown', 'cream', 'dark', 'golden', 'honey', 'pale ale', 'light', 'pilsner', 'red', 'strong']
 }
 
 export default Data

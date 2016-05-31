@@ -2,6 +2,7 @@
 
 
 #show-me-beer {
+    font-family: 'Lora', serif;
     width: 100%;
 
     .main-header {
@@ -26,20 +27,70 @@
 
     h1 {
         font-size: 1.6em;
+        margin-bottom: 15px;
+
+        &.beer-heading {
+            font-size: 3em;
+        }
     }
 
     h2 {
         font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    p {
+        margin-bottom: 15px;
+        line-height: 1.5em;
     }
 
     .split {
         box-sizing: border-box;
+        position: relative;
         padding: 15px;
         float: left;
         background: #eeeeee;
+        width: 100%;
+        margin-bottom: 10px;
 
         &.half {
             width: 100%;
+        }
+    }
+
+    ul {
+
+        &.beers-list {
+
+            li {
+                width: 23.5%;
+                margin-right: 2%;
+                height: 200px;
+                float: left;
+
+                .beer-image {
+                    height: 150px;
+                    width: auto;
+                }
+
+                .beer-title {
+                    display: block;
+                    clear: both;
+                }
+
+                &:nth-child(4n){
+                    margin-right: 0;
+                }
+            }
+        }
+
+        li {
+            line-height: 1.5em;
         }
     }
 
@@ -48,7 +99,7 @@
         height: 80vh;
     }
 
-    @media only screen and (min-width : 768px) {
+    @media only screen and (min-width : 1000px) {
         .split {
 
             &.half {

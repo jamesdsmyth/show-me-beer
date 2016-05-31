@@ -8,18 +8,21 @@ class BeersContainerView extends React.Component {
 
         var beerList = Object.keys(beers).map(function (beer, i) {
             return <li key={i}>
-                        <Link to={"/beers/" + beer}>
-                            {beer}
-                        </Link>
+                        <h3>
+                            <Link to={"/beers/" + beer}>
+                                {beer}
+                            </Link>
+                        </h3>
+                        <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
                     </li>
         });
 
         return (
             <div>
                 {!this.props.children ?
-                    <section>
+                    <section className="split">
                         <h1>Beers</h1>
-                        <ul>{beerList}</ul>
+                        <ul className="beers-list">{beerList}</ul>
                     </section>
                 : null}
                 {this.props.children}

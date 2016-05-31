@@ -5,14 +5,14 @@ class HomeContainer extends React.Component {
     render () {
         return (
             <div className="container">
-                <section className="split half">
+                <section className="split">
                     <h2>
                         <Link to="/beers">
                             Beers
                         </Link>
                     </h2>
                 </section>
-                <section className="split half">
+                <section className="split">
                     <h2>
                         <Link to="/locations">
                             Locations
