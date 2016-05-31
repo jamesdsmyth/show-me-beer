@@ -17,14 +17,13 @@ class BeerContainerView extends React.Component {
                     </li>
         });
 
-        console.log(currentBeer.locations);
-
         return (
             <div>
                 <section className="split">
                     <section className="split half">
                         <h1 className="beer-heading">{currentBeer.name}</h1>
                         <p>Type: {currentBeer.type}</p>
+                        <p>Style: {currentBeer.style}</p>
                         <p>Alcohol content: {currentBeer.alcoholContent}%</p>
                         <p>Country: {currentBeer.countryOrigin}</p>
                         <p>City: {currentBeer.cityOrigin}</p>

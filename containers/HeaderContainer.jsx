@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
                     <ul className="main-navigation">
                         <li>
                             <Link to="/" activeClassName="active">
-                                Show me beer
+                                Home
                             </Link>
                         </li>
                         <li>

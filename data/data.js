@@ -21,7 +21,8 @@ var Data = {
       },
       "name" : "London Pale Ale",
       "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg",
-      "type" : "pale ale"
+      "type" : "ale",
+      "style": "pale ale"
     }
   },
   "locations" : {
@@ -31,7 +32,8 @@ var Data = {
         "London Pale Ale" : {
             "alcoholContent" : 4,
             "price" : 4.95,
-            "type" : "pale ale",
+            "type" : "ale",
+            "style": "pale ale",
             "countryOrigin" : "England",
             "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
         }
@@ -52,7 +54,8 @@ var Data = {
           "London Pale Ale" : {
               "alcoholContent" : 4,
               "price" : 4.95,
-              "type" : "pale ale",
+              "type" : "ale",
+              "style": "pale ale",
               "countryOrigin" : "England",
               "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
           }
@@ -92,7 +95,7 @@ var Data = {
            "name" : "The Fox"
          }
    },
-   "beerTypes" : ['ale', 'lager', 'stout'],
+   "beerTypes" : ['ale', 'lager', 'stout', 'malt'],
    "beerStyles" : ['amber', 'blond', 'brown', 'cream', 'dark', 'golden', 'honey', 'pale ale', 'light', 'pilsner', 'red', 'strong']
 }
 
