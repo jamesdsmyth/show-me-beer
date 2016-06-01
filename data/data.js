@@ -29,7 +29,7 @@ var Data = {
   },
   "locations" : {
     "the-hunter-s" : {
-      "LocationPostCode" : "E8 4EH",
+      "postCode" : "E8 4EH",
       "beers" : {
         "london-pale-ale" : {
             "name": "London Pale Ale",
@@ -42,8 +42,8 @@ var Data = {
         }
       },
       "description" : "Long description of The Hunter S",
-      "locationBorough" : "Tower Hamlets",
-      "locationCity" : "London",
+      "borough" : "Tower Hamlets",
+      "city" : "London",
       "locationCountry" : "England",
       "coords": {
           "longitude" :  51.505,
@@ -52,7 +52,7 @@ var Data = {
       "name" : "The Hunter S"
       },
       "the-fox" : {
-        "LocationPostCode" : "N1 4ES",
+        "postCode" : "N1 4ES",
         "beers" : {
           "london-pale-ale" : {
               "name": "London Pale Ale",
@@ -65,8 +65,8 @@ var Data = {
           }
         },
         "description" : "Long description of The Fox",
-        "locationBorough" : "God Knows",
-        "locationCity" : "Bristol",
+        "borough" : "God Knows",
+        "city" : "Bristol",
         "locationCountry" : "England",
         "coords": {
             "longitude" :  51.505,
@@ -77,9 +77,9 @@ var Data = {
   },
    "shortLocations" : {
        "the-hunter-s" : {
-         "LocationPostCode" : "E8 4EH",
-         "locationBorough" : "Tower Hamlets",
-         "locationCity" : "London",
+         "postCode" : "E8 4EH",
+         "borough" : "Tower Hamlets",
+         "city" : "London",
          "locationCountry" : "England",
          "coords": {
              "longitude" :  51.505,
@@ -88,9 +88,9 @@ var Data = {
          "name" : "The Hunter S"
          },
          "the-fox" : {
-           "LocationPostCode" : "N1 4ES",
-           "locationBorough" : "God Knows",
-           "locationCity" : "Bristol",
+           "postCode" : "N1 4ES",
+           "borough" : "God Knows",
+           "city" : "Bristol",
            "locationCountry" : "England",
            "coords": {
                "longitude" :  51.505,
@@ -99,8 +99,61 @@ var Data = {
            "name" : "The Fox"
          }
    },
-   "beerTypes" : ['ale', 'lager', 'stout', 'malt'],
-   "beerStyles" : ['amber', 'blond', 'brown', 'cream', 'dark', 'golden', 'honey', 'pale ale', 'light', 'pilsner', 'red', 'strong']
+   "beerTypes" : [
+       'ale',
+       'lager',
+       'stout',
+       'malt'
+   ],
+   "beerStyles" : [
+       'amber',
+       'blond',
+       'brown',
+       'cream',
+       'dark',
+       'golden',
+       'honey',
+       'pale ale',
+       'light',
+       'pilsner',
+       'red',
+       'strong'
+   ],
+   "boroughs": [
+       'Barking and Dagenham',
+       'Barnet',
+       'Bexley',
+       'Brent',
+       'Bromley',
+       'Camden',
+       'City of London',
+       'Croyden',
+       'Ealing',
+       'Enfield',
+       'Greenwich',
+       'Hackney',
+       'Hammersmith and Fulham',
+       'Haringey',
+       'Harrow',
+       'Havering',
+       'Hillingdon',
+       'Hounslow',
+       'Islington',
+       'Kensington and Chelsea',
+       'Kingston upon Thames',
+       'Lambeth',
+       'Lewisham',
+       'Merton',
+       'Newham',
+       'Redbridge',
+       'Richmond upon Thames',
+       'Southwark',
+       'Sutton',
+       'Tower Hamlets',
+       'Waltham Forest',
+       'Wandsworth',
+       'Westminster'
+   ]
 }
 
 export default Data

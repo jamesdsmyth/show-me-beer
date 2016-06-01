@@ -36,10 +36,12 @@ class BeersContainerView extends React.Component {
                     return <li key={i}>
                                 <h3>
                                     <Link to={"/beers/" + beer}>
-                                        {beer}
+                                        {beers[beer].name}
                                     </Link>
                                 </h3>
-                                <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
+                                <Link to={"/beers/" + beer}>
+                                    <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
+                                </Link>
                             </li>
                 }
             }

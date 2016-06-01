@@ -26,9 +26,6 @@ class LocationsContainerView extends React.Component {
             url: 'https://api.postcodes.io/postcodes',
             data: data,
             success: (response) => {
-                // var borough = response.result[0].result.admin_district;
-
-                console.log(response.result[0].result);
                 if(response.result[0].result != null) {
                     this.setBorough(response.result[0].result.admin_district);
                 } else {
@@ -46,12 +43,21 @@ class LocationsContainerView extends React.Component {
         this.setState({ borough: borough });
     }
 
+    boroughSelect (event) {
+        this.setState({ borough: event.target.value });
+    }
+
     render () {
         var locations = this.props.locations;
         var borough = this.state.borough;
+        var boroughs = this.props.boroughs;
         var locationsList = [];
 
-        console.log('1', locations);
+
+        // creating the select dropdown options for the boroughs
+        var boroughOptions = boroughs.map(function (borough, i) {
+            return <option key={i} value={borough}>{borough}</option>
+        });
 
         if(borough == null) {
             locationsList = Object.keys(locations).map(function (location, i) {
@@ -64,7 +70,7 @@ class LocationsContainerView extends React.Component {
             });
         } else {
             locationsList = Object.keys(locations).map(function (location, i) {
-                if(locations[location].locationBorough === borough) {
+                if(locations[location].borough === borough) {
                     return <li key={i}>
                                 <Link to={"/locations/" + location}>
                                     {location}
@@ -76,10 +82,10 @@ class LocationsContainerView extends React.Component {
             });
 
             var bbb = Object.keys(locations).filter(function (location, i) {
-                if(locations[location].locationBorough === borough) {
+                if(locations[location].borough === borough) {
                     return locations[location];
                 }
-                // return locations[location].locationBorough === borough//) //{
+                // return locations[location].borough === borough//) //{
                 //     return <li key={i}>
                 //                 <Link to={"/locations/" + location}>
                 //                     {location}
@@ -97,6 +103,7 @@ class LocationsContainerView extends React.Component {
         }
 
         var postcodeClick = this.searchPostcode.bind(this);
+        var boroughSelectChange = this.boroughSelect.bind(this);
 
         return (
             <div>
@@ -113,6 +120,12 @@ class LocationsContainerView extends React.Component {
                             <ul>
                                 {locationsList}
                             </ul>
+                            <select onChange={boroughSelectChange}>
+                                <option value="all">
+                                    Select borough
+                                </option>
+                                {boroughOptions}
+                            </select>
                         </section>
                         <section className="split">
                             <MapContainer locations={locations} />
@@ -127,7 +140,8 @@ class LocationsContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        locations: state.shortLocations
+        locations: state.shortLocations,
+        boroughs: state.boroughs
     }
 }
 

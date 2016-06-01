@@ -24,7 +24,7 @@ class LocationContainerView extends React.Component {
             <div>
                 <section className="split">
                     <h1>{currentLocation.name}</h1>
-                    <p>City: {currentLocation.locationCity}</p>
+                    <p>City: {currentLocation.city}</p>
                     <p>Country: {currentLocation.locationCountry}</p>
                     <p>Description: {currentLocation.description}</p>
                     <h2>Beers sold here</h2>
