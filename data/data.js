@@ -1,18 +1,20 @@
 var Data = {
   "beers" : {
-    "London Pale Ale" : {
+    "london-pale-ale" : {
       "cityOrigin" : "London",
       "alcoholContent" : 4,
       "countryOrigin" : "England",
       "description" : "Short description",
       "locations" : {
-        "The Hunter S" : {
+        "the-hunter-s" : {
+            "name": "The Hunter S",
             "coords": {
                 "longitude" :  51.505,
                 "latitude" : -0.09
             },
         },
-        "The Fox" : {
+        "the-fox" : {
+            "name": "The Fox",
             "coords": {
                 "longitude" :  51.505,
                 "latitude" : -2.0
@@ -26,10 +28,11 @@ var Data = {
     }
   },
   "locations" : {
-    "The Hunter S" : {
+    "the-hunter-s" : {
       "LocationPostCode" : "E8 4EH",
       "beers" : {
-        "London Pale Ale" : {
+        "london-pale-ale" : {
+            "name": "London Pale Ale",
             "alcoholContent" : 4,
             "price" : 4.95,
             "type" : "ale",
@@ -48,10 +51,11 @@ var Data = {
       },
       "name" : "The Hunter S"
       },
-      "The Fox" : {
+      "the-fox" : {
         "LocationPostCode" : "N1 4ES",
         "beers" : {
-          "London Pale Ale" : {
+          "london-pale-ale" : {
+              "name": "London Pale Ale",
               "alcoholContent" : 4,
               "price" : 4.95,
               "type" : "ale",
@@ -72,7 +76,7 @@ var Data = {
       }
   },
    "shortLocations" : {
-       "The Hunter S" : {
+       "the-hunter-s" : {
          "LocationPostCode" : "E8 4EH",
          "locationBorough" : "Tower Hamlets",
          "locationCity" : "London",
@@ -83,7 +87,7 @@ var Data = {
          },
          "name" : "The Hunter S"
          },
-         "The Fox" : {
+         "the-fox" : {
            "LocationPostCode" : "N1 4ES",
            "locationBorough" : "God Knows",
            "locationCity" : "Bristol",

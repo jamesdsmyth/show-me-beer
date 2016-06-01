@@ -15,7 +15,7 @@ class LocationContainerView extends React.Component {
                             <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />
                         </Link>
                         <Link to={"/beers/" + beer} className="beer-title">
-                            {beer}
+                            {currentLocation.beers[beer].name}
                         </Link>
                     </li>
         });

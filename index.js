@@ -37,4 +37,4 @@ render((
 // - filter location on city/borough
 // - get initial styling in
 // - send email out asking what beers people enjoy. Do this on Friday
-// - make urls friendly, ask Richard about what would he do
+// - DONE - make urls friendly, ask Richard about what would he do
