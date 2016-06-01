@@ -33,8 +33,8 @@ render((
 ), document.getElementById('show-me-beer'));
 
 // - fix bug with removing location. This needs to be re-added
-// - filter beers type - http://www.thebeerstore.ca/beer-101/beer-types. Also add these fields to the beers and locations in the data.js
-// - filter location on city/borough
+// - IN PROGRESS - filter beers type - http://www.thebeerstore.ca/beer-101/beer-types. Also add these fields to the beers and locations in the data.js
+// - filter location on London boroughs - need to get a list of boroughs and cities added from here https://en.wikipedia.org/wiki/List_of_London_boroughs
 // - get initial styling in
 // - send email out asking what beers people enjoy. Do this on Friday
-// - DONE - make urls friendly, ask Richard about what would he do
+// - DONE - make urls friendly
