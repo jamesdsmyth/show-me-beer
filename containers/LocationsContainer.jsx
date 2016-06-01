@@ -9,7 +9,7 @@ class LocationsContainerView extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            borough: null
+            borough: 'all'
         }
     }
 
@@ -17,9 +17,7 @@ class LocationsContainerView extends React.Component {
         e.preventDefault();
 
         var postcode = document.getElementById('postcode').value;
-        var data = {
-                      "postcodes" : [postcode]
-                  }
+        var data = { "postcodes" : [postcode] }
 
         $.ajax({
             type: 'POST',
@@ -29,9 +27,8 @@ class LocationsContainerView extends React.Component {
                 if(response.result[0].result != null) {
                     this.setBorough(response.result[0].result.admin_district);
                 } else {
-                    this.setBorough(-1);
+                    this.setBorough('all');
                 }
-
             },
             error: (response) => {
                 console.log('error', response);
@@ -43,67 +40,50 @@ class LocationsContainerView extends React.Component {
         this.setState({ borough: borough });
     }
 
-    boroughSelect (event) {
-        this.setState({ borough: event.target.value });
+    // hack here... because updating the state occurs asyncronously, the re-render is fired before the state is updated, therefore
+    // the render still things the borough is the old value
+    boroughHandleSelect (event) {
+        var borough = event.target.value
+        this.setState({ borough: borough }, () => {
+            this.setState({ borough: borough });
+        });
     }
 
     render () {
         var locations = this.props.locations;
-        var borough = this.state.borough;
         var boroughs = this.props.boroughs;
+        var borough = this.state.borough;
         var locationsList = [];
+        var locationsMaplist = {};
 
+        console.log(borough);
 
         // creating the select dropdown options for the boroughs
         var boroughOptions = boroughs.map(function (borough, i) {
             return <option key={i} value={borough}>{borough}</option>
         });
 
-        if(borough == null) {
-            locationsList = Object.keys(locations).map(function (location, i) {
-
-                return <li key={i}>
-                            <Link to={"/locations/" + location}>
-                                {location}
-                            </Link>
-                        </li>
-            });
-        } else {
-            locationsList = Object.keys(locations).map(function (location, i) {
-                if(locations[location].borough === borough) {
-                    return <li key={i}>
-                                <Link to={"/locations/" + location}>
-                                    {location}
-                                </Link>
-                            </li>
-                } else {
-                    // delete locations[location];
-                }
-            });
-
-            var bbb = Object.keys(locations).filter(function (location, i) {
-                if(locations[location].borough === borough) {
-                    return locations[location];
-                }
-                // return locations[location].borough === borough//) //{
-                //     return <li key={i}>
-                //                 <Link to={"/locations/" + location}>
-                //                     {location}
-                //                 </Link>
-                //             </li>
-                // } else {
-                //     delete locations[location];
-                // }
-
-            });
-
-            console.log(bbb);
-
-
+        for(var i in locations) {
+            if((locations[i].borough === borough) || borough === 'all') {
+                locationsMaplist[i] = locations[i];
+            }
         }
 
+        // filtering all locations to see whether they match the borough selected
+        locationsList = Object.keys(locations).map(function (location, i) {
+            if((locations[location].borough === borough) || borough === 'all') {
+                return <li key={i}>
+                            <Link to={"/locations/" + location}>
+                                {locations[location].name}
+                            </Link>
+                        </li>
+            }
+        });
+
+        console.log(locationsMaplist);
+
         var postcodeClick = this.searchPostcode.bind(this);
-        var boroughSelectChange = this.boroughSelect.bind(this);
+        var boroughSelectChange = this.boroughHandleSelect.bind(this);
 
         return (
             <div>
@@ -120,7 +100,7 @@ class LocationsContainerView extends React.Component {
                             <ul>
                                 {locationsList}
                             </ul>
-                            <select onChange={boroughSelectChange}>
+                            <select value={this.state.borough} onChange={boroughSelectChange}>
                                 <option value="all">
                                     Select borough
                                 </option>
@@ -128,7 +108,7 @@ class LocationsContainerView extends React.Component {
                             </select>
                         </section>
                         <section className="split">
-                            <MapContainer locations={locations} />
+                            <MapContainer locations={locationsMaplist} />
                         </section>
                     </div>
                 : null}
