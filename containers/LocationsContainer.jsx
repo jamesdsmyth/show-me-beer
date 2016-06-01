@@ -80,10 +80,10 @@ class LocationsContainerView extends React.Component {
             }
         });
 
-        console.log(locationsMaplist);
+        console.log(borough);
 
         var postcodeClick = this.searchPostcode.bind(this);
-        var boroughSelectChange = this.boroughHandleSelect.bind(this);
+        var handleBoroughChange = this.boroughHandleSelect.bind(this);
 
         return (
             <div>
@@ -91,7 +91,7 @@ class LocationsContainerView extends React.Component {
                     <div>
                         <section className="split">
                             <h1>Locations</h1>
-                            {borough !== null && borough !== -1  ? <h2>Locations in {borough}</h2> : null}
+                            {borough !== 'all' && borough !== -1 ? <h2>Locations in {borough}</h2> : null}
                             {borough === -1 ? <h2>Incorrect postcode!</h2> : null}
                             <form>
                                 <input id="postcode" type="text" />
@@ -100,7 +100,7 @@ class LocationsContainerView extends React.Component {
                             <ul>
                                 {locationsList}
                             </ul>
-                            <select value={this.state.borough} onChange={boroughSelectChange}>
+                            <select value={this.state.borough} onChange={handleBoroughChange}>
                                 <option value="all">
                                     Select borough
                                 </option>

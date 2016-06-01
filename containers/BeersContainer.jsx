@@ -25,8 +25,6 @@ class BeersContainerView extends React.Component {
         var type = this.state.type;
         var style = this.state.style;
 
-        console.log(type)
-
         var beerList = Object.keys(beers).map(function (beer, i) {
 
             if((beers[beer].type == type) || (type == 'all')) {

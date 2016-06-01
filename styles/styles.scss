@@ -28,6 +28,7 @@
     h1 {
         font-size: 1.6em;
         margin-bottom: 15px;
+        text-align: center;
 
         &.beer-heading {
             font-size: 3em;
@@ -37,11 +38,21 @@
     h2 {
         font-size: 1.5em;
         margin-bottom: 15px;
+        text-align: center;
+
+        &.intro-headings {
+            font-family: 'Oleo Script', cursive;
+            font-size: 4em;
+        }
     }
 
     h3 {
         font-size: 1.5em;
         margin-bottom: 15px;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     p {
@@ -54,7 +65,6 @@
         position: relative;
         padding: 15px;
         float: left;
-        background: #eeeeee;
         width: 100%;
         margin-bottom: 10px;
 

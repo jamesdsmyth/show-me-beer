@@ -62,7 +62,7 @@ class MapContainer extends React.Component {
                 }
             ).addTo(this.mymap)
 
-            this.mymap.setView([locations.longitude, locations.latitude], 13);
+            this.mymap.setView([locations.longitude, locations.latitude], 12);
 
         } else {
             for(var key in locations) {
@@ -73,7 +73,7 @@ class MapContainer extends React.Component {
                 ).addTo(this.mymap).bindPopup('<a href="/locations/' + key + '">' + key +'</a>');
             }
 
-            this.mymap.setView([51.505, -0.09], 8);
+            this.mymap.setView([51.505, -0.09], 12);
         }
     }
 

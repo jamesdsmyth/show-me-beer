@@ -6,14 +6,14 @@ class HomeContainer extends React.Component {
         return (
             <div className="container">
                 <section className="split">
-                    <h2>
+                    <h2 className="intro-headings">
                         <Link to="/beers">
                             Beers
                         </Link>
                     </h2>
                 </section>
                 <section className="split">
-                    <h2>
+                    <h2 className="intro-headings">
                         <Link to="/locations">
                             Locations
                         </Link>
