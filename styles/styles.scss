@@ -1,5 +1,5 @@
 @import './reset.scss';
-
+@import './_colors.scss';
 
 #show-me-beer {
     font-family: 'Lora', serif;
@@ -43,6 +43,20 @@
         &.intro-headings {
             font-family: 'Oleo Script', cursive;
             font-size: 4em;
+
+            &.blue {
+
+                a {
+                    color: $light-blue;
+                }
+            }
+
+            &.red {
+
+                a {
+                    color: $light-red;
+                }
+            }
         }
     }
 
@@ -95,6 +109,22 @@
 
                 &:nth-child(4n){
                     margin-right: 0;
+                }
+            }
+        }
+
+        &.tabs-list {
+
+            li {
+                line-height: 1.5em;
+                float: left;
+                margin: 5px;
+                border: 1px solid red;
+                padding: 0 5px;
+                cursor: pointer;
+
+                &.selected {
+                    background: pink;
                 }
             }
         }

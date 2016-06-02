@@ -42,10 +42,9 @@ class LocationsContainerView extends React.Component {
 
     // hack here... because updating the state occurs asyncronously, the re-render is fired before the state is updated, therefore
     // the render still things the borough is the old value
-    boroughHandleSelect (event) {
-        var borough = event.target.value
-        this.setState({ borough: borough }, () => {
-            this.setState({ borough: borough });
+    boroughHandleSelect (borough) {
+        this.setState({ borough: borough.borough }, () => {
+            this.setState({ borough: borough.borough });
         });
     }
 
@@ -53,14 +52,14 @@ class LocationsContainerView extends React.Component {
         var locations = this.props.locations;
         var boroughs = this.props.boroughs;
         var borough = this.state.borough;
+        var postcodeClick = this.searchPostcode.bind(this);
+        var handleBoroughChange = this.boroughHandleSelect.bind(this);
         var locationsList = [];
         var locationsMaplist = {};
 
-        console.log(borough);
-
         // creating the select dropdown options for the boroughs
         var boroughOptions = boroughs.map(function (borough, i) {
-            return <option key={i} value={borough}>{borough}</option>
+            return <li key={i} onClick={() => handleBoroughChange({borough})}>{borough}</li>
         });
 
         for(var i in locations) {
@@ -80,11 +79,6 @@ class LocationsContainerView extends React.Component {
             }
         });
 
-        console.log(borough);
-
-        var postcodeClick = this.searchPostcode.bind(this);
-        var handleBoroughChange = this.boroughHandleSelect.bind(this);
-
         return (
             <div>
                 {!this.props.children ?
@@ -100,12 +94,9 @@ class LocationsContainerView extends React.Component {
                             <ul>
                                 {locationsList}
                             </ul>
-                            <select value={this.state.borough} onChange={handleBoroughChange}>
-                                <option value="all">
-                                    Select borough
-                                </option>
+                            <ul className="tabs-list">
                                 {boroughOptions}
-                            </select>
+                            </ul>
                         </section>
                         <section className="split">
                             <MapContainer locations={locationsMaplist} />
