@@ -8,8 +8,10 @@ class LocationsContainerView extends React.Component {
 
     constructor (props) {
         super (props);
+
         this.state = {
-            borough: 'all'
+            borough: 'all',
+            boroughs: this.props.boroughs
         }
     }
 
@@ -36,6 +38,7 @@ class LocationsContainerView extends React.Component {
         });
     }
 
+    // setting borough through the postcode input box
     setBorough (borough) {
         this.setState({ borough: borough });
     }
@@ -43,34 +46,41 @@ class LocationsContainerView extends React.Component {
     // hack here... because updating the state occurs asyncronously, the re-render is fired before the state is updated, therefore
     // the render still things the borough is the old value
     boroughHandleSelect (borough) {
-        this.setState({ borough: borough.borough }, () => {
-            this.setState({ borough: borough.borough });
+
+        var name = borough.borough
+        if(this.state.borough === name) {
+            name = 'all';
+        }
+
+        this.setState({ borough: name }, () => {
+            this.setState({ borough: name });
         });
     }
 
     render () {
         var locations = this.props.locations;
-        var boroughs = this.props.boroughs;
-        var borough = this.state.borough;
+        var stateBoroughs = this.state.boroughs;
+        var stateBorough = this.state.borough;
         var postcodeClick = this.searchPostcode.bind(this);
         var handleBoroughChange = this.boroughHandleSelect.bind(this);
         var locationsList = [];
         var locationsMaplist = {};
 
-        // creating the select dropdown options for the boroughs
-        var boroughOptions = boroughs.map(function (borough, i) {
-            return <li key={i} onClick={() => handleBoroughChange({borough})}>{borough}</li>
+        // creating the toggle tabs for the boroughs
+        var boroughOptions = stateBoroughs.map(function (borough, i) {
+            var newClass = borough === stateBorough ? 'selected' : null
+            return <li key={i} className={newClass} onClick={() => handleBoroughChange({borough})}>{borough}</li>
         });
 
         for(var i in locations) {
-            if((locations[i].borough === borough) || borough === 'all') {
+            if((locations[i].borough === stateBorough) || stateBorough === 'all') {
                 locationsMaplist[i] = locations[i];
             }
         }
 
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(locations).map(function (location, i) {
-            if((locations[location].borough === borough) || borough === 'all') {
+            if((locations[location].borough === stateBorough) || stateBorough === 'all') {
                 return <li key={i}>
                             <Link to={"/locations/" + location}>
                                 {locations[location].name}
@@ -79,26 +89,28 @@ class LocationsContainerView extends React.Component {
             }
         });
 
+        console.log(locationsMaplist);
+
         return (
             <div>
                 {!this.props.children ?
                     <div>
                         <section className="split">
                             <h1>Locations</h1>
-                            {borough !== 'all' && borough !== -1 ? <h2>Locations in {borough}</h2> : null}
-                            {borough === -1 ? <h2>Incorrect postcode!</h2> : null}
+                            {stateBorough !== 'all' && stateBorough !== -1 ? <h2>Locations in {stateBorough}</h2> : <h2>All locations</h2>}
+                            {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                             <form>
                                 <input id="postcode" type="text" />
                                 <button type="submit" onClick={postcodeClick}>Search postcode</button>
                             </form>
-                            <ul>
-                                {locationsList}
-                            </ul>
                             <ul className="tabs-list">
                                 {boroughOptions}
                             </ul>
                         </section>
                         <section className="split">
+                            <ul>
+                                {locationsList}
+                            </ul>
                             <MapContainer locations={locationsMaplist} />
                         </section>
                     </div>
