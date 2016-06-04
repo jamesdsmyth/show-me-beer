@@ -8,11 +8,6 @@ class HeaderContainer extends React.Component {
                 <header className="main-header">
                     <ul className="main-navigation">
                         <li>
-                            <Link to="/" activeClassName="active">
-                                Home
-                            </Link>
-                        </li>
-                        <li>
                             <Link to="/beers" activeClassName="active">
                                 Beers
                             </Link>
@@ -28,7 +23,6 @@ class HeaderContainer extends React.Component {
                 <main className="main">
                     {this.props.children}
                 </main>
-
             </div>
         )
     }

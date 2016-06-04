@@ -7,29 +7,56 @@ class BeersContainerView extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            type: 'all',
-            style: 'all'
+            types: this.props.types,
+            styles: this.props.styles,
+            type: ['all'],
+            style: ['all']
         }
     }
 
-    handleTypeChange (event) {
-        this.setState({ "type": event.target.value });
+    handleTypeClick (type) {
+        console.log(type.type)
+        console.log(this.state.type)
+        var types = this.state.type;
+        types.push(type.type);
+
+        console.log(types);
+        this.setState({"type": types });
     }
 
-    handleStyleChange (event) {
+    handleStyleClick (style) {
         this.setState({ "style": event.target.value });
     }
 
     render () {
         var beers = this.props.beers;
+        var types = this.state.types;
+        var styles = this.state.styles;
         var type = this.state.type;
         var style = this.state.style;
+        var handleTypeSelect = this.handleTypeClick.bind(this);
+        var handleStyleSelect = this.handleStyleClick.bind(this);
+
+        // console.log(this.state.styles);
+        // console.log(this.state.types);
+
+        // creating the toggle tabs for the beer types
+        var typeOptions = types.map(function (type, i) {
+            // var newClass = borough === stateBorough ? 'selected' : null
+            return <li key={i} onClick={() => handleTypeSelect({type})}>{type}</li>
+        });
+
+        // creating the toggle tabs for the beer styles
+        var styleOptions = styles.map(function (style, i) {
+            // var newClass = borough === stateBorough ? 'selected' : null
+            return <li key={i} onClick={() => handleStyleSelect({style})}>{style}</li>
+        });
 
         var beerList = Object.keys(beers).map(function (beer, i) {
 
-            if((beers[beer].type == type) || (type == 'all')) {
+            // if((beers[beer].type == type) || (type == 'all')) {
 
-                if((beers[beer].style == style) || (style == 'all')) {
+                // if((beers[beer].style == style) || (style == 'all')) {
 
                     return <li key={i}>
                                 <h3>
@@ -41,94 +68,24 @@ class BeersContainerView extends React.Component {
                                     <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
                                 </Link>
                             </li>
-                }
-            }
+                // }
+            // }
         });
-
-        var handleTypeChange = this.handleTypeChange.bind(this);
-        var handleStyleChange = this.handleStyleChange.bind(this);
 
         return (
             <div>
                 {!this.props.children ?
                     <section className="split">
                         <h1>Beers</h1>
-                        <section className="filter-section">
-                            <div>
-                                <label htmlFor="beer-type">
-                                    Beer type:
-                                </label>
-                                <select id="beer-type"
-                                    onChange={handleTypeChange}>
-                                    <option value="all">
-                                        Select a type of beer
-                                    </option>
-                                    <option value="ale">
-                                        ale
-                                    </option>
-                                    <option value="lager">
-                                        lager
-                                    </option>
-                                    <option value="stout">
-                                        stout
-                                    </option>
-                                    <option value="malt">
-                                        malt
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <label htmlFor="beer-style">
-                                    Beer style:
-                                </label>
-                                <select id="beer-style"
-                                    onChange={handleStyleChange}>
-                                    <option value="all">
-                                        Select a style of beer
-                                    </option>
-                                    <option value="ale">
-                                        ale
-                                    </option>
-                                    <option value="amber">
-                                        amber
-                                    </option>
-                                    <option value="blond">
-                                        blond
-                                    </option>
-                                    <option value="brown">
-                                        brown
-                                    </option>
-                                    <option value="cream">
-                                        cream
-                                    </option>
-                                    <option value="dark">
-                                        dark
-                                    </option>
-                                    <option value="golden">
-                                        golden
-                                    </option>
-                                    <option value="honey">
-                                        honey
-                                    </option>
-                                    <option value="pale ale">
-                                        pale ale
-                                    </option>
-                                    <option value="light">
-                                        light
-                                    </option>
-                                    <option value="pilsner">
-                                        pilsner
-                                    </option>
-                                    <option value="red">
-                                        red
-                                    </option>
-                                    <option value="strong">
-                                        strong
-                                    </option>
-                                </select>
-                            </div>
-                        </section>
-                        <ul className="beers-list">{beerList}</ul>
+                        <ul className="tabs-list">
+                            {typeOptions}
+                        </ul>
+                        <ul className="tabs-list">
+                            {styleOptions}
+                        </ul>
+                        <ul className="beers-list">
+                            {beerList}
+                        </ul>
                     </section>
                 : null}
                 {this.props.children}
@@ -139,7 +96,9 @@ class BeersContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        beers: state.beers
+        beers: state.beers,
+        types: state.beerTypes,
+        styles: state.beerStyles
     }
 }
 

@@ -119,9 +119,9 @@
                 line-height: 1.5em;
                 float: left;
                 margin: 5px;
-                border: 1px solid red;
                 padding: 0 5px;
                 cursor: pointer;
+                background: $tab-grey;
 
                 &.selected {
                     background: pink;

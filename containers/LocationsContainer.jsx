@@ -73,15 +73,10 @@ class LocationsContainerView extends React.Component {
         });
 
         for(var i in locations) {
-
-                console.log(locations[i].borough);
-                console.log(stateBorough);
             if((locations[i].borough === stateBorough) || stateBorough === 'all') {
                 locationsMaplist[i] = locations[i];
             }
         }
-
-        console.log(locationsMaplist);
 
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(locations).map(function (location, i) {
