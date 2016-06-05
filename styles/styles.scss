@@ -114,6 +114,8 @@
         }
 
         &.tabs-list {
+            clear: both;
+            float: left;
 
             li {
                 line-height: 1.5em;
