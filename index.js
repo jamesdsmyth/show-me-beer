@@ -39,5 +39,5 @@ render((
 // - get initial styling in
 // - DONE - send email out asking what beers people enjoy. Do this on Friday
 // - DONE - make urls friendly
-// - filter beers by country - best way of doing this will be to loop through each beer and create an array from the {beer.country}
+// - DONE - filter beers by country - best way of doing this will be to loop through each beer and create an array from the {beer.country}
 // get all data together and create the real data for the beers and locations

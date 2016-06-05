@@ -1,9 +1,9 @@
 var Data = {
   "beers" : {
     "london-pale-ale" : {
-      "cityOrigin" : "London",
+      "city" : "London",
       "alcoholContent" : 4,
-      "countryOrigin" : "England",
+      "country" : "England",
       "description" : "Short description",
       "locations" : {
         "the-hunter-s" : {
@@ -38,14 +38,14 @@ var Data = {
             "price" : 4.95,
             "type" : "ale",
             "style": "pale ale",
-            "countryOrigin" : "England",
+            "country" : "England",
             "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
         }
       },
       "description" : "Long description of The Hunter S",
       "borough" : "Tower Hamlets",
       "city" : "London",
-      "locationCountry" : "England",
+      "country" : "England",
       "coords": {
           "longitude" :  51.505,
           "latitude" : -0.09
@@ -62,14 +62,14 @@ var Data = {
               "price" : 4.95,
               "type" : "ale",
               "style": "pale ale",
-              "countryOrigin" : "England",
+              "country" : "England",
               "photo" : "http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
           }
         },
         "description" : "Long description of The Fox",
         "borough" : "God Knows",
         "city" : "Bristol",
-        "locationCountry" : "England",
+        "country" : "England",
         "coords": {
             "longitude" :  51.505,
             "latitude" : -2.0
@@ -82,7 +82,7 @@ var Data = {
          "postCode" : "E8 4EH",
          "borough" : "Tower Hamlets",
          "city" : "London",
-         "locationCountry" : "England",
+         "country" : "England",
          "coords": {
              "longitude" :  51.505,
              "latitude" : -0.09
@@ -93,7 +93,7 @@ var Data = {
            "postCode" : "N1 4ES",
            "borough" : "God Knows",
            "city" : "Bristol",
-           "locationCountry" : "England",
+           "country" : "England",
            "coords": {
                "longitude" :  51.505,
                "latitude" : -2.0
@@ -155,6 +155,12 @@ var Data = {
        'Waltham Forest',
        'Wandsworth',
        'Westminster'
+   ],
+   "countries" : [
+       "England",
+       "France",
+       "Belgium",
+       "Australia"
    ]
 }
 

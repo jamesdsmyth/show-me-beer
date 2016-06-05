@@ -6,6 +6,7 @@ import BeerStylesReducer from './BeerStylesReducer.jsx'
 import LocationsReducer from './LocationsReducer.jsx'
 import ShortLocationsReducer from './ShortLocationsReducer.jsx'
 import BoroughsReducer from './BoroughsReducer.jsx'
+import CountriesReducer from './CountriesReducer.jsx'
 
 var Reducer = combineReducers({
     beers: BeerReducer,
@@ -13,7 +14,8 @@ var Reducer = combineReducers({
     beerStyles: BeerStylesReducer,
     locations: LocationsReducer,
     shortLocations: ShortLocationsReducer,
-    boroughs: BoroughsReducer
+    boroughs: BoroughsReducer,
+    countries: CountriesReducer
 });
 
 var Store = createStore(Reducer);

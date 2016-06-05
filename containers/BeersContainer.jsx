@@ -9,10 +9,14 @@ class BeersContainerView extends React.Component {
         this.state = {
             types: this.props.types,
             styles: this.props.styles,
+            countries: this.props.countries,
             type: [],
             style: [],
+            country: [],
             showFilter: 'hide'
         }
+
+        console.log(this.state)
     }
 
     handleTypeClick (type) {
@@ -53,6 +57,28 @@ class BeersContainerView extends React.Component {
         this.setState({"style": styles });
     }
 
+    handleCountryClick (country) {
+        var countries = this.state.country;
+        var isPresent = 0;
+
+        // looping through the currently selected styles array and if the passed 'style' is in the list it is removed. Else added.
+        for(var i in countries) {
+            if(country.country === countries[i]) {
+                isPresent++;
+                countries.splice(i, 1);
+            }
+        }
+
+        if(isPresent === 0) {
+            countries.push(country.country);
+        }
+
+        console.log(country.country);
+        console.log(countries);
+
+        this.setState({"country": countries });
+    }
+
     toggleFilter () {
         var toggleBoolean;
         this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'})
@@ -62,10 +88,13 @@ class BeersContainerView extends React.Component {
         var beers = this.props.beers,
             types = this.state.types,
             styles = this.state.styles,
+            countries = this.state.countries,
             selectedType = this.state.type,
             selectedStyle = this.state.style,
+            selectedCountry = this.state.country,
             handleTypeSelect = this.handleTypeClick.bind(this),
             handleStyleSelect = this.handleStyleClick.bind(this),
+            handleCountrySelect = this.handleCountryClick.bind(this),
             handleFilterToggle = this.toggleFilter.bind(this),
             filterClasses = this.state.showFilter + ' filter';
 
@@ -81,20 +110,31 @@ class BeersContainerView extends React.Component {
             return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>
         });
 
+        // creating the toggle tabs for the beer countries
+        var countryOptions = countries.map(function (country, i) {
+            var styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
+            return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>
+        });
+
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
         var beerList = Object.keys(beers).map(function (beer, i) {
             if((selectedType.indexOf(beers[beer].type) > -1) || (selectedType.length === 0)) {
                 if((selectedStyle.indexOf(beers[beer].style) > -1) || (selectedStyle.length === 0)) {
-                    return <li key={i}>
-                                <h3>
+                    if((selectedCountry.indexOf(beers[beer].country) > -1) || (selectedCountry.length === 0)) {
+                        return <li key={i}>
+                                    <h3>
+                                        <Link to={"/beers/" + beer}>
+                                            {beers[beer].name}
+                                        </Link>
+                                    </h3>
                                     <Link to={"/beers/" + beer}>
-                                        {beers[beer].name}
+                                        <span>{beers[beer].type}</span>
+                                        <span>{beers[beer].style}</span>
+                                        <span>{beers[beer].country}</span>
+                                        <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
                                     </Link>
-                                </h3>
-                                <Link to={"/beers/" + beer}>
-                                    <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
-                                </Link>
-                            </li>
+                                </li>
+                    }
                 }
 
             }
@@ -116,6 +156,9 @@ class BeersContainerView extends React.Component {
                                 <ul className="tabs-list">
                                     {styleOptions}
                                 </ul>
+                                <ul className="tabs-list">
+                                    {countryOptions}
+                                </ul>
                             </div>
                         </section>
                         <section className="split">
@@ -135,7 +178,8 @@ const mapStateToProps = (state) => {
     return {
         beers: state.beers,
         types: state.beerTypes,
-        styles: state.beerStyles
+        styles: state.beerStyles,
+        countries: state.countries
     }
 }
 
