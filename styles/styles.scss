@@ -136,6 +136,24 @@
         }
     }
 
+    .filter-button {
+        display: block;
+        float: left;
+        clear: both;
+        cursor: pointer;
+    }
+
+    .filter {
+
+        &.hide {
+            display: none;
+        }
+
+        &.show {
+            display: block;
+        }
+    }
+
 
     #mapid {
         height: 80vh;

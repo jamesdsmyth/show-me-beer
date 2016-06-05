@@ -30,6 +30,7 @@ var Data = {
   "locations" : {
     "the-hunter-s" : {
       "postCode" : "E8 4EH",
+      "street" : "111 Long street",
       "beers" : {
         "london-pale-ale" : {
             "name": "London Pale Ale",
@@ -53,6 +54,7 @@ var Data = {
       },
       "the-fox" : {
         "postCode" : "N1 4ES",
+        "street" : "90 short street",
         "beers" : {
           "london-pale-ale" : {
               "name": "London Pale Ale",

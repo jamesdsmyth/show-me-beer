@@ -11,7 +11,8 @@ class LocationsContainerView extends React.Component {
 
         this.state = {
             borough: 'all',
-            boroughs: this.props.boroughs
+            boroughs: this.props.boroughs,
+            showFilter: 'hide'
         }
     }
 
@@ -57,14 +58,21 @@ class LocationsContainerView extends React.Component {
         });
     }
 
+    toggleFilter () {
+        var toggleBoolean;
+        this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'});
+    }
+
     render () {
-        var locations = this.props.locations;
-        var stateBoroughs = this.state.boroughs;
-        var stateBorough = this.state.borough;
-        var postcodeClick = this.searchPostcode.bind(this);
-        var handleBoroughChange = this.boroughHandleSelect.bind(this);
-        var locationsList = [];
-        var locationsMaplist = {};
+        var locations = this.props.locations,
+            stateBoroughs = this.state.boroughs,
+            stateBorough = this.state.borough,
+            postcodeClick = this.searchPostcode.bind(this),
+            handleBoroughChange = this.boroughHandleSelect.bind(this),
+            locationsList = [],
+            locationsMaplist = {},
+            handleFilterToggle = this.toggleFilter.bind(this),
+            filterClasses = this.state.showFilter + ' filter'
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -100,12 +108,17 @@ class LocationsContainerView extends React.Component {
                             {stateBorough !== 'all' && stateBorough !== -1 ? <h2>Locations in {stateBorough}</h2> : <h2>All locations</h2>}
                             {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                             <form>
-                                <input id="postcode" type="text" />
+                                <input id="postcode" placeholder="E8 4DA" type="text" />
                                 <button type="submit" onClick={postcodeClick}>Search postcode</button>
                             </form>
-                            <ul className="tabs-list">
-                                {boroughOptions}
-                            </ul>
+                            <span className="filter-button" onClick={() => handleFilterToggle()}>
+                                Filters
+                            </span>
+                            <div className={filterClasses}>
+                                <ul className="tabs-list">
+                                    {boroughOptions}
+                                </ul>
+                            </div>
                         </section>
                         <section className="split">
                             <ul>

@@ -10,7 +10,8 @@ class BeersContainerView extends React.Component {
             types: this.props.types,
             styles: this.props.styles,
             type: [],
-            style: []
+            style: [],
+            showFilter: 'hide'
         }
     }
 
@@ -52,14 +53,21 @@ class BeersContainerView extends React.Component {
         this.setState({"style": styles });
     }
 
+    toggleFilter () {
+        var toggleBoolean;
+        this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'})
+    }
+
     render () {
-        var beers = this.props.beers;
-        var types = this.state.types;
-        var styles = this.state.styles;
-        var selectedType = this.state.type;
-        var selectedStyle = this.state.style;
-        var handleTypeSelect = this.handleTypeClick.bind(this);
-        var handleStyleSelect = this.handleStyleClick.bind(this);
+        var beers = this.props.beers,
+            types = this.state.types,
+            styles = this.state.styles,
+            selectedType = this.state.type,
+            selectedStyle = this.state.style,
+            handleTypeSelect = this.handleTypeClick.bind(this),
+            handleStyleSelect = this.handleStyleClick.bind(this),
+            handleFilterToggle = this.toggleFilter.bind(this),
+            filterClasses = this.state.showFilter + ' filter';
 
         // creating the toggle tabs for the beer types
         var typeOptions = types.map(function (type, i) {
@@ -98,12 +106,17 @@ class BeersContainerView extends React.Component {
                     <div>
                         <section className="split">
                             <h1>Beers</h1>
-                            <ul className="tabs-list">
-                                {typeOptions}
-                            </ul>
-                            <ul className="tabs-list">
-                                {styleOptions}
-                            </ul>
+                            <span className="filter-button" onClick={() => handleFilterToggle()}>
+                                Filters
+                            </span>
+                            <div className={filterClasses}>
+                                <ul className="tabs-list">
+                                    {typeOptions}
+                                </ul>
+                                <ul className="tabs-list">
+                                    {styleOptions}
+                                </ul>
+                            </div>
                         </section>
                         <section className="split">
                             <ul className="beers-list">
