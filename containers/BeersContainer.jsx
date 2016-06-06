@@ -122,17 +122,17 @@ class BeersContainerView extends React.Component {
                 if((selectedStyle.indexOf(beers[beer].style) > -1) || (selectedStyle.length === 0)) {
                     if((selectedCountry.indexOf(beers[beer].country) > -1) || (selectedCountry.length === 0)) {
                         return <li key={i}>
+                                    <Link to={"/beers/" + beer}>
+                                        <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
+                                    </Link>
                                     <h3>
                                         <Link to={"/beers/" + beer}>
                                             {beers[beer].name}
                                         </Link>
                                     </h3>
-                                    <Link to={"/beers/" + beer}>
-                                        <span>{beers[beer].type}</span>
-                                        <span>{beers[beer].style}</span>
-                                        <span>{beers[beer].country}</span>
-                                        <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
-                                    </Link>
+                                    <span>{beers[beer].type}</span>,
+                                    <span> {beers[beer].style}</span>
+                                    <span className="italic">brewed in {beers[beer].country}</span>
                                 </li>
                     }
                 }

@@ -41,3 +41,4 @@ render((
 // - DONE - make urls friendly
 // - DONE - filter beers by country - best way of doing this will be to loop through each beer and create an array from the {beer.country}
 // get all data together and create the real data for the beers and locations
+// add option for 1 photo to be added to the locations
