@@ -188,7 +188,156 @@ var Data = {
          "type":"ale",
          "style":"pale ale",
          "brewery":"Brewdog"
-      }
+     },
+      "shoreditch-blonde":{
+         "city":"Bethnal Green",
+         "alcoholContent":4.5,
+         "country":"England",
+         "description":"A truly international combination of English lager malt, German yeast, and a unique blend of American and European hops producing a moreish and drinkable blonde beer.",
+         "locations":{
+            "the-hunter-s":{
+               "name":"The Hunter S",
+               "coords":{
+                  "longitude":51.505,
+                  "latitude":-0.09
+               }
+            },
+            "the-fox":{
+               "name":"The Fox",
+               "coords":{
+                  "longitude":51.505,
+                  "latitude":-2.0
+               }
+            }
+         },
+         "name":"Shoreditch Blonde",
+         "photo":"https://cdn.shopify.com/s/files/1/0940/3274/products/paradise-shoreditch-blonde.jpg?v=1458082918",
+         "type":"lager",
+         "style":"blond",
+         "manufacturer":"The Red Church Brewery"
+     },
+
+
+     "goose-island-ipa":{
+        "city":"Illinois",
+        "alcoholContent":5.9,
+        "country":"United States",
+        "description":"This India Pale Ale recalls a time when ales shipped from England to India were highly hopped to preserve their distinct taste during the long journey. The result is a hop lover’s dream with a fruity aroma, set off by a dry malt middle, and long hop finish.",
+        "locations":{
+           "the-hunter-s":{
+              "name":"The Hunter S",
+              "coords":{
+                 "longitude":51.505,
+                 "latitude":-0.09
+              }
+           },
+           "the-fox":{
+              "name":"The Fox",
+              "coords":{
+                 "longitude":51.505,
+                 "latitude":-2.0
+              }
+           }
+        },
+        "name":"Goose Island IPA",
+        "photo":"http://cdn2.bigcommerce.com/server5500/tpbc2s65/products/3511/images/3756/gooseisland_ipa12oz__20937.1373916546.1280.1280.jpg?c=2",
+        "type":"ale",
+        "style":"pale ale",
+        "manufacturer":"Goose Island Beer Co."
+    },
+
+
+
+
+    "greene-king-ipa":{
+       "city":"Bury St Edmunds",
+       "alcoholContent":3.6,
+       "country":"England",
+       "description":"Greene King IPA is a perfectly balanced ale, characterised by its fresh, hoppy taste and clean, bitter finish. This hoppy taste and aroma come from two varieties of English hops – Challenger and First Gold – which are combined with pale and crystal malts. A great beer to enjoy with curry, Mexican and other spicy food, or simply on its own.",
+       "locations":{
+          "the-hunter-s":{
+             "name":"The Hunter S",
+             "coords":{
+                "longitude":51.505,
+                "latitude":-0.09
+             }
+          },
+          "the-fox":{
+             "name":"The Fox",
+             "coords":{
+                "longitude":51.505,
+                "latitude":-2.0
+             }
+          }
+       },
+       "name":"Greene King IPA",
+       "photo":"http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/GreeneKingIPABottle.jpg",
+       "type":"ale",
+       "style":"pale ale",
+       "manufacturer":"Greene King"
+   },
+
+
+
+   "anchor-steam-beer":{
+      "city":"San Francisco",
+      "alcoholContent":4.9,
+      "country":"United States",
+      "description":"Anchor Steam® Beer owes its deep amber color, thick, creamy head, and rich, distinctive flavor to a historic brewing process like none other. It is a process that combines deep respect for craft brewing tradition with many decades of evolution to arrive at a unique approach: a blend of pale and caramel malts, fermentation with lager yeast at warmer ale temperatures in shallow open-air fermenters, and gentle carbonation in our cellars through an all-natural process called kräusening.",
+      "locations":{
+         "the-hunter-s":{
+            "name":"The Hunter S",
+            "coords":{
+               "longitude":51.505,
+               "latitude":-0.09
+            }
+         },
+         "the-fox":{
+            "name":"The Fox",
+            "coords":{
+               "longitude":51.505,
+               "latitude":-2.0
+            }
+         }
+      },
+      "name":"Anchor Steam Beer",
+      "photo":"http://www.lcbo.com/content/dam/lcbo/products/079962.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+      "type":"lager",
+      "style":"amber",
+      "manufacturer":"Anchor Brewing"
+  },
+
+
+
+   "beamish-stout":{
+      "city":"Cork",
+      "alcoholContent":4.1,
+      "country":"Ireland",
+      "description":"Established over 200 years ago, this Irish stout is produced in the heartland of Cork and known as one of the best stouts locally but also internationally.  Beamish tastes of full roasted, full bodied, and full flavoured hop aroma. For more information regarding this stout.",
+      "locations":{
+         "the-hunter-s":{
+            "name":"The Hunter S",
+            "coords":{
+               "longitude":51.505,
+               "latitude":-0.09
+            }
+         },
+         "the-fox":{
+            "name":"The Fox",
+            "coords":{
+               "longitude":51.505,
+               "latitude":-2.0
+            }
+         }
+      },
+      "name":"Beamish Stout",
+      "photo":"http://beamish.ie/wp-content/themes/beamish//assets/images/beamish-pint.png",
+      "type":"stout",
+      "style":"brown",
+      "manufacturer":"Beamish & Crawford Brewery"
+   }
+
+
    },
    "locations":{
       "the-hunter-s":{
@@ -321,10 +470,12 @@ var Data = {
    ],
    "countries":[
       "England",
+      "Ireland",
       "Scotland",
       "France",
       "Belgium",
-      "Australia"
+      "Australia",
+      "United States"
    ]
 }
 

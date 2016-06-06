@@ -25,8 +25,7 @@ class BeerContainerView extends React.Component {
                         <p>Type: {currentBeer.type}</p>
                         <p>Style: {currentBeer.style}</p>
                         <p>Alcohol content: {currentBeer.alcoholContent}%</p>
-                        <p>Country: {currentBeer.country}</p>
-                        <p>Brewed in: {currentBeer.city}</p>
+                        <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
                         <p>Description: {currentBeer.description}</p>
                         <h2>Locations who sell this beer</h2>
                         <ul>

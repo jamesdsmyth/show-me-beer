@@ -130,9 +130,8 @@ class BeersContainerView extends React.Component {
                                             {beers[beer].name}
                                         </Link>
                                     </h3>
-                                    <span>{beers[beer].type}</span>,
-                                    <span> {beers[beer].style}</span>
-                                    <span className="italic">brewed in {beers[beer].country}</span>
+                                    <p>{beers[beer].type}, {beers[beer].style}</p>
+                                    <p className="italic">brewed in {beers[beer].country}</p>
                                 </li>
                     }
                 }
