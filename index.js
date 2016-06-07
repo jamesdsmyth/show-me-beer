@@ -36,10 +36,11 @@ render((
 // - DONE - filter beers type - http://www.thebeerstore.ca/beer-101/beer-types. Also add these fields to the beers and locations in the data.js
 // - DONE - get beer types and styles into data.js reducers
 // - DONE - filter location on London boroughs - need to get a list of boroughs and cities added from here https://en.wikipedia.org/wiki/List_of_London_boroughs
-// - get initial styling in
 // - DONE - send email out asking what beers people enjoy. Do this on Friday
 // - DONE - make urls friendly
 // - DONE - filter beers by country - best way of doing this will be to loop through each beer and create an array from the {beer.country}
-// - Partially done - get all data together and create the real data for the beers and locations
+// - DONE - get all data together and create the real data for the beers and locations
+// - DONE - add option for 1 photo to be added to the locations
 // - add search input to filter the locations and beers using the input
-// add option for 1 photo to be added to the locations
+// - add the intiial structure before styles
+// - get initial styling in

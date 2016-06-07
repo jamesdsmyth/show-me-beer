@@ -13,11 +13,13 @@
         float: left;
 
         .main-navigation {
+            width: 135px;
+            margin: 0 auto;
 
             li {
                 display: block;
                 float: left;
-                margin-right: 10px;
+                margin-right: 20px;
 
                 &:last-child {
                     margin-right: 0;
