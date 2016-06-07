@@ -28,6 +28,7 @@ class LocationContainerView extends React.Component {
                     <p>{currentLocation.city}</p>
                     <p>{currentLocation.postCode}</p>
                     <p>Description: {currentLocation.description}</p>
+                    <img src={currentLocation.photo} alt={currentLocation.name} />
                     <h2>Beers sold here</h2>
                     <ul className="beers-list">
                         {beerslist}

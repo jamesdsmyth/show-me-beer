@@ -340,78 +340,179 @@ var Data = {
 
    },
    "locations":{
-      "the-hunter-s":{
-         "postCode":"E8 4EH",
-         "street":"111 Long street",
+      "the-red-lion":{
+         "postCode":"E11 3AA",
+         "street":"640 High Road",
          "beers":{
-            "london-pale-ale":{
-               "name":"London Pale Ale",
-               "alcoholContent":4,
-               "price":4.95,
-               "type":"ale",
-               "style":"pale ale",
-               "country":"England",
-               "photo":"http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
-            }
+            // "london-pale-ale":{
+            //    "name":"London Pale Ale",
+            //    "alcoholContent":4,
+            //    "price":4.95,
+            //    "type":"ale",
+            //    "style":"pale ale",
+            //    "country":"England",
+            //    "photo":"http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
+            // }
          },
-         "description":"Long description of The Hunter S",
-         "borough":"Tower Hamlets",
+         "description":"The 'local' is an age-old part of British tradition. At the centre of the community it is a place that we head to for some filling fare, quenching drinks and a generally good knees-up! At The Red Lion we have bought this tried and tested formula into the 21st century. Since our humble beginnings in 2011 we have transformed this previously neglected grand old building into the bustling hub of Leytonstone.",
+         "borough":"Waltham Forest",
          "city":"London",
          "country":"England",
+         "phone": "020 8985 3727",
          "coords":{
-            "longitude":51.505,
-            "latitude":-0.09
+            "longitude":51.5685804,
+            "latitude":0.011524
          },
-         "name":"The Hunter S"
+         "name":"The Red Lion",
+         "photo": "http://theredlionleytonstone.com/wp-content/gallery/home/Red-Lion-8.jpg"
       },
-      "the-fox":{
-         "postCode":"N1 4ES",
-         "street":"90 short street",
-         "beers":{
-            "london-pale-ale":{
-               "name":"London Pale Ale",
-               "alcoholContent":4,
-               "price":4.95,
-               "type":"ale",
-               "style":"pale ale",
-               "country":"England",
-               "photo":"http://www.beersofeurope.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/pimages/MeantimeLondonPaleAle.jpg"
-            }
-         },
-         "description":"Long description of The Fox",
-         "borough":"God Knows",
-         "city":"Bristol",
+      "the-dolphin":{
+         "postCode":"E8 3RH",
+         "street":"165 Mare Steet",
+         "beers":{},
+         "description":"Lively local pub, open until very late, with regular karaoke sessions and a free jukebox.",
+         "borough":"Hackney",
+         "city":"London",
          "country":"England",
+         "phone": "020 8985 3727",
          "coords":{
-            "longitude":51.505,
-            "latitude":-2.0
+            "longitude":51.539531,
+            "latitude":-0.0565677
          },
-         "name":"The Fox"
+         "name":"The Dolphin",
+         "photo": "http://www.hackneygazette.co.uk/polopoly_fs/1.2728337.1379607912!/image/4164809026.jpg_gen/derivatives/landscape_630/4164809026.jpg"
+      },
+      "the-intrepid-fox":{
+         "postCode":"WC2H 8LN",
+         "street":"15 St Giles High Street",
+         "beers":{},
+         "description":"Rock 'n' roll pub with low-lit interior, cyber-punk decor and weekend DJs upstairs.",
+         "borough":"Hackney",
+         "city":"Westminster",
+         "country":"England",
+         "phone": "020 8985 3727",
+         "coords":{
+            "longitude":51.5159963,
+            "latitude":-0.1289428
+         },
+         "name":"The Intrepid Fox",
+         "photo": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Intrepid_Fox,_Covent_Garden,_WC2_(2361130089).jpg"
+      },
+      "crobar":{
+         "postCode":"W1D 4AS",
+         "street":"17 Manette Street",
+         "beers":{},
+         "description":"Compact rock bar with jukebox and live music, memorabilia on the walls and popular happy hour deals.",
+         "borough":"Westminster",
+         "city":"London",
+         "country":"England",
+         "phone": "020 7439 0831",
+         "coords":{
+            "longitude":51.5149031,
+            "latitude":-0.1303136
+         },
+         "name":"The Intrepid Fox",
+         "photo": "https://media-cdn.tripadvisor.com/media/photo-s/03/ba/a2/8b/crobar.jpg"
+      },
+      "the-lexington":{
+         "postCode":"N1 9JB",
+         "street":"96-98 Pentonville Rd",
+         "beers":{},
+         "description":"High-ceilinged bar with sofas, serving US draught beers and whiskies, plus live music room upstairs.",
+         "borough":"Islington",
+         "city":"London",
+         "country":"England",
+         "phone": "020 7837 5371",
+         "coords":{
+            "longitude":51.5317113,
+            "latitude":-0.1118621
+         },
+         "name":"The Lexington",
+         "photo": "http://victorianawnings.co.uk/sites/default/files/projects/lexington.jpg"
+      },
+
+      "the-worlds-end":{
+         "postCode":"NW1 0NE",
+         "street":"174 Camden High Street",
+         "beers":{},
+         "description":"Traditional corner pub with mezzanine and fireplace, drawing a mixed crowd from Camden Market.",
+         "borough":"Camden",
+         "city":"London",
+         "country":"England",
+         "phone": "020 7482 1932",
+         "coords":{
+            "longitude":51.5385599,
+            "latitude":-0.1420483
+         },
+         "name":"The Worlds End",
+         "photo": "http://www.true-london.com/wp-content/uploads/IMG_0388-e1362658280485.jpg"
       }
    },
    "shortLocations":{
-      "the-hunter-s":{
-         "postCode":"E8 4EH",
-         "borough":"Tower Hamlets",
+      "the-red-lion":{
+         "postCode":"E11 3AA",
+         "borough":"Waltham Forest",
          "city":"London",
          "country":"England",
          "coords":{
-            "longitude":51.505,
-            "latitude":-0.09
+             "longitude":51.5685804,
+             "latitude":0.011524
          },
-         "name":"The Hunter S"
+         "name":"The Red Lion"
       },
-      "the-fox":{
-         "postCode":"N1 4ES",
-         "borough":"God Knows",
-         "city":"Bristol",
+      "the-dolphin":{
+         "postCode":"E8 3RH",
+         "borough":"Hackney",
+         "city":"London",
          "country":"England",
          "coords":{
-            "longitude":51.505,
-            "latitude":-2.0
+            "longitude":51.539531,
+            "latitude":-0.0565677
          },
-         "name":"The Fox"
-      }
+         "name":"The Dolphin"
+      },
+      "the-intrepid-fox":{
+         "postCode":"WC2H 8LN",
+         "borough":"Westminster",
+         "city":"London",
+         "country":"England",
+         "coords":{
+            "longitude":51.5159963,
+            "latitude":-0.1289428
+         },
+         "name":"The Intrepid Fox"
+      },
+      "the-lexington":{
+         "postCode":"N1 9JB",
+         "borough":"Islington",
+         "city":"London",
+         "country":"England",
+         "coords":{
+            "longitude":51.5317113,
+            "latitude":-0.1118621
+         },
+         "name":"The Lexington"
+     },
+     "the-worlds-end":{
+        "postCode":"NW1 0NE",
+        "borough":"Camden",
+        "city":"London",
+        "country":"England",
+        "phone": "020 7482 1932",
+        "coords":{
+           "longitude":51.5385599,
+           "latitude":-0.1420483
+        },
+        "name":"The Worlds End"
+     }
+
+
+
+
+
+
+
+
    },
    "beerTypes":[
       "ale",

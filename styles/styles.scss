@@ -122,13 +122,13 @@
                 line-height: 1.5em;
                 float: left;
                 margin: 5px;
-                padding: 0 5px;
+                padding: 2px 8px;
                 cursor: pointer;
                 background: $tab-grey;
                 @include noSelect;
 
                 &.selected {
-                    background: pink;
+                    background: $tab-blue;
                 }
             }
         }
