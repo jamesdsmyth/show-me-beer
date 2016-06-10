@@ -15,8 +15,6 @@ class BeersContainerView extends React.Component {
             country: [],
             showFilter: 'hide'
         }
-
-        console.log(this.state)
     }
 
     handleTypeClick (type) {
@@ -73,9 +71,6 @@ class BeersContainerView extends React.Component {
             countries.push(country.country);
         }
 
-        console.log(country.country);
-        console.log(countries);
-
         this.setState({"country": countries });
     }
 
@@ -96,7 +91,7 @@ class BeersContainerView extends React.Component {
             handleStyleSelect = this.handleStyleClick.bind(this),
             handleCountrySelect = this.handleCountryClick.bind(this),
             handleFilterToggle = this.toggleFilter.bind(this),
-            filterClasses = this.state.showFilter + ' filter';
+            filterClasses = this.state.showFilter + ' filter beers';
 
         // creating the toggle tabs for the beer types
         var typeOptions = types.map(function (type, i) {
@@ -143,13 +138,14 @@ class BeersContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="split">
+                        <section className="split heading">
                             <h1>Beers</h1>
                             <span className="filter-button" onClick={() => handleFilterToggle()}>
                                 Filters
+                                {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
                             </span>
                             <div className={filterClasses}>
-                                <ul className="tabs-list">
+                                <ul className="tabs-list type">
                                     {typeOptions}
                                 </ul>
                                 <ul className="tabs-list">

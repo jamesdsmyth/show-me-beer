@@ -42,14 +42,13 @@ class MapContainer extends React.Component {
         console.log('new locations are', locations);
         var LeafIcon = L.Icon.extend({
             options: {
-                iconUrl: '../node_modules/leaflet/dist/images/marker-icon.png',
-                iconSize:     [38, 95], // size of the icon
-                iconAnchor:   [22, 94],
-                popupAnchor:  [-15, -46]
+                iconSize:     [41, 60], // size of the icon
+                iconAnchor:   [21, 60],
+                popupAnchor:  [-1, -40]
             }
         });
 
-        var markerIcon = new LeafIcon({iconUrl: '../node_modules/leaflet/dist/images/marker-icon.png'})
+        var markerIcon = new LeafIcon({iconUrl: '../images/pin.png'})
 
         L.icon = function (options) {
             return new L.Icon(options);
@@ -62,7 +61,7 @@ class MapContainer extends React.Component {
                 }
             ).addTo(this.mymap)
 
-            this.mymap.setView([locations.longitude, locations.latitude], 12);
+            this.mymap.setView([locations.longitude, locations.latitude], 15);
 
         } else {
             for(var key in locations) {
@@ -70,7 +69,7 @@ class MapContainer extends React.Component {
                     {
                         icon: markerIcon
                     }
-                ).addTo(this.mymap).bindPopup('<a href="/locations/' + key + '">' + key +'</a>');
+                ).addTo(this.mymap).bindPopup('<a href="/locations/' + key + '">' + locations[key].name +'</a>');
             }
 
             this.mymap.setView([51.505, -0.09], 12);

@@ -104,26 +104,27 @@ class LocationsContainerView extends React.Component {
                 {!this.props.children ?
                     <div>
                         <section className="split">
-                            <h1>Locations</h1>
-                            {stateBorough !== 'all' && stateBorough !== -1 ? <h2>Locations in {stateBorough}</h2> : <h2>All locations</h2>}
-                            {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
-                            <form>
-                                <input id="postcode" placeholder="E8 4DA" type="text" />
-                                <button type="submit" onClick={postcodeClick}>Search postcode</button>
-                            </form>
+                            <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
                             <span className="filter-button" onClick={() => handleFilterToggle()}>
                                 Filters
+                                {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
                             </span>
                             <div className={filterClasses}>
+                                <form className="postcode-form">
+                                    <input id="postcode" placeholder="E8 4DA" type="text" />
+                                    <button type="submit" className="button" onClick={postcodeClick}>Search postcode</button>
+                                </form>
                                 <ul className="tabs-list">
                                     {boroughOptions}
                                 </ul>
                             </div>
+
+                            {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                         </section>
                         <section className="split">
-                            <ul>
+                            {/*<ul>
                                 {locationsList}
-                            </ul>
+                            </ul>*/}
                             <MapContainer locations={locationsMaplist} />
                         </section>
                     </div>

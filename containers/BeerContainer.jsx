@@ -27,16 +27,16 @@ class BeerContainerView extends React.Component {
                         <p>Alcohol content: {currentBeer.alcoholContent}%</p>
                         <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
                         <p>Description: {currentBeer.description}</p>
-                        <h2>Locations who sell this beer</h2>
-                        <ul>
-                            {locationsList}
-                        </ul>
                     </section>
                     <section className="split half">
                         <img src={currentBeer.photo} alt={currentBeer.name} />
                     </section>
                 </section>
                 <section className="split">
+                    <h2>Locations who sell this beer</h2>
+                    <ul>
+                        {locationsList}
+                    </ul>
                     <MapContainer locations={currentBeer.locations} />
                 </section>
             </div>
