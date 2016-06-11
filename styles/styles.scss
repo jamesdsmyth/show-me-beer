@@ -44,7 +44,7 @@
     h1 {
         font-size: 4.5em;
         margin-bottom: 15px;
-        color: $light-grey;
+        color: $header-green;
     }
 
     h2 {
@@ -72,8 +72,8 @@
     }
 
     h3 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
+        font-size: 1.2em;
+        margin-bottom: 5px;
     }
 
     a {
@@ -84,6 +84,10 @@
     p {
         margin-bottom: 15px;
         line-height: 1.5em;
+    }
+
+    .italic {
+        font-style: italic;
     }
 
     .hidden {
@@ -110,21 +114,42 @@
     ul {
 
         &.beers-list {
+            width: 100%;
+            float: left;
+            // background: $light-grey;
+
 
             li {
-                width: 23.5%;
-                margin-right: 2%;
-                min-height: 300px;
+                width: 100%;
+                min-height: 270px;
                 float: left;
+                background: $white;
+                box-sizing: border-box;
+                border: 1px solid $border-blue;
+                position: relative;
 
                 .beer-image {
                     height: 150px;
                     width: auto;
+                    margin: 25px auto 0;
+                    position: relative;
+                    display: block;
+                }
+
+                .beer-details {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 10px solid $white;
+                    text-align: center;
                 }
 
                 .beer-title {
                     display: block;
                     clear: both;
+                    text-align: center;
                 }
 
                 &:nth-child(4n){
@@ -161,15 +186,17 @@
         float: left;
         clear: both;
         cursor: pointer;
+        color: $light-green;
         margin-bottom: 15px;
     }
 
     .filter {
         float: left;
         width: 100%;
-        background: $yellow;
+        margin-bottom: 10px;
+        background: $light-grey;
         box-sizing: border-box;
-        border: 15px solid $yellow;
+        border: 15px solid $light-grey;
 
         &.hide {
             display: none;
@@ -182,21 +209,17 @@
         &.beers {
 
             .tabs-list {
-                width: 35%;
-                margin-right: 5%;
-
-                &.type {
-                    width: 20%;
-                }
+                float: left;
+                clear: both;
 
                 &:last-child {
-                    margin-right: 0;
+                    margin-bottom: 0;
                 }
             }
         }
 
         .postcode-form {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
 
             #postcode {
                 border: none;
@@ -226,6 +249,10 @@
     }
 
     @media only screen and (min-width : 1000px) {
+        h1 {
+            width: 80%;
+        }
+
         .split {
 
             &.half {
@@ -234,6 +261,28 @@
 
                 &:last-child {
                     margin-right: 0;
+                }
+            }
+        }
+
+        ul {
+
+            &.beers-list {
+
+                li {
+                    width: 23.5%;
+                    margin: 2% 2% 0 0;
+
+                    &:nth-child(1),
+                    &:nth-child(2),
+                    &:nth-child(3),
+                    &:nth-child(4) {
+                        margin-top: 0;
+                    }
+
+                    &:nth-child(4n){
+                        margin-right: 0;
+                    }
                 }
             }
         }

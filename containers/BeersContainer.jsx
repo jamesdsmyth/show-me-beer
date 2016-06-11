@@ -120,13 +120,14 @@ class BeersContainerView extends React.Component {
                                     <Link to={"/beers/" + beer}>
                                         <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
                                     </Link>
-                                    <h3>
-                                        <Link to={"/beers/" + beer}>
-                                            {beers[beer].name}
-                                        </Link>
-                                    </h3>
-                                    <p>{beers[beer].type}, {beers[beer].style}</p>
-                                    <p className="italic">brewed in {beers[beer].country}</p>
+                                    <div className="beer-details">
+                                        <h3>
+                                            <Link to={"/beers/" + beer}>
+                                                {beers[beer].name}
+                                            </Link>
+                                        </h3>
+                                        <span className="italic">{beers[beer].type}, {beers[beer].style} and brewed in {beers[beer].country}</span>
+                                    </div>
                                 </li>
                     }
                 }

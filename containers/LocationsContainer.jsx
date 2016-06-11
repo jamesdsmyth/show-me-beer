@@ -103,7 +103,7 @@ class LocationsContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="split">
+                        <section className="split heading">
                             <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
                             <span className="filter-button" onClick={() => handleFilterToggle()}>
                                 Filters
