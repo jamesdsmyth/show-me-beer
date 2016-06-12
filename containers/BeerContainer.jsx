@@ -32,9 +32,6 @@ class BeerContainerView extends React.Component {
                 </section>
                 <section className="area buffer locations">
                     <h2>Locations who sell this beer</h2>
-                    <ul>
-                        {locationsList}
-                    </ul>
                     <MapContainer locations={currentBeer.locations} />
                 </section>
             </div>
