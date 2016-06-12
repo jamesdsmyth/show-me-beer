@@ -139,25 +139,27 @@ class BeersContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="split heading">
-                            <h1>Beers</h1>
-                            <span className="filter-button" onClick={() => handleFilterToggle()}>
-                                Filters
-                                {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
-                            </span>
-                            <div className={filterClasses}>
-                                <ul className="tabs-list type">
-                                    {typeOptions}
-                                </ul>
-                                <ul className="tabs-list">
-                                    {styleOptions}
-                                </ul>
-                                <ul className="tabs-list">
-                                    {countryOptions}
-                                </ul>
-                            </div>
+                        <h1>Beers</h1>
+                        <section className="area">
+                            <section className={filterClasses}>
+                                <h3 className="filter-button" onClick={() => handleFilterToggle()}>
+                                    Filters
+                                    {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
+                                </h3>
+                                <div className="tabs">
+                                    <ul className="tabs-list type">
+                                        {typeOptions}
+                                    </ul>
+                                    <ul className="tabs-list">
+                                        {styleOptions}
+                                    </ul>
+                                    <ul className="tabs-list">
+                                        {countryOptions}
+                                    </ul>
+                                </div>
+                            </section>
                         </section>
-                        <section className="split">
+                        <section className="area buffer beer">
                             <ul className="beers-list">
                                 {beerList}
                             </ul>

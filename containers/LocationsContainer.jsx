@@ -103,25 +103,26 @@ class LocationsContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="split heading">
-                            <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
-                            <span className="filter-button" onClick={() => handleFilterToggle()}>
-                                Filters
-                                {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
-                            </span>
-                            <div className={filterClasses}>
-                                <form className="postcode-form">
-                                    <input id="postcode" placeholder="E8 4DA" type="text" />
-                                    <button type="submit" className="button" onClick={postcodeClick}>Search postcode</button>
-                                </form>
-                                <ul className="tabs-list">
-                                    {boroughOptions}
-                                </ul>
-                            </div>
-
+                        <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
+                        <section className="area">
+                            <section className={filterClasses}>
+                                <h3 className="filter-button" onClick={() => handleFilterToggle()}>
+                                    Filters
+                                    {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
+                                </h3>
+                                <div className="tabs">
+                                    <form className="postcode-form">
+                                        <input id="postcode" placeholder="E8 4DA" type="text" />
+                                        <button type="submit" className="button" onClick={postcodeClick}>Search postcode</button>
+                                    </form>
+                                    <ul className="tabs-list">
+                                        {boroughOptions}
+                                    </ul>
+                                </div>
+                            </section>
                             {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                         </section>
-                        <section className="split">
+                        <section className="area">
                             {/*<ul>
                                 {locationsList}
                             </ul>*/}

@@ -44,7 +44,8 @@
     h1 {
         font-size: 4.5em;
         margin-bottom: 15px;
-        color: $header-green;
+        color: $light-black;
+        padding: 15px;
     }
 
     h2 {
@@ -94,20 +95,59 @@
         display: none;
     }
 
-    .split {
+    .area {
         box-sizing: border-box;
         position: relative;
-        padding: 10px 15px;
         float: left;
         width: 100%;
         margin-bottom: 10px;
+
+        &.location-header {
+            height: 75vh;
+            overflow: hidden;
+            position: relative;
+
+            .location-image {
+
+            }
+
+            .location-title {
+                position: absolute;
+                bottom: 0;
+                left: 15px;
+                background: $white;
+                padding: 10px 25px 5px 5px;
+                margin-bottom: 0;
+                width: auto;
+            }
+        }
 
         &.half {
             width: 100%;
         }
 
-        &.heading {
-            border-bottom: 1px solid #cccccc;
+        &.buffer {
+            padding: 15px;
+        }
+
+        &.beer {
+            background: $beers-background;
+
+            h2 {
+                color: $white;
+            }
+        }
+
+        &.locations {
+            background: $locations-background;
+        }
+
+        .beer-image {
+            width: auto;
+            max-height: 500px;
+            margin: 0 auto;
+            position: relative;
+            display: block;
         }
     }
 
@@ -116,8 +156,6 @@
         &.beers-list {
             width: 100%;
             float: left;
-            // background: $light-grey;
-
 
             li {
                 width: 100%;
@@ -125,7 +163,6 @@
                 float: left;
                 background: $white;
                 box-sizing: border-box;
-                border: 1px solid $border-blue;
                 position: relative;
 
                 .beer-image {
@@ -186,8 +223,9 @@
         float: left;
         clear: both;
         cursor: pointer;
-        color: $light-green;
-        margin-bottom: 15px;
+        color: $light-black;
+        margin-bottom: 0;
+        width: 100%;
     }
 
     .filter {
@@ -198,12 +236,24 @@
         box-sizing: border-box;
         border: 15px solid $light-grey;
 
+        .tabs {
+            margin: 15px 0 10px;
+            float: left;
+            width: 100%;
+        }
+
         &.hide {
-            display: none;
+
+            .tabs {
+                display: none;
+            }
         }
 
         &.show {
-            display: block;
+
+            .tabs {
+                display: block;
+            }
         }
 
         &.beers {
@@ -253,13 +303,14 @@
             width: 80%;
         }
 
-        .split {
+        .area {
 
             &.half {
                 width: 49%;
                 margin-right: 2%;
 
-                &:last-child {
+                &:last-child,
+                &.end {
                     margin-right: 0;
                 }
             }

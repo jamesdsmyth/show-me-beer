@@ -14,27 +14,30 @@ class LocationContainerView extends React.Component {
                         <Link to={"/beers/" + beer}>
                             <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />
                         </Link>
-                        <Link to={"/beers/" + beer} className="beer-title">
-                            {currentLocation.beers[beer].name}
-                        </Link>
+                        <div className="beer-details">
+                            <h3>
+                                <Link to={"/beers/" + beer}>
+                                    {currentLocation.beers[beer].name}
+                                </Link>
+                            </h3>
+                            <span className="italic">{currentLocation.beers[beer].type}, {currentLocation.beers[beer].style} and brewed in {currentLocation.beers[beer].country}</span>
+                        </div>
                     </li>
         });
 
         return (
             <div>
-                <section className="split">
-                    <h1>{currentLocation.name}</h1>
-                    <p>{currentLocation.street}</p>
-                    <p>{currentLocation.city}</p>
-                    <p>{currentLocation.postCode}</p>
-                    <p>Description: {currentLocation.description}</p>
+                <section className="location-header area">
+                    <h1 className="location-title">{currentLocation.name}</h1>
                     <img src={currentLocation.photo} alt={currentLocation.name} />
-                    <h2>Beers sold here</h2>
+                </section>
+                <section className="area buffer beer">
+                    <h2>Beers</h2>
                     <ul className="beers-list">
                         {beerslist}
                     </ul>
                 </section>
-                <section className="split">
+                <section className="area buffer">
                     <MapContainer locations={currentLocation.coords} />
                 </section>
             </div>

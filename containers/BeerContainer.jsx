@@ -19,20 +19,18 @@ class BeerContainerView extends React.Component {
 
         return (
             <div>
-                <section className="split">
-                    <section className="split half">
-                        <h1 className="beer-heading">{currentBeer.name}</h1>
-                        <p>Type: {currentBeer.type}</p>
-                        <p>Style: {currentBeer.style}</p>
-                        <p>Alcohol content: {currentBeer.alcoholContent}%</p>
-                        <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
-                        <p>Description: {currentBeer.description}</p>
-                    </section>
-                    <section className="split half">
-                        <img src={currentBeer.photo} alt={currentBeer.name} />
-                    </section>
+                <h1 className="beer-heading">{currentBeer.name}</h1>
+                <section className="area half buffer">
+                    <p>Type: {currentBeer.type}</p>
+                    <p>Style: {currentBeer.style}</p>
+                    <p>Alcohol content: {currentBeer.alcoholContent}%</p>
+                    <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
+                    <p>Description: {currentBeer.description}</p>
                 </section>
-                <section className="split">
+                <section className="area half buffer end">
+                    <img className="beer-image" src={currentBeer.photo} alt={currentBeer.name} />
+                </section>
+                <section className="area buffer locations">
                     <h2>Locations who sell this beer</h2>
                     <ul>
                         {locationsList}
