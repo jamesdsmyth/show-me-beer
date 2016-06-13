@@ -42,5 +42,7 @@ render((
 // - DONE - get all data together and create the real data for the beers and locations
 // - DONE - add option for 1 photo to be added to the locations
 // - add search input to filter the locations and beers using the input
-// - add the intiial structure before styles
-// - get initial styling in
+// - DONE - add the intiial structure before styles
+// - DONE - get initial styling in
+// - send out email to 30 - 40 pubs and request description of the beers they are selling
+// - fix location tab click bug (ask richard)

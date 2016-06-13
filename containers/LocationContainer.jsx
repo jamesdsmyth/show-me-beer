@@ -38,6 +38,14 @@ class LocationContainerView extends React.Component {
                     </ul>
                 </section>
                 <section className="area buffer">
+                    <h2>Details</h2>
+                    <p>{currentLocation.description}</p>
+                </section>
+                <section className="area buffer">
+                    <h2>Where to find {currentLocation.name}</h2>
+                    <p>{currentLocation.street}</p>
+                    <p>{currentLocation.city}</p>
+                    <p>{currentLocation.postCode}</p>
                     <MapContainer locations={currentLocation.coords} />
                 </section>
             </div>

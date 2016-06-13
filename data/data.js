@@ -492,7 +492,7 @@ var Data = {
             "latitude":-0.0565677
          },
          "name":"The Dolphin",
-         "photo":"http://www.hackneygazette.co.uk/polopoly_fs/1.2728337.1379607912!/image/4164809026.jpg_gen/derivatives/landscape_630/4164809026.jpg"
+         "photo":"https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Seattle_Skyline_from_Rizal_Park.jpg/1600px-Seattle_Skyline_from_Rizal_Park.jpg"
       },
       "the-intrepid-fox":{
          "postCode":"WC2H 8LN",
@@ -565,7 +565,7 @@ var Data = {
             "latitude":-0.1289428
          },
          "name":"The Intrepid Fox",
-         "photo":"https://upload.wikimedia.org/wikipedia/commons/4/4e/Intrepid_Fox,_Covent_Garden,_WC2_(2361130089).jpg"
+         "photo":"https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Seattle_Skyline_from_Rizal_Park.jpg/1600px-Seattle_Skyline_from_Rizal_Park.jpg"
       },
       "the-lexington":{
          "postCode":"N1 9JB",
@@ -637,7 +637,7 @@ var Data = {
             "latitude":-0.1118621
          },
          "name":"The Lexington",
-         "photo":"http://victorianawnings.co.uk/sites/default/files/projects/lexington.jpg"
+         "photo":"https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Seattle_Skyline_from_Rizal_Park.jpg/1600px-Seattle_Skyline_from_Rizal_Park.jpg"
       },
       "the-worlds-end":{
          "postCode":"NW1 0NE",
@@ -731,7 +731,7 @@ var Data = {
             "latitude":-0.1420483
          },
          "name":"The Worlds End",
-         "photo":"http://www.true-london.com/wp-content/uploads/IMG_0388-e1362658280485.jpg"
+         "photo":"https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Seattle_Skyline_from_Rizal_Park.jpg/1600px-Seattle_Skyline_from_Rizal_Park.jpg"
       }
    },
    "shortLocations":{
