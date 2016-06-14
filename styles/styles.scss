@@ -42,8 +42,9 @@
     }
 
     h1 {
-        font-size: 4.5em;
-        margin-bottom: 15px;
+        font-family: 'Lora', serif;
+        font-size: 6em;
+        margin: 60px 0 15px;
         color: $light-black;
         padding: 15px;
     }
@@ -101,11 +102,13 @@
         float: left;
         width: 100%;
         margin-bottom: 10px;
+        border-bottom: 2px solid $light-grey;
 
         &.location-header {
             height: 75vh;
             overflow: hidden;
             position: relative;
+            border-bottom: none;
 
             .location-image {
 
@@ -116,7 +119,7 @@
                 bottom: 0;
                 left: 15px;
                 background: $white;
-                padding: 10px 25px 5px 5px;
+                padding: 5px 25px 5px 25px;
                 margin-bottom: 0;
                 width: auto;
             }
@@ -131,15 +134,21 @@
         }
 
         &.beer {
-            background: $beers-background;
+            // background: $beers-background;
+            // border-top: 10px solid $beers-background-top;
 
-            h2 {
-                color: $white;
-            }
+            // h2 {
+            //     color: $white;
+            // }
         }
 
         &.locations {
-            background: $locations-background;
+            // background: $locations-background;
+            // border-top: 10px solid $locations-background-top;
+            //
+            // h2 {
+            //     color: $white;
+            // }
         }
 
         .beer-image {

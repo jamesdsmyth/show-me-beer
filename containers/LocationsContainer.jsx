@@ -122,7 +122,7 @@ class LocationsContainerView extends React.Component {
                             </section>
                             {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                         </section>
-                        <section className="area">
+                        <section className="area buffer locations">
                             {/*<ul>
                                 {locationsList}
                             </ul>*/}
