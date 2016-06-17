@@ -133,30 +133,16 @@
             padding: 15px;
         }
 
-        &.beer {
-            // background: $beers-background;
-            // border-top: 10px solid $beers-background-top;
-
-            // h2 {
-            //     color: $white;
-            // }
-        }
-
-        &.locations {
-            // background: $locations-background;
-            // border-top: 10px solid $locations-background-top;
-            //
-            // h2 {
-            //     color: $white;
-            // }
-        }
-
         .beer-image {
             width: auto;
             max-height: 500px;
             margin: 0 auto;
             position: relative;
             display: block;
+        }
+
+        &.filters {
+            border-bottom: none;
         }
     }
 
