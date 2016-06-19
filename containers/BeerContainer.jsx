@@ -6,10 +6,12 @@ import MapContainer from '../containers/MapContainer.jsx'
 
 class BeerContainerView extends React.Component {
     render () {
-        var beers = this.props.beers;
-        var currentBeer = beers[this.props.params.beer];
+        var beers = this.props.beers,
+            currentBeer = beers[this.props.params.beer],
+            locationCount = -1;
 
         var locationsList = Object.keys(currentBeer.locations).map(function (location, i) {
+            locationCount = i++;
             return <li key={i}>
                         <Link to={"/locations/" + location}>
                             {currentBeer.locations[location].name}
@@ -19,7 +21,9 @@ class BeerContainerView extends React.Component {
 
         return (
             <div>
-                <h1 className="beer-heading">{currentBeer.name}</h1>
+                <section className="area buffer">
+                    <h1 className="beer-heading">{currentBeer.name}</h1>
+                </section>
                 <section className="area half buffer">
                     <p>Type: {currentBeer.type}</p>
                     <p>Style: {currentBeer.style}</p>
@@ -31,7 +35,13 @@ class BeerContainerView extends React.Component {
                     <img className="beer-image" src={currentBeer.photo} alt={currentBeer.name} />
                 </section>
                 <section className="area buffer locations">
-                    <h2>Locations who sell this beer</h2>
+                    <div className="locations-list">
+                        <h2>Locations that sell this beer</h2>
+                        {locationCount === -1 ? <span>There are currently no locations that sell {currentBeer.name}</span> : null}
+                        <ul>
+                            {locationsList}
+                        </ul>
+                    </div>
                     <MapContainer locations={currentBeer.locations} />
                 </section>
             </div>

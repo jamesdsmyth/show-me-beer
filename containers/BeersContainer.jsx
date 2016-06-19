@@ -139,7 +139,9 @@ class BeersContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <h1>Beers</h1>
+                        <section className="area buffer">
+                            <h1>Beers</h1>
+                        </section>
                         <section className="area filters">
                             <section className={filterClasses}>
                                 <h3 className="filter-button" onClick={() => handleFilterToggle()}>

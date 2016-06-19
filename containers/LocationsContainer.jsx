@@ -72,7 +72,8 @@ class LocationsContainerView extends React.Component {
             locationsList = [],
             locationsMaplist = {},
             handleFilterToggle = this.toggleFilter.bind(this),
-            filterClasses = this.state.showFilter + ' filter'
+            filterClasses = this.state.showFilter + ' filter',
+            locationCount = -1;
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -89,6 +90,7 @@ class LocationsContainerView extends React.Component {
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(locations).map(function (location, i) {
             if((locations[location].borough === stateBorough) || stateBorough === 'all') {
+                locationCount = i++;
                 return <li key={i}>
                             <Link to={"/locations/" + location}>
                                 {locations[location].name}
@@ -103,7 +105,9 @@ class LocationsContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
+                        <section className="area buffer">
+                            <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
+                        </section>
                         <section className="area filters">
                             <section className={filterClasses}>
                                 <h3 className="filter-button" onClick={() => handleFilterToggle()}>
@@ -123,9 +127,12 @@ class LocationsContainerView extends React.Component {
                             {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
                         </section>
                         <section className="area buffer locations">
-                            {/*<ul>
-                                {locationsList}
-                            </ul>*/}
+                            <div className="locations-list">
+                                {locationCount === -1 ? <span>There are currently no locations in {stateBorough}</span> : null}
+                                <ul>
+                                    {locationsList}
+                                </ul>
+                            </div>
                             <MapContainer locations={locationsMaplist} />
                         </section>
                     </div>

@@ -9,16 +9,16 @@ class HeaderContainer extends React.Component {
                     <ul className="main-navigation">
                         <li>
                             <Link to="/beers" activeClassName="active">
-                                <img src="../images/glass.png" alt="image of a beer glass" />
-                                <span className="hidden">
+                                {/*<img src="../images/glass.png" alt="image of a beer glass" />*/}
+                                <span>
                                     Beers
                                 </span>
                             </Link>
                         </li>
                         <li>
                             <Link to="/locations" activeClassName="active">
-                                <img src="../images/pin.png" alt="image of a map marker pin" />
-                                <span className="hidden">
+                                {/*<img src="../images/pin.png" alt="image of a map marker pin" />*/}
+                                <span>
                                     Locations
                                 </span>
                             </Link>
