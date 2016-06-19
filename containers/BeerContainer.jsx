@@ -21,7 +21,7 @@ class BeerContainerView extends React.Component {
 
         return (
             <div>
-                <section className="area buffer">
+                <section className="area buffer page-title">
                     <h1 className="beer-heading">{currentBeer.name}</h1>
                 </section>
                 <section className="area half buffer">

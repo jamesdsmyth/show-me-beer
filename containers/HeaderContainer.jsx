@@ -3,9 +3,12 @@ import{ Link, IndexLink } from 'react-router'
 
 class HeaderContainer extends React.Component {
     render() {
+
+        var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
+
         return (
             <div>
-                <header className="main-header">
+                <header className={headingClasses}>
                     <ul className="main-navigation">
                         <li>
                             <Link to="/beers" activeClassName="active">

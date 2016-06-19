@@ -20,7 +20,7 @@ render((
     <Provider store={Store}>
         <Router history={browserHistory}>
             <Route path="/" component={HeaderContainer}>
-                <IndexRoute component={HomeContainer} />
+                {/*<IndexRoute component={HomeContainer} />*/}
                 <Route path="/beers" component={BeersContainer}>
                     <Route path="/beers/:beer" component={BeerContainer} />
                 </Route>
@@ -44,5 +44,6 @@ render((
 // - add search input to filter the locations and beers using the input
 // - DONE - add the intiial structure before styles
 // - DONE - get initial styling in
+// - on the beers page, there needs to be more photos of the beer, eg in the glass, being poured. I could ask the brewery for this? It needs to be in a slide show
 // - send out email to 30 - 40 pubs and request description of the beers they are selling
 // - fix location tab click bug (ask richard)

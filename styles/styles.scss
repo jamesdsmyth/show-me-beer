@@ -10,10 +10,16 @@
 
     .main-header {
         width: 100%;
-        padding: 15px;
         float: left;
 
+        &.home {
+            font-size: 3em;
+        }
+
         .main-navigation {
+            float: left;
+            padding: 15px;
+            display: block;
 
             li {
                 display: block;
@@ -110,10 +116,6 @@
             position: relative;
             border-bottom: none;
 
-            .location-image {
-
-            }
-
             .location-title {
                 position: absolute;
                 bottom: -15px;
@@ -137,7 +139,8 @@
             display: block;
         }
 
-        &.filters {
+        &.filters,
+        &.page-title {
             border-bottom: none;
         }
     }
@@ -285,6 +288,7 @@
 
     #mapid {
         height: 80vh;
+        width: 100%;
         float: left;
     }
 
@@ -296,7 +300,19 @@
         display: none;
     }
 
-    @media only screen and (min-width : 1000px) {
+    @media only screen and (min-width : 768px) {
+
+        .main-header {
+
+            &.home {
+                
+                .main-navigation {
+                    margin: 0 auto;
+                    width: 360px;
+                    float: none;
+                }
+            }
+        }
 
         .area {
 

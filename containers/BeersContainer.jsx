@@ -139,7 +139,7 @@ class BeersContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="area buffer">
+                        <section className="area buffer page-title">
                             <h1>Beers</h1>
                         </section>
                         <section className="area filters">

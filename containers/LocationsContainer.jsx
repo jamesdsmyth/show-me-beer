@@ -105,7 +105,7 @@ class LocationsContainerView extends React.Component {
             <div>
                 {!this.props.children ?
                     <div>
-                        <section className="area buffer">
+                        <section className="area buffer page-title">
                             <h1>Locations {stateBorough !== 'all' && stateBorough !== -1 ? <span>in {stateBorough}</span> : null}</h1>
                         </section>
                         <section className="area filters">
