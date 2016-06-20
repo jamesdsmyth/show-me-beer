@@ -11,6 +11,9 @@
     .main-header {
         width: 100%;
         float: left;
+        background: #fafafa;
+        border-bottom: 1px solid #dbdbdb;
+        margin-bottom: 20px;
 
         &.home {
             font-size: 3em;
@@ -18,7 +21,7 @@
 
         .main-navigation {
             float: left;
-            padding: 15px;
+            padding: 25px 15px 20px;
             display: block;
 
             li {
@@ -305,7 +308,7 @@
         .main-header {
 
             &.home {
-                
+
                 .main-navigation {
                     margin: 0 auto;
                     width: 360px;
