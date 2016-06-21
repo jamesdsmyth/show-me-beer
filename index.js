@@ -47,3 +47,4 @@ render((
 // - on the beers page, there needs to be more photos of the beer, eg in the glass, being poured. I could ask the brewery for this? It needs to be in a slide show
 // - send out email to 30 - 40 pubs and request description of the beers they are selling
 // - fix location tab click bug (ask richard)
+// - use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
