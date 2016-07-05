@@ -17,6 +17,11 @@
     "url": "https://github.com/jamesdsmyth/show-me-beer/issues"
   },
   "homepage": "https://github.com/jamesdsmyth/show-me-beer#readme",
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
   "dependencies": {
     "firebase": "^2.4.2",
     "immutable": "^3.8.1",

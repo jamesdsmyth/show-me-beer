@@ -14,6 +14,8 @@ import BeerContainer from './containers/BeerContainer.jsx'
 import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 
+// import TestReducer from './reducers/TestReducer.js'
+
 import Store from './reducers/CombinedReducers.jsx'
 
 render((
@@ -40,10 +42,9 @@ render((
 // - DONE - filter beers by country - best way of doing this will be to loop through each beer and create an array from the {beer.country}
 // - DONE - get all data together and create the real data for the beers and locations
 // - DONE - add option for 1 photo to be added to the locations
-// - add search input to filter the locations and beers using the input
 // - DONE - add the intiial structure before styles
 // - DONE - get initial styling in
 // - on the beers page, there needs to be more photos of the beer, eg in the glass, being poured. I could ask the brewery for this? It needs to be in a slide show
-// - send out email to 30 - 40 pubs and request description of the beers they are selling
-// - fix location tab click bug (ask richard)
-// - use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
+// - DONE - send out email to 20 pubs and request description of the beers they are selling, use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
+// - hook up firebase to the redux store
+// - add search input to filter the locations and beers using the input

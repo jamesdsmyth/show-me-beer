@@ -12,8 +12,12 @@ class LocationsContainerView extends React.Component {
         this.state = {
             borough: 'all',
             boroughs: this.props.boroughs,
-            showFilter: 'hide'
+            showFilter: 'hide',
+            locations: this.props.locations,
+            blah: this.props.saasa
         }
+
+        console.log(this.state);
     }
 
     searchPostcode (e) {
@@ -64,7 +68,7 @@ class LocationsContainerView extends React.Component {
     }
 
     render () {
-        var locations = this.props.locations,
+        var locations = this.state.locations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
             postcodeClick = this.searchPostcode.bind(this),
@@ -74,6 +78,7 @@ class LocationsContainerView extends React.Component {
             handleFilterToggle = this.toggleFilter.bind(this),
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
+
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -143,10 +148,15 @@ class LocationsContainerView extends React.Component {
     }
 }
 
+// this is not being updated.
+// something like this.setState({ timer: this.state.timer + 1000 }); could work p
+
 const mapStateToProps = (state) => {
+    console.log(state.locations);
     return {
         locations: state.shortLocations,
-        boroughs: state.boroughs
+        boroughs: state.boroughs,
+        saasa: state.locations
     }
 }
 

@@ -20,4 +20,14 @@ var Reducer = combineReducers({
 
 var Store = createStore(Reducer);
 
+
+
+
+import * as actions from '../actions/actions.js'
+
+firebase.database().ref('/').once('value').then((snapshot) => {
+    console.log(snapshot.val());
+    Store.dispatch(actions.populateLocations(snapshot.val()));
+});
+
 export default Store
