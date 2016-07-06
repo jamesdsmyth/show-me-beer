@@ -4,14 +4,11 @@ var LocationsReducer = (state = Data.locations, action) => {
 
     var newState = Object.assign({}, state);
 
+    console.log(action.type)
     switch (action.type) {
         case 'ALL_LOCATIONS':
-            console.log(action.data.locations);
-            console.log(state);
 
             newState = action.data.locations
-
-            console.log(newState);
             return newState;
             break;
 

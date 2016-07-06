@@ -4,7 +4,15 @@ var BeerReducer = (state = Data.beers, action) => {
 
     var newState = Object.assign({}, state);
 
-    return state;
+    switch (action.type) {
+        case 'ALL_BEERS':
+            newState = action.data.beers;
+            return newState;
+            break;
+
+        default:
+            return state;
+    }
 }
 
 export default BeerReducer

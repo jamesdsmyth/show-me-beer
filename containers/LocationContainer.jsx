@@ -5,8 +5,26 @@ import { Link } from 'react-router'
 import MapContainer from '../containers/MapContainer.jsx'
 
 class LocationContainerView extends React.Component {
+
+    constructor (props) {
+        super (props);
+
+        this.state = {
+            firebaseLocations: this.props.firebaseLocations
+        }
+    }
+
+    // this is called when the firebase data is received
+    componentWillReceiveProps (props) {
+        this.setState({
+            firebaseLocations: props.firebaseLocations
+        });
+    }
+
     render () {
-        var locations = this.props.locations;
+        var locations = this.state.firebaseLocations;
+
+        console.log(locations)
         var currentLocation = locations[this.props.params.location];
 
         var beerslist = Object.keys(currentLocation.beers).map(function (beer, i) {
@@ -57,7 +75,7 @@ class LocationContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        locations: state.locations
+        firebaseLocations: state.locations
     }
 }
 

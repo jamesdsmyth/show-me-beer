@@ -38,8 +38,6 @@ class MapContainer extends React.Component {
     setLocationMarkers () {
 
         var locations = this.props.locations;
-
-        console.log('new locations are', locations);
         var LeafIcon = L.Icon.extend({
             options: {
                 iconSize:     [41, 60], // size of the icon

@@ -14,8 +14,6 @@ import BeerContainer from './containers/BeerContainer.jsx'
 import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 
-// import TestReducer from './reducers/TestReducer.js'
-
 import Store from './reducers/CombinedReducers.jsx'
 
 render((
@@ -48,3 +46,5 @@ render((
 // - DONE - send out email to 20 pubs and request description of the beers they are selling, use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
 // - hook up firebase to the redux store
 // - add search input to filter the locations and beers using the input
+// - add flexbox structure
+// - add redux saga (https://github.com/yelouafi/redux-saga) to replace the setTimeouts when retreiving firebase data

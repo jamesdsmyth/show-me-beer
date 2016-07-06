@@ -11,20 +11,26 @@ class LocationsContainerView extends React.Component {
 
         this.state = {
             borough: 'all',
-            boroughs: this.props.boroughs,
             showFilter: 'hide',
-            locations: this.props.locations,
-            blah: this.props.saasa
+            boroughs: this.props.boroughs,
+            firebaseLocations: this.props.firebaseLocations
         }
+    }
 
-        console.log(this.state);
+    // this is called when the firebase data is received
+    componentWillReceiveProps (props) {
+        this.setState({
+            firebaseLocations: props.firebaseLocations
+        });
     }
 
     searchPostcode (e) {
         e.preventDefault();
 
         var postcode = document.getElementById('postcode').value;
-        var data = { "postcodes" : [postcode] }
+        var data = {
+            "postcodes" : [postcode]
+        }
 
         $.ajax({
             type: 'POST',
@@ -68,7 +74,7 @@ class LocationsContainerView extends React.Component {
     }
 
     render () {
-        var locations = this.state.locations,
+        var shortLocations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
             postcodeClick = this.searchPostcode.bind(this),
@@ -79,32 +85,29 @@ class LocationsContainerView extends React.Component {
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
 
-
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
             var newClass = borough === stateBorough ? 'selected' : null
             return <li key={i} className={newClass} onClick={() => handleBoroughChange({borough})}>{borough}</li>
         });
 
-        for(var i in locations) {
-            if((locations[i].borough === stateBorough) || stateBorough === 'all') {
-                locationsMaplist[i] = locations[i];
+        for(var i in shortLocations) {
+            if((shortLocations[i].borough === stateBorough) || stateBorough === 'all') {
+                locationsMaplist[i] = shortLocations[i];
             }
         }
 
         // filtering all locations to see whether they match the borough selected
-        locationsList = Object.keys(locations).map(function (location, i) {
-            if((locations[location].borough === stateBorough) || stateBorough === 'all') {
+        locationsList = Object.keys(shortLocations).map(function (location, i) {
+            if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
                 locationCount = i++;
                 return <li key={i}>
                             <Link to={"/locations/" + location}>
-                                {locations[location].name}
+                                {shortLocations[location].name}
                             </Link>
                         </li>
             }
         });
-
-        console.log(locationsMaplist);
 
         return (
             <div>
@@ -148,15 +151,11 @@ class LocationsContainerView extends React.Component {
     }
 }
 
-// this is not being updated.
-// something like this.setState({ timer: this.state.timer + 1000 }); could work p
-
-const mapStateToProps = (state) => {
-    console.log(state.locations);
+var mapStateToProps = (state) => {
+    console.log(state);
     return {
-        locations: state.shortLocations,
         boroughs: state.boroughs,
-        saasa: state.locations
+        firebaseLocations: state.locations
     }
 }
 
