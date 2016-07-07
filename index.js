@@ -44,7 +44,7 @@ render((
 // - DONE - get initial styling in
 // - on the beers page, there needs to be more photos of the beer, eg in the glass, being poured. I could ask the brewery for this? It needs to be in a slide show
 // - DONE - send out email to 20 pubs and request description of the beers they are selling, use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
-// - hook up firebase to the redux store
+// - DONE - hook up firebase to the redux store
 // - add search input to filter the locations and beers using the input
 // - add flexbox structure
 // - add redux saga (https://github.com/yelouafi/redux-saga) to replace the setTimeouts when retreiving firebase data
