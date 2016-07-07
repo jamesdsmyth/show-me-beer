@@ -5,12 +5,16 @@ import { Link } from 'react-router'
 import MapContainer from '../containers/MapContainer.jsx'
 
 class BeerContainerView extends React.Component {
+
     render () {
         var beers = this.props.beers,
-            currentBeer = beers[this.props.params.beer],
+            currentBeer = beers[this.props.params.beer] || {},
             locationCount = -1;
 
-        var locationsList = Object.keys(currentBeer.locations).map(function (location, i) {
+
+        console.log(currentBeer)
+
+        var locationsList = Object.keys(currentBeer.locations || {}).map(function (location, i) {
             locationCount = i++;
             return <li key={i}>
                         <Link to={"/locations/" + location}>
@@ -42,7 +46,7 @@ class BeerContainerView extends React.Component {
                             {locationsList}
                         </ul>
                     </div>
-                    <MapContainer locations={currentBeer.locations} />
+                    {currentBeer.locations !== undefined ? <MapContainer locations={currentBeer.locations} /> : null}
                 </section>
             </div>
         )

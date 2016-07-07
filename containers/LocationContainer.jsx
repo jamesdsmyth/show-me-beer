@@ -6,28 +6,11 @@ import MapContainer from '../containers/MapContainer.jsx'
 
 class LocationContainerView extends React.Component {
 
-    constructor (props) {
-        super (props);
-
-        this.state = {
-            firebaseLocations: this.props.firebaseLocations
-        }
-    }
-
-    // this is called when the firebase data is received
-    componentWillReceiveProps (props) {
-        this.setState({
-            firebaseLocations: props.firebaseLocations
-        });
-    }
-
     render () {
-        var locations = this.state.firebaseLocations;
+        var locations = this.props.locations;
+        var currentLocation = locations[this.props.params.location] || {};
 
-        console.log(locations)
-        var currentLocation = locations[this.props.params.location];
-
-        var beerslist = Object.keys(currentLocation.beers).map(function (beer, i) {
+        var beerslist = Object.keys(currentLocation.beers || {}).map(function (beer, i) {
             return <li key={i}>
                         <Link to={"/beers/" + beer}>
                             <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />
@@ -66,7 +49,7 @@ class LocationContainerView extends React.Component {
                         <p>{currentLocation.city}</p>
                         <p>{currentLocation.postCode}</p>
                     </div>
-                    <MapContainer locations={currentLocation.coords} />
+                    {currentLocation.coords !== undefined ? <MapContainer locations={currentLocation.coords} /> : null}
                 </section>
             </div>
         )
@@ -75,7 +58,7 @@ class LocationContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        firebaseLocations: state.locations
+        locations: state.locations
     }
 }
 

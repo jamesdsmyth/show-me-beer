@@ -10,7 +10,6 @@ var BeerTypesReducer = (state = Data.beerTypes, action) => {
         case 'ALL_BEER_TYPES':
 
             newState = action.data.beerTypes;
-            console.log(newState);
             return newState;
             break;
 
