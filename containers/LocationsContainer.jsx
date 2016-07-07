@@ -97,6 +97,8 @@ class LocationsContainerView extends React.Component {
             }
         }
 
+        console.log(locationsMaplist);
+
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(shortLocations).map(function (location, i) {
             if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
@@ -141,7 +143,7 @@ class LocationsContainerView extends React.Component {
                                     {locationsList}
                                 </ul>
                             </div>
-                            <MapContainer locations={locationsMaplist} />
+                            {Object.keys(locationsMaplist).length !== 0 ? <MapContainer locations={locationsMaplist} /> : null}
                         </section>
                     </div>
                 : null}
