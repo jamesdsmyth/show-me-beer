@@ -1,7 +1,4 @@
-import Data from '../data/data.js'
-
-var LocationsReducer = (state = Data.locations, action) => {
-
+var LocationsReducer = (state = {}, action) => {
     var newState = Object.assign({}, state);
 
     console.log(action.type)
