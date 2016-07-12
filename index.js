@@ -15,6 +15,10 @@ import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 
 import Store from './reducers/CombinedReducers.jsx'
+import FirebaseRef from './data/FirebaseRef.jsx'
+
+// calling FirebaseRef() to initialise the call to the Firebase DB to get the data
+FirebaseRef();
 
 render((
     <Provider store={Store}>
