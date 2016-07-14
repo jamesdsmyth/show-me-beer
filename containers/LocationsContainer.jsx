@@ -97,8 +97,6 @@ class LocationsContainerView extends React.Component {
             }
         }
 
-        console.log(locationsMaplist);
-
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(shortLocations).map(function (location, i) {
             if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
@@ -154,7 +152,6 @@ class LocationsContainerView extends React.Component {
 }
 
 var mapStateToProps = (state) => {
-    console.log(state);
     return {
         boroughs: state.boroughs,
         firebaseLocations: state.locations
