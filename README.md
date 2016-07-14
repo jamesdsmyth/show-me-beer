@@ -5,7 +5,7 @@ Show me beer is in progress and by no means finished! It is an app built using R
 
 ### How to run
 
-1. `git clone` the the repo
+1. `git clone` the repo
 2. `npm install` to get the node_modules folder
 3. `npm start` to initialize the app
 4. visit [http://localhost:8080/](http://localhost:8080/)
