@@ -18,3 +18,12 @@ export function populateBeers (data) {
         data: data
     }
 }
+
+export function populateUser (data) {
+
+    console.log('yehhhhh')
+    return {
+        type: 'POPULATE_USER',
+        data: data
+    }
+}

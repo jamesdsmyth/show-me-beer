@@ -24,6 +24,7 @@ render((
     <Provider store={Store}>
         <Router history={browserHistory}>
             <Route path="/" component={HeaderContainer}>
+                <IndexRoute component={HomeContainer} />
                 <Route path="/beers" component={BeersContainer}>
                     <Route path="/beers/:beer" component={BeerContainer} />
                 </Route>

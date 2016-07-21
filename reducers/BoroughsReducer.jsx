@@ -1,6 +1,6 @@
 import Data from '../data/data.js'
 
-var BoroughsReducer = (state = Data.boroughs, actions) => {
+const BoroughsReducer = (state = Data.boroughs, actions) => {
     return state;
 }
 

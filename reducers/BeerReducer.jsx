@@ -1,6 +1,6 @@
 import Data from '../data/data.js'
 
-var BeerReducer = (state = Data.beers, action) => {
+const BeerReducer = (state = Data.beers, action) => {
 
     var newState = Object.assign({}, state);
 

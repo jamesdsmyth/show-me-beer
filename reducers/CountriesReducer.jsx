@@ -1,6 +1,6 @@
 import Data from '../data/data.js'
 
-var CountriesReducer = (state = Data.countries, actions) => {
+const CountriesReducer = (state = Data.countries, actions) => {
     return state;
 }
 

@@ -26,7 +26,6 @@ class HeaderContainer extends React.Component {
                         </li>
                     </ul>
                 </header>
-
                 <main className="main">
                     {this.props.children}
                 </main>

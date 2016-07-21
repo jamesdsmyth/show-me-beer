@@ -1,6 +1,6 @@
 import Data from '../data/data.js'
 
-var ShortLocationsReducer = (state = Data.shortLocations, action) => {
+const ShortLocationsReducer = (state = Data.shortLocations, action) => {
 
     var newState = Object.assign({}, state);
 

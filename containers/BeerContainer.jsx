@@ -6,6 +6,11 @@ import MapContainer from '../containers/MapContainer.jsx'
 
 class BeerContainerView extends React.Component {
 
+    addBeer () {
+        alert('added');
+        // here I need to fire off an action that creates the
+    }
+
     render () {
         var beers = this.props.beers,
             currentBeer = beers[this.props.params.beer] || {},
@@ -27,6 +32,10 @@ class BeerContainerView extends React.Component {
             <div>
                 <section className="area buffer page-title">
                     <h1 className="beer-heading">{currentBeer.name}</h1>
+                    {/*<span className="add-beer"
+                        onClick={() => this.addBeer()}>
+                        Save beer
+                    </span>*/}
                 </section>
                 <section className="area half buffer">
                     <p>Type: {currentBeer.type}</p>
