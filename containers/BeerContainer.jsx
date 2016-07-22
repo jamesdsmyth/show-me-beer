@@ -7,7 +7,7 @@ import MapContainer from '../containers/MapContainer.jsx'
 class BeerContainerView extends React.Component {
 
     addBeer () {
-        alert('added');
+        alert('beer added');
         // here I need to fire off an action that creates the
     }
 

@@ -21,6 +21,6 @@ const Reducer = combineReducers({
 });
 
 var Store = createStore(Reducer);
-console.log(Store.getState())
+console.log(Store.getState());
 
 export default Store

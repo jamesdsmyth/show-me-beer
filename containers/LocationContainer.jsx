@@ -30,7 +30,10 @@ class LocationContainerView extends React.Component {
             <div>
                 <section className="location-header area">
                     <h1 className="location-title">{currentLocation.name}</h1>
-                    <img src={currentLocation.photo} alt={currentLocation.name} />
+                    <picture>
+                        <source srcSet={currentLocation.photo} media="(min-width: 800px)" />
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Seattle_Skyline_from_Rizal_Park.jpg/800px-Seattle_Skyline_from_Rizal_Park.jpg" alt="default fallback image" />
+                    </picture>
                 </section>
                 <section className="area buffer beer">
                     <h2>Beers</h2>

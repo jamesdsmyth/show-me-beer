@@ -1,9 +1,7 @@
+// setting state up initially as an object because it is empty until populated.
 const UserReducer = (state = {}, action) => {
 
-    console.log(state);
     var newState = Object.assign({}, state);
-
-    console.log(action)
 
     switch (action.type) {
 
@@ -19,8 +17,8 @@ const UserReducer = (state = {}, action) => {
             return newState;
             break;
 
-            default:
-                return state;
+        default:
+            return state;
     }
 }
 

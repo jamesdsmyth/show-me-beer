@@ -186,3 +186,18 @@ const mapStateToProps = (state) => {
 const BeersContainer = connect(mapStateToProps)(BeersContainerView);
 
 export default BeersContainer
+
+
+
+
+
+
+
+
+
+
+
+const myReducer = () => {
+
+    var newState = Object.assign({}, state);
+}

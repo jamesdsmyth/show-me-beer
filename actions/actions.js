@@ -20,10 +20,10 @@ export function populateBeers (data) {
 }
 
 export function populateUser (data) {
-
-    console.log('yehhhhh')
     return {
         type: 'POPULATE_USER',
-        data: data
+        userName: data,
+        email: data,
+        uid: data
     }
 }
