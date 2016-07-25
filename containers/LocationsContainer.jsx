@@ -98,7 +98,7 @@ class LocationsContainerView extends React.Component {
         }
 
         // filtering all locations to see whether they match the borough selected
-        locationsList = Object.keys(shortLocations).map(function (location, i) {
+        locationsList = Object.keys(shortLocations).map((location, i) => {
             if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
                 locationCount = i++;
                 return <li key={i}>

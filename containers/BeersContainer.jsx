@@ -94,25 +94,25 @@ class BeersContainerView extends React.Component {
             filterClasses = this.state.showFilter + ' filter beers';
 
         // creating the toggle tabs for the beer types
-        var typeOptions = types.map(function (type, i) {
+        var typeOptions = types.map((type, i) => {
             var typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
             return <li key={i} className={typeClass} onClick={() => handleTypeSelect({type})}>{type}</li>
         });
 
         // creating the toggle tabs for the beer styles
-        var styleOptions = styles.map(function (style, i) {
+        var styleOptions = styles.map((style, i) => {
             var styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
             return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>
         });
 
         // creating the toggle tabs for the beer countries
-        var countryOptions = countries.map(function (country, i) {
+        var countryOptions = countries.map((country, i) => {
             var styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
             return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>
         });
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
-        var beerList = Object.keys(beers).map(function (beer, i) {
+        var beerList = Object.keys(beers).map((beer, i) => {
             if((selectedType.indexOf(beers[beer].type) > -1) || (selectedType.length === 0)) {
                 if((selectedStyle.indexOf(beers[beer].style) > -1) || (selectedStyle.length === 0)) {
                     if((selectedCountry.indexOf(beers[beer].country) > -1) || (selectedCountry.length === 0)) {
@@ -186,18 +186,3 @@ const mapStateToProps = (state) => {
 const BeersContainer = connect(mapStateToProps)(BeersContainerView);
 
 export default BeersContainer
-
-
-
-
-
-
-
-
-
-
-
-const myReducer = () => {
-
-    var newState = Object.assign({}, state);
-}

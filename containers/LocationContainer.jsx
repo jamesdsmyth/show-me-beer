@@ -10,7 +10,7 @@ class LocationContainerView extends React.Component {
         var locations = this.props.locations;
         var currentLocation = locations[this.props.params.location] || {};
 
-        var beerslist = Object.keys(currentLocation.beers || {}).map(function (beer, i) {
+        var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
             return <li key={i}>
                         <Link to={"/beers/" + beer}>
                             <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />

@@ -19,7 +19,7 @@ class BeerContainerView extends React.Component {
 
         console.log(currentBeer)
 
-        var locationsList = Object.keys(currentBeer.locations || {}).map(function (location, i) {
+        var locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
             locationCount = i++;
             return <li key={i}>
                         <Link to={"/locations/" + location}>
