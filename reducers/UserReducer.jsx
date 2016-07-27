@@ -3,16 +3,26 @@ const UserReducer = (state = {}, action) => {
 
     var newState = Object.assign({}, state);
 
+    var user = 'user'
+
     switch (action.type) {
 
-        case 'POPULATE_USER':
-            // need to look at the grow me reducers for this.
-            // newState = {
-            //     ...state,
-            //     name: action.data.name
-            // }
+        case 'SIGN_IN_USER':
+            newState = Object.assign({}, state, {
+                userName: action.userName,
+                email: action.email
+            });
 
             console.log(newState);
+
+            return newState;
+            break;
+
+        case 'SIGN_OUT_USER':
+            newState = Object.assign({}, state, {
+                userName: null,
+                email: null
+            });
 
             return newState;
             break;

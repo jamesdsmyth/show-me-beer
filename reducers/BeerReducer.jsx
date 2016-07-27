@@ -2,11 +2,14 @@ import Data from '../data/data.js'
 
 const BeerReducer = (state = Data.beers, action) => {
 
-    var newState = Object.assign({}, state);
+    var newState = null;
+
+    console.log('state is', state);
 
     switch (action.type) {
         case 'ALL_BEERS':
-            newState = action.data.beers;
+            newState = Object.assign({}, state, action.data.beers);
+
             return newState;
             break;
 

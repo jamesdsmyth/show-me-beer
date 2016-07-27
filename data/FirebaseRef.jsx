@@ -21,7 +21,6 @@ var GetCurrentUser = () => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log(user.email);
         Store.dispatch(actions.populateUser(user));
       } else {
           console.log('no one is currently signed in')

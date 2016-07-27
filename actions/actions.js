@@ -21,9 +21,14 @@ export function populateBeers (data) {
 
 export function populateUser (data) {
     return {
-        type: 'POPULATE_USER',
-        userName: data,
-        email: data,
-        uid: data
+        type: 'SIGN_IN_USER',
+        userName: data.displayName,
+        email: data.email
+    }
+}
+
+export function signOutUser () {
+    return {
+        type: 'SIGN_OUT_USER'
     }
 }
