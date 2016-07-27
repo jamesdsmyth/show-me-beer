@@ -23,7 +23,8 @@ export function populateUser (data) {
     return {
         type: 'SIGN_IN_USER',
         userName: data.displayName,
-        email: data.email
+        email: data.email,
+        uid: data.uid
     }
 }
 

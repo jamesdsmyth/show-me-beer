@@ -21,7 +21,8 @@ const UserReducer = (state = {}, action) => {
         case 'SIGN_OUT_USER':
             newState = Object.assign({}, state, {
                 userName: null,
-                email: null
+                email: null,
+                uid: null
             });
 
             return newState;
