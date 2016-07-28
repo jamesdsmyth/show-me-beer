@@ -17,15 +17,41 @@ var PopulateStore = () => {
     });
 }
 
+// creating the user and adding it to Firebase
+var CreateUser = (uid) => {
+    firebase.database().ref('users/' + uid).set({
+        beers: 'currently no beers',
+        locations: 'currently no locations'
+    });
+}
+
+// getting the user data from Firebase
+var GetUserData = (user) => {
+
+    firebase.database().ref('/users/' + user.uid).once('value').then((snapshot) => {
+
+        var data = snapshot.val();
+
+        console.log(data);
+
+        if(data !== null) {
+            console.log(data);
+            Store.dispatch(actions.populateUser(user, data));
+        } else {
+            // need to create the user
+            CreateUser(uid);
+        }
+    });
+}
+
 var GetCurrentUser = () => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log(user);
-        Store.dispatch(actions.populateUser(user));
+
+        GetUserData(user);
       } else {
-          console.log('no one is currently signed in')
-        // No user is signed in.
+          console.log('no one is currently signed in');
       }
     });
 }

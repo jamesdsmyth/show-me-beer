@@ -19,12 +19,16 @@ export function populateBeers (data) {
     }
 }
 
-export function populateUser (data) {
+export function populateUser (user, data) {
+
+    console.log(user, data);
     return {
         type: 'SIGN_IN_USER',
-        userName: data.displayName,
-        email: data.email,
-        uid: data.uid
+        userName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        beers: data.beers,
+        locations: data.locations
     }
 }
 

@@ -10,7 +10,9 @@ const UserReducer = (state = {}, action) => {
         case 'SIGN_IN_USER':
             newState = Object.assign({}, state, {
                 userName: action.userName,
-                email: action.email
+                email: action.email,
+                beers: action.beers,
+                locations: action.locations
             });
 
             console.log(newState);
@@ -22,7 +24,9 @@ const UserReducer = (state = {}, action) => {
             newState = Object.assign({}, state, {
                 userName: null,
                 email: null,
-                uid: null
+                uid: null,
+                beers: null,
+                locations: null
             });
 
             return newState;
