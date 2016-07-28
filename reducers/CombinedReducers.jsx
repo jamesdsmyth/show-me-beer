@@ -20,7 +20,6 @@ const Reducer = combineReducers({
     user: UserReducer
 });
 
-var Store = createStore(Reducer);
-console.log(Store.getState());
+const Store = createStore(Reducer);
 
 export default Store

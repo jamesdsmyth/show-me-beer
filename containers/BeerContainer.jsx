@@ -1,23 +1,30 @@
 import React, { propTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { saveBeer } from '../actions/actions.js'
+import Store from '../reducers/CombinedReducers.jsx'
+import { SaveBeer } from '../data/FirebaseRef.jsx'
 
 import MapContainer from '../containers/MapContainer.jsx'
 
 class BeerContainerView extends React.Component {
 
-    addBeer () {
-        alert('beer added');
-        // here I need to fire off an action that creates the
+    // save the beer to Firebase. If the user is not logged in, then an alert to log in is shown
+    saveBeer (beer) {
+        console.log(this.props.user)
+        if(this.props.user.userName !== null) {
+            SaveBeer(beer);
+        } else {
+            alert('please log in to save a beer')
+        }
     }
 
     render () {
-        var beers = this.props.beers,
+        var userData = this.props.user,
+            userLoggedIn = false,
+            beers = this.props.beers,
             currentBeer = beers[this.props.params.beer] || {},
             locationCount = -1;
-
-
-        console.log(currentBeer)
 
         var locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
             locationCount = i++;
@@ -28,14 +35,40 @@ class BeerContainerView extends React.Component {
                     </li>
         });
 
+        var beerSaved = false;
+
+        if((userData.beers !== undefined) && (userData.beers !==  null)) {
+
+            userLoggedIn = true;
+
+            for (var i = 0; i < userData.beers.length; i++) {
+                if (userData.beers[i] === currentBeer.name) {
+
+                    beerSaved = true;
+                }
+            }
+        }
+
+
         return (
             <div>
                 <section className="area buffer page-title">
                     <h1 className="beer-heading">{currentBeer.name}</h1>
-                    {/*<span className="add-beer"
-                        onClick={() => this.addBeer()}>
-                        Save beer
-                    </span>*/}
+
+                    {
+                        beerSaved === false ?
+                            <button type="button"
+                                className="button add-beer"
+                                onClick={() => this.saveBeer(currentBeer.name)}>
+                                Save beer
+                            </button>
+
+                        :
+                            <span>
+                                Beer added!
+                            </span>
+                    }
+
                 </section>
                 <section className="area half buffer">
                     <p>Type: {currentBeer.type}</p>
@@ -64,7 +97,8 @@ class BeerContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        beers: state.beers
+        beers: state.beers,
+        user: state.user
     }
 }
 

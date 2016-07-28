@@ -1,4 +1,11 @@
 var Data = {
+    "user": {
+      "userName": null,
+      "uid": null,
+      "email": null,
+      "beers": null,
+      "locations": null
+    },
    "beers":{},
    "locations":{},
    "shortLocations":{},

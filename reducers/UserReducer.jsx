@@ -1,5 +1,6 @@
-// setting state up initially as an object because it is empty until populated.
-const UserReducer = (state = {}, action) => {
+import data from '../data/data.js'
+
+const UserReducer = (state = data.user, action) => {
 
     var newState = Object.assign({}, state);
 
@@ -8,11 +9,26 @@ const UserReducer = (state = {}, action) => {
     switch (action.type) {
 
         case 'SIGN_IN_USER':
+
             newState = Object.assign({}, state, {
                 userName: action.userName,
+                uid: action.uid,
                 email: action.email,
                 beers: action.beers,
                 locations: action.locations
+            });
+
+            return newState;
+            break;
+
+        case 'SIGN_OUT_USER':
+
+            newState = Object.assign({}, state, {
+                userName: null,
+                email: null,
+                uid: null,
+                beers: null,
+                locations: null
             });
 
             console.log(newState);
@@ -20,13 +36,10 @@ const UserReducer = (state = {}, action) => {
             return newState;
             break;
 
-        case 'SIGN_OUT_USER':
+        case 'SAVE_BEER':
+
             newState = Object.assign({}, state, {
-                userName: null,
-                email: null,
-                uid: null,
-                beers: null,
-                locations: null
+                beers: action.beers
             });
 
             return newState;

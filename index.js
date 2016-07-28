@@ -15,7 +15,7 @@ import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 
 import Store from './reducers/CombinedReducers.jsx'
-import FirebaseRef from './data/FirebaseRef.jsx'
+import { FirebaseRef } from './data/FirebaseRef.jsx'
 
 // calling FirebaseRef() to initialise the call to the Firebase DB to get the data
 FirebaseRef();
@@ -52,4 +52,4 @@ render((
 // - DONE - hook up firebase to the redux store
 
 // from signing in, firebase needs to be updated with the saved data regarding that user (uid)
-// the data will be their beers and locations they have previously saved. 
+// the data will be their beers and locations they have previously saved.

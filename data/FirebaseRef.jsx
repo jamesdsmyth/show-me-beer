@@ -28,27 +28,39 @@ var CreateUser = (uid) => {
 // getting the user data from Firebase
 var GetUserData = (user) => {
 
-    firebase.database().ref('/users/' + user.uid).once('value').then((snapshot) => {
+    let userRef = firebase.database().ref('/users/' + user.uid);
+
+    userRef.once('value').then((snapshot) => {
 
         var data = snapshot.val();
 
         console.log(data);
 
         if(data !== null) {
-            console.log(data);
             Store.dispatch(actions.populateUser(user, data));
         } else {
-            // need to create the user
-            CreateUser(uid);
+            CreateUser(user.uid);
         }
     });
+
+    userRef.on('child_changed', function(data) {
+        let val = data.val();
+
+        if(data.key === 'beers') {
+            Store.dispatch(actions.saveBeer(val));
+        }
+    });
+
+    userRef.on('child_removed', function(data) {
+        alert('removed');
+    });
+
 }
 
 var GetCurrentUser = () => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-
         GetUserData(user);
       } else {
           console.log('no one is currently signed in');
@@ -56,7 +68,47 @@ var GetCurrentUser = () => {
     });
 }
 
-var FirebaseRef = () => {
+export function SaveBeer (beer) {
+    let uid = Store.getState().user.uid;
+
+    firebase.database().ref('users/' + uid + '/beers').push({
+        beer
+    });
+}
+
+export function SaveLocation (location) {
+
+}
+
+export function SignUserIn () {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+    });
+}
+
+export function SignUserOut () {
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      Store.dispatch(actions.signOutUser());
+    }, function(error) {
+      alert('an error occurred when signing out');
+    });
+}
+
+export function FirebaseRef () {
 
     // Initialize Firebase
     var config = {
@@ -70,4 +122,3 @@ var FirebaseRef = () => {
     PopulateStore();
     GetCurrentUser();
 }
-export default FirebaseRef;
