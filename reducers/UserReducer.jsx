@@ -31,8 +31,6 @@ const UserReducer = (state = data.user, action) => {
                 locations: null
             });
 
-            console.log(newState);
-
             return newState;
             break;
 

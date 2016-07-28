@@ -64,9 +64,8 @@ class BeerContainerView extends React.Component {
                             </button>
 
                         :
-                            <span>
-                                Beer added!
-                            </span>
+                            <img className="green-tick"
+                                 src="../images/tick.png" alt="this beer has been saved" />
                     }
 
                 </section>

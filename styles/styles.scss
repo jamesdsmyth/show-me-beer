@@ -65,6 +65,7 @@
         clear: both;
         background: #FFCC00;
         display: inline-block;
+        float: left;
     }
 
     h2 {
@@ -112,6 +113,11 @@
 
     .hidden {
         display: none;
+    }
+
+    .green-tick {
+        width: 50px;
+        margin: 15px 0 0 20px;
     }
 
     .area {
@@ -294,6 +300,10 @@
         background: $button-green;
         color: $white;
         font-size: 1em;
+
+        &.add-beer {
+            margin: 25px 0 0 20px;
+        }
     }
 
 
