@@ -7,7 +7,7 @@ class HomeContainer extends React.Component {
         return (
             <section>
                 <h1>
-                    Sign in to see your saved beers and locations... (in progress)
+                    Not quite finished, so click on beers or locations :)
                 </h1>
             </section>
         )

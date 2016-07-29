@@ -147,7 +147,6 @@ class BeersContainerView extends React.Component {
                                 </li>
                     }
                 }
-
             }
         });
 

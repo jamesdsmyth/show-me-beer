@@ -50,6 +50,8 @@ render((
 // - on the beers page, there needs to be more photos of the beer, eg in the glass, being poured. I could ask the brewery for this? It needs to be in a slide show
 // - DONE - send out email to 20 pubs and request description of the beers they are selling, use this wiki page https://en.wikipedia.org/wiki/List_of_breweries_in_England
 // - DONE - hook up firebase to the redux store
-
-// from signing in, firebase needs to be updated with the saved data regarding that user (uid)
-// the data will be their beers and locations they have previously saved.
+// - DONE = from signing in, firebase needs to be updated with the saved data regarding that user (uid)
+// - IN PROGRESS - the data will be their beers and locations they have previously saved.
+// - hook up locations with stars
+// - add filter where user can filter there starred beers and locations
+// - add notifications to when you star/unstar/sign in/sign out
