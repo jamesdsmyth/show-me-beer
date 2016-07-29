@@ -3,8 +3,12 @@ var Data = {
       "userName": null,
       "uid": null,
       "email": null,
-      "beers": null,
-      "locations": null
+      "beers": {
+          "data": null
+      },
+      "locations": {
+           "data": null
+      }
     },
    "beers":{},
    "locations":{},

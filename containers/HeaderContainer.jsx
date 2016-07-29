@@ -24,8 +24,6 @@ class HeaderContainerView extends React.Component {
         var userObject = this.props.user;
         var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
 
-        console.log(userObject.userName)
-
         return (
             <div>
                 <header className={headingClasses}>

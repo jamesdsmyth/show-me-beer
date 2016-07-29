@@ -40,6 +40,7 @@ const UserReducer = (state = data.user, action) => {
                 beers: action.beers
             });
 
+            console.log(newState)
             return newState;
             break;
 

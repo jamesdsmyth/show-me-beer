@@ -34,8 +34,6 @@ var GetUserData = (user) => {
 
         var data = snapshot.val();
 
-        console.log(data);
-
         if(data !== null) {
             Store.dispatch(actions.populateUser(user, data));
         } else {
@@ -54,7 +52,6 @@ var GetUserData = (user) => {
     userRef.on('child_removed', function(data) {
         alert('removed');
     });
-
 }
 
 var GetCurrentUser = () => {
@@ -74,6 +71,12 @@ export function SaveBeer (beer) {
     firebase.database().ref('users/' + uid + '/beers').push({
         beer
     });
+}
+
+export function RemoveBeer (beerKey) {
+    let uid = Store.getState().user.uid;
+
+    firebase.database().ref('users/' + uid + '/beers/' + beerKey).remove();
 }
 
 export function SaveLocation (location) {
