@@ -115,9 +115,12 @@
         display: none;
     }
 
-    .green-tick {
+    .star {
         width: 50px;
         margin: 15px 0 0 20px;
+        display: block;
+        cursor: pointer;
+        float: left;
     }
 
     .area {
@@ -300,13 +303,7 @@
         background: $button-green;
         color: $white;
         font-size: 1em;
-
-        &.add-beer {
-            margin: 25px 0 0 20px;
-        }
     }
-
-
 
     #mapid {
         height: 80vh;

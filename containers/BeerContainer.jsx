@@ -65,23 +65,18 @@ class BeerContainerView extends React.Component {
 
                     {
                         beerSaved === false ?
-                            <button type="button"
-                                className="button add-beer"
-                                onClick={() => this.saveBeer(currentBeer.name)}>
-                                Save beer
-                            </button>
+
+                            <img className="star"
+                                 src="../images/star-grey.png"
+                                 alt="click this beer to save it"
+                                 onClick={() => this.saveBeer(currentBeer.name)} />
 
                         :
 
-                        <div>
-                            <img className="green-tick"
-                                 src="../images/tick.png" alt="this beer has been saved" />
-                             <button type="button"
-                                 className="button remove-beer"
-                                 onClick={() => this.removeBeer(beerUID)}>
-                                 Remove beer
-                             </button>
-                         </div>
+                            <img className="star"
+                                 src="../images/star-gold.png"
+                                 alt="click this beer to remove it from your saved beers"
+                                 onClick={() => this.removeBeer(beerUID)} />
                     }
 
                 </section>
