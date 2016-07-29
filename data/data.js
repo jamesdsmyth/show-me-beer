@@ -10,9 +10,6 @@ var Data = {
            "data": null
       }
     },
-   "beers":{},
-   "locations":{},
-   "shortLocations":{},
    "beerTypes":[
       "ale",
       "lager",
