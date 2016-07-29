@@ -46,15 +46,17 @@ var GetUserData = (user) => {
     userRef.on('child_changed', function(data) {
         let val = data.val();
 
-        console.log(data.key);
-
         if(data.key === 'beers') {
             Store.dispatch(actions.saveBeerToUser(val));
         }
     });
 
     userRef.on('child_removed', function(data) {
-        alert('removed');
+        let val = data.val();
+
+        if(data.key === 'beers') {
+            Store.dispatch(actions.saveBeerToUser(val));
+        }
     });
 }
 

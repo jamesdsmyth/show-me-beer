@@ -183,8 +183,9 @@
                 &.saved {
                     .beer-title {
                         background: url('../images/star-gold.png') top left no-repeat transparent;
-                        background-size: 30px 30px;
+                        background-size: 25px 25px;
                         padding: 5px 0 5px 40px;
+                        background-position-y: 1px;
                     }
                 }
 
