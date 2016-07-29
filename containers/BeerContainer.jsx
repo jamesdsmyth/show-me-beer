@@ -47,9 +47,7 @@ class BeerContainerView extends React.Component {
         // looping through all saved user Firebase beers with the UID and if it matches
         // the beer the user has already saved we will change the tick and cross around.
         if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
-
             userLoggedIn = true;
-
             for (var beer in userSavedBeers) {
                 if (userSavedBeers[beer].beer === currentBeer.name) {
                     beerSaved = true;

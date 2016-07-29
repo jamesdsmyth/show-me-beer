@@ -18,6 +18,8 @@ const UserReducer = (state = data.user, action) => {
                 locations: action.locations
             });
 
+            console.log(newState);
+
             return newState;
             break;
 
@@ -40,7 +42,6 @@ const UserReducer = (state = data.user, action) => {
                 beers: action.beers
             });
 
-            console.log(newState)
             return newState;
             break;
 

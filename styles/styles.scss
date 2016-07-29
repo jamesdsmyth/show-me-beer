@@ -180,6 +180,14 @@
                 box-sizing: border-box;
                 position: relative;
 
+                &.saved {
+                    .beer-title {
+                        background: url('../images/star-gold.png') top left no-repeat transparent;
+                        background-size: 30px 30px;
+                        padding: 5px 0 5px 40px;
+                    }
+                }
+
                 .beer-image {
                     height: 150px;
                     width: auto;
@@ -195,12 +203,6 @@
                     width: 100%;
                     box-sizing: border-box;
                     border: 10px solid $white;
-                    text-align: center;
-                }
-
-                .beer-title {
-                    display: block;
-                    clear: both;
                     text-align: center;
                 }
 

@@ -80,6 +80,7 @@ class BeersContainerView extends React.Component {
     }
 
     render () {
+
         var beers = this.props.beers,
             types = this.state.types,
             styles = this.state.styles,
@@ -91,7 +92,8 @@ class BeersContainerView extends React.Component {
             handleStyleSelect = this.handleStyleClick.bind(this),
             handleCountrySelect = this.handleCountryClick.bind(this),
             handleFilterToggle = this.toggleFilter.bind(this),
-            filterClasses = this.state.showFilter + ' filter beers';
+            filterClasses = this.state.showFilter + ' filter beers',
+            userSavedBeers = this.props.user.beers.data;
 
         // creating the toggle tabs for the beer types
         var typeOptions = types.map((type, i) => {
@@ -113,20 +115,34 @@ class BeersContainerView extends React.Component {
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
         var beerList = Object.keys(beers).map((beer, i) => {
-            if((selectedType.indexOf(beers[beer].type) > -1) || (selectedType.length === 0)) {
-                if((selectedStyle.indexOf(beers[beer].style) > -1) || (selectedStyle.length === 0)) {
-                    if((selectedCountry.indexOf(beers[beer].country) > -1) || (selectedCountry.length === 0)) {
-                        return <li key={i}>
+
+            let beerItem = beers[beer];
+            let beerSaved = null;
+
+            if((selectedType.indexOf(beerItem.type) > -1) || (selectedType.length === 0)) {
+                if((selectedStyle.indexOf(beerItem.style) > -1) || (selectedStyle.length === 0)) {
+                    if((selectedCountry.indexOf(beerItem.country) > -1) || (selectedCountry.length === 0)) {
+
+                        if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
+                            for (var savedBeer in userSavedBeers) {
+                                if(userSavedBeers[savedBeer].beer === beerItem.name) {
+                                    beerSaved = 'saved';
+                                }
+                            }
+                        }
+
+                        return <li className={beerSaved} key={i}>
                                     <Link to={"/beers/" + beer}>
-                                        <img src={beers[beer].photo} alt={beers[beer].name} className="beer-image" />
+                                        <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
                                     </Link>
                                     <div className="beer-details">
                                         <h3>
-                                            <Link to={"/beers/" + beer}>
-                                                {beers[beer].name}
+                                            <Link to={"/beers/" + beer}
+                                                  className="beer-title">
+                                                {beerItem.name}
                                             </Link>
                                         </h3>
-                                        <span className="italic">{beers[beer].type}, {beers[beer].style} and brewed in {beers[beer].country}</span>
+                                        <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
                                     </div>
                                 </li>
                     }
@@ -179,7 +195,8 @@ const mapStateToProps = (state) => {
         beers: state.beers,
         types: state.beerTypes,
         styles: state.beerStyles,
-        countries: state.countries
+        countries: state.countries,
+        user: state.user
     }
 }
 

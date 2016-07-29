@@ -41,11 +41,15 @@ var GetUserData = (user) => {
         }
     });
 
+
+    // when the child of users changes (so when a beer is saved etc), then we will dispatch an action that updates the users data
     userRef.on('child_changed', function(data) {
         let val = data.val();
 
+        console.log(data.key);
+
         if(data.key === 'beers') {
-            Store.dispatch(actions.saveBeer(val));
+            Store.dispatch(actions.saveBeerToUser(val));
         }
     });
 

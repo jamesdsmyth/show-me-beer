@@ -42,7 +42,7 @@ export function signOutUser () {
     }
 }
 
-export function saveBeer (beerObjects) {
+export function saveBeerToUser (beerObjects) {
 
     console.log(beerObjects);
 

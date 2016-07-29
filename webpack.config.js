@@ -22,6 +22,11 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass']
+            },
+            // url-loader needed for background images in scss file
+            {
+                test: /\.png$/,
+                loader: "url-loader?limit=100000"
             }
         ]
     }
