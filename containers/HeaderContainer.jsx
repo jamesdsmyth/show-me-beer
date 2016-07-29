@@ -47,7 +47,9 @@ class HeaderContainerView extends React.Component {
                     {/* checking if userObject.userName is populated or not */
                         (userObject.userName !== undefined) && (userObject.userName !== null) ?
                             <section className="sign-in-area">
-                                <span>{userObject.userName}</span>
+                                <img className="user-image"
+                                     src={userObject.photo}
+                                     alt={userObject.userName} />
                                 <button type="submit"
                                         className="button"
                                         onClick={this.signOut}>Sign out</button>

@@ -8,3 +8,10 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+@mixin borderRadius ($pixels) {
+    -webkit-border-radius: $pixels;
+    -moz-border-radius: $pixels;
+    -ms-border-radius: $pixels;
+    border-radius: $pixels;
+}

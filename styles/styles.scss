@@ -44,8 +44,17 @@
             float: right;
             margin: 20px 15px;
 
+            .user-image {
+                width: 30px;
+                @include borderRadius(20px)
+                display: block;
+                float: left;
+            }
+
             .button {
                 margin-left: 20px;
+                float: left;
+                cursor: pointer;
             }
         }
     }

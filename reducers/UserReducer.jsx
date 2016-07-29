@@ -13,6 +13,7 @@ const UserReducer = (state = data.user, action) => {
             newState = Object.assign({}, state, {
                 userName: action.userName,
                 uid: action.uid,
+                photo: action.photo,
                 email: action.email,
                 beers: action.beers,
                 locations: action.locations
@@ -29,6 +30,7 @@ const UserReducer = (state = data.user, action) => {
                 userName: null,
                 email: null,
                 uid: null,
+                photo: null,
                 beers: null,
                 locations: null
             });

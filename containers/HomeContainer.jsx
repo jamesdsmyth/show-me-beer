@@ -6,7 +6,9 @@ class HomeContainer extends React.Component {
     render () {
         return (
             <section>
-                Homepage..
+                <h1>
+                    Sign in to see your saved beers and locations... (in progress)
+                </h1>
             </section>
         )
     }
