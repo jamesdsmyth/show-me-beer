@@ -117,6 +117,8 @@ export function SignUserOut () {
     });
 }
 
+// initial call to Firebase to set up the DB link. When this is initialised we
+// populate the store and then get the current google users data
 export function FirebaseRef () {
 
     // Initialize Firebase
