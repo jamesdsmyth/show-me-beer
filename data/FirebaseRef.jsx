@@ -1,20 +1,22 @@
 import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
+// using ES6 promises here
 var PopulateStore = () => {
-    // https://github.com/yelouafi/redux-saga will replace the setTimeouts
-    firebase.database().ref('/').once('value').then((snapshot) => {
 
-        Store.dispatch(actions.populateLocations(snapshot.val()));
+    let firebaseDB = firebase.database().ref('/').once('value');
+    let snapshotRef = null;
 
-        setTimeout(() => {
-            Store.dispatch(actions.populateShortLocations(snapshot.val()));
-        }, 200);
+    firebaseDB.then((snapshot) => {
 
-        setTimeout(() => {
-            Store.dispatch(actions.populateBeers(snapshot.val()));
-        }, 400);
-    });
+        snapshotRef = snapshot;
+
+        Store.dispatch(actions.populateLocations(snapshotRef.val()));
+    }).then(() => {
+        Store.dispatch(actions.populateShortLocations(snapshotRef.val()));
+    }).then(() => {
+        Store.dispatch(actions.populateBeers(snapshotRef.val()));
+    })
 }
 
 // creating the user and adding it to Firebase
