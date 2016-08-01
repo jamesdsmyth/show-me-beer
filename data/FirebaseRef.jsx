@@ -8,7 +8,6 @@ var PopulateStore = () => {
     let snapshotRef = null;
 
     firebaseDB.then((snapshot) => {
-
         snapshotRef = snapshot;
 
         Store.dispatch(actions.populateLocations(snapshotRef.val()));
@@ -16,7 +15,7 @@ var PopulateStore = () => {
         Store.dispatch(actions.populateShortLocations(snapshotRef.val()));
     }).then(() => {
         Store.dispatch(actions.populateBeers(snapshotRef.val()));
-    })
+    });
 }
 
 // creating the user and adding it to Firebase
@@ -49,6 +48,8 @@ var GetUserData = (user) => {
         let val = data.val();
 
         if(data.key === 'beers') {
+
+            console.log(data.key);
             Store.dispatch(actions.saveBeerToUser(val));
         }
     });
@@ -76,15 +77,19 @@ var GetCurrentUser = () => {
 export function SaveBeer (beer) {
     let uid = Store.getState().user.uid;
 
-    firebase.database().ref('users/' + uid + '/beers').push({
-        beer
+    firebase.database().ref('users/' + uid + '/beers').push({ beer }).then(() => {
+        Store.dispatch(actions.showAddNotification(beer, 'beer'));
+    }).catch(() => {
+        alert('error saving the beer');
     });
 }
 
-export function RemoveBeer (beerKey) {
+export function RemoveBeer (beerKey, beerName) {
     let uid = Store.getState().user.uid;
 
-    firebase.database().ref('users/' + uid + '/beers/' + beerKey).remove();
+    firebase.database().ref('users/' + uid + '/beers/' + beerKey).remove().then(() => {
+        Store.dispatch(actions.showRemoveNotification(beerName, 'beer'));
+    });
 }
 
 export function SaveLocation (location) {

@@ -56,3 +56,19 @@ export function saveBeerToUser (beerObjects) {
         }
     }
 }
+
+export function showAddNotification (item, type) {
+    return {
+        type: 'SHOW_ADDED_NOTIFICATION',
+        beerOrLocation: type,
+        name: item
+    }
+}
+
+export function showRemoveNotification (item, type) {
+    return {
+        type: 'SHOW_REMOVED_NOTIFICATION',
+        beerOrLocation: type,
+        name: item
+    }
+}

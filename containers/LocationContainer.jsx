@@ -7,17 +7,32 @@ import MapContainer from '../containers/MapContainer.jsx'
 class LocationContainerView extends React.Component {
 
     render () {
-        var locations = this.props.locations;
-        var currentLocation = locations[this.props.params.location] || {};
+        var locations = this.props.locations,
+            userSavedBeers = this.props.user.beers.data,
+            currentLocation = locations[this.props.params.location] || {};
+
+            console.log(userSavedBeers);
 
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
-            return <li key={i}>
+
+            let beerSaved = null;
+
+            if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
+                for (var savedBeer in userSavedBeers) {
+                    if(userSavedBeers[savedBeer].beer === currentLocation.beers[beer].name) {
+                        beerSaved = 'saved';
+                    }
+                }
+            }
+
+            return <li key={i} className={beerSaved}>
                         <Link to={"/beers/" + beer}>
                             <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />
                         </Link>
                         <div className="beer-details">
                             <h3>
-                                <Link to={"/beers/" + beer}>
+                                <Link to={"/beers/" + beer}
+                                      className="beer-title">
                                     {currentLocation.beers[beer].name}
                                 </Link>
                             </h3>
@@ -61,7 +76,8 @@ class LocationContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        locations: state.locations
+        locations: state.locations,
+        user: state.user
     }
 }
 

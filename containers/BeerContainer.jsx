@@ -19,8 +19,8 @@ class BeerContainerView extends React.Component {
     }
 
     // passing the beer UID from firebase to remove the beer.
-    removeBeer (beerUID) {
-        RemoveBeer(beerUID);
+    removeBeer (beerUID, beerName) {
+        RemoveBeer(beerUID, beerName);
     }
 
     render () {
@@ -74,7 +74,7 @@ class BeerContainerView extends React.Component {
                             <img className="star"
                                  src="../images/star-gold.png"
                                  alt="click this beer to remove it from your saved beers"
-                                 onClick={() => this.removeBeer(beerUID)} />
+                                 onClick={() => this.removeBeer(beerUID, currentBeer.name)} />
                     }
 
                 </section>

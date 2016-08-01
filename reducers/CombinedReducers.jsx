@@ -8,6 +8,7 @@ import ShortLocationsReducer from './ShortLocationsReducer.jsx'
 import BoroughsReducer from './BoroughsReducer.jsx'
 import CountriesReducer from './CountriesReducer.jsx'
 import UserReducer from './UserReducer.jsx'
+import NotificationReducer from './NotificationReducer.jsx'
 
 // combining all our reducers
 const Reducer = combineReducers({
@@ -18,7 +19,8 @@ const Reducer = combineReducers({
     shortLocations: ShortLocationsReducer,
     boroughs: BoroughsReducer,
     countries: CountriesReducer,
-    user: UserReducer
+    user: UserReducer,
+    notifications: NotificationReducer
 });
 
 // creating the store with the combined reducers. Store is used throughout the app via dispatches

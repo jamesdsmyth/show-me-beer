@@ -5,14 +5,18 @@ import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 import { SignUserIn, SignUserOut } from '../data/FirebaseRef.jsx'
 
+import NotificationsContainer from './NotificationsContainer.jsx'
+
 class HeaderContainerView extends React.Component {
 
+    // when the user clicks sign in
     signIn (event) {
         event.preventDefault();
 
         SignUserIn();
     }
 
+    // when the user clicks sign out
     signOut (event) {
         event.preventDefault();
 
@@ -22,7 +26,10 @@ class HeaderContainerView extends React.Component {
     render() {
 
         var userObject = this.props.user;
+        var notifications = this.props.notifications;
         var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
+
+        console.log(notifications);
 
         return (
             <div>
@@ -68,6 +75,8 @@ class HeaderContainerView extends React.Component {
                 <main className="main">
                     {this.props.children}
                 </main>
+                
+                <NotificationsContainer />
             </div>
         )
     }
@@ -75,7 +84,8 @@ class HeaderContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        notifications: state.notifications
     }
 }
 
