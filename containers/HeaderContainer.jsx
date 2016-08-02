@@ -26,10 +26,7 @@ class HeaderContainerView extends React.Component {
     render() {
 
         var userObject = this.props.user;
-        var notifications = this.props.notifications;
         var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
-
-        console.log(notifications);
 
         return (
             <div>
@@ -75,7 +72,7 @@ class HeaderContainerView extends React.Component {
                 <main className="main">
                     {this.props.children}
                 </main>
-                
+
                 <NotificationsContainer />
             </div>
         )
@@ -84,8 +81,7 @@ class HeaderContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-        notifications: state.notifications
+        user: state.user
     }
 }
 

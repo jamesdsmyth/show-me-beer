@@ -64,6 +64,34 @@
         width: 100%;
     }
 
+    .notifications {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 400px;
+        padding: 20px;
+        opacity: 0;
+        @include transition(0.5s);
+
+        &.positive {
+            background: $positive-notication;
+            color: $white;
+        }
+
+        &.negative {
+            background: $negative-notification;
+        }
+
+        &.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .notification-text {
+            margin-bottom: 0;
+        }
+    }
+
     h1 {
         font-family: 'Lora', serif;
         font-size: 3em;
@@ -190,7 +218,7 @@
                 position: relative;
 
                 &.saved {
-                    
+
                     .beer-title {
                         background: url('../images/star-gold.png') top left no-repeat transparent;
                         background-size: 25px 25px;

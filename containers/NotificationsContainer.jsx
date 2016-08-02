@@ -6,13 +6,21 @@ class NotificationsContainerView extends React.Component {
 
         var notification = this.props.notifications,
             content = null,
-            visibility = null;
+            visibility = null,
+            classType = null;
 
         if(notification.added !== undefined) {
-            content = notification.added === true ? notification.name + ' has been added to your list'  : notification.name + ' has been removed from your list';
+
+            if(notification.added === true) {
+                content = notification.name + ' has been added to your list';
+                classType = 'positive';
+            } else {
+                content = notification.name + ' has been removed from your list';
+                classType = 'negative';
+            }
 
             var element = $('.notifications');
-            element.addClass('visible');
+            element.removeClass('positive negative').addClass('visible ' + classType);
 
             window.clearTimeout(notificationTimout)
 
@@ -23,7 +31,7 @@ class NotificationsContainerView extends React.Component {
 
         return (
             <section className="notifications">
-                <p>
+                <p className="notification-text">
                     {content}
                 </p>
             </section>

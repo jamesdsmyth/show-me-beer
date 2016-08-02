@@ -15,3 +15,9 @@
     -ms-border-radius: $pixels;
     border-radius: $pixels;
 }
+
+@mixin transition ($time) {
+    transition: opacity $time ease-in-out;
+    -moz-transition: opacity $time ease-in-out;
+    -webkit-transition: opacity $time ease-in-out;
+}
