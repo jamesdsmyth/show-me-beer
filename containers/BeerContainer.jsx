@@ -78,14 +78,14 @@ class BeerContainerView extends React.Component {
                     }
 
                 </section>
-                <section className="area half buffer">
+                <section className="area half buffer beer-description">
                     <p>Type: {currentBeer.type}</p>
                     <p>Style: {currentBeer.style}</p>
                     <p>Alcohol content: {currentBeer.alcoholContent}%</p>
                     <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
                     <p>Description: {currentBeer.description}</p>
                 </section>
-                <section className="area half buffer end">
+                <section className="area half buffer beer-image end">
                     <img className="beer-image" src={currentBeer.photo} alt={currentBeer.name} />
                 </section>
                 <section className="area buffer locations">

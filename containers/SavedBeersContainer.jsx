@@ -7,10 +7,12 @@ class SavedBeersContainerView extends React.Component {
     render () {
 
         var beers = this.props.beers,
-            userBeers = this.props.user.beers.data
+            userBeers = this.props.user.beers.data,
+            count = 0;
 
             // looping through each beer and if it is listed within the userBeers then it is displayed
             var beerList = Object.keys(beers).map((beer, i) => {
+                count = i;
                 let beerItem = beers[beer];
 
                 for (var savedBeer in userBeers) {
@@ -39,9 +41,14 @@ class SavedBeersContainerView extends React.Component {
                     <h1>Your saved beers</h1>
                 </section>
                 <section className="area buffer beer">
+                    {count > 0 ?
                     <ul className="beers-list">
                         {beerList}
                     </ul>
+
+                    :
+
+                    <p>You do not have any saved beers, click on the stars next to a beer to add them to this list</p> }
                 </section>
             </div>
         )

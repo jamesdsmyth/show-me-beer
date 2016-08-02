@@ -166,13 +166,13 @@
         float: left;
         width: 100%;
         margin-bottom: 10px;
-        border-bottom: 2px solid $light-grey;
+        border-top: 2px solid $light-grey;
 
         &.location-header {
             height: 75vh;
             overflow: hidden;
             position: relative;
-            border-bottom: none;
+            border-top: none;
 
             .location-title {
                 position: absolute;
@@ -189,17 +189,23 @@
             padding: 15px;
         }
 
+        &.beer-description,
+        &.beer-image {
+            border-top: none;
+        }
+
         .beer-image {
             width: auto;
-            max-height: 500px;
+            max-height: 300px;
             margin: 0 auto;
             position: relative;
             display: block;
+            border-top: none;
         }
 
         &.filters,
         &.page-title {
-            border-bottom: none;
+            border-top: none;
         }
     }
 
