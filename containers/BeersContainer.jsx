@@ -164,7 +164,7 @@ class BeersContainerView extends React.Component {
                                     {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
                                 </h3>
                                 <div className="tabs">
-                                    <ul className="tabs-list type">
+                                    <ul className="tabs-list">
                                         {typeOptions}
                                     </ul>
                                     <ul className="tabs-list">

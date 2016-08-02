@@ -26,11 +26,11 @@ class HeaderContainerView extends React.Component {
     render() {
 
         var userObject = this.props.user;
-        var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
+        // var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
 
         return (
             <div>
-                <header className={headingClasses}>
+                <header className="main-header">
                     <ul className="main-navigation">
                         <li>
                             <Link to="/beers" activeClassName="active">
@@ -46,6 +46,17 @@ class HeaderContainerView extends React.Component {
                                 </span>
                             </Link>
                         </li>
+                        {(userObject.userName !== undefined) && (userObject.userName !== null) ?
+                            <li>
+                                <Link to="/saved-beers" className="saved-beers" activeClassName="active">
+                                    <span>
+                                        Saved beers
+                                    </span>
+                                </Link>
+                            </li>
+                        :
+                        null
+                    }
                     </ul>
 
                     {/* checking if userObject.userName is populated or not */
