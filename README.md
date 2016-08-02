@@ -7,6 +7,8 @@ You can login using Google authentication and save the beers you like by clickin
 
 ![Show me beer screengrab 1](images/beer-screengrab-1.jpg)
 
+---
+
 ![Show me beer screengrab 2](images/beer-screengrab-2.jpg)
 
 ### How to run
