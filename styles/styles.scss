@@ -344,13 +344,16 @@
             margin-bottom: 15px;
 
             #postcode {
-                border: none;
-                padding: 6px 10px;
-                font-size: 1em;
-                color: $light-black;
                 margin-right: 10px;
             }
         }
+    }
+
+    .input {
+        border: 1px solid #cccccc;
+        padding: 6px 10px;
+        font-size: 1em;
+        color: $light-black;
     }
 
     .button {
@@ -373,6 +376,18 @@
 
     .leaflet-popup-close-button {
         display: none;
+    }
+
+    .add-beer-form {
+        width: 100%;
+        max-width: 800px;
+
+        .input {
+            float: left;
+            margin-bottom: 15px;
+            clear: both;
+            width: 300px;
+        }
     }
 
     @media only screen and (min-width : 768px) {

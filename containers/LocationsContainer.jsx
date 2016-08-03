@@ -124,7 +124,7 @@ class LocationsContainerView extends React.Component {
                                 </h3>
                                 <div className="tabs">
                                     <form className="postcode-form">
-                                        <input id="postcode" placeholder="E8 4DA" type="text" />
+                                        <input id="postcode" className="input" placeholder="E8 4DA" type="text" />
                                         <button type="submit" className="button" onClick={postcodeClick}>Search postcode</button>
                                     </form>
                                     <ul className="tabs-list">
