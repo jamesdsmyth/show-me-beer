@@ -12,11 +12,11 @@ class SavedBeersContainerView extends React.Component {
 
             // looping through each beer and if it is listed within the userBeers then it is displayed
             var beerList = Object.keys(beers).map((beer, i) => {
-                count = i;
                 let beerItem = beers[beer];
 
                 for (var savedBeer in userBeers) {
                     if(userBeers[savedBeer].beer === beerItem.name) {
+                        count = i;
                         return <li key={i}>
                                     <Link to={"/beers/" + beer}>
                                         <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />

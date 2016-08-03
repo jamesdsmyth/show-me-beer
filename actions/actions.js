@@ -22,8 +22,6 @@ export function populateBeers (data) {
 // populating the user state.
 export function populateUser (user, data) {
 
-    console.log(user, data);
-
     return {
         type: 'SIGN_IN_USER',
         userName: user.displayName,
