@@ -95,9 +95,9 @@
     h1 {
         font-family: 'Lora', serif;
         font-size: 3em;
-        margin: 0 0 15px;
+        margin: 0;
         color: $light-black;
-        padding: 15px;
+        padding: 20px;
         width: auto;
         clear: both;
         background: $h1-background;
@@ -154,7 +154,7 @@
 
     .star {
         width: 50px;
-        margin: 15px 0 0 20px;
+        margin: 20px 0 0 20px;
         display: block;
         cursor: pointer;
         float: left;
@@ -201,6 +201,15 @@
             position: relative;
             display: block;
             border-top: none;
+        }
+
+        &.page-title {
+            padding: 30px 15px;
+            background: url('../images/clouds.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
 
         &.filters,
