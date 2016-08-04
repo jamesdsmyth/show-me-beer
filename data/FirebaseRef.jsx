@@ -9,7 +9,6 @@ var PopulateStore = () => {
 
     firebaseDB.then((snapshot) => {
         snapshotRef = snapshot;
-
         Store.dispatch(actions.populateLocations(snapshotRef.val()));
     }).then(() => {
         Store.dispatch(actions.populateShortLocations(snapshotRef.val()));
@@ -92,8 +91,13 @@ export function RemoveBeer (beerKey, beerName) {
     });
 }
 
-export function SaveLocation (location) {
-
+export function CreateBeer (beerObject) {
+    firebase.database().ref('beers/').push(beerObject).then(() => {
+        // Store.dispatch(actions.showAddNotification(beer, 'beer'));
+        alert('beer created');
+    }).catch(() => {
+        alert('error saving the beer');
+    });
 }
 
 export function SignUserIn () {
