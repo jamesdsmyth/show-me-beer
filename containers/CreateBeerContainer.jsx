@@ -17,7 +17,8 @@ class CreateBeerContainerView extends React.Component {
     // when the beers fibally are loaded from firebase, we use this to set the state
     componentWillReceiveProps (props) {
         this.setState({
-            beers: props.beers
+            beers: props.beers,
+            createBeers: props.createBeers
         });
     }
 
@@ -36,7 +37,8 @@ class CreateBeerContainerView extends React.Component {
             manufacturer: document.getElementById('brewer').value,
             photo: document.getElementById('photo').value,
             type: $('#type').val(),
-            style: $('#style').val()
+            style: $('#style').val(),
+            locations: this.state.createBeers.locations
         }
 
         // do a quick check of the select fields and if these pass we can check the name of the beer
@@ -113,22 +115,6 @@ class CreateBeerContainerView extends React.Component {
                     <h1>Add a beer</h1>
                 </section>
                 <section className="area">
-                    <h2>Locations</h2>
-
-
-
-
-
-
-                    <FilterLocationsComponent />
-
-
-
-
-
-
-                </section>
-                <section className="area">
                     <h2>Details</h2>
                     <form className="add-beer-form" onSubmit={this.createBeerObject}>
                         <input id="name" className="input" placeholder="Name of beer" type="text" />
@@ -155,6 +141,11 @@ class CreateBeerContainerView extends React.Component {
                         }
                     </form>
                 </section>
+                <section className="area">
+                    <h2>Locations</h2>
+                </section>
+                {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
+                <FilterLocationsComponent creationPage={true}/>
             </div>
         )
     }
@@ -167,7 +158,7 @@ const MapStateToProps = (state) => {
         styles: state.beerStyles,
         locations: state.shortLocations,
         countries: state.countries,
-        user: state.user
+        createBeers: state.createBeers
     }
 }
 

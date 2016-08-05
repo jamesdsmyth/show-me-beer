@@ -15,7 +15,8 @@ class FilterLocationsComponentView extends React.Component {
             borough: 'all',
             showFilter: 'hide',
             boroughs: this.props.boroughs,
-            firebaseLocations: this.props.firebaseLocations
+            firebaseLocations: this.props.firebaseLocations,
+            isCreationPage: this.props.creationPage || false
         }
     }
 
@@ -111,13 +112,23 @@ class FilterLocationsComponentView extends React.Component {
         locationsList = Object.keys(shortLocations).map((location, i) => {
             if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
                 locationCount = i++;
-                return <li key={i}>
-                            <Link to={"/locations/" + location}>
-                                {shortLocations[location].name}
-                            </Link>
-                            <span onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</span>
-                            <span onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</span>
-                        </li>
+
+                // if we are on a creation page then we need to display the add/remove location buttons
+                if(this.state.isCreationPage === true) {
+                    return <li key={i}>
+                                <Link to={"/locations/" + location}>
+                                    {shortLocations[location].name}
+                                </Link>
+                                <span onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</span>
+                                <span onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</span>
+                            </li>
+                } else {
+                    return <li key={i}>
+                                <Link to={"/locations/" + location}>
+                                    {shortLocations[location].name}
+                                </Link>
+                            </li>
+                }
             }
         });
 

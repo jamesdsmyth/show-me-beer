@@ -1,9 +1,8 @@
 import Data from '../data/data.js'
 
 const CreateBeerReducer = (state = Data.createBeer, action) => {
-    let newState = null;
 
-    console.log(action)
+    let newState = null;
 
     switch (action.type) {
 
@@ -18,13 +17,12 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
                     ]
             });
 
-            console.log(newState);
-
             return newState;
             break;
 
         case 'REMOVE_LOCATION_FROM_BEER':
 
+            // filtering the location we need to remove. Then below setting it
             let locationsArray = state.locations.filter((location, i) => {
                 if(location.coords.longitude !== action.coords.longitude) {
                     return location;
@@ -34,8 +32,6 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
             newState = Object.assign({}, state, {
                 locations: locationsArray
             });
-
-            console.log(newState);
 
             return newState;
             break;
