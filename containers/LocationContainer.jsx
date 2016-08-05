@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import MapContainer from '../containers/MapContainer.jsx'
+import MapComponent from '../components/MapComponent.jsx'
 
 class LocationContainerView extends React.Component {
 
@@ -10,8 +10,6 @@ class LocationContainerView extends React.Component {
         var locations = this.props.locations,
             userSavedBeers = this.props.user.beers.data,
             currentLocation = locations[this.props.params.location] || {};
-
-            console.log(userSavedBeers);
 
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
 
@@ -67,7 +65,7 @@ class LocationContainerView extends React.Component {
                         <p>{currentLocation.city}</p>
                         <p>{currentLocation.postCode}</p>
                     </div>
-                    {currentLocation.coords !== undefined ? <MapContainer locations={currentLocation.coords} /> : null}
+                    {currentLocation.coords !== undefined ? <MapComponent locations={currentLocation.coords} /> : null}
                 </section>
             </div>
         )

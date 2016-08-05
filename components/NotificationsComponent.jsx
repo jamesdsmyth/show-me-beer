@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class NotificationsContainerView extends React.Component {
+class NotificationsComponentView extends React.Component {
     render () {
 
         var notification = this.props.notifications,
@@ -45,6 +45,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const NotificationsContainer = connect(mapStateToProps)(NotificationsContainerView)
+const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView)
 
-export default NotificationsContainer
+export default NotificationsComponent

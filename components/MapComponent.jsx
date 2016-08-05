@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import leaflet from 'leaflet'
 import { Link } from 'react-router'
 
-class MapContainer extends React.Component {
+class MapComponent extends React.Component {
 
     componentDidMount () {
         this.createMap();
@@ -81,4 +81,4 @@ class MapContainer extends React.Component {
     }
 }
 
-export default MapContainer
+export default MapComponent

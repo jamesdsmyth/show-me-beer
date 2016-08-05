@@ -5,7 +5,7 @@ import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 import { SignUserIn, SignUserOut } from '../data/FirebaseRef.jsx'
 
-import NotificationsContainer from './NotificationsContainer.jsx'
+import NotificationsComponent from '../components/NotificationsComponent.jsx'
 
 class HeaderContainerView extends React.Component {
 
@@ -84,7 +84,7 @@ class HeaderContainerView extends React.Component {
                     {this.props.children}
                 </main>
 
-                <NotificationsContainer />
+                <NotificationsComponent />
             </div>
         )
     }

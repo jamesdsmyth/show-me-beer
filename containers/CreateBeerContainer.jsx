@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { CreateBeer } from '../data/FirebaseRef.jsx'
+import MapComponent from '../components/MapComponent.jsx'
+import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx'
 
 class CreateBeerContainerView extends React.Component {
 
@@ -9,50 +11,68 @@ class CreateBeerContainerView extends React.Component {
         this.state = {};
 
         // binding this to createBeer() function
-        this.createBeer = this.createBeer.bind(this);
+        this.createBeerObject = this.createBeerObject.bind(this);
     }
 
     // when the beers fibally are loaded from firebase, we use this to set the state
     componentWillReceiveProps (props) {
-
         this.setState({
             beers: props.beers
         });
     }
 
-    createBeer (event) {
+    // creating the object to pass to firebase to add the beer to the list
+    createBeerObject (event) {
 
         event.preventDefault();
-
+        let error = false;
         let matched = false;
         let beerObject = {
             name: document.getElementById('name').value,
             alcoholContent: document.getElementById('alcoholContent').value,
             description: document.getElementById('description').value,
             city: document.getElementById('city').value,
-            country: $('#country').text(),
+            country: $('#country').val(),
             manufacturer: document.getElementById('brewer').value,
             photo: document.getElementById('photo').value,
-            type: $('#type').text(),
-            style: $('#style').text()
+            type: $('#type').val(),
+            style: $('#style').val()
         }
 
-        // now checking to see if the beer already exists
-        for(var beer in this.state.beers) {
-            console.log(this.state.beers[beer]);
-            if(this.state.beers[beer].name.toLowerCase() === beerObject.name.toLowerCase()) {
-                matched = true;
+        // do a quick check of the select fields and if these pass we can check the name of the beer
+        // if there is an error with any of them, then we will not proceed
+        if(beerObject.country === 'Country') {
+            alert('Beer country is required');
+            error = true;
+        }
 
+        if(beerObject.type === 'Type') {
+            alert('Beer type is required');
+            error = true;
+        }
+
+        if(beerObject.style === 'Style') {
+            alert('Beer style is required');
+            error = true;
+        }
+
+        // if there are no errors with the input fields then we can cross reference the beer name
+        if(error === false) {
+            // now checking to see if the beer already exists
+            for(var beer in this.state.beers) {
+                if(this.state.beers[beer].name.toLowerCase() === beerObject.name.toLowerCase()) {
+                    matched = true;
+                }
+            }
+
+            if(matched === false) {
+                // add to beers list
+                // CreateBeer(beerObject);
+                console.log(beerObject);
+            } else {
+                alert('Beer already exists');
             }
         }
-
-        if(matched === false) {
-            // add to beers list
-            CreateBeer(beerObject);
-        } else {
-            alert('Beer already exists');
-        }
-        console.log(beerObject);
     }
 
 
@@ -62,7 +82,9 @@ class CreateBeerContainerView extends React.Component {
             styles = this.props.styles,
             locations = this.props.locations,
             countries = this.props.countries,
-            beers = this.state.beers || {}
+            beers = this.state.beers || {};
+
+        console.log(locations)
 
         var typeSelectOptions = types.map((type, i) => {
             return <option key={i} value={type}>{type}</option>
@@ -82,22 +104,27 @@ class CreateBeerContainerView extends React.Component {
                     <h1>Add a beer</h1>
                 </section>
                 <section className="area">
-                    <form className="add-beer-form" onSubmit={this.createBeer}>
+                    <h2>Locations</h2>
+                    <FilterLocationsComponent />
+                </section>
+                <section className="area">
+                    <h2>Details</h2>
+                    <form className="add-beer-form" onSubmit={this.createBeerObject}>
                         <input id="name" className="input" placeholder="Name of beer" type="text" />
                         <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" />
                         <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" />
                         <input id="city" className="input" placeholder="City of origin" type="text" />
-                        <select>
+                        <select id="country">
                             <option>Country</option>
                             {countrySelectOptions}
                         </select>
                         <input id="brewer" className="input" placeholder="Brewer" type="text" />
                         <input id="photo" className="input" placeholder="image url" type="text" />
-                        <select>
+                        <select id="type">
                             <option>Type</option>
                             {typeSelectOptions}
                         </select>
-                        <select>
+                        <select id="style">
                             <option>Style</option>
                             {styleSelectOptions}
                         </select>

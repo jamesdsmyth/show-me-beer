@@ -5,7 +5,7 @@ import { saveBeer } from '../actions/actions.js'
 import Store from '../reducers/CombinedReducers.jsx'
 import { SaveBeer, RemoveBeer } from '../data/FirebaseRef.jsx'
 
-import MapContainer from '../containers/MapContainer.jsx'
+import MapComponent from '../components/MapComponent.jsx'
 
 class BeerContainerView extends React.Component {
 
@@ -96,7 +96,7 @@ class BeerContainerView extends React.Component {
                             {locationsList}
                         </ul>
                     </div>
-                    {currentBeer.locations !== undefined ? <MapContainer locations={currentBeer.locations} /> : null}
+                    {currentBeer.locations !== undefined ? <MapComponent locations={currentBeer.locations} /> : null}
                 </section>
             </div>
         )
