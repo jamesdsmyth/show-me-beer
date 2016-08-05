@@ -76,6 +76,17 @@ class CreateBeerContainerView extends React.Component {
     }
 
 
+
+
+
+    addLocationToBeer (location) {
+        console.log(location)
+    }
+
+
+
+
+
     render () {
 
         var types = this.props.types,
@@ -83,8 +94,6 @@ class CreateBeerContainerView extends React.Component {
             locations = this.props.locations,
             countries = this.props.countries,
             beers = this.state.beers || {};
-
-        console.log(locations)
 
         var typeSelectOptions = types.map((type, i) => {
             return <option key={i} value={type}>{type}</option>
@@ -105,7 +114,19 @@ class CreateBeerContainerView extends React.Component {
                 </section>
                 <section className="area">
                     <h2>Locations</h2>
+
+
+
+
+
+
                     <FilterLocationsComponent />
+
+
+
+
+
+
                 </section>
                 <section className="area">
                     <h2>Details</h2>

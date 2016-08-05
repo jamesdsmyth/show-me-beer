@@ -1,4 +1,7 @@
 var Data = {
+    "createBeer": {
+        "locations": []
+    },
     "user": {
       "userName": null,
       "uid": null,

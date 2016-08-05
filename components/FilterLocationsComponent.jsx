@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Store from '../reducers/CombinedReducers.jsx'
+import { addLocationToBeer, removeLocationToBeer } from '../actions/actions.js'
 
 import MapComponent from './MapComponent.jsx'
 
@@ -19,6 +21,7 @@ class FilterLocationsComponentView extends React.Component {
 
     // this is called when the firebase data is received
     componentWillReceiveProps (props) {
+
         this.setState({
             firebaseLocations: props.firebaseLocations
         });
@@ -73,23 +76,30 @@ class FilterLocationsComponentView extends React.Component {
         this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'});
     }
 
+    // adds the location to the beer when creating a beer
+    // function only exposed on the create beer page
+    addLocationToBeer (location) {
+        Store.dispatch(addLocationToBeer(location))
+    }
+
+    removeLocationToBeer (location) {
+        Store.dispatch(removeLocationToBeer(location))
+    }
+
     render () {
         var shortLocations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
-            postcodeClick = this.searchPostcode.bind(this),
-            handleBoroughChange = this.boroughHandleSelect.bind(this),
             locationsList = [],
             locationsMaplist = {},
-            handleFilterToggle = this.toggleFilter.bind(this),
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
             var newClass = borough === stateBorough ? 'selected' : null
-            return <li key={i} className={newClass} onClick={() => handleBoroughChange({borough})}>{borough}</li>
-        });
+            return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({borough})}>{borough}</li>
+        }.bind(this));
 
         for(var i in shortLocations) {
             if((shortLocations[i].borough === stateBorough) || stateBorough === 'all') {
@@ -105,43 +115,41 @@ class FilterLocationsComponentView extends React.Component {
                             <Link to={"/locations/" + location}>
                                 {shortLocations[location].name}
                             </Link>
+                            <span onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</span>
+                            <span onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</span>
                         </li>
             }
         });
 
         return (
             <div>
-                {!this.props.children ?
-                    <div>
-                        <section className="area filters">
-                            <section className={filterClasses}>
-                                <h3 className="filter-button" onClick={() => handleFilterToggle()}>
-                                    Filters
-                                    {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
-                                </h3>
-                                <div className="tabs">
-                                    <form className="postcode-form">
-                                        <input id="postcode" className="input" placeholder="E8 4DA" type="text" />
-                                        <button type="submit" className="button" onClick={postcodeClick}>Search postcode</button>
-                                    </form>
-                                    <ul className="tabs-list">
-                                        {boroughOptions}
-                                    </ul>
-                                </div>
-                            </section>
-                            {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
-                        </section>
-                        <section className="area buffer locations">
-                            <div className="locations-list">
-                                {locationCount === -1 ? <span>There are currently no locations in {stateBorough}</span> : null}
-                                <ul>
-                                    {locationsList}
-                                </ul>
-                            </div>
-                            {Object.keys(locationsMaplist).length !== 0 ? <MapComponent locations={locationsMaplist} /> : null}
-                        </section>
+                <section className="area filters">
+                    <section className={filterClasses}>
+                        <h3 className="filter-button" onClick={() => this.toggleFilter()}>
+                            Filters
+                            {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
+                        </h3>
+                        <div className="tabs">
+                            <form className="postcode-form">
+                                <input id="postcode" className="input" placeholder="E8 4DA" type="text" />
+                                <button type="submit" className="button" onClick={() => this.postcodeClick()}>Search postcode</button>
+                            </form>
+                            <ul className="tabs-list">
+                                {boroughOptions}
+                            </ul>
+                        </div>
+                    </section>
+                    {stateBorough === -1 ? <h2>Incorrect postcode!</h2> : null}
+                </section>
+                <section className="area buffer locations">
+                    <div className="locations-list">
+                        {locationCount === -1 ? <span>There are currently no locations in {stateBorough}</span> : null}
+                        <ul>
+                            {locationsList}
+                        </ul>
                     </div>
-                : null}
+                    {Object.keys(locationsMaplist).length !== 0 ? <MapComponent locations={locationsMaplist} /> : null}
+                </section>
             </div>
         )
 
