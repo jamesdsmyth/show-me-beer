@@ -41,7 +41,6 @@ var GetUserData = (user) => {
         }
     });
 
-
     // when the child of users changes (so when a beer is saved etc), then we will dispatch an action that updates the users data
     userRef.on('child_changed', function(data) {
         let val = data.val();
@@ -95,8 +94,9 @@ export function CreateBeer (beerObject) {
     firebase.database().ref('beers/').push(beerObject).then(() => {
         // Store.dispatch(actions.showAddNotification(beer, 'beer'));
         alert('beer created');
-    }).catch(() => {
+    }).catch((error) => {
         alert('error saving the beer');
+        console.log(error)
     });
 }
 

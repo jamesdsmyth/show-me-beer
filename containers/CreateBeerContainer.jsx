@@ -69,7 +69,7 @@ class CreateBeerContainerView extends React.Component {
 
             if(matched === false) {
                 // add to beers list
-                // CreateBeer(beerObject);
+                CreateBeer(beerObject);
                 console.log(beerObject);
             } else {
                 alert('Beer already exists');
@@ -115,7 +115,7 @@ class CreateBeerContainerView extends React.Component {
                     <h1>Add a beer</h1>
                 </section>
                 <section className="area">
-                    <h2>Details</h2>
+                    <h2>About the beer</h2>
                     <form className="add-beer-form" onSubmit={this.createBeerObject}>
                         <input id="name" className="input" placeholder="Name of beer" type="text" />
                         <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" />
@@ -142,7 +142,7 @@ class CreateBeerContainerView extends React.Component {
                     </form>
                 </section>
                 <section className="area">
-                    <h2>Locations</h2>
+                    <h2>Who sells this beer?</h2>
                 </section>
                 {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
                 <FilterLocationsComponent creationPage={true}/>
