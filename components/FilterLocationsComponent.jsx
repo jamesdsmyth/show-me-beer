@@ -16,15 +16,19 @@ class FilterLocationsComponentView extends React.Component {
             showFilter: 'hide',
             boroughs: this.props.boroughs,
             firebaseLocations: this.props.firebaseLocations,
-            isCreationPage: this.props.creationPage || false
+            isCreationPage: this.props.creationPage || false,
+            createBeer: this.props.createBeer
         }
     }
 
     // this is called when the firebase data is received
     componentWillReceiveProps (props) {
 
+        console.log(props)
+
         this.setState({
-            firebaseLocations: props.firebaseLocations
+            firebaseLocations: props.firebaseLocations,
+            createBeer: props.createBeer
         });
     }
 
@@ -80,7 +84,7 @@ class FilterLocationsComponentView extends React.Component {
     // adds the location to the beer when creating a beer
     // function only exposed on the create beer page
     addLocationToBeer (location) {
-        Store.dispatch(addLocationToBeer(location))
+        Store.dispatch(addLocationToBeer(location));
     }
 
     removeLocationToBeer (location) {
@@ -91,10 +95,13 @@ class FilterLocationsComponentView extends React.Component {
         var shortLocations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
+            createBeer = this.state.createBeer,
             locationsList = [],
             locationsMaplist = {},
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
+
+            console.log(createBeer);
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -119,8 +126,8 @@ class FilterLocationsComponentView extends React.Component {
                                 <Link to={"/locations/" + location}>
                                     {shortLocations[location].name}
                                 </Link>
-                                <span onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</span>
-                                <span onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</span>
+                                <button type="type" className="button" onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</button>
+                                <button type="type" className="button" onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</button>
                             </li>
                 } else {
                     return <li key={i}>
@@ -168,9 +175,11 @@ class FilterLocationsComponentView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
         boroughs: state.boroughs,
-        firebaseLocations: state.locations
+        firebaseLocations: state.locations,
+        createBeer: state.createBeer
     }
 }
 

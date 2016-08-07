@@ -114,24 +114,24 @@ class CreateBeerContainerView extends React.Component {
                 <section className="area buffer page-title">
                     <h1>Add a beer</h1>
                 </section>
-                <section className="area">
+                <section className="area half buffer">
                     <h2>About the beer</h2>
                     <form className="add-beer-form" onSubmit={this.createBeerObject}>
                         <input id="name" className="input" placeholder="Name of beer" type="text" />
                         <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" />
                         <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" />
                         <input id="city" className="input" placeholder="City of origin" type="text" />
-                        <select id="country">
+                        <select id="country" className="select">
                             <option>Country</option>
                             {countrySelectOptions}
                         </select>
                         <input id="brewer" className="input" placeholder="Brewer" type="text" />
                         <input id="photo" className="input" placeholder="image url" type="text" />
-                        <select id="type">
+                        <select id="type" className="select">
                             <option>Type</option>
                             {typeSelectOptions}
                         </select>
-                        <select id="style">
+                        <select id="style" className="select">
                             <option>Style</option>
                             {styleSelectOptions}
                         </select>
@@ -141,7 +141,7 @@ class CreateBeerContainerView extends React.Component {
                         }
                     </form>
                 </section>
-                <section className="area">
+                <section className="area half buffer">
                     <h2>Who sells this beer?</h2>
                 </section>
                 {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
