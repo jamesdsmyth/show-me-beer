@@ -114,9 +114,9 @@ class CreateBeerContainerView extends React.Component {
                 <section className="area buffer page-title">
                     <h1>Add a beer</h1>
                 </section>
-                <section className="area half buffer">
-                    <h2>About the beer</h2>
-                    <form className="add-beer-form" onSubmit={this.createBeerObject}>
+                <form className="add-beer-form" onSubmit={this.createBeerObject}>
+                    <section className="area half buffer">
+                        <h2>About the beer</h2>
                         <input id="name" className="input" placeholder="Name of beer" type="text" />
                         <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" />
                         <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" />
@@ -135,17 +135,19 @@ class CreateBeerContainerView extends React.Component {
                             <option>Style</option>
                             {styleSelectOptions}
                         </select>
+                    </section>
+                    <section className="area buffer">
+                        <h2>Who sells this beer?</h2>
+                        <FilterLocationsComponent creationPage={true}/>
                         { Object.keys(beers).length > 0 ?
                             <button type="submit" className="button">Add!</button>
                             : null
                         }
-                    </form>
-                </section>
-                <section className="area half buffer">
-                    <h2>Who sells this beer?</h2>
-                </section>
+                    </section>
+                </form>
+
                 {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-                <FilterLocationsComponent creationPage={true}/>
+
             </div>
         )
     }

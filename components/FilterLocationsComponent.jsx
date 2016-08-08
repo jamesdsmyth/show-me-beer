@@ -96,6 +96,7 @@ class FilterLocationsComponentView extends React.Component {
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
             createBeer = this.state.createBeer,
+            postcodeClick = this.searchPostcode.bind(this),
             locationsList = [],
             locationsMaplist = {},
             filterClasses = this.state.showFilter + ' filter',
@@ -148,10 +149,10 @@ class FilterLocationsComponentView extends React.Component {
                             {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
                         </h3>
                         <div className="tabs">
-                            <form className="postcode-form">
+                            <div className="postcode-form">
                                 <input id="postcode" className="input" placeholder="E8 4DA" type="text" />
-                                <button type="submit" className="button" onClick={() => this.postcodeClick()}>Search postcode</button>
-                            </form>
+                                <button type="button" className="button" onClick={postcodeClick}>Search postcode</button>
+                            </div>
                             <ul className="tabs-list">
                                 {boroughOptions}
                             </ul>
