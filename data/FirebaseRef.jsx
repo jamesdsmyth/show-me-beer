@@ -2,7 +2,7 @@ import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
 // using ES6 promises here
-var PopulateStore = () => {
+const PopulateStore = () => {
 
     let firebaseDB = firebase.database().ref('/').once('value');
     let snapshotRef = null;
@@ -18,7 +18,7 @@ var PopulateStore = () => {
 }
 
 // creating the user and adding it to Firebase
-var CreateUser = (uid) => {
+const CreateUser = (uid) => {
     firebase.database().ref('users/' + uid).set({
         beers: 'currently no beers',
         locations: 'currently no locations'
@@ -26,7 +26,7 @@ var CreateUser = (uid) => {
 }
 
 // getting the user data from Firebase
-var GetUserData = (user) => {
+const GetUserData = (user) => {
 
     let userRef = firebase.database().ref('/users/' + user.uid);
 
@@ -61,7 +61,7 @@ var GetUserData = (user) => {
     });
 }
 
-var GetCurrentUser = () => {
+const GetCurrentUser = () => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
@@ -91,6 +91,63 @@ export function RemoveBeer (beerKey, beerName) {
 }
 
 export function CreateBeer (beerObject) {
+
+    let storage = firebase.storage();
+    let storageRef = storage.ref();
+    let imagesRef = storageRef.child('images');
+
+    // File or Blob named mountains.jpg
+    // var aaaaa = $('#photo-url').get(0).files[0];
+    var file = document.getElementById('photo').files[0];
+
+    debugger;
+    // Create the file metadata
+    var metadata = {
+    contentType: file.type
+    };
+
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
+            break;
+        }
+    }, function(error) {
+        switch (error.code) {
+            case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+
+            case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+            case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+    }, function() {
+        // Upload completed successfully, now we can get the download URL
+        var downloadURL = uploadTask.snapshot.downloadURL;
+        console.log('the url is', downloadURL);
+        // now need to pass this image into the beer object image url.
+    });
+
+
+
+
+
+
     firebase.database().ref('beers/').push(beerObject).then(() => {
         // Store.dispatch(actions.showAddNotification(beer, 'beer'));
         alert('beer created');
@@ -104,18 +161,18 @@ export function SignUserIn () {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
+        let token = result.credential.accessToken;
         // The signed-in user info.
-        var user = result.user;
+        let user = result.user;
         // ...
     }).catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
         // The email of the user's account used.
-        var email = error.email;
+        let email = error.email;
         // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
+        let credential = error.credential;
     });
 }
 
@@ -133,7 +190,7 @@ export function SignUserOut () {
 export function FirebaseRef () {
 
     // Initialize Firebase
-    var config = {
+    let config = {
         apiKey: "AIzaSyA7JwFHnI-I84gPBWPqklQrgPLtT1ijD58",
         authDomain: "show-me-beer.firebaseapp.com",
         databaseURL: "https://show-me-beer.firebaseio.com",

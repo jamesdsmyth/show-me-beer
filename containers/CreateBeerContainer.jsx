@@ -115,7 +115,8 @@ class CreateBeerContainerView extends React.Component {
                             {countrySelectOptions}
                         </select>
                         <input id="brewer" className="input" placeholder="Brewer" type="text" />
-                        <input id="photo" className="input" placeholder="image url" type="text" />
+                        <input id="photo" className="input" placeholder="image url" type="file" required />
+                        <input id="photo-url" className="input" text="input" />
                         <select id="type" className="select">
                             <option>Type</option>
                             {typeSelectOptions}
