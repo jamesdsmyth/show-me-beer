@@ -11,24 +11,24 @@ class FilterLocationsComponentView extends React.Component {
     constructor (props) {
         super (props);
 
+        console.log(props)
+
         this.state = {
             borough: 'all',
             showFilter: 'hide',
             boroughs: this.props.boroughs,
             firebaseLocations: this.props.firebaseLocations,
             isCreationPage: this.props.creationPage || false,
-            createBeer: this.props.createBeer
+            createBeers: this.props.createBeers
         }
     }
 
-    // this is called when the firebase data is received
+    // when the beers fibally are loaded from firebase, we use this to set the state
     componentWillReceiveProps (props) {
-
-        console.log(props)
 
         this.setState({
             firebaseLocations: props.firebaseLocations,
-            createBeer: props.createBeer
+            createBeers: props.createBeers
         });
     }
 
@@ -95,14 +95,14 @@ class FilterLocationsComponentView extends React.Component {
         var shortLocations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
-            createBeer = this.state.createBeer,
+            createBeers = this.state.createBeers.locations,
             postcodeClick = this.searchPostcode.bind(this),
             locationsList = [],
             locationsMaplist = {},
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
 
-            console.log(createBeer);
+            console.log(createBeers);
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -123,12 +123,24 @@ class FilterLocationsComponentView extends React.Component {
 
                 // if we are on a creation page then we need to display the add/remove location buttons
                 if(this.state.isCreationPage === true) {
-                    return <li key={i}>
+
+                    let present = false;
+
+                    for(var addedLocation in createBeers) {
+                        if(createBeers[addedLocation].coords.longitude === shortLocations[location].coords.longitude) {
+                            present = true;
+                        }
+                    }
+
+                    return <li key={i} className="location">
                                 <Link to={"/locations/" + location}>
                                     {shortLocations[location].name}
                                 </Link>
-                                <button type="type" className="button" onClick={() => this.addLocationToBeer(shortLocations[location])}>Add location</button>
-                                <button type="type" className="button" onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove location</button>
+                                {present === true ?
+                                    <span className="button" onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove</span>
+                                    :
+                                    <span className="button" onClick={() => this.addLocationToBeer(shortLocations[location])}>Add</span>
+                                }
                             </li>
                 } else {
                     return <li key={i}>
@@ -163,7 +175,7 @@ class FilterLocationsComponentView extends React.Component {
                 <section className="area buffer locations">
                     <div className="locations-list">
                         {locationCount === -1 ? <span>There are currently no locations in {stateBorough}</span> : null}
-                        <ul>
+                        <ul className="locations">
                             {locationsList}
                         </ul>
                     </div>
@@ -177,10 +189,12 @@ class FilterLocationsComponentView extends React.Component {
 
 const mapStateToProps = (state) => {
 
+    console.log(state)
+
     return {
         boroughs: state.boroughs,
         firebaseLocations: state.locations,
-        createBeer: state.createBeer
+        createBeers: state.createBeers
     }
 }
 

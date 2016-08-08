@@ -54,7 +54,6 @@
             .button {
                 margin-left: 20px;
                 float: left;
-                cursor: pointer;
             }
         }
     }
@@ -287,6 +286,28 @@
 
         li {
             line-height: 1.5em;
+            margin-bottom: 5px;
+            clear: both;
+            float: left;
+        }
+
+        &.locations {
+
+            .location {
+
+                a {
+                    display: block;
+                    float: left;
+                    min-width: 200px;
+                }
+
+                .button {
+                    display: block;
+                    float: left;
+                    margin-left: 20px;
+                    min-width: 60px
+                }
+            }
         }
     }
 
@@ -361,8 +382,10 @@
         padding: 6px 10px;
         border: none;
         background: $button-green;
+        text-align: center;
         color: $white;
         font-size: 1em;
+        cursor: pointer;
     }
 
     #mapid {

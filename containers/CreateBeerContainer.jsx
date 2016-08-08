@@ -16,6 +16,7 @@ class CreateBeerContainerView extends React.Component {
 
     // when the beers fibally are loaded from firebase, we use this to set the state
     componentWillReceiveProps (props) {
+
         this.setState({
             beers: props.beers,
             createBeers: props.createBeers
@@ -76,18 +77,6 @@ class CreateBeerContainerView extends React.Component {
             }
         }
     }
-
-
-
-
-
-    addLocationToBeer (location) {
-        console.log(location)
-    }
-
-
-
-
 
     render () {
 
@@ -154,6 +143,7 @@ class CreateBeerContainerView extends React.Component {
 }
 
 const MapStateToProps = (state) => {
+
     return {
         beers: state.beers,
         types: state.beerTypes,
