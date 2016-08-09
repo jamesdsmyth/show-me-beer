@@ -90,37 +90,35 @@ export function RemoveBeer (beerKey, beerName) {
     });
 }
 
+// function that gets the beerObject and uploads the image associated with it.
 export function CreateBeer (beerObject) {
 
     let storage = firebase.storage();
     let storageRef = storage.ref();
-    let imagesRef = storageRef.child('images');
 
-    // File or Blob named mountains.jpg
-    // var aaaaa = $('#photo-url').get(0).files[0];
     var file = document.getElementById('photo').files[0];
 
-    debugger;
-    // Create the file metadata
     var metadata = {
-    contentType: file.type
+        contentType: file.type
     };
 
-    // Upload file and metadata to the object 'images/mountains.jpg'
     var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
         console.log('Upload is ' + progress + '% done');
+
         switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
-            console.log('Upload is paused');
-            break;
+                console.log('Upload is paused');
+                break;
+
             case firebase.storage.TaskState.RUNNING: // or 'running'
-            console.log('Upload is running');
-            break;
+                console.log('Upload is running');
+                break;
         }
     }, function(error) {
         switch (error.code) {
@@ -138,22 +136,27 @@ export function CreateBeer (beerObject) {
         }
     }, function() {
         // Upload completed successfully, now we can get the download URL
-        var downloadURL = uploadTask.snapshot.downloadURL;
-        console.log('the url is', downloadURL);
-        // now need to pass this image into the beer object image url.
-    });
+
+        beerObject.photo = uploadTask.snapshot.downloadURL;
 
 
 
 
+        var updates = {};
+        updates['/beers/' + beerObject.name] = beerObject;
+        // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+        return firebase.database().ref().update(updates);
 
 
-    firebase.database().ref('beers/').push(beerObject).then(() => {
-        // Store.dispatch(actions.showAddNotification(beer, 'beer'));
-        alert('beer created');
-    }).catch((error) => {
-        alert('error saving the beer');
-        console.log(error)
+
+        // firebase.database().ref('beers/').push(beerObject).then(() => {
+        //     // Store.dispatch(actions.showAddNotification(beer, 'beer'));
+        //     alert('beer created');
+        // }).catch((error) => {
+        //     alert('error saving the beer');
+        //     console.log(error)
+        // });
     });
 }
 

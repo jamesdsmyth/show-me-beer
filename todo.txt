@@ -1,3 +1,4 @@
 - add beer to do
-    - read this and create an upload section to save the images to this link when creating a new beer - https://firebase.google.com/docs/storage/
-    - style the add location/remove location buttons
+    - sort out the unique IDs in the table structure. You can have more than one pub named the same -
+    currentBeer = beers[this.props.params.beer] || {}, in the beer container. This is what I need to change
+    - add newly created beer to the associated locations
