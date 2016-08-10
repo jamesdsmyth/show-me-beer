@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { CreateBeer } from '../data/FirebaseRef.jsx'
+import { CreateBeer, uidGenerator } from '../data/FirebaseRef.jsx'
 import MapComponent from '../components/MapComponent.jsx'
 import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx'
 
@@ -27,38 +27,28 @@ class CreateBeerContainerView extends React.Component {
     createBeerObject (event) {
 
         event.preventDefault();
+
         let error = false,
             matched = false,
             name = document.getElementById('name').value,
             friendlyUrl = name.replace(/\s+/g, '-').toLowerCase(),
-
-            beerObject = {
-                name: name,
-                alcoholContent: document.getElementById('alcoholContent').value,
-                description: document.getElementById('description').value,
-                city: document.getElementById('city').value,
-                country: $('#country').val(),
-                manufacturer: document.getElementById('brewer').value,
-                photo: document.getElementById('photo').value,
-                type: $('#type').val(),
-                style: $('#style').val(),
-                locations: this.state.createBeers.locations,
-                url: friendlyUrl
-            };
+            country = $('#country').val(),
+            type = $('#type').val(),
+            style = $('#style').val();
 
         // do a quick check of the select fields and if these pass we can check the name of the beer
         // if there is an error with any of them, then we will not proceed
-        if(beerObject.country === 'Country') {
+        if(country === 'Country') {
             alert('Beer country is required');
             error = true;
         }
 
-        if(beerObject.type === 'Type') {
+        if(type === 'Type') {
             alert('Beer type is required');
             error = true;
         }
 
-        if(beerObject.style === 'Style') {
+        if(style === 'Style') {
             alert('Beer style is required');
             error = true;
         }
@@ -67,14 +57,32 @@ class CreateBeerContainerView extends React.Component {
         if(error === false) {
             // now checking to see if the beer already exists
             for(var beer in this.state.beers) {
-                if(this.state.beers[beer].url === beerObject.url) {
-                    matched = true;
-                }
+                matched = this.state.beers[beer].url === friendlyUrl ? true : false;
             }
 
             if(matched === false) {
+
+                let beerObject = {
+                    name: name,
+                    alcoholContent: document.getElementById('alcoholContent').value,
+                    description: document.getElementById('description').value,
+                    city: document.getElementById('city').value,
+                    country: country,
+                    manufacturer: document.getElementById('brewer').value,
+                    type: type,
+                    style: style,
+                    locations: this.state.createBeers.locations,
+                    url: friendlyUrl,
+                }
+
+                let uid = uidGenerator();
+
+                let beerForLocationObject = {
+                    uid: uid
+                }
+
                 // add to beers list
-                CreateBeer(beerObject);
+                CreateBeer(beerObject, beerForLocationObject, uid);
             } else {
                 alert('Beer already exists');
             }

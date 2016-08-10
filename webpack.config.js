@@ -20,7 +20,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /(\.css|\.scss)$/,
                 loaders: ['style', 'css', 'sass']
             },
             // url-loader needed for background images in scss file

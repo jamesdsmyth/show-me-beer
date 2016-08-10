@@ -107,25 +107,6 @@
     h2 {
         font-size: 1.5em;
         margin-bottom: 15px;
-
-        &.intro-headings {
-            font-family: 'Oleo Script', cursive;
-            font-size: 4em;
-
-            &.blue {
-
-                a {
-                    color: $link-color;
-                }
-            }
-
-            &.red {
-
-                a {
-                    color: $light-red;
-                }
-            }
-        }
     }
 
     h3 {

@@ -1,6 +1,15 @@
 import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
+export function uidGenerator () {
+    let uid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+
+    return uid;
+}
+
 // using ES6 promises here
 const PopulateStore = () => {
 
@@ -91,7 +100,7 @@ export function RemoveBeer (beerKey, beerName) {
 }
 
 // function that gets the beerObject and uploads the image associated with it.
-export function CreateBeer (beerObject) {
+export function CreateBeer (beerObject, beerForLocationObject, uid) {
 
     let storage = firebase.storage();
     let storageRef = storage.ref();
@@ -139,20 +148,25 @@ export function CreateBeer (beerObject) {
 
         beerObject.photo = uploadTask.snapshot.downloadURL;
 
-
-
-
         var updates = {};
-        updates['/beers/' + beerObject.name] = beerObject;
+        updates['/beers/' + uid] = beerObject;
         // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+        // now need to add a structure like
+
+
+
+
 
         return firebase.database().ref().update(updates);
 
-
-
-        // firebase.database().ref('beers/').push(beerObject).then(() => {
+        // firebase.database().ref('beers/').push(beerObject).then((item) => {
         //     // Store.dispatch(actions.showAddNotification(beer, 'beer'));
         //     alert('beer created');
+        //
+        //     console.log(item);
+        //
+        //     // then add the beer to the correct
         // }).catch((error) => {
         //     alert('error saving the beer');
         //     console.log(error)
