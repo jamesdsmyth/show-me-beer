@@ -76,7 +76,8 @@ export function addLocationToBeer (location) {
     return {
         type: 'ADD_LOCATION_TO_BEER',
         name: location.name,
-        coords: location.coords
+        coords: location.coords,
+        url: location.url
     }
 }
 

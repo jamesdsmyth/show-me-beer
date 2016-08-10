@@ -27,20 +27,24 @@ class CreateBeerContainerView extends React.Component {
     createBeerObject (event) {
 
         event.preventDefault();
-        let error = false;
-        let matched = false;
-        let beerObject = {
-            name: document.getElementById('name').value,
-            alcoholContent: document.getElementById('alcoholContent').value,
-            description: document.getElementById('description').value,
-            city: document.getElementById('city').value,
-            country: $('#country').val(),
-            manufacturer: document.getElementById('brewer').value,
-            photo: document.getElementById('photo').value,
-            type: $('#type').val(),
-            style: $('#style').val(),
-            locations: this.state.createBeers.locations
-        }
+        let error = false,
+            matched = false,
+            name = document.getElementById('name').value,
+            friendlyUrl = name.replace(/\s+/g, '-').toLowerCase(),
+
+            beerObject = {
+                name: name,
+                alcoholContent: document.getElementById('alcoholContent').value,
+                description: document.getElementById('description').value,
+                city: document.getElementById('city').value,
+                country: $('#country').val(),
+                manufacturer: document.getElementById('brewer').value,
+                photo: document.getElementById('photo').value,
+                type: $('#type').val(),
+                style: $('#style').val(),
+                locations: this.state.createBeers.locations,
+                url: friendlyUrl
+            };
 
         // do a quick check of the select fields and if these pass we can check the name of the beer
         // if there is an error with any of them, then we will not proceed
@@ -63,7 +67,7 @@ class CreateBeerContainerView extends React.Component {
         if(error === false) {
             // now checking to see if the beer already exists
             for(var beer in this.state.beers) {
-                if(this.state.beers[beer].name.toLowerCase() === beerObject.name.toLowerCase()) {
+                if(this.state.beers[beer].url === beerObject.url) {
                     matched = true;
                 }
             }
@@ -71,7 +75,6 @@ class CreateBeerContainerView extends React.Component {
             if(matched === false) {
                 // add to beers list
                 CreateBeer(beerObject);
-                console.log(beerObject);
             } else {
                 alert('Beer already exists');
             }

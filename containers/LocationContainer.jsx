@@ -7,9 +7,16 @@ import MapComponent from '../components/MapComponent.jsx'
 class LocationContainerView extends React.Component {
 
     render () {
-        var locations = this.props.locations,
+
+        let locations = this.props.locations,
             userSavedBeers = this.props.user.beers.data,
-            currentLocation = locations[this.props.params.location] || {};
+            currentLocation = {};
+
+        for(var location in locations) {
+            if(locations[location].url === this.props.params.location) {
+                currentLocation = locations[location];
+            }
+        }
 
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
 

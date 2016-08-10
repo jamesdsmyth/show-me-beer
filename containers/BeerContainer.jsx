@@ -25,24 +25,30 @@ class BeerContainerView extends React.Component {
 
     render () {
 
-        var userData = this.props.user,
+        let userData = this.props.user,
             userSavedBeers = userData.beers.data,
             userLoggedIn = false,
             beers = this.props.beers,
-            currentBeer = beers[this.props.params.beer] || {},
-            locationCount = -1;
+            locationCount = -1,
+            currentBeer = {};
 
-        var locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
+        for(var beer in beers) {
+            if(beers[beer].url === this.props.params.beer) {
+                currentBeer = beers[beer];
+            }
+        }
+
+        let locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
             locationCount = i++;
-            return <li key={i}>
-                        <Link to={"/locations/" + location}>
+            return <li key={i} className="basic-location">
+                        <Link to={"/locations/" + currentBeer.locations[location].url}>
                             {currentBeer.locations[location].name}
                         </Link>
                     </li>
         });
 
-        var beerSaved = false;
-        var beerUID = null;
+        let beerSaved = false;
+        let beerUID = null;
 
         // looping through all saved user Firebase beers with the UID and if it matches
         // the beer the user has already saved we will change the tick and cross around.
@@ -92,7 +98,7 @@ class BeerContainerView extends React.Component {
                     <div className="locations-list">
                         <h2>Locations that sell this beer</h2>
                         {locationCount === -1 ? <span>There are currently no locations that sell {currentBeer.name}</span> : null}
-                        <ul>
+                        <ul className="locations">
                             {locationsList}
                         </ul>
                     </div>

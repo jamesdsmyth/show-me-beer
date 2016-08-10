@@ -292,6 +292,11 @@
 
         &.locations {
 
+            .basic-location {
+                display: block;
+                clear: both;
+            }
+
             .location {
 
                 a {

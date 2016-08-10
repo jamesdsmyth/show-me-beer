@@ -143,7 +143,7 @@ class FilterLocationsComponentView extends React.Component {
                                 }
                             </li>
                 } else {
-                    return <li key={i}>
+                    return <li key={i} className="basic-location">
                                 <Link to={"/locations/" + location}>
                                     {shortLocations[location].name}
                                 </Link>
