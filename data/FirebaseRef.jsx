@@ -157,9 +157,11 @@ export function CreateBeer (beerObject) {
             updates['/locations/' + beerObject.locations[i].uid + '/beers/' + newlocationBeerKey] = beerUidObject;
         }
 
-        console.log(updates);
-
-        return firebase.database().ref().update(updates);
+        return firebase.database().ref().update(updates).then(value => {
+            alert('beer has been saved');
+        }).catch(error => {
+            alert('beer has not been saved');
+        });
     });
 }
 

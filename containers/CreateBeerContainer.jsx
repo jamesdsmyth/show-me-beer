@@ -111,17 +111,16 @@ class CreateBeerContainerView extends React.Component {
                 <form className="add-beer-form" onSubmit={this.createBeerObject}>
                     <section className="area half buffer">
                         <h2>About the beer</h2>
-                        <input id="name" className="input" placeholder="Name of beer" type="text" />
-                        <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" />
-                        <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" />
-                        <input id="city" className="input" placeholder="City of origin" type="text" />
+                        <input id="name" className="input" placeholder="Name of beer" type="text" required />
+                        <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" step="any" min="0" required/>
+                        <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" required />
+                        <input id="city" className="input" placeholder="City of origin" type="text" required />
                         <select id="country" className="select">
                             <option>Country</option>
                             {countrySelectOptions}
                         </select>
-                        <input id="brewer" className="input" placeholder="Brewer" type="text" />
+                        <input id="brewer" className="input" placeholder="Brewer" type="text" required />
                         <input id="photo" className="input" placeholder="image url" type="file" required />
-                        <input id="photo-url" className="input" text="input" />
                         <select id="type" className="select">
                             <option>Type</option>
                             {typeSelectOptions}
@@ -133,6 +132,7 @@ class CreateBeerContainerView extends React.Component {
                     </section>
                     <section className="area buffer">
                         <h2>Who sells this beer?</h2>
+                        {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
                         <FilterLocationsComponent creationPage={true}/>
                         { Object.keys(beers).length > 0 ?
                             <button type="submit" className="button">Add!</button>
@@ -140,9 +140,6 @@ class CreateBeerContainerView extends React.Component {
                         }
                     </section>
                 </form>
-
-                {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-
             </div>
         )
     }
