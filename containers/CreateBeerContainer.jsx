@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { CreateBeer, uidGenerator } from '../data/FirebaseRef.jsx'
+import { CreateBeer } from '../data/FirebaseRef.jsx'
 import MapComponent from '../components/MapComponent.jsx'
 import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx'
 
@@ -75,14 +75,8 @@ class CreateBeerContainerView extends React.Component {
                     url: friendlyUrl,
                 }
 
-                let uid = uidGenerator();
-
-                let beerForLocationObject = {
-                    uid: uid
-                }
-
                 // add to beers list
-                CreateBeer(beerObject, beerForLocationObject, uid);
+                CreateBeer(beerObject);
             } else {
                 alert('Beer already exists');
             }

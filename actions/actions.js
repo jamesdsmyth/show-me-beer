@@ -72,20 +72,17 @@ export function showRemoveNotification (item, type) {
 }
 
 // adding location from a beer when creating a beer
-export function addLocationToBeer (location) {
+export function addLocationToBeer (key) {
     return {
         type: 'ADD_LOCATION_TO_BEER',
-        name: location.name,
-        coords: location.coords,
-        url: location.url
+        uid: key
     }
 }
 
 // adding location from a beer when creating a beer
-export function removeLocationToBeer (location) {
+export function removeLocationToBeer (key) {
     return {
         type: 'REMOVE_LOCATION_FROM_BEER',
-        name: location.name,
-        coords: location.coords
+        uid: key
     }
 }

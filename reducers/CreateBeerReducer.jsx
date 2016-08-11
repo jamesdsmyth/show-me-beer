@@ -11,8 +11,7 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
                 locations: [
                     ...state.locations,
                         {
-                            name: action.name,
-                            coords: action.coords
+                            uid: action.uid
                         }
                     ]
             });
@@ -24,7 +23,7 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
 
             // filtering the location we need to remove. Then below setting it
             let locationsArray = state.locations.filter((location, i) => {
-                if(location.coords.longitude !== action.coords.longitude) {
+                if(location.uid !== action.uid) {
                     return location;
                 }
             });

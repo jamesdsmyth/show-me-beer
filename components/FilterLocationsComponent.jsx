@@ -83,12 +83,12 @@ class FilterLocationsComponentView extends React.Component {
 
     // adds the location to the beer when creating a beer
     // function only exposed on the create beer page
-    addLocationToBeer (location) {
-        Store.dispatch(addLocationToBeer(location));
+    addLocationToBeer (locationKey) {
+        Store.dispatch(addLocationToBeer(locationKey));
     }
 
-    removeLocationToBeer (location) {
-        Store.dispatch(removeLocationToBeer(location))
+    removeLocationToBeer (locationKey) {
+        Store.dispatch(removeLocationToBeer(locationKey))
     }
 
     render () {
@@ -127,7 +127,7 @@ class FilterLocationsComponentView extends React.Component {
                     let present = false;
 
                     for(var addedLocation in createBeers) {
-                        if(createBeers[addedLocation].coords.longitude === shortLocations[location].coords.longitude) {
+                        if(createBeers[addedLocation].uid === location) {
                             present = true;
                         }
                     }
@@ -137,9 +137,9 @@ class FilterLocationsComponentView extends React.Component {
                                     {shortLocations[location].name}
                                 </Link>
                                 {present === true ?
-                                    <span className="button" onClick={() => this.removeLocationToBeer(shortLocations[location])}>Remove</span>
+                                    <span className="button" onClick={() => this.removeLocationToBeer(location)}>Remove</span>
                                     :
-                                    <span className="button" onClick={() => this.addLocationToBeer(shortLocations[location])}>Add</span>
+                                    <span className="button" onClick={() => this.addLocationToBeer(location)}>Add</span>
                                 }
                             </li>
                 } else {

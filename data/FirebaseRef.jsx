@@ -1,15 +1,6 @@
 import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
-export function uidGenerator () {
-    let uid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    });
-
-    return uid;
-}
-
 // using ES6 promises here
 const PopulateStore = () => {
 
@@ -100,7 +91,7 @@ export function RemoveBeer (beerKey, beerName) {
 }
 
 // function that gets the beerObject and uploads the image associated with it.
-export function CreateBeer (beerObject, beerForLocationObject, uid) {
+export function CreateBeer (beerObject) {
 
     let storage = firebase.storage();
     let storageRef = storage.ref();
@@ -144,33 +135,31 @@ export function CreateBeer (beerObject, beerForLocationObject, uid) {
             break;
         }
     }, function() {
-        // Upload completed successfully, now we can get the download URL
+        // Upload completed successfully, now we can write the beer to the db and add the beer relationship to the locations
 
         beerObject.photo = uploadTask.snapshot.downloadURL;
 
+        var newBeerKey = firebase.database().ref().child('beers').push().key;
+
         var updates = {};
-        updates['/beers/' + uid] = beerObject;
-        // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-        // now need to add a structure like
+        updates['/beers/' + newBeerKey] = beerObject;
 
 
+        // adding the beer reference to the location object
+        for(var i = 0; i < beerObject.locations.length; i++) {
 
+            let beerUidObject = {
+                uid: newBeerKey
+            }
 
+            let newlocationBeerKey = firebase.database().ref().child('locations/beers').push().key;
+
+            updates['/locations/' + beerObject.locations[i].uid + '/beers/' + newlocationBeerKey] = beerUidObject;
+        }
+
+        console.log(updates);
 
         return firebase.database().ref().update(updates);
-
-        // firebase.database().ref('beers/').push(beerObject).then((item) => {
-        //     // Store.dispatch(actions.showAddNotification(beer, 'beer'));
-        //     alert('beer created');
-        //
-        //     console.log(item);
-        //
-        //     // then add the beer to the correct
-        // }).catch((error) => {
-        //     alert('error saving the beer');
-        //     console.log(error)
-        // });
     });
 }
 
