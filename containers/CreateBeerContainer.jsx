@@ -14,7 +14,7 @@ class CreateBeerContainerView extends React.Component {
         this.createBeerObject = this.createBeerObject.bind(this);
     }
 
-    // when the beers fibally are loaded from firebase, we use this to set the state
+    // when the beers finally are loaded from firebase, we use this to set the state
     componentWillReceiveProps (props) {
 
         this.setState({
@@ -108,7 +108,7 @@ class CreateBeerContainerView extends React.Component {
                 <section className="area buffer page-title">
                     <h1>Add a beer</h1>
                 </section>
-                <form className="add-beer-form" onSubmit={this.createBeerObject}>
+                <form className="add-item-form" onSubmit={this.createBeerObject}>
                     <section className="area half buffer">
                         <h2>About the beer</h2>
                         <input id="name" className="input" placeholder="Name of beer" type="text" required />
@@ -133,7 +133,7 @@ class CreateBeerContainerView extends React.Component {
                     <section className="area buffer">
                         <h2>Who sells this beer?</h2>
                         {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-                        <FilterLocationsComponent creationPage={true}/>
+                        <FilterLocationsComponent creationPage={true} />
                         { Object.keys(beers).length > 0 ?
                             <button type="submit" className="button">Add!</button>
                             : null

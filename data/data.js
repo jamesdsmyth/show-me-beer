@@ -2,6 +2,9 @@ var Data = {
     "createBeer": {
         "locations": []
     },
+    "createLocation": {
+        "beers": []
+    },
     "user": {
       "userName": null,
       "uid": null,

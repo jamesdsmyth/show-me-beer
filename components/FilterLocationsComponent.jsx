@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Store from '../reducers/CombinedReducers.jsx'
-import { addLocationToBeer, removeLocationToBeer } from '../actions/actions.js'
+import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions.js'
 
 import MapComponent from './MapComponent.jsx'
 
@@ -87,8 +87,8 @@ class FilterLocationsComponentView extends React.Component {
         Store.dispatch(addLocationToBeer(locationKey));
     }
 
-    removeLocationToBeer (locationKey) {
-        Store.dispatch(removeLocationToBeer(locationKey))
+    removeLocationFromBeer (locationKey) {
+        Store.dispatch(removeLocationFromBeer(locationKey))
     }
 
     render () {
@@ -101,8 +101,6 @@ class FilterLocationsComponentView extends React.Component {
             locationsMaplist = {},
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
-
-            console.log(createBeers);
 
         // creating the toggle tabs for the boroughs
         var boroughOptions = stateBoroughs.map(function (borough, i) {
@@ -137,7 +135,7 @@ class FilterLocationsComponentView extends React.Component {
                                     {shortLocations[location].name}
                                 </Link>
                                 {present === true ?
-                                    <span className="button" onClick={() => this.removeLocationToBeer(location)}>Remove</span>
+                                    <span className="button" onClick={() => this.removeLocationFromBeer(location)}>Remove</span>
                                     :
                                     <span className="button" onClick={() => this.addLocationToBeer(location)}>Add</span>
                                 }
@@ -188,8 +186,6 @@ class FilterLocationsComponentView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
-    console.log(state)
 
     return {
         boroughs: state.boroughs,

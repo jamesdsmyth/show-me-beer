@@ -80,9 +80,25 @@ export function addLocationToBeer (key) {
 }
 
 // adding location from a beer when creating a beer
-export function removeLocationToBeer (key) {
+export function removeLocationFromBeer (key) {
     return {
         type: 'REMOVE_LOCATION_FROM_BEER',
+        uid: key
+    }
+}
+
+// adding beer from a location when creating a location
+export function addBeerToLocation (key) {
+    return {
+        type: 'ADD_BEER_TO_LOCATION',
+        uid: key
+    }
+}
+
+// removing beer from a location when creating a location
+export function removeLocationFromBeer (key) {
+    return {
+        type: 'REMOVE_BEER_FROM_LOCATION',
         uid: key
     }
 }

@@ -165,6 +165,80 @@ export function CreateBeer (beerObject) {
     });
 }
 
+export function CreateLocation (locationObject) {
+
+    let storage = firebase.storage();
+    let storageRef = storage.ref();
+
+    var file = document.getElementById('photo').files[0];
+
+    var metadata = {
+        contentType: file.type
+    };
+
+    var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        console.log('Upload is ' + progress + '% done');
+
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                break;
+
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+        }
+    }, function(error) {
+        switch (error.code) {
+            case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+
+            case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+            case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+    }, function() {
+        // Upload completed successfully, now we can write the beer to the db and add the beer relationship to the locations
+
+        locationObject.photo = uploadTask.snapshot.downloadURL;
+
+        var newLocationKey = firebase.database().ref().child('locations').push().key;
+
+        var updates = {};
+        updates['/locations/' + newLocationKey] = locationObject;
+
+
+        // adding the beer reference to the location object
+        // for(var i = 0; i < locationObject.beers.length; i++) {
+        //
+        //     let locationUidObject = {
+        //         uid: newLocationKey
+        //     }
+        //
+        //     let newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
+        //
+        //     updates['/beers/' + locationObject.beers[i].uid + '/beers/' + newlocationBeerKey] = beerUidObject;
+        // }
+
+        return firebase.database().ref().update(updates).then(value => {
+            alert('location has been saved');
+        }).catch(error => {
+            alert('location has not been saved');
+        });
+    });
+}
+
 export function SignUserIn () {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {

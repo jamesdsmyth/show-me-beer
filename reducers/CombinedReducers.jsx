@@ -10,6 +10,7 @@ import CountriesReducer from './CountriesReducer.jsx'
 import UserReducer from './UserReducer.jsx'
 import NotificationReducer from './NotificationReducer.jsx'
 import CreateBeerReducer from './CreateBeerReducer.jsx'
+import CreateLocationsReducer from './CreateLocationReducer.jsx'
 
 // combining all our reducers
 const Reducer = combineReducers({
@@ -22,7 +23,8 @@ const Reducer = combineReducers({
     countries: CountriesReducer,
     user: UserReducer,
     notifications: NotificationReducer,
-    createBeers: CreateBeerReducer
+    createBeers: CreateBeerReducer,
+    createLocations: CreateLocationsReducer
 });
 
 // creating the store with the combined reducers. Store is used throughout the app via dispatches

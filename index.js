@@ -19,6 +19,7 @@ import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 import SavedBeersContainer from './containers/SavedBeersContainer.jsx'
 import CreateBeerContainer from './containers/CreateBeerContainer.jsx'
+import CreateLocationContainer from './containers/CreateLocationContainer.jsx'
 
 import Store from './reducers/CombinedReducers.jsx'
 import { FirebaseRef } from './data/FirebaseRef.jsx'
@@ -39,6 +40,7 @@ render((
                 </Route>
                 <Route path="/saved-beers" component={SavedBeersContainer} />
                 <Route path="/add-beer" component={CreateBeerContainer} />
+                <Route path="/add-location" component={CreateLocationContainer} />
             </Route>
         </Router>
     </Provider>
