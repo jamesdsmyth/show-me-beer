@@ -131,7 +131,7 @@ class FilterLocationsComponentView extends React.Component {
                     }
 
                     return <li key={i} className="location">
-                                <Link to={"/locations/" + location}>
+                                <Link to={"/locations/" + locations[location].url}>
                                     {locations[location].name}
                                 </Link>
                                 {present === true ?
@@ -142,7 +142,7 @@ class FilterLocationsComponentView extends React.Component {
                             </li>
                 } else {
                     return <li key={i} className="basic-location">
-                                <Link to={"/locations/" + location}>
+                                <Link to={"/locations/" + locations[location].name}>
                                     {locations[location].name}
                                 </Link>
                             </li>

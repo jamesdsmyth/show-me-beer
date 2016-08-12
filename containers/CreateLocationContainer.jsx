@@ -10,7 +10,7 @@ class CreateBeerContainerView extends React.Component {
         this.state = {};
 
         // binding this to createBeer() function
-        this.createBeerObject = this.createLocationObject.bind(this);
+        this.createLocationObject = this.createLocationObject.bind(this);
     }
 
     // when the beers finally are loaded from firebase, we use this to set the state
