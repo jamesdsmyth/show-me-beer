@@ -10,17 +10,18 @@ import MapComponent from '../components/MapComponent.jsx'
 class BeerContainerView extends React.Component {
 
     // save the beer to Firebase. If the user is not logged in, then an alert to log in is shown
-    saveBeer (beer) {
+    // passing the beerName as well so we can easily set the notification to say you have added the beer
+    saveBeer (beerUID, beerName) {
         if(this.props.user.userName !== null) {
-            SaveBeer(beer);
+            SaveBeer(beerUID, beerName);
         } else {
             alert('please log in to save a beer');
         }
     }
 
     // passing the beer UID from firebase to remove the beer.
-    removeBeer (beerUID, beerName) {
-        RemoveBeer(beerUID, beerName);
+    removeBeer (beerSavedKey, beerName) {
+        RemoveBeer(beerSavedKey, beerName);
     }
 
     render () {
@@ -30,11 +31,15 @@ class BeerContainerView extends React.Component {
             userLoggedIn = false,
             beers = this.props.beers,
             locationCount = -1,
-            currentBeer = {};
+            currentBeer = {},
+            beerSaved = false,
+            beerUID = null,
+            beerSavedKey = null //if this beer has been saved by the user we reference it if the user wants to remove it
 
         for(var beer in beers) {
             if(beers[beer].url === this.props.params.beer) {
                 currentBeer = beers[beer];
+                beerUID = beer;
             }
         }
 
@@ -47,17 +52,16 @@ class BeerContainerView extends React.Component {
                     </li>
         });
 
-        let beerSaved = false;
-        let beerUID = null;
-
         // looping through all saved user Firebase beers with the UID and if it matches
         // the beer the user has already saved we will change the tick and cross around.
         if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
             userLoggedIn = true;
-            for (var beer in userSavedBeers) {
-                if (userSavedBeers[beer].beer === currentBeer.name) {
+
+            console.log(userSavedBeers);
+            for (var userSavedBeer in userSavedBeers) {
+                if (userSavedBeers[userSavedBeer].uid === beerUID) {
                     beerSaved = true;
-                    beerUID = beer;
+                    beerSavedKey = userSavedBeer;
                 }
             }
         }
@@ -73,14 +77,14 @@ class BeerContainerView extends React.Component {
                             <img className="star"
                                  src="../images/star-grey.png"
                                  alt="click this beer to save it"
-                                 onClick={() => this.saveBeer(currentBeer.name)} />
+                                 onClick={() => this.saveBeer(beerUID, currentBeer.name)} />
 
                         :
 
                             <img className="star"
                                  src="../images/star-gold.png"
                                  alt="click this beer to remove it from your saved beers"
-                                 onClick={() => this.removeBeer(beerUID, currentBeer.name)} />
+                                 onClick={() => this.removeBeer(beerSavedKey, currentBeer.name)} />
                     }
 
                 </section>

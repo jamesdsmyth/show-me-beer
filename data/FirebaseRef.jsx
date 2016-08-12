@@ -11,8 +11,6 @@ const PopulateStore = () => {
         snapshotRef = snapshot;
         Store.dispatch(actions.populateLocations(snapshotRef.val()));
     }).then(() => {
-        Store.dispatch(actions.populateShortLocations(snapshotRef.val()));
-    }).then(() => {
         Store.dispatch(actions.populateBeers(snapshotRef.val()));
     });
 }
@@ -48,6 +46,7 @@ const GetUserData = (user) => {
         if(data.key === 'beers') {
 
             console.log(data.key);
+            console.log(val);
             Store.dispatch(actions.saveBeerToUser(val));
         }
     });
@@ -72,20 +71,27 @@ const GetCurrentUser = () => {
     });
 }
 
-export function SaveBeer (beer) {
-    let uid = Store.getState().user.uid;
+export function SaveBeer (beerUID, beerName) {
 
-    firebase.database().ref('users/' + uid + '/beers').push({ beer }).then(() => {
-        Store.dispatch(actions.showAddNotification(beer, 'beer'));
-    }).catch(() => {
+    let uid = Store.getState().user.uid;
+    let newBeerKey = firebase.database().ref().child('beers').push().key;
+    let beerObject = {"uid": beerUID};
+
+    var updates = {};
+    updates['/users/' + uid + '/beers/' + newBeerKey] = beerObject;
+
+    return firebase.database().ref().update(updates).then(value => {
+        Store.dispatch(actions.showAddNotification(beerName, 'beer'));
+    }).catch(error => {
         alert('error saving the beer');
     });
 }
 
-export function RemoveBeer (beerKey, beerName) {
+// passing the key of the saved beer within the user so we can remove it
+export function RemoveBeer (beerSavedKey, beerName) {
     let uid = Store.getState().user.uid;
 
-    firebase.database().ref('users/' + uid + '/beers/' + beerKey).remove().then(() => {
+    firebase.database().ref('users/' + uid + '/beers/' + beerSavedKey).remove().then(() => {
         Store.dispatch(actions.showRemoveNotification(beerName, 'beer'));
     });
 }

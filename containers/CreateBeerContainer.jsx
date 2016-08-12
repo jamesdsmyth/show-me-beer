@@ -19,7 +19,8 @@ class CreateBeerContainerView extends React.Component {
 
         this.setState({
             beers: props.beers,
-            createBeers: props.createBeers
+            createBeers: props.createBeers,
+            user: props.user
         });
     }
 
@@ -73,6 +74,7 @@ class CreateBeerContainerView extends React.Component {
                     style: style,
                     locations: this.state.createBeers.locations,
                     url: friendlyUrl,
+                    lastEditedBy: this.state.user.uid
                 }
 
                 // add to beers list
@@ -151,9 +153,10 @@ const MapStateToProps = (state) => {
         beers: state.beers,
         types: state.beerTypes,
         styles: state.beerStyles,
-        locations: state.shortLocations,
+        locations: state.locations,
         countries: state.countries,
-        createBeers: state.createBeers
+        createBeers: state.createBeers,
+        user: state.user
     }
 }
 

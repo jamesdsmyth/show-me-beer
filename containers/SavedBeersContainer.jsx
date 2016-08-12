@@ -15,7 +15,7 @@ class SavedBeersContainerView extends React.Component {
                 let beerItem = beers[beer];
 
                 for (var savedBeer in userBeers) {
-                    if(userBeers[savedBeer].beer === beerItem.name) {
+                    if(userBeers[savedBeer].uid === beer) {
                         count = i;
                         return <li key={i}>
                                     <Link to={"/beers/" + beer}>

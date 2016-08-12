@@ -1,4 +1,0 @@
-- add beer to do
-    - sort out the unique IDs in the table structure. You can have more than one pub named the same -
-    currentBeer = beers[this.props.params.beer] || {}, in the beer container. This is what I need to change
-    - add newly created beer to the associated locations

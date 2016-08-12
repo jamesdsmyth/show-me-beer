@@ -92,7 +92,7 @@ class FilterLocationsComponentView extends React.Component {
     }
 
     render () {
-        var shortLocations = this.state.firebaseLocations,
+        var locations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
             createBeers = this.state.createBeers.locations,
@@ -108,15 +108,15 @@ class FilterLocationsComponentView extends React.Component {
             return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({borough})}>{borough}</li>
         }.bind(this));
 
-        for(var i in shortLocations) {
-            if((shortLocations[i].borough === stateBorough) || stateBorough === 'all') {
-                locationsMaplist[i] = shortLocations[i];
+        for(var i in locations) {
+            if((locations[i].borough === stateBorough) || stateBorough === 'all') {
+                locationsMaplist[i] = locations[i];
             }
         }
 
         // filtering all locations to see whether they match the borough selected
-        locationsList = Object.keys(shortLocations).map((location, i) => {
-            if((shortLocations[location].borough === stateBorough) || stateBorough === 'all') {
+        locationsList = Object.keys(locations).map((location, i) => {
+            if((locations[location].borough === stateBorough) || stateBorough === 'all') {
                 locationCount = i++;
 
                 // if we are on a creation page then we need to display the add/remove location buttons
@@ -132,7 +132,7 @@ class FilterLocationsComponentView extends React.Component {
 
                     return <li key={i} className="location">
                                 <Link to={"/locations/" + location}>
-                                    {shortLocations[location].name}
+                                    {locations[location].name}
                                 </Link>
                                 {present === true ?
                                     <span className="button" onClick={() => this.removeLocationFromBeer(location)}>Remove</span>
@@ -143,7 +143,7 @@ class FilterLocationsComponentView extends React.Component {
                 } else {
                     return <li key={i} className="basic-location">
                                 <Link to={"/locations/" + location}>
-                                    {shortLocations[location].name}
+                                    {locations[location].name}
                                 </Link>
                             </li>
                 }

@@ -5,13 +5,6 @@ export function populateLocations (data) {
     }
 }
 
-export function populateShortLocations (data) {
-    return {
-        type: 'ALL_SHORT_LOCATIONS',
-        data: data
-    }
-}
-
 export function populateBeers (data) {
     return {
         type: 'ALL_BEERS',
@@ -43,14 +36,12 @@ export function signOutUser () {
     }
 }
 
-export function saveBeerToUser (beerObjects) {
-
-    console.log(beerObjects);
+export function saveBeerToUser (beerUID) {
 
     return {
         type: 'SAVE_BEER',
         beers : {
-            data: beerObjects
+            data: beerUID
         }
     }
 }

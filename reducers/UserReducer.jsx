@@ -19,6 +19,8 @@ const UserReducer = (state = data.user, action) => {
                 locations: action.locations
             });
 
+            console.log(newState);
+
             return newState;
             break;
 
@@ -38,9 +40,18 @@ const UserReducer = (state = data.user, action) => {
 
         case 'SAVE_BEER':
 
+        console.log(state);
+        console.log(action.beers.data)
+
             newState = Object.assign({}, state, {
-                beers: action.beers
+                beers: {
+                    data: action.beers.data
+                }
             });
+
+            console.log(newState);
+
+
 
             return newState;
             break;

@@ -185,7 +185,7 @@ class FilterBeersComponentView extends React.Component {
 
                             if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
                                 for (var savedBeer in userSavedBeers) {
-                                    if(userSavedBeers[savedBeer].beer === beerItem.name) {
+                                    if(userSavedBeers[savedBeer].uid === beer) {
                                         beerSaved = 'saved';
                                     }
                                 }
