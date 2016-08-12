@@ -38,6 +38,8 @@ class MapComponent extends React.Component {
     setLocationMarkers () {
 
         var locations = this.props.locations;
+
+        console.log(locations)
         var LeafIcon = L.Icon.extend({
             options: {
                 iconSize:     [41, 60], // size of the icon
@@ -62,12 +64,13 @@ class MapComponent extends React.Component {
             this.mymap.setView([locations.longitude, locations.latitude], 15);
 
         } else {
-            for(var key in locations) {
-                L.marker([locations[key].coords.longitude, locations[key].coords.latitude],
+            for(var location in locations) {
+                
+                L.marker([locations[location].coords.longitude, locations[location].coords.latitude],
                     {
                         icon: markerIcon
                     }
-                ).addTo(this.mymap).bindPopup('<a href="/locations/' + key + '">' + locations[key].name +'</a>');
+                ).addTo(this.mymap).bindPopup('<a href="/locations/' + location + '">' + locations[location].name +'</a>');
             }
 
             this.mymap.setView([51.505, -0.09], 12);

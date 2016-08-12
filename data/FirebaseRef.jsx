@@ -9,9 +9,9 @@ const PopulateStore = () => {
 
     firebaseDB.then((snapshot) => {
         snapshotRef = snapshot;
-        Store.dispatch(actions.populateLocations(snapshotRef.val()));
-    }).then(() => {
         Store.dispatch(actions.populateBeers(snapshotRef.val()));
+    }).then(() => {
+        Store.dispatch(actions.populateLocations(snapshotRef.val()));
     });
 }
 

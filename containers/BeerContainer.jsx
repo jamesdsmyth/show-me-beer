@@ -31,6 +31,8 @@ class BeerContainerView extends React.Component {
             userLoggedIn = false,
             beers = this.props.beers,
             locationCount = -1,
+            locations = this.props.locations,
+            mapLocations = [],
             currentBeer = {},
             beerSaved = false,
             beerUID = null,
@@ -45,9 +47,13 @@ class BeerContainerView extends React.Component {
 
         let locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
             locationCount = i++;
+
+            // create locations to pass to map component
+            mapLocations.push(locations[currentBeer.locations[location].uid]);
+
             return <li key={i} className="basic-location">
-                        <Link to={"/locations/" + currentBeer.locations[location].url}>
-                            {currentBeer.locations[location].name}
+                        <Link to={"/locations/" + locations[currentBeer.locations[location].uid].url}>
+                            {locations[currentBeer.locations[location].uid].name}
                         </Link>
                     </li>
         });
@@ -106,7 +112,7 @@ class BeerContainerView extends React.Component {
                             {locationsList}
                         </ul>
                     </div>
-                    {currentBeer.locations !== undefined ? <MapComponent locations={currentBeer.locations} /> : null}
+                    {currentBeer.locations !== undefined ? <MapComponent locations={mapLocations} /> : null}
                 </section>
             </div>
         )
@@ -116,6 +122,7 @@ class BeerContainerView extends React.Component {
 const mapStateToProps = (state) => {
     return {
         beers: state.beers,
+        locations: state.locations,
         user: state.user
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { propTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
@@ -8,9 +8,15 @@ class LocationContainerView extends React.Component {
 
     render () {
 
+        console.log(this.props);
+
         let locations = this.props.locations,
             userSavedBeers = this.props.user.beers.data,
+            beers = this.props.beers,
             currentLocation = {};
+
+            console.log(userSavedBeers);
+            console.log(beers);
 
         for(var location in locations) {
             if(locations[location].url === this.props.params.location) {
@@ -21,27 +27,30 @@ class LocationContainerView extends React.Component {
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
 
             let beerSaved = null;
+            let singleBeer = beers[beer];
+
+            console.log(beers);
 
             if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
                 for (var savedBeer in userSavedBeers) {
-                    if(userSavedBeers[savedBeer].beer === currentLocation.beers[beer].name) {
+                    if(userSavedBeers[savedBeer].beer === singleBeer.name) {
                         beerSaved = 'saved';
                     }
                 }
             }
 
             return <li key={i} className={beerSaved}>
-                        <Link to={"/beers/" + beer}>
-                            <img className="beer-image" src={currentLocation.beers[beer].photo} alt={beer} />
+                        <Link to={"/beers/" + singleBeer.url}>
+                            <img className="beer-image" src={singleBeer.photo} alt={singleBeer.name} />
                         </Link>
                         <div className="beer-details">
                             <h3>
-                                <Link to={"/beers/" + beer}
+                                <Link to={"/beers/" + singleBeer.url}
                                       className="beer-title">
-                                    {currentLocation.beers[beer].name}
+                                    {singleBeer.name}
                                 </Link>
                             </h3>
-                            <span className="italic">{currentLocation.beers[beer].type}, {currentLocation.beers[beer].style} and brewed in {currentLocation.beers[beer].country}</span>
+                            <span className="italic">{singleBeer.type}, {singleBeer.style} and brewed in {singleBeer.country}</span>
                         </div>
                     </li>
         });
@@ -80,8 +89,13 @@ class LocationContainerView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
+    console.log(state.locations);
+    console.log(state.beers);
+
     return {
         locations: state.locations,
+        beers: state.beers,
         user: state.user
     }
 }
