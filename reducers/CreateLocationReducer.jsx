@@ -16,6 +16,8 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
                     ]
             });
 
+            console.log(newState)
+
             return newState;
             break;
 
@@ -29,7 +31,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
             });
 
             newState = Object.assign({}, state, {
-                locations: beersArray
+                beers: beersArray
             });
 
             return newState;

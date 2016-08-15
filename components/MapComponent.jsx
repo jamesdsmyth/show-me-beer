@@ -65,8 +65,6 @@ class MapComponent extends React.Component {
         } else {
             for(var location in locations) {
 
-                console.log(locations);
-
                 L.marker([locations[location].coords.longitude, locations[location].coords.latitude],
                     {
                         icon: markerIcon

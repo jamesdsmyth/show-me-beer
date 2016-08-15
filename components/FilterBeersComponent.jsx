@@ -146,16 +146,12 @@ class FilterBeersComponentView extends React.Component {
                 if((selectedStyle.indexOf(beerItem.style) > -1) || (selectedStyle.length === 0)) {
                     if((selectedCountry.indexOf(beerItem.country) > -1) || (selectedCountry.length === 0)) {
 
-                        console.log(this.state.isCreationPage);
-
                         // if we are on a creation page then we need to display the add/remove location buttons
                         if(this.state.isCreationPage === true) {
 
                             let present = false;
 
                             for(var addedLocation in createLocations) {
-
-                                console.log(beer)
                                 if(createLocations[addedLocation].uid === beer) {
                                     present = true;
                                 }

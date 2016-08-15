@@ -7,6 +7,7 @@ class CreateBeerContainerView extends React.Component {
 
     constructor (props) {
         super(props);
+
         this.state = {};
 
         // binding this to createBeer() function
@@ -72,7 +73,7 @@ class CreateBeerContainerView extends React.Component {
                         latitude: document.getElementById('latitude').value,
                         longitude: document.getElementById('longitude').value
                     },
-                    locations: this.state.createLocations.locations,
+                    beers: this.state.createLocations.beers,
                     lastEditedBy: this.state.user.uid
                 }
 
@@ -157,7 +158,7 @@ const MapStateToProps = (state) => {
         countries: state.countries,
         boroughs: state.boroughs,
         createBeers: state.createBeers,
-        createBeers: state.createLocations,
+        createLocations: state.createLocations,
         user: state.user
     }
 }

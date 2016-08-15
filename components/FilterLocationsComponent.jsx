@@ -11,8 +11,6 @@ class FilterLocationsComponentView extends React.Component {
     constructor (props) {
         super (props);
 
-        console.log(props)
-
         this.state = {
             borough: 'all',
             showFilter: 'hide',

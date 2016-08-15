@@ -8,15 +8,10 @@ class LocationContainerView extends React.Component {
 
     render () {
 
-        // console.log(this.props);
-
         let locations = this.props.locations,
             userSavedBeers = this.props.user.beers.data,
             beers = this.props.beers,
             currentLocation = {};
-
-            // console.log(userSavedBeers);
-            // console.log(beers);
 
         for(var location in locations) {
             if(locations[location].url === this.props.params.location) {
@@ -28,12 +23,7 @@ class LocationContainerView extends React.Component {
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
 
             let beerSaved = null;
-            // let singleBeer = beers[beerUid];
-
-            // console.log(currentLocation.beers[beer]);
-            console.log(currentLocation.beers[beer].uid);
             let singleBeer = beers[currentLocation.beers[beer].uid];
-            console.log(singleBeer);
 
             // seeing whether the current beer has been previously saved by the user. If it has then we need to give it a class of 'saved'
             if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
