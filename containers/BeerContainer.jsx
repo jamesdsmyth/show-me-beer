@@ -51,12 +51,7 @@ class BeerContainerView extends React.Component {
             // locations = this.props.locations, is not being loaded
 
             // create locations to pass to map component
-            console.log(location);
-            console.log(currentBeer);
             let uid = currentBeer.locations[location].uid;
-            console.log(uid)
-            console.log(locations);
-            console.log(locations[uid]);
 
             if(locations[uid] !== undefined) {
                 mapLocations.push(locations[uid]);

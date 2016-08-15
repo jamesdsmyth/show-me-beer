@@ -69,7 +69,7 @@ class MapComponent extends React.Component {
                     {
                         icon: markerIcon
                     }
-                ).addTo(this.mymap).bindPopup('<a href="/locations/' + location + '">' + locations[location].name +'</a>');
+                ).addTo(this.mymap).bindPopup('<a href="/locations/' + locations[location].url + '">' + locations[location].name +'</a>');
             }
 
             this.mymap.setView([51.505, -0.09], 12);

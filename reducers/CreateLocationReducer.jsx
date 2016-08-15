@@ -16,8 +16,6 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
                     ]
             });
 
-            console.log(newState)
-
             return newState;
             break;
 
