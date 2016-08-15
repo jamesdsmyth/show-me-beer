@@ -390,6 +390,13 @@
     .add-item-form {
         width: 100%;
 
+        .form-row {
+            display: block;
+            float: left;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
         .input,
         .select {
             float: left;

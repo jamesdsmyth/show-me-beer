@@ -8,7 +8,9 @@ class CreateBeerContainerView extends React.Component {
 
     constructor (props) {
         super(props);
-        this.state = {};
+        this.state = {
+            formFillCount: 0
+        };
 
         // binding this to createBeer() function
         this.createBeerObject = this.createBeerObject.bind(this);
@@ -22,6 +24,26 @@ class CreateBeerContainerView extends React.Component {
             createBeers: props.createBeers,
             user: props.user
         });
+    }
+
+    // checks the section to see whether it has been filled out correctly
+    checkFormSection (sectionNumber) {
+
+        $('.form-row.' + sectionNumber + ' input').each(function (i) {
+            console.log($(this).val(), i);
+        });
+
+        // now need to do some checking on whether each one has a value. If each one has a value then I push it
+
+
+        // $('.form-row.' + sectionNumber )
+        // for(var i = 0; $('.form-row.' + sectionNumber + ' input').length;)
+        // console.log(valueOne, valueTwo);
+        // if(valueOne !== '' && valueTwo !== '') {
+        //     this.setState({
+        //         formFillCount: ifSuccessful
+        //     });
+        // }
     }
 
     // creating the object to pass to firebase to add the beer to the list
@@ -91,7 +113,8 @@ class CreateBeerContainerView extends React.Component {
             styles = this.props.styles,
             locations = this.props.locations,
             countries = this.props.countries,
-            beers = this.state.beers || {};
+            beers = this.state.beers || {},
+            formFillCount = this.state.formFillCount;
 
         var typeSelectOptions = types.map((type, i) => {
             return <option key={i} value={type}>{type}</option>
@@ -111,26 +134,65 @@ class CreateBeerContainerView extends React.Component {
                     <h1>Add a beer</h1>
                 </section>
                 <form className="add-item-form" onSubmit={this.createBeerObject}>
-                    <section className="area half buffer">
+                    <section className="area buffer">
                         <h2>About the beer</h2>
-                        <input id="name" className="input" placeholder="Name of beer" type="text" required />
-                        <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" step="any" min="0" required/>
-                        <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" required />
-                        <input id="city" className="input" placeholder="City of origin" type="text" required />
-                        <select id="country" className="select">
-                            <option>Country</option>
-                            {countrySelectOptions}
-                        </select>
-                        <input id="brewer" className="input" placeholder="Brewer" type="text" required />
-                        <input id="photo" className="input" placeholder="image url" type="file" required />
-                        <select id="type" className="select">
-                            <option>Type</option>
-                            {typeSelectOptions}
-                        </select>
-                        <select id="style" className="select">
-                            <option>Style</option>
-                            {styleSelectOptions}
-                        </select>
+
+                        {formFillCount === 0
+                        ?
+                        <div className="form-row one">
+                            <input id="name" className="input" placeholder="Name of beer" type="text" required />
+                            <input id="alcoholContent" className="input" placeholder="Alcohol content" type="number" step="any" min="0" required/>
+                            <button type="button" onClick={() => this.checkFormSection('one')}>
+                                Next
+                            </button>
+                        </div>
+                        :
+                        null}
+
+                        {formFillCount === 1
+                        ?
+                        <div className="form-row">
+                            <textarea id="description" className="input" placeholder="Tell us about the beer" type="text" required />
+                        </div>
+                        :
+                        null}
+
+                        {formFillCount === 2
+                        ?
+                        <div className="form-row">
+                            <input id="brewer" className="input" placeholder="Brewer" type="text" required />
+                            <input id="city" className="input" placeholder="City of origin" type="text" required />
+                            <select id="country" className="select">
+                                <option>Country</option>
+                                {countrySelectOptions}
+                            </select>
+                        </div>
+                        :
+                        null}
+
+                        {formFillCount === 3
+                        ?
+                        <div className="form-row">
+                            <input id="photo" className="input" placeholder="image url" type="file" required />
+                        </div>
+                        :
+                        null}
+
+                        {formFillCount === 4
+                        ?
+                        <div className="form-row">
+                            <select id="type" className="select">
+                                <option>Type</option>
+                                {typeSelectOptions}
+                            </select>
+                            <select id="style" className="select">
+                                <option>Style</option>
+                                {styleSelectOptions}
+                            </select>
+                        </div>
+                        :
+                        null}
+
                     </section>
                     <section className="area buffer">
                         <h2>Who sells this beer?</h2>
