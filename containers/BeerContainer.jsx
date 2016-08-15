@@ -48,19 +48,27 @@ class BeerContainerView extends React.Component {
         let locationsList = Object.keys(currentBeer.locations || {}).map((location, i) => {
             locationCount = i++;
 
+            // locations = this.props.locations, is not being loaded
+
             // create locations to pass to map component
-            mapLocations.push(locations[currentBeer.locations[location].uid]);
-
+            console.log(location);
+            console.log(currentBeer);
+            let uid = currentBeer.locations[location].uid;
+            console.log(uid)
             console.log(locations);
-            console.log(currentBeer.locations);
-            console.log(currentBeer.locations[location]);
-            console.log(locations[currentBeer.locations[location].uid].url);
+            console.log(locations[uid]);
 
-            return <li key={i} className="basic-location">
-                        <Link to={"/locations/" + locations[currentBeer.locations[location].uid].url}>
-                            {locations[currentBeer.locations[location].uid].name}
-                        </Link>
-                    </li>
+            if(locations[uid] !== undefined) {
+                mapLocations.push(locations[uid]);
+            }
+
+            if(Object.keys(locations).length > 0) {
+                return <li key={i} className="basic-location">
+                            <Link to={"/locations/" + locations[currentBeer.locations[location].uid].url}>
+                                {locations[currentBeer.locations[location].uid].name}
+                            </Link>
+                        </li>
+            }
         });
 
         // looping through all saved user Firebase beers with the UID and if it matches
@@ -68,7 +76,6 @@ class BeerContainerView extends React.Component {
         if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
             userLoggedIn = true;
 
-            console.log(userSavedBeers);
             for (var userSavedBeer in userSavedBeers) {
                 if (userSavedBeers[userSavedBeer].uid === beerUID) {
                     beerSaved = true;
@@ -125,6 +132,8 @@ class BeerContainerView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
+    console.log(state.locations)
     return {
         beers: state.beers,
         locations: state.locations,

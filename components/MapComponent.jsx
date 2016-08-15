@@ -39,7 +39,6 @@ class MapComponent extends React.Component {
 
         var locations = this.props.locations;
 
-        console.log(locations)
         var LeafIcon = L.Icon.extend({
             options: {
                 iconSize:     [41, 60], // size of the icon
@@ -65,7 +64,9 @@ class MapComponent extends React.Component {
 
         } else {
             for(var location in locations) {
-                
+
+                console.log(locations);
+
                 L.marker([locations[location].coords.longitude, locations[location].coords.latitude],
                     {
                         icon: markerIcon

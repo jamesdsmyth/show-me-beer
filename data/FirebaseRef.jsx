@@ -1,17 +1,14 @@
 import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
-// using ES6 promises here
+// populating both the beer and location states 
 const PopulateStore = () => {
+    firebase.database().ref('/beers').once('value').then((snapshot) => {
+        Store.dispatch(actions.populateBeers(snapshot.val()));
+    });
 
-    let firebaseDB = firebase.database().ref('/').once('value');
-    let snapshotRef = null;
-
-    firebaseDB.then((snapshot) => {
-        snapshotRef = snapshot;
-        Store.dispatch(actions.populateBeers(snapshotRef.val()));
-    }).then(() => {
-        Store.dispatch(actions.populateLocations(snapshotRef.val()));
+    firebase.database().ref('/locations').once('value').then((snapshot) => {
+        Store.dispatch(actions.populateLocations(snapshot.val()));
     });
 }
 

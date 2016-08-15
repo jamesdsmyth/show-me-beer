@@ -18,12 +18,12 @@ class SavedBeersContainerView extends React.Component {
                     if(userBeers[savedBeer].uid === beer) {
                         count = i;
                         return <li key={i}>
-                                    <Link to={"/beers/" + beer}>
+                                    <Link to={"/beers/" + beerItem.url}>
                                         <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
                                     </Link>
                                     <div className="beer-details">
                                         <h3>
-                                            <Link to={"/beers/" + beer}
+                                            <Link to={"/beers/" + beerItem.url}
                                                   className="beer-title">
                                                 {beerItem.name}
                                             </Link>
