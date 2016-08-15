@@ -127,6 +127,7 @@ export function CreateBeer (beerObject) {
                 break;
         }
     }, function(error) {
+        console.log(error);
         switch (error.code) {
             case 'storage/unauthorized':
             // User doesn't have permission to access the object

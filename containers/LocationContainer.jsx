@@ -26,10 +26,15 @@ class LocationContainerView extends React.Component {
 
         var beerslist = Object.keys(currentLocation.beers || {}).map((beer, i) => {
 
+            console.log(beer);
+
+            let beerUid = currentLocation.beers[beer].uid;
             let beerSaved = null;
-            let singleBeer = beers[beer];
+            let singleBeer = beers[beerUid];
 
             console.log(beers);
+            console.log(beer);
+            console.log(singleBeer);
 
             if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
                 for (var savedBeer in userSavedBeers) {

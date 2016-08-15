@@ -51,6 +51,11 @@ class BeerContainerView extends React.Component {
             // create locations to pass to map component
             mapLocations.push(locations[currentBeer.locations[location].uid]);
 
+            console.log(locations);
+            console.log(currentBeer.locations);
+            console.log(currentBeer.locations[location]);
+            console.log(locations[currentBeer.locations[location].uid].url);
+
             return <li key={i} className="basic-location">
                         <Link to={"/locations/" + locations[currentBeer.locations[location].uid].url}>
                             {locations[currentBeer.locations[location].uid].name}
