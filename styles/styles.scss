@@ -366,11 +366,33 @@
     .button {
         padding: 6px 10px;
         border: none;
-        background: $button-green;
         text-align: center;
         color: $white;
         font-size: 1em;
         cursor: pointer;
+        background: $button-grey;
+
+        &.primary {
+            background: $button-green;
+        }
+
+        &.secondary {
+            background: $button-blue;
+        }
+    }
+
+    .buttons {
+        float: left;
+        clear: both;
+
+        .button {
+            float: left;
+            margin-right: 20px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
     }
 
     #mapid {

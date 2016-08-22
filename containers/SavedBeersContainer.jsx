@@ -38,7 +38,7 @@ class SavedBeersContainerView extends React.Component {
         return (
             <div>
                 <section className="area buffer page-title">
-                    <h1>Your saved beers</h1>
+                    <h1>My Saved Beers</h1>
                 </section>
                 <section className="area buffer beer">
                     {count > 0 ?

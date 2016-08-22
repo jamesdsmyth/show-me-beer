@@ -96,16 +96,16 @@ export function RemoveBeer (beerSavedKey, beerName) {
 // function that gets the beerObject and uploads the image associated with it.
 export function CreateBeer (beerObject) {
 
-    console.log(beerObject);
-
     let storage = firebase.storage();
     let storageRef = storage.ref();
 
-    var metadata = {
+    let metadata = {
         contentType: beerObject.photo.type
     };
 
-    var uploadTask = storageRef.child('images/' + beerObject.photo.name).put(beerObject.photo, metadata);
+    let uploadTask = storageRef.child('images/' + beerObject.photo.name).put(beerObject.photo, metadata);
+
+    Store.dispatch(actions.beerSubmitted());
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
@@ -138,6 +138,10 @@ export function CreateBeer (beerObject) {
             // Unknown error occurred, inspect error.serverResponse
             break;
         }
+
+        Store.dispatch(actions.creationOfBeerFailure());
+
+        return;
     }, function() {
         // Upload completed successfully, now we can write the beer to the db and add the beer relationship to the locations
 
@@ -162,9 +166,9 @@ export function CreateBeer (beerObject) {
         }
 
         return firebase.database().ref().update(updates).then(value => {
-            alert('beer has been saved');
+            Store.dispatch(actions.creationOfBeerSuccess());
         }).catch(error => {
-            alert('beer has not been saved');
+            Store.dispatch(actions.creationOfBeerFailure());
         });
     });
 }

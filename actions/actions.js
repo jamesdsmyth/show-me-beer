@@ -93,3 +93,38 @@ export function removeLocationFromBeer (key) {
         uid: key
     }
 }
+
+// this removes all locations from the beer array for when the form needs to be completely reset
+export function clearLocationsFromBeer () {
+    return {
+        type: 'CLEAR_LOCATIONS_FROM_BEER'
+    }
+}
+
+// after creating a beer, we need to display the form again so the user can create another beer
+export function initialiseBeerCreation () {
+    return {
+        type: 'INITIALISE_BEER_CREATION'
+    }
+}
+
+// when the beer has been submitted we need to show a screen that tells the user something is happening
+export function beerSubmitted () {
+    return {
+        type: 'BEER_SUBMITTED'
+    }
+}
+
+// on creation of the beer, we need to let the creation page know to display the success message
+export function creationOfBeerSuccess () {
+    return {
+        type: 'BEER_CREATED_SUCCESS'
+    }
+}
+
+// on failure of creation of the beer, we need to let the creation page know to display the failure message
+export function creationOfBeerFailure () {
+    return {
+        type: 'BEER_CREATED_FAILURE'
+    }
+}

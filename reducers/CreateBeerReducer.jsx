@@ -35,6 +35,56 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
             return newState;
             break;
 
+        case 'CLEAR_LOCATIONS_FROM_BEER':
+
+            newState = Object.assign({}, state, {
+                locations: [],
+                VisibleSection: 'form'
+            });
+
+            return newState;
+            break;
+
+        // when we initialise the beer creation page or want to create a new beer, we want the form
+        // to be shown instead of a success/error message relating to the last beer created
+        case 'INITIALISE_BEER_CREATION':
+
+            newState = Object.assign({}, state, {
+                VisibleSection: 'form'
+            });
+
+            return newState;
+            break;
+
+        case 'BEER_SUBMITTED':
+
+            newState = Object.assign({}, state, {
+                VisibleSection: 'submitted'
+            });
+
+            return newState;
+            break;
+
+        // so when the beer is created we want the beer creation page to show a success message
+        case 'BEER_CREATED_SUCCESS':
+
+            newState = Object.assign({}, state, {
+                VisibleSection: 'success'
+            });
+
+            return newState;
+            break;
+
+        // so when the beer fails to be created we want the beer creation page to show a failure message
+        case 'BEER_CREATED_FAILURE':
+
+            newState = Object.assign({}, state, {
+                VisibleSection: 'failure'
+            });
+
+            return newState;
+            break;
+
         default:
             return state;
     }

@@ -26,7 +26,6 @@ class HeaderContainerView extends React.Component {
     render() {
 
         var userObject = this.props.user;
-        // var headingClasses = this.props.children === null ? 'main-header home' : 'main-header';
 
         return (
             <div>
@@ -48,15 +47,24 @@ class HeaderContainerView extends React.Component {
                         </li>
                         {(userObject.userName !== undefined) && (userObject.userName !== null) ?
                             <li>
-                                <Link to="/saved-beers" className="saved-beers" activeClassName="active">
+                                <Link to="/saved-beers" activeClassName="active">
                                     <span>
-                                        Saved beers
+                                        My Saved Beers
                                     </span>
                                 </Link>
                             </li>
                         :
-                        null
-                    }
+                        null }
+                        {(userObject.userName !== undefined) && (userObject.userName !== null) ?
+                            <li>
+                                <Link to="/add-beer" activeClassName="active">
+                                    <span>
+                                        Add a Beer
+                                    </span>
+                                </Link>
+                            </li>
+                        :
+                        null }
                     </ul>
 
                     {/* checking if userObject.userName is populated or not */
@@ -74,7 +82,7 @@ class HeaderContainerView extends React.Component {
 
                             <section className="sign-in-area">
                                 <button type="submit"
-                                        className="button"
+                                        className="button primary"
                                         onClick={this.signIn}>Sign in</button>
                             </section>
                     }
@@ -83,7 +91,6 @@ class HeaderContainerView extends React.Component {
                 <main className="main">
                     {this.props.children}
                 </main>
-
                 <NotificationsComponent />
             </div>
         )
