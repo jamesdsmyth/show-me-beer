@@ -1,7 +1,7 @@
 import Store from '../reducers/CombinedReducers.jsx'
 import * as actions from '../actions/actions.js'
 
-// populating both the beer and location states 
+// populating both the beer and location states
 const PopulateStore = () => {
     firebase.database().ref('/beers').once('value').then((snapshot) => {
         Store.dispatch(actions.populateBeers(snapshot.val()));
@@ -96,16 +96,16 @@ export function RemoveBeer (beerSavedKey, beerName) {
 // function that gets the beerObject and uploads the image associated with it.
 export function CreateBeer (beerObject) {
 
+    console.log(beerObject);
+
     let storage = firebase.storage();
     let storageRef = storage.ref();
 
-    var file = document.getElementById('photo').files[0];
-
     var metadata = {
-        contentType: file.type
+        contentType: beerObject.photo.type
     };
 
-    var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+    var uploadTask = storageRef.child('images/' + beerObject.photo.name).put(beerObject.photo, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {

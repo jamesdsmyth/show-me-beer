@@ -55,10 +55,11 @@ class CreateBeerContainerView extends React.Component {
     // we check whether the name of the beer exists here. If it does we break the loop and show a warning.
     // the user can not go forward without creating a new beer with an individual name
     checkBeerName () {
-
+        let newBeer = $('#name').val().replace(/\s+/g, '-').toLowerCase();
         let matched = false;
+
         for(var beer in this.state.beers) {
-            matched = this.state.beers[beer].name.toLowerCase() === $('#name').val().toLowerCase() ? true : false;
+            matched = this.state.beers[beer].url === newBeer ? true : false;
 
             if(matched === true) {
                 alert('This beer already exists');
@@ -66,28 +67,70 @@ class CreateBeerContainerView extends React.Component {
             }
         }
 
-        matched === false ? this.nextButtonClick() : null;
+        matched === false ? this.nextButtonClick('zero') : null;
     }
 
     // clicking the next button will change the question section.
     // this is done by increasing the formFillCount which matches to the section that relates to that number
-    nextButtonClick () {
+    nextButtonClick (section) {
 
-        // setting the state with the values in the form fields. If a value is
-        this.setState({
-            name: this.state.name === undefined ? $('#name').val() : this.state.name,
-            alcoholContent: this.state.alcoholContent === undefined ? $('#alcoholContent').val() : this.state.alcoholContent,
-            description: this.state.description === undefined ? $('#description').val() : this.state.description,
-            manufacturer: this.state.manufacturer === undefined ? $('#brewer').val() : this.state.manufacturer,
-            city: this.state.city === undefined ? $('#city').val() : this.state.city,
-            country: this.state.country === undefined ? $('#country').val() : this.state.country,
-            type: this.state.type === undefined ? $('#type').val() : this.state.type,
-            style: this.state.style === undefined ? $('#style').val() : this.state.style,
-            formFillCount: this.state.formFillCount + 1,
-            showNextButton: false
-        });
+        var setObject = {};
 
+        switch (section) {
+
+            case 'zero':
+
+                setObject = {
+                    name: $('#name').val(),
+                    alcoholContent: $('#alcoholContent').val()
+                }
+
+                break;
+
+            case 'one':
+
+                setObject = {
+                    description: $('#description').val()
+                }
+
+                break;
+
+            case 'two':
+
+                setObject = {
+                    manufacturer: $('#manufacturer').val(),
+                    city: $('#city').val(),
+                    country: $('#country').val()
+                }
+
+                break;
+
+            case 'three':
+
+                setObject = {
+                    photo: document.getElementById('photo').files[0]
+                }
+
+                break;
+
+
+            case 'four':
+
+                setObject = {
+                    type: $('#type').val(),
+                    style: $('#style').val()
+                }
+
+                break;
+        }
+
+        setObject.formFillCount = this.state.formFillCount + 1;
+        setObject.showNextButton = false;
+
+        this.setState(setObject);
         this.setFieldData();
+
+        console.log(setObject);
     }
 
     previousButtonClick () {
@@ -102,18 +145,17 @@ class CreateBeerContainerView extends React.Component {
     // when we navigate through the steps, we want to populate data that the user has already filled out
     setFieldData () {
 
-        console.log('updating')
-
         setTimeout(() => {
             $('#name').val(this.state.name);
             $('#alcoholContent').val(this.state.alcoholContent);
             $('#description').val(this.state.description);
-            $('#brewer').val(this.state.brewer);
+            $('#manufacturer').val(this.state.manufacturer);
             $('#city').val(this.state.city);
             $('#country').val(this.state.country);
+            $('#photo').val(this.state.photo);
             $('#type').val(this.state.type);
             $('#style').val(this.state.style);
-        }, 500);
+        }, 250);
     }
 
     // creating the object to pass to firebase to add the beer to the list
@@ -121,65 +163,26 @@ class CreateBeerContainerView extends React.Component {
 
         event.preventDefault();
 
-        let error = false,
-            matched = false,
-            name = document.getElementById('name').value,
-            friendlyUrl = name.replace(/\s+/g, '-').toLowerCase(),
-            country = $('#country').val(),
-            type = $('#type').val(),
-            style = $('#style').val();
-
-        // do a quick check of the select fields and if these pass we can check the name of the beer
-        // if there is an error with any of them, then we will not proceed
-        // if(country === 'Country') {
-        //     alert('Beer country is required');
-        //     error = true;
-        // }
-        //
-        // if(type === 'Type') {
-        //     alert('Beer type is required');
-        //     error = true;
-        // }
-        //
-        // if(style === 'Style') {
-        //     alert('Beer style is required');
-        //     error = true;
-        // }
-
-        // if there are no errors with the input fields then we can cross reference the beer name
-        if(error === false) {
-            // now checking to see if the beer already exists
-            for(var beer in this.state.beers) {
-                matched = this.state.beers[beer].url === friendlyUrl ? true : false;
-            }
-
-            if(matched === false) {
-
-                let beerObject = {
-                    name: name,
-                    alcoholContent: document.getElementById('alcoholContent').value,
-                    description: document.getElementById('description').value,
-                    city: document.getElementById('city').value,
-                    country: country,
-                    manufacturer: document.getElementById('brewer').value,
-                    type: type,
-                    style: style,
-                    locations: this.state.createBeers.locations,
-                    url: friendlyUrl,
-                    lastEditedBy: this.state.user.uid
-                }
-
-                // add to beers list
-                CreateBeer(beerObject);
-            } else {
-                alert('Beer already exists');
-            }
+        let beerObject = {
+            name: this.state.name,
+            alcoholContent: this.state.alcoholContent,
+            description: this.state.description,
+            manufacturer: this.state.manufacturer,
+            city: this.state.city,
+            country: this.state.country,
+            type: this.state.type,
+            photo: this.state.photo,
+            style: this.state.style,
+            locations: this.state.createBeers.locations,
+            url: this.state.name.replace(/\s+/g, '-').toLowerCase(),
+            lastEditedBy: this.state.user.uid
         }
+
+        // add to beers list
+        CreateBeer(beerObject);
     }
 
     render () {
-
-        console.log(this.state);
 
         var types = this.props.types,
             styles = this.props.styles,
@@ -199,8 +202,6 @@ class CreateBeerContainerView extends React.Component {
         var countrySelectOptions = countries.map((country, i) => {
             return <option key={i} value={country}>{country}</option>
         });
-
-        console.log(this.state.description);
 
         return (
             <div>
@@ -252,7 +253,7 @@ class CreateBeerContainerView extends React.Component {
                             </button>
                             {this.state.showNextButton === true ?
                                 <button type="button"
-                                    onClick={() => this.nextButtonClick()}>
+                                    onClick={() => this.nextButtonClick('one')}>
                                     Next
                                 </button>
                             :
@@ -264,7 +265,7 @@ class CreateBeerContainerView extends React.Component {
                         {formFillCount === 2
                         ?
                         <div className="form-row two">
-                            <input id="brewer"
+                            <input id="manufacturer"
                                 className="input"
                                 placeholder="Brewer"
                                 type="text"
@@ -288,7 +289,7 @@ class CreateBeerContainerView extends React.Component {
                             </button>
                             {this.state.showNextButton === true ?
                                 <button type="button"
-                                    onClick={() => this.nextButtonClick()}>
+                                    onClick={() => this.nextButtonClick('two')}>
                                     Next
                                 </button>
                             :
@@ -313,7 +314,7 @@ class CreateBeerContainerView extends React.Component {
 
                             {this.state.showNextButton === true ?
                                 <button type="button"
-                                    onClick={() => this.nextButtonClick()}>
+                                    onClick={() => this.nextButtonClick('three')}>
                                     Next
                                 </button>
                             :
@@ -344,7 +345,7 @@ class CreateBeerContainerView extends React.Component {
 
                             {this.state.showNextButton === true ?
                             <button type="button"
-                                onClick={() => this.nextButtonClick()}>
+                                onClick={() => this.nextButtonClick('four')}>
                                 Next
                             </button>
                             :
