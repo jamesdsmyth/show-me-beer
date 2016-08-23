@@ -42,7 +42,7 @@ class CreateBeerContainerView extends React.Component {
 
         section.find('.input').each(function () {
             inputCount++;
-            if($(this).val() !== '') {
+            if($(this).val() !== ('') && ($(this).val() !== 'Country') && ($(this).val() !== 'Type') && ($(this).val() !== 'Style')) {
                 completed++;
             }
         });
@@ -136,8 +136,6 @@ class CreateBeerContainerView extends React.Component {
 
         this.setState(setObject);
         this.setFieldData();
-
-        console.log(setObject);
     }
 
     previousButtonClick () {
@@ -322,7 +320,7 @@ class CreateBeerContainerView extends React.Component {
                                             onChange={() => this.checkFormSection('two')}
                                             required />
                                         <select id="country"
-                                            className="select"
+                                            className="select input"
                                             onChange={() => this.checkFormSection('two')}>
                                             <option value="Country">Country</option>
                                             {countrySelectOptions}
@@ -378,13 +376,13 @@ class CreateBeerContainerView extends React.Component {
                                     ?
                                     <div className="form-row four">
                                         <select id="type"
-                                            className="select"
+                                            className="select input"
                                             onChange={() => this.checkFormSection('four')}>
                                             <option value="Type">Type</option>
                                             {typeSelectOptions}
                                         </select>
                                         <select id="style"
-                                            className="select"
+                                            className="select input"
                                             onChange={() => this.checkFormSection('four')}>
                                             <option value="Style">Style</option>
                                             {styleSelectOptions}
@@ -422,6 +420,7 @@ class CreateBeerContainerView extends React.Component {
                                     <FilterLocationsComponent creationPage={true} />
                                     <div className="buttons">
                                         <button type="button"
+                                            className="button secondary"
                                             onClick={() => this.previousButtonClick()}>
                                             Previous
                                         </button>
@@ -470,6 +469,8 @@ class CreateBeerContainerView extends React.Component {
                                 </section>
                 break;
         }
+
+        console.log('updated fill form count issssss', formFillCount)
 
         return (
             <div>
