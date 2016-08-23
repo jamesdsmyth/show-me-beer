@@ -13,8 +13,11 @@ class CreateBeerContainerView extends React.Component {
         this.state = {
             formFillCount: 0,
             showNextButton: false,
-            VisibleSection: 'form'
-        };
+            VisibleSection: 'form',
+            country: 'Country',
+            type: 'Type',
+            style: 'Style'
+        }
 
         // binding this to createBeer() function
         this.createBeerObject = this.createBeerObject.bind(this);
@@ -204,7 +207,7 @@ class CreateBeerContainerView extends React.Component {
             type: this.state.type,
             photo: this.state.photo,
             style: this.state.style,
-            locations: this.state.createBeers.locations,
+            locations: this.state.createBeers.locations || [],
             url: this.state.name.replace(/\s+/g, '-').toLowerCase(),
             lastEditedBy: this.state.user.uid
         }
@@ -245,7 +248,7 @@ class CreateBeerContainerView extends React.Component {
                                 {formFillCount < 5 ?
                                 <section className="area buffer">
                                     <h2>About the beer</h2>
-
+                                    <p>Here you can add a beer and tell us where it is currently being sold.</p>
                                     {formFillCount === 0 ?
                                     <div className="form-row zero">
                                         <input id="name"
@@ -279,7 +282,7 @@ class CreateBeerContainerView extends React.Component {
                                     ?
                                     <div className="form-row one">
                                         <textarea id="description"
-                                            className="input"
+                                            className="input textarea"
                                             placeholder="Tell us about the beer"
                                             type="text"
                                             onChange={() => this.checkFormSection('one')}
@@ -321,7 +324,7 @@ class CreateBeerContainerView extends React.Component {
                                         <select id="country"
                                             className="select"
                                             onChange={() => this.checkFormSection('two')}>
-                                            <option>Country</option>
+                                            <option value="Country">Country</option>
                                             {countrySelectOptions}
                                         </select>
                                         <div className="buttons">
@@ -377,13 +380,13 @@ class CreateBeerContainerView extends React.Component {
                                         <select id="type"
                                             className="select"
                                             onChange={() => this.checkFormSection('four')}>
-                                            <option>Type</option>
+                                            <option value="Type">Type</option>
                                             {typeSelectOptions}
                                         </select>
                                         <select id="style"
                                             className="select"
                                             onChange={() => this.checkFormSection('four')}>
-                                            <option>Style</option>
+                                            <option value="Style">Style</option>
                                             {styleSelectOptions}
                                         </select>
                                         <div className="buttons">

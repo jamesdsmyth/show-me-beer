@@ -3,11 +3,11 @@ import * as actions from '../actions/actions.js'
 
 // populating both the beer and location states
 const PopulateStore = () => {
-    firebase.database().ref('/beers').once('value').then((snapshot) => {
+    firebase.database().ref('/beers').on('value', (snapshot) => {
         Store.dispatch(actions.populateBeers(snapshot.val()));
     });
 
-    firebase.database().ref('/locations').once('value').then((snapshot) => {
+    firebase.database().ref('/locations').on('value', (snapshot) => {
         Store.dispatch(actions.populateLocations(snapshot.val()));
     });
 }
