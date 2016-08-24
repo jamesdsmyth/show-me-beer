@@ -178,13 +178,11 @@ export function CreateLocation (locationObject) {
     let storage = firebase.storage();
     let storageRef = storage.ref();
 
-    var file = document.getElementById('photo').files[0];
-
     var metadata = {
-        contentType: file.type
+        contentType: locationObject.photo.type
     };
 
-    var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+    var uploadTask = storageRef.child('images/' + locationObject.photo.name).put(locationObject.photo, metadata);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
@@ -236,7 +234,7 @@ export function CreateLocation (locationObject) {
         //
         //     let newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
         //
-        //     updates['/beers/' + locationObject.beers[i].uid + '/beers/' + newlocationBeerKey] = beerUidObject;
+        //     updates['/beers/' + locationObject.beers[i].uid + '/beers/' + newlocationBeerKey] = locationUidObject;
         // }
 
         return firebase.database().ref().update(updates).then(value => {
