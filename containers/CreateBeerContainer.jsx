@@ -13,7 +13,7 @@ class CreateBeerContainerView extends React.Component {
         this.state = {
             formFillCount: 0,
             showNextButton: false,
-            VisibleSection: 'form',
+            visibleSection: 'form',
             country: 'Country',
             type: 'Type',
             style: 'Style'
@@ -29,7 +29,7 @@ class CreateBeerContainerView extends React.Component {
         this.setState({
             beers: props.beers,
             createBeers: props.createBeers,
-            VisibleSection: props.createBeers.VisibleSection,
+            visibleSection: props.createBeers.visibleSection,
             user: props.user
         });
     }
@@ -222,8 +222,10 @@ class CreateBeerContainerView extends React.Component {
             countries = this.props.countries,
             beers = this.state.beers || {},
             formFillCount = this.state.formFillCount,
-            sectionToDisplay = this.state.VisibleSection,
-            VisibleSection = null
+            sectionToDisplay = this.state.visibleSection,
+            visibleSection = null;
+
+            console.log(sectionToDisplay)
 
         var typeSelectOptions = types.map((type, i) => {
             return <option key={i} value={type}>{type}</option>
@@ -240,7 +242,7 @@ class CreateBeerContainerView extends React.Component {
         {/* switch statement for the different panels needed in filling out, submitted and getting the success/failure from submitting a beer*/}
         switch (sectionToDisplay) {
             case 'form':
-            VisibleSection =  <form className="add-item-form" onSubmit={this.createBeerObject}>
+            visibleSection =  <form className="add-item-form" onSubmit={this.createBeerObject}>
 
                                 {/* this is section one and is shown only for the first 4 sections */}
                                 {formFillCount < 5 ?
@@ -437,13 +439,13 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'submitted':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>Your beer is being created...</p>
                                 </section>
                 break;
 
             case 'success':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>You have just added a beer!</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -457,7 +459,7 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'failure':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>We could not create your beer at this time</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -477,7 +479,7 @@ class CreateBeerContainerView extends React.Component {
                 <section className="area buffer page-title">
                     <h1>Add a Beer</h1>
                 </section>
-                {VisibleSection}
+                {visibleSection}
             </div>
         )
     }

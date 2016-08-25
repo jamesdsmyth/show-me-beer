@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FilterBeersComponent from '../components/FilterBeersComponent.jsx'
 import { CreateLocation } from '../data/FirebaseRef.jsx'
+import { initialiseLocationCreation, clearBeersFromLocations } from '../actions/actions.js'
 
 class CreateBeerContainerView extends React.Component {
 
@@ -11,7 +12,7 @@ class CreateBeerContainerView extends React.Component {
         this.state = {
             formFillCount: 0,
             showNextButton: false,
-            VisibleSection: 'form',
+            visibleSection: 'form',
             borough: 'Borough',
             country: 'Country'
         }
@@ -24,10 +25,9 @@ class CreateBeerContainerView extends React.Component {
     componentWillReceiveProps (props) {
 
         this.setState({
-            beers: props.beers,
-            createBeers: props.createBeers,
-            createLocations: props.createLocations,
             locations: props.locations,
+            createLocations: props.createLocations,
+            visibleSection: props.createBeers.visibleSection,
             user: props.user
         });
     }
@@ -168,13 +168,13 @@ class CreateBeerContainerView extends React.Component {
     }
 
     // removes all selected locations from the beer so a new beer can be created
-    clearLocations () {
-        Store.dispatch(clearLocationsFromBeer());
+    clearBeers () {
+        Store.dispatch(clearBeersFromLocation());
     }
 
     // navigates the user to the form section again ready to create a new beer
     viewForm () {
-        Store.dispatch(initialiseBeerCreation());
+        Store.dispatch(initialiseLocationCreation());
     }
 
     // creating the object to pass to firebase to add the beer to the list
@@ -213,8 +213,8 @@ class CreateBeerContainerView extends React.Component {
             locations = this.props.locations,
             countries = this.props.countries,
             beers = this.state.beers || {},
-            sectionToDisplay = this.state.VisibleSection,
-            VisibleSection = null,
+            sectionToDisplay = this.state.visibleSection,
+            visibleSection = null,
             formFillCount = this.state.formFillCount;
 
         var boroughSelectOptions = boroughs.map((type, i) => {
@@ -228,7 +228,7 @@ class CreateBeerContainerView extends React.Component {
         {/* switch statement for the different panels needed in filling out, submitted and getting the success/failure from submitting a beer*/}
         switch (sectionToDisplay) {
             case 'form':
-                VisibleSection = <form className="add-item-form" onSubmit={this.createLocationObject}>
+                visibleSection = <form className="add-item-form" onSubmit={this.createLocationObject}>
                                     {formFillCount < 6 ?
                                         <section className="area buffer">
                                             <h2>About the Location</h2>
@@ -426,19 +426,19 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'submitted':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>Your location is being created...</p>
                                 </section>
                 break;
 
             case 'success':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>You have just added a location!</p>
                                     <div className="buttons">
                                         <button type="button"
                                                 className="button secondary"
                                                 onClick={() => this.clearFormData(),
-                                                         () => this.clearLocations()}>
+                                                         () => this.clearBeers()}>
                                             Create another location
                                         </button>
                                     </div>
@@ -446,7 +446,7 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'failure':
-                VisibleSection =  <section className="area buffer">
+                visibleSection =  <section className="area buffer">
                                     <p>We could not create your location at this time</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -467,7 +467,7 @@ class CreateBeerContainerView extends React.Component {
                 <section className="area buffer page-title">
                     <h1>Add a location</h1>
                 </section>
-                {VisibleSection}
+                {visibleSection}
             </div>
         )
     }

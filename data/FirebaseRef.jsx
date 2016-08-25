@@ -178,11 +178,13 @@ export function CreateLocation (locationObject) {
     let storage = firebase.storage();
     let storageRef = storage.ref();
 
-    var metadata = {
+    let metadata = {
         contentType: locationObject.photo.type
     };
 
-    var uploadTask = storageRef.child('images/' + locationObject.photo.name).put(locationObject.photo, metadata);
+    let uploadTask = storageRef.child('images/' + locationObject.photo.name).put(locationObject.photo, metadata);
+
+    Store.dispatch(actions.locationSubmitted());
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
@@ -200,6 +202,10 @@ export function CreateLocation (locationObject) {
                 console.log('Upload is running');
                 break;
         }
+
+        Store.dispatch(actions.creationOfLocationFailure());
+
+        return;
     }, function(error) {
         switch (error.code) {
             case 'storage/unauthorized':
@@ -215,7 +221,7 @@ export function CreateLocation (locationObject) {
             break;
         }
     }, function() {
-        // Upload completed successfully, now we can write the beer to the db and add the beer relationship to the locations
+        // Upload completed successfully, now we can write the location to the db and add the location relationship to the beers
 
         locationObject.photo = uploadTask.snapshot.downloadURL;
 
@@ -224,23 +230,23 @@ export function CreateLocation (locationObject) {
         var updates = {};
         updates['/locations/' + newLocationKey] = locationObject;
 
-
         // adding the beer reference to the location object
-        // for(var i = 0; i < locationObject.beers.length; i++) {
-        //
-        //     let locationUidObject = {
-        //         uid: newLocationKey
-        //     }
-        //
-        //     let newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
-        //
-        //     updates['/beers/' + locationObject.beers[i].uid + '/beers/' + newlocationBeerKey] = locationUidObject;
-        // }
+        for(var i = 0; i < locationObject.beers.length; i++) {
+
+            let locationUidObject = {
+                uid: newLocationKey
+            }
+
+            let newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
+
+            updates['/beers/' + locationObject.beers[i].uid + '/locations/' + newlocationBeerKey] = locationUidObject;
+        }
+
 
         return firebase.database().ref().update(updates).then(value => {
-            alert('location has been saved');
+            Store.dispatch(actions.creationOfLocationSuccess());
         }).catch(error => {
-            alert('location has not been saved');
+            Store.dispatch(actions.creationOfLocationFailure());
         });
     });
 }

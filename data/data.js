@@ -1,10 +1,11 @@
 var Data = {
     "createBeer": {
         "locations": [],
-        "VisibleSection": "form"
+        "visibleSection": "form"
     },
     "createLocation": {
-        "beers": []
+        "beers": [],
+        "visibleSection": "form"
     },
     "user": {
       "userName": null,
