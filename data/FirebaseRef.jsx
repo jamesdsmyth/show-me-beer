@@ -68,6 +68,7 @@ const GetCurrentUser = () => {
     });
 }
 
+// save beer to the user (gold star)
 export function SaveBeer (beerUID, beerName) {
 
     let uid = Store.getState().user.uid;
@@ -84,7 +85,7 @@ export function SaveBeer (beerUID, beerName) {
     });
 }
 
-// passing the key of the saved beer within the user so we can remove it
+// passing the key of the saved beer within the user so we can remove it (grey star)
 export function RemoveBeer (beerSavedKey, beerName) {
     let uid = Store.getState().user.uid;
 
@@ -124,7 +125,6 @@ export function CreateBeer (beerObject) {
                 break;
         }
     }, function(error) {
-        console.log(error);
         switch (error.code) {
             case 'storage/unauthorized':
             // User doesn't have permission to access the object
@@ -202,10 +202,6 @@ export function CreateLocation (locationObject) {
                 console.log('Upload is running');
                 break;
         }
-
-        Store.dispatch(actions.creationOfLocationFailure());
-
-        return;
     }, function(error) {
         switch (error.code) {
             case 'storage/unauthorized':
@@ -220,6 +216,10 @@ export function CreateLocation (locationObject) {
             // Unknown error occurred, inspect error.serverResponse
             break;
         }
+
+        Store.dispatch(actions.creationOfLocationFailure());
+
+        return;
     }, function() {
         // Upload completed successfully, now we can write the location to the db and add the location relationship to the beers
 

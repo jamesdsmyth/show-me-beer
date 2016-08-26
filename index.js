@@ -1,8 +1,8 @@
-require('./node_modules/leaflet/dist/leaflet.css');
 require('./styles/styles.scss');
 
 // importing firebase dependancy
 import firebase from 'firebase';
+
 
 // dependancies
 import React from 'react'

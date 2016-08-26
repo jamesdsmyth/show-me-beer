@@ -223,7 +223,7 @@ class CreateBeerContainerView extends React.Component {
             beers = this.state.beers || {},
             formFillCount = this.state.formFillCount,
             sectionToDisplay = this.state.visibleSection,
-            visibleSection = null;
+            toDisplay = null;
 
             console.log(sectionToDisplay)
 
@@ -242,12 +242,12 @@ class CreateBeerContainerView extends React.Component {
         {/* switch statement for the different panels needed in filling out, submitted and getting the success/failure from submitting a beer*/}
         switch (sectionToDisplay) {
             case 'form':
-            visibleSection =  <form className="add-item-form" onSubmit={this.createBeerObject}>
+            toDisplay =  <form className="add-item-form" onSubmit={this.createBeerObject}>
 
                                 {/* this is section one and is shown only for the first 4 sections */}
                                 {formFillCount < 5 ?
                                 <section className="area buffer">
-                                    <h2>About the beer</h2>
+                                    <h2>Tell us about the Beer</h2>
                                     <p>Here you can add a beer and tell us where it is currently being sold.</p>
                                     {formFillCount === 0 ?
                                     <div className="form-row zero">
@@ -439,13 +439,13 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'submitted':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>Your beer is being created...</p>
                                 </section>
                 break;
 
             case 'success':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>You have just added a beer!</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -459,7 +459,7 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'failure':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>We could not create your beer at this time</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -472,14 +472,12 @@ class CreateBeerContainerView extends React.Component {
                 break;
         }
 
-        console.log('updated fill form count issssss', formFillCount)
-
         return (
             <div>
                 <section className="area buffer page-title">
                     <h1>Add a Beer</h1>
                 </section>
-                {visibleSection}
+                {toDisplay}
             </div>
         )
     }

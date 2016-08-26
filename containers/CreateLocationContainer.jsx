@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Store from '../reducers/CombinedReducers.jsx'
 import FilterBeersComponent from '../components/FilterBeersComponent.jsx'
 import { CreateLocation } from '../data/FirebaseRef.jsx'
 import { initialiseLocationCreation, clearBeersFromLocations } from '../actions/actions.js'
@@ -27,7 +28,7 @@ class CreateBeerContainerView extends React.Component {
         this.setState({
             locations: props.locations,
             createLocations: props.createLocations,
-            visibleSection: props.createBeers.visibleSection,
+            visibleSection: props.createLocations.visibleSection,
             user: props.user
         });
     }
@@ -214,8 +215,11 @@ class CreateBeerContainerView extends React.Component {
             countries = this.props.countries,
             beers = this.state.beers || {},
             sectionToDisplay = this.state.visibleSection,
-            visibleSection = null,
+            toDisplay = null,
             formFillCount = this.state.formFillCount;
+
+
+            console.log(sectionToDisplay);
 
         var boroughSelectOptions = boroughs.map((type, i) => {
             return <option key={i} value={type}>{type}</option>
@@ -228,10 +232,10 @@ class CreateBeerContainerView extends React.Component {
         {/* switch statement for the different panels needed in filling out, submitted and getting the success/failure from submitting a beer*/}
         switch (sectionToDisplay) {
             case 'form':
-                visibleSection = <form className="add-item-form" onSubmit={this.createLocationObject}>
+                toDisplay = <form className="add-item-form" onSubmit={this.createLocationObject}>
                                     {formFillCount < 6 ?
                                         <section className="area buffer">
-                                            <h2>About the Location</h2>
+                                            <h2>Tell us about the Location</h2>
                                             <p>Here you can add a location and tell us what beers are currently being sold there.</p>
 
                                             {/* this is section one and is shown only for the first 4 sections */}
@@ -426,13 +430,13 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'submitted':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>Your location is being created...</p>
                                 </section>
                 break;
 
             case 'success':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>You have just added a location!</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -446,7 +450,7 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
             case 'failure':
-                visibleSection =  <section className="area buffer">
+                toDisplay =  <section className="area buffer">
                                     <p>We could not create your location at this time</p>
                                     <div className="buttons">
                                         <button type="button"
@@ -465,9 +469,9 @@ class CreateBeerContainerView extends React.Component {
         return (
             <div>
                 <section className="area buffer page-title">
-                    <h1>Add a location</h1>
+                    <h1>Add a Location</h1>
                 </section>
-                {visibleSection}
+                {toDisplay}
             </div>
         )
     }
@@ -482,7 +486,6 @@ const MapStateToProps = (state) => {
         locations: state.locations,
         countries: state.countries,
         boroughs: state.boroughs,
-        createBeers: state.createBeers,
         createLocations: state.createLocations,
         user: state.user
     }

@@ -129,15 +129,6 @@ export function creationOfBeerFailure () {
     }
 }
 
-
-
-
-
-
-
-
-
-
 // this removes all locations from the beer array for when the form needs to be completely reset
 export function clearBeersFromLocations () {
     return {

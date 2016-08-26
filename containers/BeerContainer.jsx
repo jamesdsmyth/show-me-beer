@@ -102,6 +102,7 @@ class BeerContainerView extends React.Component {
 
                 </section>
                 <section className="area half buffer beer-description">
+                    <h2>Details</h2>
                     <p>Type: {currentBeer.type}</p>
                     <p>Style: {currentBeer.style}</p>
                     <p>Alcohol content: {currentBeer.alcoholContent}%</p>

@@ -1,6 +1,7 @@
 @import './reset.scss';
 @import './_colors.scss';
 @import './_mixins.scss';
+@import '../node_modules/leaflet/dist/leaflet.css';
 
 #show-me-beer {
     font-family: 'Roboto', sans-serif;
@@ -11,13 +12,8 @@
     .main-header {
         width: 100%;
         float: left;
-        background: $header-background;
-        border-bottom: 1px solid #dbdbdb;
+        border-bottom: 1px solid $light-grey;
         margin-bottom: 20px;
-
-        &.home {
-            font-size: 3em;
-        }
 
         .main-navigation {
             float: left;
@@ -106,7 +102,12 @@
 
     h2 {
         font-size: 1.5em;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
+        background: $h2-background;
+        display: inline-block;
+        padding: 10px;
+        color: $white;
+        clear: both;
     }
 
     h3 {
@@ -117,6 +118,10 @@
     a {
         text-decoration: none;
         color: $link-color;
+
+        &:hover {
+            color: $link-hover;
+        }
     }
 
     p {
@@ -145,8 +150,7 @@
         position: relative;
         float: left;
         width: 100%;
-        margin-bottom: 10px;
-        border-top: 2px solid $light-grey;
+        margin-bottom: 20px;
 
         &.location-header {
             height: 75vh;
@@ -156,7 +160,7 @@
 
             .location-title {
                 position: absolute;
-                bottom: -15px;
+                bottom: 0;
                 left: 15px;
             }
         }
@@ -185,11 +189,7 @@
 
         &.page-title {
             padding: 30px 15px;
-            background: url('../images/clouds.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+            background: #F4FAD2;
         }
 
         &.filters,
@@ -357,10 +357,17 @@
 
     .input,
     .select {
-        border: 1px solid #cccccc;
+        border: 1px solid $light-grey;
         padding: 6px 10px;
         font-size: 1em;
         color: $light-black;
+    }
+
+    .select {
+        border-radius: 0 !important;
+        height: 30px;
+        background: $white;
+        font-family: 'Roboto', sans-serif;
     }
 
     .button {
@@ -422,9 +429,13 @@
         .input,
         .select {
             float: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             clear: both;
             width: 400px;
+        }
+
+        .select {
+            width: 420px;
         }
 
         .textarea {

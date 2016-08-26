@@ -39,7 +39,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
 
             newState = Object.assign({}, state, {
                 beers: [],
-                VisibleSection: 'form'
+                visibleSection: 'form'
             });
 
             return newState;
@@ -50,7 +50,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
         case 'INITIALISE_LOCATION_CREATION':
 
             newState = Object.assign({}, state, {
-                VisibleSection: 'form'
+                visibleSection: 'form'
             });
 
             return newState;
@@ -59,7 +59,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
         case 'LOCATION_SUBMITTED':
 
             newState = Object.assign({}, state, {
-                VisibleSection: 'submitted'
+                visibleSection: 'submitted'
             });
 
             return newState;
@@ -69,7 +69,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
         case 'LOCATION_CREATED_SUCCESS':
 
             newState = Object.assign({}, state, {
-                VisibleSection: 'success'
+                visibleSection: 'success'
             });
 
             return newState;
@@ -79,7 +79,7 @@ const CreateLocationReducer = (state = Data.createLocation, action) => {
         case 'LOCATION_CREATED_FAILURE':
 
             newState = Object.assign({}, state, {
-                VisibleSection: 'failure'
+                visibleSection: 'failure'
             });
 
             return newState;

@@ -59,7 +59,17 @@ class HeaderContainerView extends React.Component {
                             <li>
                                 <Link to="/add-beer" activeClassName="active">
                                     <span>
-                                        Add a Beer
+                                        + Beer
+                                    </span>
+                                </Link>
+                            </li>
+                        :
+                        null }
+                        {(userObject.userName !== undefined) && (userObject.userName !== null) ?
+                            <li>
+                                <Link to="/add-location" activeClassName="active">
+                                    <span>
+                                        + Location
                                     </span>
                                 </Link>
                             </li>

@@ -59,12 +59,6 @@ class LocationContainerView extends React.Component {
                         <img src={currentLocation.photo} alt={currentLocation.name} />
                     </picture>
                 </section>
-                <section className="area buffer beer">
-                    <h2>Beers</h2>
-                    <ul className="beers-list">
-                        {beerslist}
-                    </ul>
-                </section>
                 <section className="area buffer">
                     <h2>Details</h2>
                     <p>{currentLocation.description}</p>
@@ -77,6 +71,12 @@ class LocationContainerView extends React.Component {
                         <p>{currentLocation.postCode}</p>
                     </div>
                     {currentLocation.coords !== undefined ? <MapComponent locations={currentLocation.coords} /> : null}
+                </section>
+                <section className="area buffer beer">
+                    <h2>Beers</h2>
+                    <ul className="beers-list">
+                        {beerslist}
+                    </ul>
                 </section>
             </div>
         )
