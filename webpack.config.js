@@ -27,6 +27,15 @@ module.exports = {
             {
                 test: /(\.png|\.jpg)$/,
                 loader: 'url-loader?limit=1000000'
+            },
+            // svg-sprite-loader
+            {
+                test: /\.svg$/,
+                loader: 'svg-sprite?' + JSON.stringify({
+                    name: '[name]_[hash]',
+                    prefixize: true,
+                    spriteModule: 'utils/my-custom-sprite'
+                });
             }
         ]
     }
