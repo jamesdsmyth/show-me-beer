@@ -1,6 +1,7 @@
 import React, { propTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import classnames from 'classnames';
 import { saveBeer } from '../actions/actions.js'
 import Store from '../reducers/CombinedReducers.jsx'
 import { SaveBeer, RemoveBeer } from '../data/FirebaseRef.jsx'
@@ -81,7 +82,7 @@ class BeerContainerView extends React.Component {
 
         return (
             <div>
-                <section className="area buffer page-title">
+                <section className={classnames('area', 'buffer', 'page-title')}>
                     <h1 className="beer-heading">{currentBeer.name}</h1>
 
                     {
@@ -101,7 +102,7 @@ class BeerContainerView extends React.Component {
                     }
 
                 </section>
-                <section className="area half buffer beer-description">
+                <section className={classnames('area', 'half', 'buffer', 'beer-description')}>
                     <h2>Details</h2>
                     <p>Type: {currentBeer.type}</p>
                     <p>Style: {currentBeer.style}</p>
@@ -109,7 +110,7 @@ class BeerContainerView extends React.Component {
                     <p>Brewed in: {currentBeer.city}, {currentBeer.country}</p>
                     <p>Description: {currentBeer.description}</p>
                 </section>
-                <section className="area half buffer beer-image end">
+                <section className={classnames('area', 'half', 'buffer', 'beer-image', 'end')}>
                     <img className="beer-image" src={currentBeer.photo} alt={currentBeer.name} />
                 </section>
                 <section className="area buffer locations">
@@ -129,7 +130,6 @@ class BeerContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    console.log(state.locations)
     return {
         beers: state.beers,
         locations: state.locations,
