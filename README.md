@@ -1,4 +1,4 @@
-Show Me Beer
+Show Me Beer (still in progress)
 =====================
 
 Show Me Beer is an application built using React, Redux, Webpack and Firebase that shows you what beers are being sold at pubs in London. All the beers and locations are being served up by Firebase.
