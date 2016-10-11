@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+// import Icon from '../svg/svgIcons.jsx'
+import GLYPHS from '../svg/svgIcons.jsx';
+
+// some-component.jsx
+import Icon from '../svg/svgIcons.jsx'
+// import help from '../images/pin.svg';
 
 class SavedBeersContainerView extends React.Component {
 
     render () {
+
+        console.log(GLYPHS);
 
         var beers = this.props.beers,
             userBeers = this.props.user.beers.data,
@@ -39,6 +47,9 @@ class SavedBeersContainerView extends React.Component {
             <div>
                 <section className="area buffer page-title">
                     <h1>My Saved Beers</h1>
+
+                        <Icon glyph={GLYPHS.PIN} />
+
                 </section>
                 <section className="area buffer beer">
                     {count > 0 ?
