@@ -1,7 +1,7 @@
 Show Me Beer (still in progress)
 =====================
 
-Show Me Beer is an application built using React, Redux, Webpack and Firebase that shows you what beers are being sold at pubs in London. All the beers and locations are being served up by Firebase.
+Show Me Beer is an application built using React, Redux, Webpack and Firebase that shows you what beers are being sold at pubs in London. All the beers and locations are being served up by Firebase, more locations need to be added...but the thought is there.
 
 You can login using Google authentication and save the beers you like by clicking on the stars next to the beer! This will write your saves to the Firebase DB. You can also create beers and locations which will automatically update both lists.
 
