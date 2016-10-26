@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import BeerReducer from './BeerReducer.jsx'
 import BeerTypesReducer from './BeerTypesReducer.jsx'
@@ -26,6 +26,8 @@ const Reducer = combineReducers({
 });
 
 // creating the store with the combined reducers. Store is used throughout the app via dispatches
-const Store = createStore(Reducer);
+const Store = createStore(
+  Reducer
+);
 
 export default Store

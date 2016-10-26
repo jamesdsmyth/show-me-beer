@@ -1,5 +1,6 @@
 require('./styles/styles.scss');
 
+require('./offline-fallback.js');
 // importing firebase dependancy
 import firebase from 'firebase';
 
