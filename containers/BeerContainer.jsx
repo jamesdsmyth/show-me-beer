@@ -63,7 +63,7 @@ class BeerContainerView extends React.Component {
                             <Link to={"/locations/" + locations[currentBeer.locations[location].uid].url}>
                                 {locations[currentBeer.locations[location].uid].name}
                             </Link>
-                        </li>
+                        </li>;
             }
         });
 

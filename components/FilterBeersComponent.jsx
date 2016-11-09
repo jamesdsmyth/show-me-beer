@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import Store from '../reducers/CombinedReducers.jsx';
 import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js';
 
 class FilterBeersComponentView extends React.Component {
 
     constructor (props) {
-        
+
         super (props);
         this.state = {
             types: this.props.types,
@@ -45,7 +46,7 @@ class FilterBeersComponentView extends React.Component {
             types.push(type.type);
         }
 
-        this.setState({"type": types });
+        this.setState({'type': types });
     }
 
     handleStyleClick (style) {
@@ -64,7 +65,7 @@ class FilterBeersComponentView extends React.Component {
             styles.push(style.style);
         }
 
-        this.setState({"style": styles });
+        this.setState({'style': styles });
     }
 
     handleCountryClick (country) {
@@ -83,12 +84,11 @@ class FilterBeersComponentView extends React.Component {
             countries.push(country.country);
         }
 
-        this.setState({"country": countries });
+        this.setState({'country': countries });
     }
 
     toggleFilter () {
-        var toggleBoolean;
-        this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'})
+        this.setState({'showFilter': this.state.showFilter === 'show' ? 'hide' : 'show'});
     }
 
     // adds the location to the beer when creating a beer
@@ -98,7 +98,7 @@ class FilterBeersComponentView extends React.Component {
     }
 
     removeBeerFromLocation (locationKey) {
-        Store.dispatch(removeBeerFromLocation(locationKey))
+        Store.dispatch(removeBeerFromLocation(locationKey));
     }
 
     render () {
@@ -121,19 +121,19 @@ class FilterBeersComponentView extends React.Component {
         // creating the toggle tabs for the beer types
         var typeOptions = types.map((type, i) => {
             var typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
-            return <li key={i} className={typeClass} onClick={() => handleTypeSelect({type})}>{type}</li>
+            return <li key={i} className={typeClass} onClick={() => handleTypeSelect({type})}>{type}</li>;
         });
 
         // creating the toggle tabs for the beer styles
         var styleOptions = styles.map((style, i) => {
             var styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>
+            return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>;
         });
 
         // creating the toggle tabs for the beer countries
         var countryOptions = countries.map((country, i) => {
             var styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>
+            return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>;
         });
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
@@ -158,7 +158,7 @@ class FilterBeersComponentView extends React.Component {
                             }
 
                             return <li key={i}>
-                                        <Link to={"/beers/" + beerItem.url}>
+                                        <Link to={'/beers/' + beerItem.url}>
                                             <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
                                         </Link>
                                         {present === true ?
@@ -168,14 +168,14 @@ class FilterBeersComponentView extends React.Component {
                                         }
                                         <div className="beer-details">
                                             <h3>
-                                                <Link to={"/beers/" + beerItem.url}
+                                                <Link to={'/beers/' + beerItem.url}
                                                       className="beer-title">
                                                     {beerItem.name}
                                                 </Link>
                                             </h3>
                                             <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
                                         </div>
-                                    </li>
+                                    </li>;
 
                         } else {
 
@@ -188,19 +188,19 @@ class FilterBeersComponentView extends React.Component {
                             }
 
                             return <li className={beerSaved} key={i}>
-                                        <Link to={"/beers/" + beerItem.url}>
+                                        <Link to={'/beers/' + beerItem.url}>
                                             <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
                                         </Link>
                                         <div className="beer-details">
                                             <h3>
-                                                <Link to={"/beers/" + beerItem.url}
+                                                <Link to={'/beers/' + beerItem.url}
                                                       className="beer-title">
                                                     {beerItem.name}
                                                 </Link>
                                             </h3>
                                             <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
                                         </div>
-                                    </li>
+                                    </li>;
                         }
                     }
                 }
@@ -251,4 +251,4 @@ const mapStateToProps = (state) => {
 
 const FilterBeersComponent = connect(mapStateToProps)(FilterBeersComponentView);
 
-export default FilterBeersComponent
+export default FilterBeersComponent;

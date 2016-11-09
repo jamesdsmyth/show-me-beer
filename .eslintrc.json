@@ -1,4 +1,6 @@
 {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
     "env": {
         "browser": true,
         "es6": true
@@ -12,14 +14,26 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "jsx-a11y",
+        "react",
+        "import"
     ],
     "rules": {
+        "no-trailing-spaces": "error",
+        "max-len": 0,
+        "no-underscore-dangle": 0,
+        "linebreak-style": 0,
         "comma-dangle": [
             2,
             "never"
         ],
-        "indent": [2, 4, {"SwitchCase": 1}],
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
         "linebreak-style": [
             "error",
             "unix"
@@ -33,5 +47,9 @@
             "always"
         ],
         "no-console": 0
+    },
+    "settings": {
+        "import/parser": "babel-eslint",
+        "import/ignore": ["node_modules", ".(scss)$"]
     }
 }
