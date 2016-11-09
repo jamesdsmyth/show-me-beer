@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import Store from '../reducers/CombinedReducers.jsx'
-import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js'
+import React from 'react';
+import { connect } from 'react-redux';
+import Store from '../reducers/CombinedReducers.jsx';
+import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js';
 
 class FilterBeersComponentView extends React.Component {
 
     constructor (props) {
+        
         super (props);
         this.state = {
             types: this.props.types,
@@ -18,7 +18,7 @@ class FilterBeersComponentView extends React.Component {
             showFilter: 'hide',
             isCreationPage: this.props.creationPage || false,
             createLocations: this.props.createLocations
-        }
+        };
     }
 
     // when the beers fibally are loaded from firebase, we use this to set the state
@@ -234,7 +234,7 @@ class FilterBeersComponentView extends React.Component {
                         </ul>
                     </section>
                 </div>
-        )
+        );
     }
 }
 
@@ -246,8 +246,8 @@ const mapStateToProps = (state) => {
         countries: state.countries,
         user: state.user,
         createLocations: state.createLocations
-    }
-}
+    };
+};
 
 const FilterBeersComponent = connect(mapStateToProps)(FilterBeersComponentView);
 
