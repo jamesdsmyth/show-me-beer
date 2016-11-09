@@ -11,41 +11,20 @@
             "experimentalObjectRestSpread": true,
             "jsx": true
         },
-        "sourceType": "module"
+        "sourceType": "module",
+        "allowImportExportEverywhere": false
     },
-    "plugins": [
-        "jsx-a11y",
-        "react",
-        "import"
-    ],
+    "plugins": [ "jsx-a11y", "react", "import" ],
     "rules": {
         "no-trailing-spaces": "error",
         "max-len": 0,
         "no-underscore-dangle": 0,
         "linebreak-style": 0,
-        "comma-dangle": [
-            2,
-            "never"
-        ],
-        "indent": [
-            2,
-            4,
-            {
-                "SwitchCase": 1
-            }
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
+        "comma-dangle": [ 2, "never" ],
+        "indent": [ 2, 4, { "SwitchCase": 1 }],
+        "linebreak-style": [ "error", "unix" ],
+        "quotes": [ "error", "single" ],
+        "semi": [ "error", "always" ],
         "no-console": 0
     },
     "settings": {
