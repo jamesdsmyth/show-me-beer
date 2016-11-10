@@ -14,8 +14,8 @@ import { Provider } from 'react-redux';
 // file dependancies
 import HeaderContainer from './containers/HeaderContainer.jsx'
 import HomeContainer from './containers/HomeContainer.jsx'
-import BeersContainer from './containers/BeersContainer.jsx'
-import BeerContainer from './containers/BeerContainer.jsx'
+import BeersContainer from './containers/BeersContainer.jsx';
+import BeerContainer from './containers/BeerContainer.jsx';
 import LocationsContainer from './containers/LocationsContainer.jsx'
 import LocationContainer from './containers/LocationContainer.jsx'
 import SavedBeersContainer from './containers/SavedBeersContainer.jsx'
