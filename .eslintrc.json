@@ -3,16 +3,12 @@
     "extends": "airbnb",
     "env": {
         "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module",
-        "allowImportExportEverywhere": false
+        "sourceType": "module"
     },
     "plugins": [ "jsx-a11y", "react", "import" ],
     "rules": {
@@ -20,7 +16,7 @@
         "max-len": 0,
         "no-underscore-dangle": 0,
         "linebreak-style": 0,
-        "comma-dangle": [ 2, "never" ],
+        "comma-dangle": [ "error", "never" ],
         "indent": [ 2, 4, { "SwitchCase": 1 }],
         "linebreak-style": [ "error", "unix" ],
         "quotes": [ "error", "single" ],
@@ -29,6 +25,8 @@
     },
     "settings": {
         "import/parser": "babel-eslint",
-        "import/ignore": ["node_modules", ".(scss)$"]
+        "import/resolve": {
+            "moduleDirectory": ["node_modules", "src"]
+        }
     }
 }

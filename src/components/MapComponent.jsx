@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import leaflet from 'leaflet'
-import { Link } from 'react-router'
+import leaflet from 'leaflet';
 
 class MapComponent extends React.Component {
 
@@ -47,7 +46,7 @@ class MapComponent extends React.Component {
             }
         });
 
-        var markerIcon = new LeafIcon({iconUrl: '../images/pin.png'})
+        var markerIcon = new LeafIcon({iconUrl: '../src/images/pin.png'})
 
         L.icon = function (options) {
             return new L.Icon(options);
