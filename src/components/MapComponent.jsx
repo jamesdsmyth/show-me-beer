@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import leaflet from 'leaflet';
 
 class MapComponent extends React.Component {
@@ -36,9 +36,9 @@ class MapComponent extends React.Component {
 
     setLocationMarkers () {
 
-        var locations = this.props.locations;
+        const locations = this.props.locations;
 
-        var LeafIcon = L.Icon.extend({
+        const LeafIcon = L.Icon.extend({
             options: {
                 iconSize:     [41, 60], // size of the icon
                 iconAnchor:   [21, 60],
@@ -46,7 +46,7 @@ class MapComponent extends React.Component {
             }
         });
 
-        var markerIcon = new LeafIcon({iconUrl: '../src/images/pin.png'})
+        const markerIcon = new LeafIcon({iconUrl: '../src/images/pin.png'})
 
         L.icon = function (options) {
             return new L.Icon(options);
@@ -57,12 +57,12 @@ class MapComponent extends React.Component {
                 {
                     icon: markerIcon
                 }
-            ).addTo(this.mymap)
+            ).addTo(this.mymap);
 
             this.mymap.setView([locations.longitude, locations.latitude], 15);
 
         } else {
-            for(var location in locations) {
+            for(let location in locations) {
 
                 L.marker([locations[location].coords.longitude, locations[location].coords.latitude],
                     {
@@ -77,9 +77,9 @@ class MapComponent extends React.Component {
 
     render () {
         return (
-            <div id="mapid"></div>
-        )
+            <div id="mapid" />
+        );
     }
 }
 
-export default MapComponent
+export default MapComponent;

@@ -6,7 +6,6 @@ import { saveBeer } from '../actions/actions.js';
 import Store from '../reducers/CombinedReducers.jsx'
 import { SaveBeer, RemoveBeer } from '../data/FirebaseRef.jsx';
 
-
 import MapComponent from '../components/MapComponent.jsx';
 
 class BeerContainerView extends React.Component {

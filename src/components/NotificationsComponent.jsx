@@ -1,12 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
 class NotificationsComponentView extends React.Component {
     render () {
 
-        var notification = this.props.notifications,
-            content = null,
-            visibility = null,
+        const notification = this.props.notifications;
+
+        let content = null,
             classType = null;
 
         if(notification.added !== undefined) {
@@ -19,12 +19,12 @@ class NotificationsComponentView extends React.Component {
                 classType = 'negative';
             }
 
-            var element = $('.notifications');
+            const element = $('.notifications');
             element.removeClass('positive negative').addClass('visible ' + classType);
 
-            window.clearTimeout(notificationTimout)
+            window.clearTimeout(notificationTimout);
 
-            var notificationTimout = setTimeout(() => {
+            const notificationTimout = setTimeout(() => {
                 element.removeClass('visible');
             }, 3000);
         }
@@ -35,16 +35,16 @@ class NotificationsComponentView extends React.Component {
                     {content}
                 </p>
             </section>
-        )
+        );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         notifications: state.notifications
-    }
-}
+    };
+};
 
-const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView)
+const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView);
 
-export default NotificationsComponent
+export default NotificationsComponent;

@@ -6,9 +6,9 @@ import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js
 
 class FilterBeersComponentView extends React.Component {
 
-    constructor (props) {
-
+    constructor(props) {
         super (props);
+
         this.state = {
             types: this.props.types,
             styles: this.props.styles,
@@ -31,11 +31,11 @@ class FilterBeersComponentView extends React.Component {
     }
 
     handleTypeClick (type) {
-        var types = this.state.type;
-        var isPresent = 0;
+        const types = this.state.type;
+        let isPresent = 0;
 
         // looping through the currently selected types array and if the passed 'type' is in the list it is removed. Else added.
-        for(var i in types) {
+        for(let i in types) {
             if(type.type === types[i]) {
                 isPresent++;
                 types.splice(i, 1);
@@ -50,11 +50,11 @@ class FilterBeersComponentView extends React.Component {
     }
 
     handleStyleClick (style) {
-        var styles = this.state.style;
-        var isPresent = 0;
+        const styles = this.state.style;
+        let isPresent = 0;
 
         // looping through the currently selected styles array and if the passed 'style' is in the list it is removed. Else added.
-        for(var i in styles) {
+        for(let i in styles) {
             if(style.style === styles[i]) {
                 isPresent++;
                 styles.splice(i, 1);
@@ -69,11 +69,11 @@ class FilterBeersComponentView extends React.Component {
     }
 
     handleCountryClick (country) {
-        var countries = this.state.country;
-        var isPresent = 0;
+        const countries = this.state.country;
+        let isPresent = 0;
 
         // looping through the currently selected styles array and if the passed 'style' is in the list it is removed. Else added.
-        for(var i in countries) {
+        for(let i in countries) {
             if(country.country === countries[i]) {
                 isPresent++;
                 countries.splice(i, 1);
@@ -103,7 +103,7 @@ class FilterBeersComponentView extends React.Component {
 
     render () {
 
-        var beers = this.props.beers,
+        const beers = this.props.beers,
             types = this.state.types,
             styles = this.state.styles,
             countries = this.state.countries,
@@ -119,25 +119,25 @@ class FilterBeersComponentView extends React.Component {
             createLocations = this.state.createLocations.beers;
 
         // creating the toggle tabs for the beer types
-        var typeOptions = types.map((type, i) => {
-            var typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
+        const typeOptions = types.map((type, i) => {
+            let typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
             return <li key={i} className={typeClass} onClick={() => handleTypeSelect({type})}>{type}</li>;
         });
 
         // creating the toggle tabs for the beer styles
-        var styleOptions = styles.map((style, i) => {
-            var styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
+        const styleOptions = styles.map((style, i) => {
+            let styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
             return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>;
         });
 
         // creating the toggle tabs for the beer countries
-        var countryOptions = countries.map((country, i) => {
-            var styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
+        const countryOptions = countries.map((country, i) => {
+            let styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
             return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>;
         });
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
-        var beerList = Object.keys(beers).map((beer, i) => {
+        const beerList = Object.keys(beers).map((beer, i) => {
 
             let beerItem = beers[beer];
             let beerSaved = null;
@@ -151,7 +151,7 @@ class FilterBeersComponentView extends React.Component {
 
                             let present = false;
 
-                            for(var addedLocation in createLocations) {
+                            for(let addedLocation in createLocations) {
                                 if(createLocations[addedLocation].uid === beer) {
                                     present = true;
                                 }
@@ -180,7 +180,7 @@ class FilterBeersComponentView extends React.Component {
                         } else {
 
                             if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
-                                for (var savedBeer in userSavedBeers) {
+                                for (let savedBeer in userSavedBeers) {
                                     if(userSavedBeers[savedBeer].uid === beer) {
                                         beerSaved = 'saved';
                                     }

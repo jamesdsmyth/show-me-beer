@@ -1,10 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import Store from '../reducers/CombinedReducers.jsx'
-import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions.js'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import Store from '../reducers/CombinedReducers.jsx';
+import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions.js';
 
-import MapComponent from './MapComponent.jsx'
+import MapComponent from './MapComponent.jsx';
 
 class FilterLocationsComponentView extends React.Component {
 
@@ -18,7 +18,7 @@ class FilterLocationsComponentView extends React.Component {
             firebaseLocations: this.props.firebaseLocations,
             isCreationPage: this.props.creationPage || false,
             createBeers: this.props.createBeers
-        }
+        };
     }
 
     // when the beers fibally are loaded from firebase, we use this to set the state
@@ -33,10 +33,10 @@ class FilterLocationsComponentView extends React.Component {
     searchPostcode (e) {
         e.preventDefault();
 
-        var postcode = document.getElementById('postcode').value;
-        var data = {
-            "postcodes" : [postcode]
-        }
+        const postcode = document.getElementById('postcode').value;
+        const data = {
+            'postcodes' : [postcode]
+        };
 
         $.ajax({
             type: 'POST',
@@ -64,7 +64,7 @@ class FilterLocationsComponentView extends React.Component {
     // the render still things the borough is the old value
     boroughHandleSelect (borough) {
 
-        var name = borough.borough
+        let name = borough.borough;
         if(this.state.borough === name) {
             name = 'all';
         }
@@ -75,8 +75,7 @@ class FilterLocationsComponentView extends React.Component {
     }
 
     toggleFilter () {
-        var toggleBoolean;
-        this.setState({'showFilter': toggleBoolean = this.state.showFilter === 'show' ? 'hide' : 'show'});
+        this.setState({'showFilter': this.state.showFilter === 'show' ? 'hide' : 'show'});
     }
 
     // adds the location to the beer when creating a beer
@@ -86,27 +85,28 @@ class FilterLocationsComponentView extends React.Component {
     }
 
     removeLocationFromBeer (locationKey) {
-        Store.dispatch(removeLocationFromBeer(locationKey))
+        Store.dispatch(removeLocationFromBeer(locationKey));
     }
 
     render () {
-        var locations = this.state.firebaseLocations,
+        const locations = this.state.firebaseLocations,
             stateBoroughs = this.state.boroughs,
             stateBorough = this.state.borough,
             createBeers = this.state.createBeers.locations,
-            postcodeClick = this.searchPostcode.bind(this),
-            locationsList = [],
+            postcodeClick = this.searchPostcode.bind(this);
+
+        let locationsList = [],
             locationsMaplist = {},
             filterClasses = this.state.showFilter + ' filter',
             locationCount = -1;
 
         // creating the toggle tabs for the boroughs
-        var boroughOptions = stateBoroughs.map(function (borough, i) {
-            var newClass = borough === stateBorough ? 'selected' : null
-            return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({borough})}>{borough}</li>
+        const boroughOptions = stateBoroughs.map(function (borough, i) {
+            let newClass = borough === stateBorough ? 'selected' : null;
+            return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({borough})}>{borough}</li>;
         }.bind(this));
 
-        for(var i in locations) {
+        for(let i in locations) {
             if((locations[i].borough === stateBorough) || stateBorough === 'all') {
                 locationsMaplist[i] = locations[i];
             }
@@ -122,14 +122,14 @@ class FilterLocationsComponentView extends React.Component {
 
                     let present = false;
 
-                    for(var addedLocation in createBeers) {
+                    for(let addedLocation in createBeers) {
                         if(createBeers[addedLocation].uid === location) {
                             present = true;
                         }
                     }
 
                     return <li key={i} className="location">
-                                <Link to={"/locations/" + locations[location].url}>
+                                <Link to={'/locations/' + locations[location].url}>
                                     {locations[location].name}
                                 </Link>
                                 {present === true ?
@@ -137,13 +137,13 @@ class FilterLocationsComponentView extends React.Component {
                                     :
                                     <span className="button" onClick={() => this.addLocationToBeer(location)}>Add</span>
                                 }
-                            </li>
+                            </li>;
                 } else {
                     return <li key={i} className="basic-location">
-                                <Link to={"/locations/" + locations[location].url}>
+                                <Link to={'/locations/' + locations[location].url}>
                                     {locations[location].name}
                                 </Link>
-                            </li>
+                            </li>;
                 }
             }
         });
@@ -178,7 +178,7 @@ class FilterLocationsComponentView extends React.Component {
                     {Object.keys(locationsMaplist).length !== 0 ? <MapComponent locations={locationsMaplist} /> : null}
                 </section>
             </div>
-        )
+        );
 
     }
 }
@@ -189,9 +189,9 @@ const mapStateToProps = (state) => {
         boroughs: state.boroughs,
         firebaseLocations: state.locations,
         createBeers: state.createBeers
-    }
-}
+    };
+};
 
-const FilterLocationsComponent = connect(mapStateToProps)(FilterLocationsComponentView)
+const FilterLocationsComponent = connect(mapStateToProps)(FilterLocationsComponentView);
 
-export default FilterLocationsComponent
+export default FilterLocationsComponent;
