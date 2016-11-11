@@ -3,7 +3,7 @@ require('./styles/styles.scss');
 require('./offline-fallback.js');
 // importing firebase dependancy
 import firebase from 'firebase';
-
+import leaflet from 'leaflet';
 
 // dependancies
 import React from 'react';

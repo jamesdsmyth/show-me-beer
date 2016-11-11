@@ -8,6 +8,7 @@
   },
   "rules": {
       "no-var": 2,
+      "no-undef": 0,
       "constructor-super": 2,
       "no-trailing-spaces": 2,
       "max-len": 0,

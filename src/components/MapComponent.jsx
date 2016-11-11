@@ -1,5 +1,4 @@
 import React from 'react';
-import leaflet from 'leaflet';
 
 class MapComponent extends React.Component {
 
@@ -14,7 +13,7 @@ class MapComponent extends React.Component {
     }
 
     clearMap() {
-        if(this.mymap != null) {
+        if (this.mymap != null) {
             this.mymap.eachLayer(function (layer) {
                 this.mymap.removeLayer(layer);
             }.bind(this));
@@ -30,24 +29,21 @@ class MapComponent extends React.Component {
     }
 
     setLocationMarkers() {
-
         const locations = this.props.locations;
 
         const LeafIcon = L.Icon.extend({
             options: {
-                iconSize:     [41, 60], // size of the icon
-                iconAnchor:   [21, 60],
-                popupAnchor:  [-1, -40]
+                iconSize: [41, 60], // size of the icon
+                iconAnchor: [21, 60],
+                popupAnchor: [-1, -40]
             }
         });
 
-        const markerIcon = new LeafIcon({iconUrl: '../src/images/pin.png'})
+        const markerIcon = new LeafIcon({ iconUrl: '../src/images/pin.png' });
 
-        L.icon = function (options) {
-            return new L.Icon(options);
-        };
+        L.icon = options => new L.Icon(options);
 
-        if(locations.longitude != null) {
+        if (locations.longitude != null) {
             L.marker([locations.longitude, locations.latitude],
                 {
                     icon: markerIcon
@@ -55,10 +51,8 @@ class MapComponent extends React.Component {
             ).addTo(this.mymap);
 
             this.mymap.setView([locations.longitude, locations.latitude], 15);
-
         } else {
-            for(let location in locations) {
-
+            for (const location in locations) {
                 L.marker([locations[location].coords.longitude, locations[location].coords.latitude],
                     {
                         icon: markerIcon

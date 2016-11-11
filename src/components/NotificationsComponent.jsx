@@ -9,15 +9,15 @@ const NotificationsComponentView = ({ notifications }) => {
 
     if (notification.added !== undefined) {
         if (notification.added === true) {
-            content = notification.name + ' has been added to your list';
+            content = `${notification.name} has been added to your list`;
             classType = 'positive';
         } else {
-            content = notification.name + ' has been removed from your list';
+            content = `${notification.name} has been removed from your list`;
             classType = 'negative';
         }
 
-        const element = $('.notifications');
-        element.removeClass('positive negative').addClass('visible ' + classType);
+        const element = document.getElementsByClassName('.notifications')[0];
+        element.removeClass('positive negative').addClass(`visible ${classType}`);
 
         // window.clearTimeout(notificationTimout);
 
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 
 NotificationsComponentView.propTypes = {
     notifications: PropTypes.arrayOf
-}
+};
 
 const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView);
 
