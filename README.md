@@ -1,7 +1,7 @@
-Show Me Beer (still in progress)
+Show Me Beer
 =====================
 
-Show Me Beer is an application built using React, Redux, Webpack and Firebase 3.x that shows you what beers are being sold at pubs in London. All the beers and locations are being served up by Firebase, more locations need to be added...but the thought is there.
+Show Me Beer is an application built using React, Redux, Webpack and Firebase 3.x that shows you what beers are being sold at pubs in London. It is still in progress and is meant more of a side project to test out new packages and ideas, rather than a production ready project. All the beers and locations are being served up by Firebase, more locations need to be added...but the thought is there.
 
 You can login using Google authentication and save the beers you like by clicking on the stars next to the beer! This will write your saves to the Firebase DB. You can also create beers and locations which will automatically update both lists.
 
@@ -22,9 +22,11 @@ You can login using Google authentication and save the beers you like by clickin
 3. `npm start` to initialize the app
 4. visit [http://localhost:8080/](http://localhost:8080/)
 
-#### eslint rules
+### eslint rules
 
 These rules are applied to the code using the `.eslint.json` file in the root of the project. I am also running an atom package named [linter-eslint](https://atom.io/packages/linter-eslint) which provides an interface to eslint.
+
+(0 = off, 1 = warn, 2 = error)
 
 * `no-var: 2` - require let or const instead of var
 * `constructor-super: 2` - make sure every constructor has a super()
@@ -37,3 +39,7 @@ These rules are applied to the code using the `.eslint.json` file in the root of
 * `quotes: [ 2, "single" ]` - single quotation marks within a string
 * `semi: [ 2, "always" ]` - enforce semi colons at the end of statements
 * `no-console: 0` - allows console.logs to be added in the code
+
+#### pre commit
+
+[Pre-commit](https://www.npmjs.com/package/pre-commit) is being used to catch any errors when trying to commit code with errors. The eslint rules above need to be adhered by.

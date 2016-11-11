@@ -8,8 +8,8 @@ import MapComponent from './MapComponent.jsx';
 
 class FilterLocationsComponentView extends React.Component {
 
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
 
         this.state = {
             borough: 'all',
@@ -184,7 +184,6 @@ class FilterLocationsComponentView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
         boroughs: state.boroughs,
         firebaseLocations: state.locations,

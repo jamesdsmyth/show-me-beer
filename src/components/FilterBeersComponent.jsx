@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Store from '../reducers/CombinedReducers.jsx';
@@ -7,7 +7,7 @@ import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js
 class FilterBeersComponentView extends React.Component {
 
     constructor(props) {
-        super (props);
+        super(props);
 
         this.state = {
             types: this.props.types,
@@ -17,122 +17,120 @@ class FilterBeersComponentView extends React.Component {
             style: [],
             country: [],
             showFilter: 'hide',
-            isCreationPage: this.props.creationPage || false,
+            isCreationPage: this.props.creationPage,
             createLocations: this.props.createLocations
         };
     }
 
     // when the beers fibally are loaded from firebase, we use this to set the state
-    componentWillReceiveProps (props) {
-
+    componentWillReceiveProps(props) {
         this.setState({
             createLocations: props.createLocations
         });
     }
 
-    handleTypeClick (type) {
+    handleTypeClick(type) {
         const types = this.state.type;
         let isPresent = 0;
 
         // looping through the currently selected types array and if the passed 'type' is in the list it is removed. Else added.
-        for(let i in types) {
-            if(type.type === types[i]) {
+        for (const i in types) {
+            if (type.type === types[i]) {
                 isPresent++;
                 types.splice(i, 1);
             }
         }
 
-        if(isPresent === 0) {
+        if (isPresent === 0) {
             types.push(type.type);
         }
 
-        this.setState({'type': types });
+        this.setState({ type: types });
     }
 
-    handleStyleClick (style) {
+    handleStyleClick(style) {
         const styles = this.state.style;
         let isPresent = 0;
 
         // looping through the currently selected styles array and if the passed 'style' is in the list it is removed. Else added.
-        for(let i in styles) {
-            if(style.style === styles[i]) {
+        for (const i in styles) {
+            if (style.style === styles[i]) {
                 isPresent++;
                 styles.splice(i, 1);
             }
         }
 
-        if(isPresent === 0) {
+        if (isPresent === 0) {
             styles.push(style.style);
         }
 
-        this.setState({'style': styles });
+        this.setState({ style: styles });
     }
 
-    handleCountryClick (country) {
+    handleCountryClick(country) {
         const countries = this.state.country;
         let isPresent = 0;
 
         // looping through the currently selected styles array and if the passed 'style' is in the list it is removed. Else added.
-        for(let i in countries) {
-            if(country.country === countries[i]) {
+        for (const i in countries) {
+            if (country.country === countries[i]) {
                 isPresent++;
                 countries.splice(i, 1);
             }
         }
 
-        if(isPresent === 0) {
+        if (isPresent === 0) {
             countries.push(country.country);
         }
 
-        this.setState({'country': countries });
+        this.setState({ country: countries });
     }
 
-    toggleFilter () {
-        this.setState({'showFilter': this.state.showFilter === 'show' ? 'hide' : 'show'});
+    toggleFilter() {
+        this.setState({ showFilter: this.state.showFilter === 'show' ? 'hide' : 'show' });
     }
 
     // adds the location to the beer when creating a beer
     // function only exposed on the create beer page
-    addBeerToLocation (locationKey) {
+    addBeerToLocation(locationKey) {
         Store.dispatch(addBeerToLocation(locationKey));
     }
 
-    removeBeerFromLocation (locationKey) {
+    removeBeerFromLocation(locationKey) {
         Store.dispatch(removeBeerFromLocation(locationKey));
     }
 
-    render () {
-
-        const beers = this.props.beers,
-            types = this.state.types,
-            styles = this.state.styles,
-            countries = this.state.countries,
-            selectedType = this.state.type,
-            selectedStyle = this.state.style,
-            selectedCountry = this.state.country,
-            handleTypeSelect = this.handleTypeClick.bind(this),
-            handleStyleSelect = this.handleStyleClick.bind(this),
-            handleCountrySelect = this.handleCountryClick.bind(this),
-            handleFilterToggle = this.toggleFilter.bind(this),
-            filterClasses = this.state.showFilter + ' filter beers',
-            userSavedBeers = this.props.user.beers.data,
-            createLocations = this.state.createLocations.beers;
+    render() {
+        const beers = this.props.beers;
+        const types = this.state.types;
+        const styles = this.state.styles;
+        const countries = this.state.countries;
+        const selectedType = this.state.type;
+        const selectedStyle = this.state.style;
+        const selectedCountry = this.state.country;
+        const handleTypeSelect = this.handleTypeClick.bind(this);
+        const handleStyleSelect = this.handleStyleClick.bind(this);
+        const handleCountrySelect = this.handleCountryClick.bind(this);
+        const handleFilterToggle = this.toggleFilter.bind(this);
+        const filterClasses = this.state.showFilter + ' filter beers';
+        const userSavedBeers = this.props.user.beers.data;
+        const createLocations = this.state.createLocations.beers;
 
         // creating the toggle tabs for the beer types
         const typeOptions = types.map((type, i) => {
-            let typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
-            return <li key={i} className={typeClass} onClick={() => handleTypeSelect({type})}>{type}</li>;
+            const typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
+            return <li key={i} className={typeClass} onClick={() => handleTypeSelect({ type })}>{type}</li>;
         });
 
         // creating the toggle tabs for the beer styles
         const styleOptions = styles.map((style, i) => {
-            let styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleStyleSelect({style})}>{style}</li>;
+            const styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
+            return <li key={i} className={styleClass} onClick={() => handleStyleSelect({ style })}>{style}</li>;
         });
 
         // creating the toggle tabs for the beer countries
         const countryOptions = countries.map((country, i) => {
-            let styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
+            const styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
             return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>;
         });
 
@@ -208,32 +206,32 @@ class FilterBeersComponentView extends React.Component {
         });
 
         return (
-                <div>
-                    <section className="area filters">
-                        <section className={filterClasses}>
-                            <h3 className="filter-button" onClick={() => handleFilterToggle()}>
-                                Filters
-                                {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
-                            </h3>
-                            <div className="tabs">
-                                <ul className="tabs-list">
-                                    {typeOptions}
-                                </ul>
-                                <ul className="tabs-list">
-                                    {styleOptions}
-                                </ul>
-                                <ul className="tabs-list">
-                                    {countryOptions}
-                                </ul>
-                            </div>
-                        </section>
+            <div>
+                <section className="area filters">
+                    <section className={filterClasses}>
+                        <h3 className="filter-button" onClick={() => handleFilterToggle()}>
+                            Filters
+                            {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
+                        </h3>
+                        <div className="tabs">
+                            <ul className="tabs-list">
+                                {typeOptions}
+                            </ul>
+                            <ul className="tabs-list">
+                                {styleOptions}
+                            </ul>
+                            <ul className="tabs-list">
+                                {countryOptions}
+                            </ul>
+                        </div>
                     </section>
-                    <section className="area buffer beer">
-                        <ul className="beers-list">
-                            {beerList}
-                        </ul>
-                    </section>
-                </div>
+                </section>
+                <section className="area buffer beer">
+                    <ul className="beers-list">
+                        {beerList}
+                    </ul>
+                </section>
+            </div>
         );
     }
 }
@@ -247,6 +245,14 @@ const mapStateToProps = (state) => {
         user: state.user,
         createLocations: state.createLocations
     };
+};
+
+FilterBeersComponentView.propTypes = {
+    types: PropTypes.arrayOf,
+    styles: PropTypes.arrayOf,
+    countries: PropTypes.arrayOf,
+    isCreationPage: PropTypes.bool,
+    createLocations: PropTypes.bool
 };
 
 const FilterBeersComponent = connect(mapStateToProps)(FilterBeersComponentView);

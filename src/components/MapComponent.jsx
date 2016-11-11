@@ -1,24 +1,19 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import leaflet from 'leaflet';
 
 class MapComponent extends React.Component {
 
-    componentDidMount () {
+    componentDidMount() {
         this.createMap();
         this.setLocationMarkers();
     }
 
-    componentWillReceiveProps () {
+    componentWillReceiveProps() {
         this.clearMap();
         this.setLocationMarkers();
     }
 
-    createMap () {
-        this.mymap = L.map('mapid');
-        this.setTileLayer();
-    }
-
-    clearMap () {
+    clearMap() {
         if(this.mymap != null) {
             this.mymap.eachLayer(function (layer) {
                 this.mymap.removeLayer(layer);
@@ -28,13 +23,13 @@ class MapComponent extends React.Component {
         }
     }
 
-    setTileLayer () {
+    setTileLayer() {
         return L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFtZXNkc215dGgiLCJhIjoiY2lvaXFlejRoMDA2eHV1a3gwMWJyOThiYSJ9.ZHj4u050E2Ta_YiWyRnOxA', {
             maxZoom: 18
         }).addTo(this.mymap);
     }
 
-    setLocationMarkers () {
+    setLocationMarkers() {
 
         const locations = this.props.locations;
 
@@ -75,7 +70,12 @@ class MapComponent extends React.Component {
         }
     }
 
-    render () {
+    createMap() {
+        this.mymap = L.map('mapid');
+        this.setTileLayer();
+    }
+
+    render() {
         return (
             <div id="mapid" />
         );

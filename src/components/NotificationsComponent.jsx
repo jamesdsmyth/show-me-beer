@@ -1,49 +1,49 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-class NotificationsComponentView extends React.Component {
-    render () {
+const NotificationsComponentView = ({ notifications }) => {
+    const notification = notifications;
 
-        const notification = this.props.notifications;
+    let content = null;
+    let classType = null;
 
-        let content = null,
-            classType = null;
-
-        if(notification.added !== undefined) {
-
-            if(notification.added === true) {
-                content = notification.name + ' has been added to your list';
-                classType = 'positive';
-            } else {
-                content = notification.name + ' has been removed from your list';
-                classType = 'negative';
-            }
-
-            const element = $('.notifications');
-            element.removeClass('positive negative').addClass('visible ' + classType);
-
-            window.clearTimeout(notificationTimout);
-
-            const notificationTimout = setTimeout(() => {
-                element.removeClass('visible');
-            }, 3000);
+    if (notification.added !== undefined) {
+        if (notification.added === true) {
+            content = notification.name + ' has been added to your list';
+            classType = 'positive';
+        } else {
+            content = notification.name + ' has been removed from your list';
+            classType = 'negative';
         }
 
-        return (
-            <section className="notifications">
-                <p className="notification-text">
-                    {content}
-                </p>
-            </section>
-        );
+        const element = $('.notifications');
+        element.removeClass('positive negative').addClass('visible ' + classType);
+
+        // window.clearTimeout(notificationTimout);
+
+        setTimeout(() => {
+            element.removeClass('visible');
+        }, 3000);
     }
-}
+
+    return (
+        <section className="notifications">
+            <p className="notification-text">
+                {content}
+            </p>
+        </section>
+    );
+};
 
 const mapStateToProps = (state) => {
     return {
         notifications: state.notifications
     };
 };
+
+NotificationsComponentView.propTypes = {
+    notifications: PropTypes.arrayOf
+}
 
 const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView);
 

@@ -14,11 +14,17 @@
       "no-underscore-dangle": 0,
       "linebreak-style": 0,
       "comma-dangle": [ 2, "never" ],
-      "indent": [ 2, 4],
+      "indent": [ 2, 4 ],
       "quotes": [ 2, "single" ],
       "semi": [ 2, "always" ],
       "no-console": 0,
-      "react/jsx-filename-extension": 0
+      "react/jsx-filename-extension": 0,
+      "react/require-extension": 0,
+      "react/jsx-indent": [ 2, 4 ],
+
+      "arrow-body-style": [1, "as-needed"],
+      "no-plusplus": 0,
+      "no-restricted-syntax": 0
   },
   "plugins": [
     "jsx-a11y", "react", "import"

@@ -409,7 +409,7 @@ class CreateBeerContainerView extends React.Component {
                                         <section className="area buffer">
                                             <h2>What beers do they sell?</h2>
                                             {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-                                            <FilterBeersComponent creationPage={true} />
+                                            <FilterBeersComponent creationPage />
                                             <div className="buttons">
                                                 <button type="button"
                                                     className="button secondary"

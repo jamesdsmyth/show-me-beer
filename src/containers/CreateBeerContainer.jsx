@@ -419,7 +419,7 @@ class CreateBeerContainerView extends React.Component {
                                 <section className="area buffer">
                                     <h2>Who sells this beer?</h2>
                                     {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-                                    <FilterLocationsComponent creationPage={true} />
+                                    <FilterLocationsComponent creationPage />
                                     <div className="buttons">
                                         <button type="button"
                                             className="button secondary"
@@ -484,7 +484,6 @@ class CreateBeerContainerView extends React.Component {
 }
 
 const MapStateToProps = (state) => {
-
     return {
         beers: state.beers,
         types: state.beerTypes,
@@ -493,9 +492,9 @@ const MapStateToProps = (state) => {
         countries: state.countries,
         createBeers: state.createBeers,
         user: state.user
-    }
-}
+    };
+};
 
 const CreateBeerContainer = connect(MapStateToProps)(CreateBeerContainerView);
 
-export default CreateBeerContainer
+export default CreateBeerContainer;
