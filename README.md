@@ -22,7 +22,7 @@ You can login using Google authentication and save the beers you like by clickin
 3. `npm start` to initialize the app
 4. visit [http://localhost:8080/](http://localhost:8080/)
 
-### eslint rules
+### Eslint rules
 
 These rules are applied to the code using the `.eslint.json` file in the root of the project. I am also running an atom package named [linter-eslint](https://atom.io/packages/linter-eslint) which provides an interface to eslint.
 
@@ -40,6 +40,6 @@ These rules are applied to the code using the `.eslint.json` file in the root of
 * `semi: [ 2, "always" ]` - enforce semi colons at the end of statements
 * `no-console: 0` - allows console.logs to be added in the code
 
-#### pre commit
+#### Pre-commit
 
-[Pre-commit](https://www.npmjs.com/package/pre-commit) is being used to catch any errors when trying to commit code with errors. The eslint rules above need to be adhered by.
+[pre-commit](https://www.npmjs.com/package/pre-commit) is being used to catch any errors when trying to commit code with errors. The eslint rules above need to be adhered by.

@@ -1,9 +1,9 @@
-import React from 'react';
-import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx';
+import React, { PropTypes } from 'react';
+import FilterLocationsComponent from '../components/FilterLocationsComponent';
 
-const LocationsContainer = () => (
+const LocationsContainer = ({ children }) => (
     <div>
-        {!this.props.children ?
+        {!children ?
             <div>
                 <section className="area buffer page-title">
                     <h1>Locations</h1>
@@ -11,8 +11,12 @@ const LocationsContainer = () => (
                 <FilterLocationsComponent />
             </div>
         : null}
-        {this.props.children}
+        {children}
     </div>
 );
+
+LocationsContainer.propTypes = {
+    children: PropTypes.arrayOf
+};
 
 export default LocationsContainer;

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Store from '../reducers/CombinedReducers.jsx';
-import { initialiseBeerCreation, clearLocationsFromBeer } from '../actions/actions.js';
-import { CreateBeer } from '../data/FirebaseRef.jsx';
-import MapComponent from '../components/MapComponent.jsx';
-import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx';
+import Store from '../reducers/CombinedReducers';
+import { initialiseBeerCreation, clearLocationsFromBeer } from '../actions/actions';
+import { CreateBeer } from '../data/FirebaseRef';
+import MapComponent from '../components/MapComponent';
+import FilterLocationsComponent from '../components/FilterLocationsComponent';
 
 class CreateBeerContainerView extends React.Component {
 

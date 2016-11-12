@@ -1,29 +1,29 @@
-require('./styles/styles.scss');
-
-require('./offline-fallback.js');
 // importing firebase dependancy
 import firebase from 'firebase';
 import leaflet from 'leaflet';
 
 // dependancies
 import React from 'react';
-import { render } from 'react-dom'
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import { render } from 'react-dom';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
 // file dependancies
-import HeaderContainer from './containers/HeaderContainer.jsx'
-import HomeContainer from './containers/HomeContainer.jsx'
-import BeersContainer from './containers/BeersContainer.jsx';
-import BeerContainer from './containers/BeerContainer.jsx';
-import LocationsContainer from './containers/LocationsContainer.jsx'
-import LocationContainer from './containers/LocationContainer.jsx'
-import SavedBeersContainer from './containers/SavedBeersContainer.jsx'
-import CreateBeerContainer from './containers/CreateBeerContainer.jsx'
-import CreateLocationContainer from './containers/CreateLocationContainer.jsx'
+import HeaderContainer from './containers/HeaderContainer';
+import HomeContainer from './containers/HomeContainer';
+import BeersContainer from './containers/BeersContainer';
+import BeerContainer from './containers/BeerContainer';
+import LocationsContainer from './containers/LocationsContainer';
+import LocationContainer from './containers/LocationContainer';
+import SavedBeersContainer from './containers/SavedBeersContainer';
+import CreateBeerContainer from './containers/CreateBeerContainer';
+import CreateLocationContainer from './containers/CreateLocationContainer';
 
-import Store from './reducers/CombinedReducers.jsx'
-import { FirebaseRef } from './data/FirebaseRef.jsx'
+import Store from './reducers/CombinedReducers';
+import { FirebaseRef } from './data/FirebaseRef';
+
+require('./styles/styles.scss');
+require('./offline-fallback.js');
 
 // calling FirebaseRef() to initialise the call to the Firebase DB to get the data
 FirebaseRef();

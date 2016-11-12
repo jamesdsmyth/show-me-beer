@@ -2,11 +2,11 @@ import React, { propTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classnames from 'classnames';
-import { saveBeer } from '../actions/actions.js';
-import Store from '../reducers/CombinedReducers.jsx';
-import { SaveBeer, RemoveBeer } from '../data/FirebaseRef.jsx';
+import { saveBeer } from '../actions/actions';
+import Store from '../reducers/CombinedReducers';
+import { SaveBeer, RemoveBeer } from '../data/FirebaseRef';
 
-import MapComponent from '../components/MapComponent.jsx';
+import MapComponent from '../components/MapComponent';
 
 class BeerContainerView extends React.Component {
     // save the beer to Firebase. If the user is not logged in, then an alert to log in is shown

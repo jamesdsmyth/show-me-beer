@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class MapComponent extends React.Component {
 
@@ -10,16 +10,6 @@ class MapComponent extends React.Component {
     componentWillReceiveProps() {
         this.clearMap();
         this.setLocationMarkers();
-    }
-
-    clearMap() {
-        if (this.mymap != null) {
-            this.mymap.eachLayer(function (layer) {
-                this.mymap.removeLayer(layer);
-            }.bind(this));
-
-            this.setTileLayer();
-        }
     }
 
     setTileLayer() {
@@ -57,10 +47,20 @@ class MapComponent extends React.Component {
                     {
                         icon: markerIcon
                     }
-                ).addTo(this.mymap).bindPopup('<a href="/locations/' + locations[location].url + '">' + locations[location].name +'</a>');
+                ).addTo(this.mymap).bindPopup(`<a href="/locations/ ${locations[location].url}">${locations[location].name}</a>`);
             }
 
             this.mymap.setView([51.505, -0.09], 12);
+        }
+    }
+
+    clearMap() {
+        if (this.mymap != null) {
+            this.mymap.eachLayer((layer) => {
+                this.mymap.removeLayer(layer);
+            });
+
+            this.setTileLayer();
         }
     }
 
@@ -75,5 +75,9 @@ class MapComponent extends React.Component {
         );
     }
 }
+
+MapComponent.propTypes = {
+    locations: PropTypes.arrayOf
+};
 
 export default MapComponent;

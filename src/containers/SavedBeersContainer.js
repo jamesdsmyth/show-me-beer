@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import GLYPHS from '../svg/svgIcons.jsx';
+import GLYPHS from '../svg/svgIcons';
 
 // some-component.jsx
-import Icon from '../svg/svgIcons.jsx';
+import Icon from '../svg/svgIcons';
 // import help from '../images/pin.svg';
 
 class SavedBeersContainerView extends React.Component {

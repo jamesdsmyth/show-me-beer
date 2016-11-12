@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Store from '../reducers/CombinedReducers.jsx';
-import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions.js';
+import Store from '../reducers/CombinedReducers';
+import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions';
 
-import MapComponent from './MapComponent.jsx';
+import MapComponent from './MapComponent';
 
 class FilterLocationsComponentView extends React.Component {
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import FilterBeersComponent from '../components/FilterBeersComponent.jsx';
+import FilterBeersComponent from '../components/FilterBeersComponent';
 
 const BeersContainer = ({ children }) => (
     <div>

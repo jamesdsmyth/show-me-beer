@@ -1,13 +1,13 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Store from '../reducers/CombinedReducers.jsx'
-import FilterBeersComponent from '../components/FilterBeersComponent.jsx'
-import { CreateLocation } from '../data/FirebaseRef.jsx'
-import { initialiseLocationCreation, clearBeersFromLocations } from '../actions/actions.js'
+import React from 'react';
+import { connect } from 'react-redux';
+import Store from '../reducers/CombinedReducers';
+import FilterBeersComponent from '../components/FilterBeersComponent';
+import { CreateLocation } from '../data/FirebaseRef';
+import { initialiseLocationCreation, clearBeersFromLocations } from '../actions/actions';
 
 class CreateBeerContainerView extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -16,15 +16,14 @@ class CreateBeerContainerView extends React.Component {
             visibleSection: 'form',
             borough: 'Borough',
             country: 'Country'
-        }
+        };
 
         // binding this to createBeer() function
         this.createLocationObject = this.createLocationObject.bind(this);
     }
 
     // when the beers finally are loaded from firebase, we use this to set the state
-    componentWillReceiveProps (props) {
-
+    componentWillReceiveProps(props) {
         this.setState({
             locations: props.locations,
             createLocations: props.createLocations,
@@ -34,14 +33,14 @@ class CreateBeerContainerView extends React.Component {
     }
 
     // checks the section to see whether it has been filled out correctly
-    checkFormSection (sectionNumber) {
+    checkFormSection(sectionNumber) {
         let completed = 0;
         let inputCount = 0;
-        let section = $('.form-row.' + sectionNumber);
+        const section = $(`.form-row. ${sectionNumber}`);
 
         section.find('.input').each(function () {
             inputCount++;
-            if($(this).val() !== ('') && ($(this).val() !== 'Country') && ($(this).val() !== 'Borough')) {
+            if ($(this).val() !== ('') && ($(this).val() !== 'Country') && ($(this).val() !== 'Borough')) {
                 completed++;
             }
         });
@@ -463,8 +462,6 @@ class CreateBeerContainerView extends React.Component {
                 break;
 
         }
-
-
 
         return (
             <div>

@@ -1,8 +1,8 @@
-import React, { propTypes } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import React, { propTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
-import MapComponent from '../components/MapComponent.jsx'
+import MapComponent from '../components/MapComponent';
 
 class LocationContainerView extends React.Component {
 

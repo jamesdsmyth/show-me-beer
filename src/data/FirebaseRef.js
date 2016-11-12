@@ -1,5 +1,5 @@
-import Store from '../reducers/CombinedReducers.jsx'
-import * as actions from '../actions/actions.js'
+import Store from '../reducers/CombinedReducers';
+import * as actions from '../actions/actions';
 
 // populating both the beer and location states
 const PopulateStore = () => {
@@ -10,7 +10,7 @@ const PopulateStore = () => {
     firebase.database().ref('/locations').on('value', (snapshot) => {
         Store.dispatch(actions.populateLocations(snapshot.val()));
     });
-}
+};
 
 // creating the user and adding it to Firebase
 const CreateUser = (uid) => {
@@ -18,7 +18,7 @@ const CreateUser = (uid) => {
         beers: 'currently no beers',
         locations: 'currently no locations'
     });
-}
+};
 
 // getting the user data from Firebase
 const GetUserData = (user) => {

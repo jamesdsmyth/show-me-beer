@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Store from '../reducers/CombinedReducers.jsx';
-import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions.js';
+import Store from '../reducers/CombinedReducers';
+import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions';
 
 class FilterBeersComponentView extends React.Component {
 
