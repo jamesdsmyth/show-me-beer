@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Store from '../reducers/CombinedReducers';
 import { initialiseBeerCreation, clearLocationsFromBeer } from '../actions/actions';
 import { CreateBeer } from '../data/FirebaseRef';
-import MapComponent from '../components/MapComponent';
 import FilterLocationsComponent from '../components/FilterLocationsComponent';
 
 class CreateBeerContainerView extends React.Component {
@@ -43,6 +42,29 @@ class CreateBeerContainerView extends React.Component {
         });
     }
 
+    previousButtonClick() {
+        this.setState({
+            formFillCount: this.state.formFillCount - 1,
+            showNextButton: true
+        });
+
+        this.setFieldData();
+    }
+
+    // when we navigate through the steps, we want to populate data that the user has already filled out
+    setFieldData() {
+        setTimeout(() => {
+            $('#name').val(this.state.name);
+            $('#alcoholContent').val(this.state.alcoholContent);
+            $('#description').val(this.state.description);
+            $('#manufacturer').val(this.state.manufacturer);
+            $('#city').val(this.state.city);
+            $('#country').val(this.state.country);
+            $('#photo').val(this.state.photo);
+            $('#type').val(this.state.type);
+            $('#style').val(this.state.style);
+        }, 250);
+    }
 
     // clicking the next button will change the question section.
     // this is done by increasing the formFillCount which matches to the section that relates to that number
@@ -101,30 +123,6 @@ class CreateBeerContainerView extends React.Component {
 
         this.setState(setObject);
         this.setFieldData();
-    }
-
-    previousButtonClick() {
-        this.setState({
-            formFillCount: this.state.formFillCount - 1,
-            showNextButton: true
-        });
-
-        this.setFieldData();
-    }
-
-    // when we navigate through the steps, we want to populate data that the user has already filled out
-    setFieldData() {
-        setTimeout(() => {
-            $('#name').val(this.state.name);
-            $('#alcoholContent').val(this.state.alcoholContent);
-            $('#description').val(this.state.description);
-            $('#manufacturer').val(this.state.manufacturer);
-            $('#city').val(this.state.city);
-            $('#country').val(this.state.country);
-            $('#photo').val(this.state.photo);
-            $('#type').val(this.state.type);
-            $('#style').val(this.state.style);
-        }, 250);
     }
 
     // we check whether the name of the beer exists here. If it does we break the loop and show a warning.

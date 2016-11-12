@@ -1,7 +1,5 @@
-import Data from '../data/data.js'
+import Data from '../data/data';
 
-const BoroughsReducer = (state = Data.boroughs, actions) => {
-    return state;
-}
+const BoroughsReducer = (state = Data.boroughs) => state;
 
-export default BoroughsReducer
+export default BoroughsReducer;

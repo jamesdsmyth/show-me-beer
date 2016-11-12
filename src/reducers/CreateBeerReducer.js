@@ -1,93 +1,84 @@
-import Data from '../data/data.js'
+import Data from '../data/data';
 
 const CreateBeerReducer = (state = Data.createBeer, action) => {
-
     let newState = null;
 
     switch (action.type) {
-
-        case 'ADD_LOCATION_TO_BEER':
-            newState = Object.assign({}, state, {
-                locations: [
-                    ...state.locations,
-                        {
-                            uid: action.uid
-                        }
-                    ]
-            });
-
-            return newState;
-            break;
-
-        case 'REMOVE_LOCATION_FROM_BEER':
-
-            // filtering the location we need to remove. Then below setting it
-            let locationsArray = state.locations.filter((location, i) => {
-                if(location.uid !== action.uid) {
-                    return location;
+    case 'ADD_LOCATION_TO_BEER':
+        newState = Object.assign({}, state, {
+            locations: [
+                ...state.locations,
+                {
+                    uid: action.uid
                 }
-            });
+            ]
+        });
 
-            newState = Object.assign({}, state, {
-                locations: locationsArray
-            });
+        return newState;
 
-            return newState;
-            break;
+    case 'REMOVE_LOCATION_FROM_BEER':
 
-        case 'CLEAR_LOCATIONS_FROM_BEER':
+        // filtering the location we need to remove. Then below setting it
+        const locationsArray = state.locations.filter((location) => {
+            if (location.uid !== action.uid) {
+                return location;
+            }
+        });
 
-            newState = Object.assign({}, state, {
-                locations: [],
-                visibleSection: 'form'
-            });
+        newState = Object.assign({}, state, {
+            locations: locationsArray
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        // when we initialise the beer creation page or want to create a new beer, we want the form
-        // to be shown instead of a success/error message relating to the last beer created
-        case 'INITIALISE_BEER_CREATION':
+    case 'CLEAR_LOCATIONS_FROM_BEER':
 
-            newState = Object.assign({}, state, {
-                visibleSection: 'form'
-            });
+        newState = Object.assign({}, state, {
+            locations: [],
+            visibleSection: 'form'
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        case 'BEER_SUBMITTED':
+    // when we initialise the beer creation page or want to create a new beer, we want the form
+    // to be shown instead of a success/error message relating to the last beer created
+    case 'INITIALISE_BEER_CREATION':
 
-            newState = Object.assign({}, state, {
-                visibleSection: 'submitted'
-            });
+        newState = Object.assign({}, state, {
+            visibleSection: 'form'
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        // so when the beer is created we want the beer creation page to show a success message
-        case 'BEER_CREATED_SUCCESS':
+    case 'BEER_SUBMITTED':
 
-            newState = Object.assign({}, state, {
-                visibleSection: 'success'
-            });
+        newState = Object.assign({}, state, {
+            visibleSection: 'submitted'
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        // so when the beer fails to be created we want the beer creation page to show a failure message
-        case 'BEER_CREATED_FAILURE':
+    // so when the beer is created we want the beer creation page to show a success message
+    case 'BEER_CREATED_SUCCESS':
 
-            newState = Object.assign({}, state, {
-                visibleSection: 'failure'
-            });
+        newState = Object.assign({}, state, {
+            visibleSection: 'success'
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        default:
-            return state;
+    // so when the beer fails to be created we want the beer creation page to show a failure message
+    case 'BEER_CREATED_FAILURE':
+
+        newState = Object.assign({}, state, {
+            visibleSection: 'failure'
+        });
+
+        return newState;
+
+    default:
+        return state;
     }
-}
+};
 
-export default CreateBeerReducer
+export default CreateBeerReducer;

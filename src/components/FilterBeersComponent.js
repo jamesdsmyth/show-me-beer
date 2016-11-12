@@ -251,7 +251,7 @@ FilterBeersComponentView.propTypes = {
     types: PropTypes.arrayOf,
     styles: PropTypes.arrayOf,
     countries: PropTypes.arrayOf,
-    isCreationPage: PropTypes.bool,
+    creationPage: PropTypes.bool,
     createLocations: PropTypes.bool
 };
 

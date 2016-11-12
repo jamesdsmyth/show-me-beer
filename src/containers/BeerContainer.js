@@ -123,7 +123,7 @@ class BeerContainerView extends React.Component {
                     {currentBeer.locations !== undefined ? <MapComponent locations={mapLocations} /> : null}
                 </section>
             </div>
-        )
+        );
     }
 }
 
@@ -133,9 +133,9 @@ const mapStateToProps = (state) => {
         beers: state.beers,
         locations: state.locations,
         user: state.user
-    }
-}
+    };
+};
 
 const BeerContainer = connect(mapStateToProps)(BeerContainerView)
 
-export default BeerContainer
+export default BeerContainer;

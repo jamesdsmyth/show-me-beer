@@ -1,7 +1,5 @@
-import Data from '../data/data.js'
+import Data from '../data/data';
 
-const BeerTypesReducer = (state = Data.beerTypes, action) => {
-    return state;
-}
+const BeerTypesReducer = (state = Data.beerTypes) => state;
 
-export default BeerTypesReducer
+export default BeerTypesReducer;
