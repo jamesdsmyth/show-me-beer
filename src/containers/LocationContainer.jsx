@@ -85,9 +85,6 @@ class LocationContainerView extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    console.log(state.locations);
-    console.log(state.beers);
-
     return {
         locations: state.locations,
         beers: state.beers,

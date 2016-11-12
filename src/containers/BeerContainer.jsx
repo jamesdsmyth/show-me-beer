@@ -1,9 +1,9 @@
-import React, { propTypes } from 'react'
-import { connect } from 'react-redux'
+import React, { propTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 import { saveBeer } from '../actions/actions.js';
-import Store from '../reducers/CombinedReducers.jsx'
+import Store from '../reducers/CombinedReducers.jsx';
 import { SaveBeer, RemoveBeer } from '../data/FirebaseRef.jsx';
 
 import MapComponent from '../components/MapComponent.jsx';
@@ -11,8 +11,8 @@ import MapComponent from '../components/MapComponent.jsx';
 class BeerContainerView extends React.Component {
     // save the beer to Firebase. If the user is not logged in, then an alert to log in is shown
     // passing the beerName as well so we can easily set the notification to say you have added the beer
-    saveBeer (beerUID, beerName) {
-        if(this.props.user.userName !== null) {
+    saveBeer(beerUID, beerName) {
+        if (this.props.user.userName !== null) {
             SaveBeer(beerUID, beerName);
         } else {
             alert('please log in to save a beer');
@@ -36,7 +36,7 @@ class BeerContainerView extends React.Component {
             currentBeer = {},
             beerSaved = false,
             beerUID = null,
-            beerSavedKey = null //if this beer has been saved by the user we reference it if the user wants to remove it
+            beerSavedKey = null; // if this beer has been saved by the user we reference it if the user wants to remove it
 
         for(var beer in beers) {
             if(beers[beer].url === this.props.params.beer) {

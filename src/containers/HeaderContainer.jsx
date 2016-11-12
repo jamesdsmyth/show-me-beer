@@ -1,31 +1,30 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import{ Link, IndexLink } from 'react-router'
-import Store from '../reducers/CombinedReducers.jsx'
-import * as actions from '../actions/actions.js'
-import { SignUserIn, SignUserOut } from '../data/FirebaseRef.jsx'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import Store from '../reducers/CombinedReducers.jsx';
+import * as actions from '../actions/actions.js';
+import { SignUserIn, SignUserOut } from '../data/FirebaseRef.jsx';
 
-import NotificationsComponent from '../components/NotificationsComponent.jsx'
+import NotificationsComponent from '../components/NotificationsComponent.jsx';
 
 class HeaderContainerView extends React.Component {
 
     // when the user clicks sign in
-    signIn (event) {
+    static signIn(event) {
         event.preventDefault();
 
         SignUserIn();
     }
 
     // when the user clicks sign out
-    signOut (event) {
+    static signOut(event) {
         event.preventDefault();
 
         SignUserOut();
     }
 
     render() {
-
-        var userObject = this.props.user;
+        const userObject = this.props.user;
 
         return (
             <div>
@@ -80,20 +79,30 @@ class HeaderContainerView extends React.Component {
                     {/* checking if userObject.userName is populated or not */
                         (userObject.userName !== undefined) && (userObject.userName !== null) ?
                             <section className="sign-in-area">
-                                <img className="user-image"
-                                     src={userObject.photo}
-                                     alt={userObject.userName} />
-                                <button type="submit"
-                                        className="button"
-                                        onClick={this.signOut}>Sign out</button>
+                                <img
+                                    className="user-image"
+                                    src={userObject.photo}
+                                    alt={userObject.userName}
+                                />
+                                <button
+                                    type="submit"
+                                    className="button"
+                                    onClick={this.signOut}
+                                >
+                                        Sign out
+                                </button>
                             </section>
 
                             :
 
                             <section className="sign-in-area">
-                                <button type="submit"
-                                        className="button primary"
-                                        onClick={this.signIn}>Sign in</button>
+                                <button
+                                    type="submit"
+                                    className="button primary"
+                                    onClick={this.signIn}
+                                >
+                                        Sign in
+                                </button>
                             </section>
                     }
 
@@ -103,16 +112,21 @@ class HeaderContainerView extends React.Component {
                 </main>
                 <NotificationsComponent />
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         user: state.user
-    }
-}
+    };
+};
+
+HeaderContainerView.propTypes = {
+    children: PropTypes.arrayOf,
+    user: PropTypes.shape
+};
 
 const HeaderContainer = connect(mapStateToProps)(HeaderContainerView);
 
-export default HeaderContainer
+export default HeaderContainer;

@@ -1,24 +1,18 @@
-import React from 'react'
-import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx'
+import React from 'react';
+import FilterLocationsComponent from '../components/FilterLocationsComponent.jsx';
 
-class LocationsContainer extends React.Component {
-
-    render () {
-
-        return (
+const LocationsContainer = () => (
+    <div>
+        {!this.props.children ?
             <div>
-                {!this.props.children ?
-                    <div>
-                        <section className="area buffer page-title">
-                            <h1>Locations</h1>
-                        </section>
-                        <FilterLocationsComponent />
-                    </div>
-                : null}
-                {this.props.children}
+                <section className="area buffer page-title">
+                    <h1>Locations</h1>
+                </section>
+                <FilterLocationsComponent />
             </div>
-        )
-    }
-}
+        : null}
+        {this.props.children}
+    </div>
+);
 
-export default LocationsContainer
+export default LocationsContainer;
