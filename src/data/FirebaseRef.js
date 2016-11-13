@@ -78,9 +78,10 @@ export function SaveBeer (beerUID, beerName) {
     var updates = {};
     updates['/users/' + uid + '/beers/' + newBeerKey] = beerObject;
 
-    return firebase.database().ref().update(updates).then(value => {
+    return firebase.database().ref().update(updates).then((value) => {
         Store.dispatch(actions.showAddNotification(beerName, 'beer'));
-    }).catch(error => {
+    })
+    .catch((error) => {
         alert('error saving the beer');
     });
 }
@@ -246,49 +247,40 @@ export function CreateLocation (locationObject) {
         return firebase.database().ref().update(updates).then(value => {
             Store.dispatch(actions.creationOfLocationSuccess());
         }).catch(error => {
+            console.log(error);
             Store.dispatch(actions.creationOfLocationFailure());
         });
     });
 }
 
-export function SignUserIn () {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        let token = result.credential.accessToken;
-        // The signed-in user info.
-        let user = result.user;
-        // ...
-    }).catch(function(error) {
+export function SignUserIn() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then((result) => {
+        console.log(result);
+    }).catch((error) => {
         // Handle Errors here.
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        // The email of the user's account used.
-        let email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        let credential = error.credential;
+        console.log(error);
     });
 }
 
-export function SignUserOut () {
-    firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-      Store.dispatch(actions.signOutUser());
-    }, function(error) {
-      alert('an error occurred when signing out');
+export function SignUserOut() {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        Store.dispatch(actions.signOutUser());
+    }, (error) => {
+        console.log(error);
     });
 }
 
 // initial call to Firebase to set up the DB link. When this is initialised we
 // populate the store and then get the current google users data
-export function FirebaseRef () {
-
+export function FirebaseRef() {
     // Initialize Firebase
-    let config = {
-        apiKey: "AIzaSyA7JwFHnI-I84gPBWPqklQrgPLtT1ijD58",
-        authDomain: "show-me-beer.firebaseapp.com",
-        databaseURL: "https://show-me-beer.firebaseio.com",
-        storageBucket: "show-me-beer.appspot.com",
+    const config = {
+        apiKey: 'AIzaSyA7JwFHnI-I84gPBWPqklQrgPLtT1ijD58',
+        authDomain: 'how-me-beer.firebaseapp.com',
+        databaseURL: 'https://show-me-beer.firebaseio.com',
+        storageBucket: 'show-me-beer.appspot.com'
     };
     firebase.initializeApp(config);
 

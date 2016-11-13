@@ -88,14 +88,14 @@ class BeerContainerView extends React.Component {
                         beerSaved === false ?
 
                             <img className="star"
-                                 src="../images/star-grey.png"
+                                 src="../src/images/star-grey.png"
                                  alt="click this beer to save it"
                                  onClick={() => this.saveBeer(beerUID, currentBeer.name)} />
 
                         :
 
                             <img className="star"
-                                 src="../images/star-gold.png"
+                                 src="../src/images/star-gold.png"
                                  alt="click this beer to remove it from your saved beers"
                                  onClick={() => this.removeBeer(beerSavedKey, currentBeer.name)} />
                     }

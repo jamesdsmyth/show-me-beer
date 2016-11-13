@@ -12,7 +12,6 @@ const NotificationReducer = (state = {}, action) => {
             });
 
             return newState;
-            break;
 
         case 'SHOW_REMOVED_NOTIFICATION':
             newState = Object.assign({}, state, {
