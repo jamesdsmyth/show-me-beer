@@ -14,7 +14,7 @@ const PopulateStore = () => {
 
 // creating the user and adding it to Firebase
 const CreateUser = (uid) => {
-    firebase.database().ref('users/' + uid).set({
+    firebase.database().ref(`users/  ${uid}`).set({
         beers: 'currently no beers',
         locations: 'currently no locations'
     });
@@ -22,14 +22,12 @@ const CreateUser = (uid) => {
 
 // getting the user data from Firebase
 const GetUserData = (user) => {
-
-    let userRef = firebase.database().ref('/users/' + user.uid);
+    const userRef = firebase.database().ref(`/users/ ${user.uid}`);
 
     userRef.once('value').then((snapshot) => {
+        const data = snapshot.val();
 
-        var data = snapshot.val();
-
-        if(data !== null) {
+        if (data !== null) {
             Store.dispatch(actions.populateUser(user, data));
         } else {
             CreateUser(user.uid);
@@ -37,216 +35,200 @@ const GetUserData = (user) => {
     });
 
     // when the child of users changes (so when a beer is saved etc), then we will dispatch an action that updates the users data
-    userRef.on('child_changed', function(data) {
-        let val = data.val();
+    userRef.on('child_changed', (data) => {
+        const val = data.val();
 
-        if(data.key === 'beers') {
-
+        if (data.key === 'beers') {
             console.log(data.key);
             console.log(val);
             Store.dispatch(actions.saveBeerToUser(val));
         }
     });
 
-    userRef.on('child_removed', function(data) {
-        let val = data.val();
+    userRef.on('child_removed', (data) => {
+        const val = data.val();
 
-        if(data.key === 'beers') {
+        if (data.key === 'beers') {
             Store.dispatch(actions.saveBeerToUser(val));
         }
     });
-}
+};
 
 const GetCurrentUser = () => {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        GetUserData(user);
-      } else {
-          console.log('no one is currently signed in');
-      }
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in.
+            GetUserData(user);
+        } else {
+            console.log('no one is currently signed in');
+        }
     });
-}
+};
 
 // save beer to the user (gold star)
-export function SaveBeer (beerUID, beerName) {
+export function SaveBeer(beerUID, beerName) {
+    const uid = Store.getState().user.uid;
+    const newBeerKey = firebase.database().ref().child('beers').push().key;
+    const beerObject = { uid: beerUID };
 
-    let uid = Store.getState().user.uid;
-    let newBeerKey = firebase.database().ref().child('beers').push().key;
-    let beerObject = {"uid": beerUID};
-
-    var updates = {};
-    updates['/users/' + uid + '/beers/' + newBeerKey] = beerObject;
+    const updates = {};
+    updates[`/users/ ${uid} /beers/ ${newBeerKey}`] = beerObject;
 
     return firebase.database().ref().update(updates).then((value) => {
+        console.log(value);
         Store.dispatch(actions.showAddNotification(beerName, 'beer'));
     })
     .catch((error) => {
+        console.log(error);
         alert('error saving the beer');
     });
 }
 
 // passing the key of the saved beer within the user so we can remove it (grey star)
-export function RemoveBeer (beerSavedKey, beerName) {
-    let uid = Store.getState().user.uid;
+export function RemoveBeer(beerSavedKey, beerName) {
+    const uid = Store.getState().user.uid;
 
-    firebase.database().ref('users/' + uid + '/beers/' + beerSavedKey).remove().then(() => {
+    firebase.database().ref(`users/ ${uid} /beers/ ${beerSavedKey}`).remove().then(() => {
         Store.dispatch(actions.showRemoveNotification(beerName, 'beer'));
     });
 }
 
 // function that gets the beerObject and uploads the image associated with it.
-export function CreateBeer (beerObject) {
+export function CreateBeer(beerObject) {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
 
-    let storage = firebase.storage();
-    let storageRef = storage.ref();
-
-    let metadata = {
+    const metadata = {
         contentType: beerObject.photo.type
     };
 
-    let uploadTask = storageRef.child('images/' + beerObject.photo.name).put(beerObject.photo, metadata);
+    const uploadTask = storageRef.child(`images/ ${beerObject.photo.name}`).put(beerObject.photo, metadata);
 
     Store.dispatch(actions.beerSubmitted());
 
     // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-        console.log('Upload is ' + progress + '% done');
+        console.log(`Upload is ${progress} % done`);
 
         switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log('Upload is paused');
-                break;
-
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log('Upload is running');
-                break;
-        }
-    }, function(error) {
-        switch (error.code) {
-            case 'storage/unauthorized':
-            // User doesn't have permission to access the object
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
             break;
 
-            case 'storage/canceled':
-            // User canceled the upload
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
             break;
 
-            case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
+        default:
+            console.log('Upload is running');
             break;
         }
+    }, (error) => {
+        console.log(error.code);
 
         Store.dispatch(actions.creationOfBeerFailure());
-
-        return;
-    }, function() {
+    }, () => {
         // Upload completed successfully, now we can write the beer to the db and add the beer relationship to the locations
 
-        beerObject.photo = uploadTask.snapshot.downloadURL;
+        const obj = beerObject;
 
-        var newBeerKey = firebase.database().ref().child('beers').push().key;
+        obj.photo = uploadTask.snapshot.downloadURL;
 
-        var updates = {};
-        updates['/beers/' + newBeerKey] = beerObject;
+        const newBeerKey = firebase.database().ref().child('beers').push().key;
+
+        const updates = {};
+        updates[`/beers/ ${newBeerKey}`] = obj;
 
 
         // adding the beer reference to the location object
-        for(var i = 0; i < beerObject.locations.length; i++) {
-
-            let beerUidObject = {
+        for (let i = 0; i < obj.locations.length; i++) {
+            const beerUidObject = {
                 uid: newBeerKey
-            }
+            };
 
-            let newlocationBeerKey = firebase.database().ref().child('locations/beers').push().key;
+            const newlocationBeerKey = firebase.database().ref().child('locations/beers').push().key;
 
-            updates['/locations/' + beerObject.locations[i].uid + '/beers/' + newlocationBeerKey] = beerUidObject;
+            updates[`/locations/ ${obj.locations[i].uid} /beers/ ${newlocationBeerKey}`] = beerUidObject;
         }
 
-        return firebase.database().ref().update(updates).then(value => {
+        return firebase.database().ref().update(updates).then((value) => {
+            console.log(value);
             Store.dispatch(actions.creationOfBeerSuccess());
-        }).catch(error => {
+        })
+        .catch((error) => {
+            console.log(error);
             Store.dispatch(actions.creationOfBeerFailure());
         });
     });
 }
 
-export function CreateLocation (locationObject) {
+export function CreateLocation(locationObject) {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
 
-    let storage = firebase.storage();
-    let storageRef = storage.ref();
-
-    let metadata = {
+    const metadata = {
         contentType: locationObject.photo.type
     };
 
-    let uploadTask = storageRef.child('images/' + locationObject.photo.name).put(locationObject.photo, metadata);
+    const uploadTask = storageRef.child(`images/ ${locationObject.photo.name}`).put(locationObject.photo, metadata);
 
     Store.dispatch(actions.locationSubmitted());
 
     // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot) {
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-        console.log('Upload is ' + progress + '% done');
+        console.log(`Upload is ${progress} % done`);
 
         switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log('Upload is paused');
-                break;
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
+            break;
 
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log('Upload is running');
-                break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
+            break;
+
+        default:
+            console.log('default case');
         }
-    }, function(error) {
-        switch (error.code) {
-            case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-
-            case 'storage/canceled':
-            // User canceled the upload
-            break;
-
-            case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
+    }, (error) => {
+        console.log(error.code);
 
         Store.dispatch(actions.creationOfLocationFailure());
-
-        return;
-    }, function() {
+    }, () => {
         // Upload completed successfully, now we can write the location to the db and add the location relationship to the beers
 
-        locationObject.photo = uploadTask.snapshot.downloadURL;
+        obj = locationObject;
 
-        var newLocationKey = firebase.database().ref().child('locations').push().key;
+        obj.photo = uploadTask.snapshot.downloadURL;
 
-        var updates = {};
-        updates['/locations/' + newLocationKey] = locationObject;
+        const newLocationKey = firebase.database().ref().child('locations').push().key;
+
+        const updates = {};
+        updates[`/locations/ ${newLocationKey}`] = obj;
 
         // adding the beer reference to the location object
-        for(var i = 0; i < locationObject.beers.length; i++) {
-
-            let locationUidObject = {
+        for (let i = 0; i < obj.beers.length; i++) {
+            const locationUidObject = {
                 uid: newLocationKey
-            }
+            };
 
-            let newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
+            const newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
 
-            updates['/beers/' + locationObject.beers[i].uid + '/locations/' + newlocationBeerKey] = locationUidObject;
+            updates[`/beers/ ${obj.beers[i].uid} /locations/ ${newlocationBeerKey}`] = locationUidObject;
         }
 
 
-        return firebase.database().ref().update(updates).then(value => {
+        return firebase.database().ref().update(updates).then((value) => {
+            console.log(value);
             Store.dispatch(actions.creationOfLocationSuccess());
-        }).catch(error => {
+        })
+        .catch((error) => {
             console.log(error);
             Store.dispatch(actions.creationOfLocationFailure());
         });
