@@ -168,17 +168,17 @@ class CreateBeerContainerView extends React.Component {
     }
 
     // removes all selected locations from the beer so a new beer can be created
-    clearBeers () {
+    static clearBeers() {
         Store.dispatch(clearBeersFromLocation());
     }
 
     // navigates the user to the form section again ready to create a new beer
-    viewForm () {
+    static viewForm() {
         Store.dispatch(initialiseLocationCreation());
     }
 
     // creating the object to pass to firebase to add the beer to the list
-    createLocationObject (event) {
+    createLocationObject(event) {
 
         event.preventDefault();
 

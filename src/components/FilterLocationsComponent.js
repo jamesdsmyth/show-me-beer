@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Store from '../reducers/CombinedReducers';
@@ -7,6 +7,16 @@ import { addLocationToBeer, removeLocationFromBeer } from '../actions/actions';
 import MapComponent from './MapComponent';
 
 class FilterLocationsComponentView extends React.Component {
+
+    // adds the location to the beer when creating a beer
+    // function only exposed on the create beer page
+    static addLocationToBeer(locationKey) {
+        Store.dispatch(addLocationToBeer(locationKey));
+    }
+
+    static removeLocationFromBeer(locationKey) {
+        Store.dispatch(removeLocationFromBeer(locationKey));
+    }
 
     constructor(props) {
         super(props);
@@ -22,28 +32,31 @@ class FilterLocationsComponentView extends React.Component {
     }
 
     // when the beers fibally are loaded from firebase, we use this to set the state
-    componentWillReceiveProps (props) {
-
+    componentWillReceiveProps(props) {
         this.setState({
             firebaseLocations: props.firebaseLocations,
             createBeers: props.createBeers
         });
     }
 
-    searchPostcode (e) {
+    // setting borough through the postcode input box
+    setBorough(borough) {
+        this.setState({ borough });
+    }
+
+    searchPostcode(e) {
         e.preventDefault();
 
         const postcode = document.getElementById('postcode').value;
-        const data = {
-            'postcodes' : [postcode]
-        };
 
         $.ajax({
             type: 'POST',
             url: 'https://api.postcodes.io/postcodes',
-            data: data,
+            data: {
+                postcodes: [postcode]
+            },
             success: (response) => {
-                if(response.result[0].result != null) {
+                if (response.result[0].result != null) {
                     this.setBorough(response.result[0].result.admin_district);
                 } else {
                     this.setBorough('all');
@@ -55,17 +68,11 @@ class FilterLocationsComponentView extends React.Component {
         });
     }
 
-    // setting borough through the postcode input box
-    setBorough (borough) {
-        this.setState({ borough: borough });
-    }
-
     // hack here... because updating the state occurs asyncronously, the re-render is fired before the state is updated, therefore
     // the render still things the borough is the old value
-    boroughHandleSelect (borough) {
-
+    boroughHandleSelect(borough) {
         let name = borough.borough;
-        if(this.state.borough === name) {
+        if (this.state.borough === name) {
             name = 'all';
         }
 
@@ -74,78 +81,71 @@ class FilterLocationsComponentView extends React.Component {
         });
     }
 
-    toggleFilter () {
-        this.setState({'showFilter': this.state.showFilter === 'show' ? 'hide' : 'show'});
+    toggleFilter() {
+        this.setState({ showFilter: this.state.showFilter === 'show' ? 'hide' : 'show' });
     }
 
-    // adds the location to the beer when creating a beer
-    // function only exposed on the create beer page
-    addLocationToBeer (locationKey) {
-        Store.dispatch(addLocationToBeer(locationKey));
-    }
+    render() {
+        const locations = this.state.firebaseLocations;
+        const stateBoroughs = this.state.boroughs;
+        const stateBorough = this.state.borough;
+        const createBeers = this.state.createBeers.locations;
 
-    removeLocationFromBeer (locationKey) {
-        Store.dispatch(removeLocationFromBeer(locationKey));
-    }
-
-    render () {
-        const locations = this.state.firebaseLocations,
-            stateBoroughs = this.state.boroughs,
-            stateBorough = this.state.borough,
-            createBeers = this.state.createBeers.locations,
-            postcodeClick = this.searchPostcode.bind(this);
-
-        let locationsList = [],
-            locationsMaplist = {},
-            filterClasses = this.state.showFilter + ' filter',
-            locationCount = -1;
+        let locationsList = [];
+        const locationsMaplist = {};
+        const filterClasses = `${this.state.showFilter} filter`;
+        let locationCount = -1;
+        let toReturn = null;
 
         // creating the toggle tabs for the boroughs
-        const boroughOptions = stateBoroughs.map(function (borough, i) {
-            let newClass = borough === stateBorough ? 'selected' : null;
-            return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({borough})}>{borough}</li>;
-        }.bind(this));
+        const boroughOptions = stateBoroughs.map((borough, i) => {
+            const newClass = borough === stateBorough ? 'selected' : null;
+            return <li key={i} className={newClass} onClick={() => this.boroughHandleSelect({ borough })}>{borough}</li>;
+        });
 
-        for(let i in locations) {
-            if((locations[i].borough === stateBorough) || stateBorough === 'all') {
+        for (const i in locations) {
+            if ((locations[i].borough === stateBorough) || stateBorough === 'all') {
                 locationsMaplist[i] = locations[i];
             }
         }
 
         // filtering all locations to see whether they match the borough selected
         locationsList = Object.keys(locations).map((location, i) => {
-            if((locations[location].borough === stateBorough) || stateBorough === 'all') {
-                locationCount = i++;
+            if ((locations[location].borough === stateBorough) || stateBorough === 'all') {
+                locationCount++;
 
                 // if we are on a creation page then we need to display the add/remove location buttons
-                if(this.state.isCreationPage === true) {
-
+                if (this.state.isCreationPage === true) {
                     let present = false;
 
-                    for(let addedLocation in createBeers) {
-                        if(createBeers[addedLocation].uid === location) {
+                    for (const addedLocation in createBeers) {
+                        if (createBeers[addedLocation].uid === location) {
                             present = true;
                         }
                     }
 
-                    return <li key={i} className="location">
-                                <Link to={'/locations/' + locations[location].url}>
-                                    {locations[location].name}
-                                </Link>
-                                {present === true ?
-                                    <span className="button" onClick={() => this.removeLocationFromBeer(location)}>Remove</span>
-                                    :
-                                    <span className="button" onClick={() => this.addLocationToBeer(location)}>Add</span>
-                                }
-                            </li>;
+                    toReturn =
+                        <li key={i} className="location">
+                            <Link to={`/locations/${locations[location].url}`}>
+                                {locations[location].name}
+                            </Link>
+                            {present === true ?
+                                <span className="button" onClick={() => this.removeLocationFromBeer(location)}>Remove</span>
+                                :
+                                <span className="button" onClick={() => this.addLocationToBeer(location)}>Add</span>
+                            }
+                        </li>;
                 } else {
-                    return <li key={i} className="basic-location">
-                                <Link to={'/locations/' + locations[location].url}>
-                                    {locations[location].name}
-                                </Link>
-                            </li>;
+                    toReturn =
+                        <li key={i} className="basic-location">
+                            <Link to={`/locations/${locations[location].url}`}>
+                                {locations[location].name}
+                            </Link>
+                        </li>;
                 }
             }
+
+            return toReturn;
         });
 
         return (
@@ -159,7 +159,7 @@ class FilterLocationsComponentView extends React.Component {
                         <div className="tabs">
                             <div className="postcode-form">
                                 <input id="postcode" className="input" placeholder="E8 4DA" type="text" />
-                                <button type="button" className="button" onClick={postcodeClick}>Search postcode</button>
+                                <button type="button" className="button" onClick={this.postcodeClick}>Search postcode</button>
                             </div>
                             <ul className="tabs-list">
                                 {boroughOptions}
@@ -179,7 +179,6 @@ class FilterLocationsComponentView extends React.Component {
                 </section>
             </div>
         );
-
     }
 }
 
@@ -189,6 +188,13 @@ const mapStateToProps = (state) => {
         firebaseLocations: state.locations,
         createBeers: state.createBeers
     };
+};
+
+FilterLocationsComponentView.propTypes = {
+    boroughs: PropTypes.arrayOf,
+    firebaseLocations: PropTypes.arrayOf,
+    creationPage: PropTypes.bool,
+    createBeers: PropTypes.bool
 };
 
 const FilterLocationsComponent = connect(mapStateToProps)(FilterLocationsComponentView);

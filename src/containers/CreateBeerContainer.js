@@ -42,15 +42,6 @@ class CreateBeerContainerView extends React.Component {
         });
     }
 
-    previousButtonClick() {
-        this.setState({
-            formFillCount: this.state.formFillCount - 1,
-            showNextButton: true
-        });
-
-        this.setFieldData();
-    }
-
     // when we navigate through the steps, we want to populate data that the user has already filled out
     setFieldData() {
         setTimeout(() => {
@@ -64,6 +55,15 @@ class CreateBeerContainerView extends React.Component {
             $('#type').val(this.state.type);
             $('#style').val(this.state.style);
         }, 250);
+    }
+
+    previousButtonClick() {
+        this.setState({
+            formFillCount: this.state.formFillCount - 1,
+            showNextButton: true
+        });
+
+        this.setFieldData();
     }
 
     // clicking the next button will change the question section.

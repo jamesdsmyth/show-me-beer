@@ -6,6 +6,16 @@ import { addBeerToLocation, removeBeerFromLocation } from '../actions/actions';
 
 class FilterBeersComponentView extends React.Component {
 
+    // adds the location to the beer when creating a beer
+    // function only exposed on the create beer page
+    static addBeerToLocation(locationKey) {
+        Store.dispatch(addBeerToLocation(locationKey));
+    }
+
+    static removeBeerFromLocation(locationKey) {
+        Store.dispatch(removeBeerFromLocation(locationKey));
+    }
+
     constructor(props) {
         super(props);
 
@@ -90,16 +100,6 @@ class FilterBeersComponentView extends React.Component {
         this.setState({ showFilter: this.state.showFilter === 'show' ? 'hide' : 'show' });
     }
 
-    // adds the location to the beer when creating a beer
-    // function only exposed on the create beer page
-    addBeerToLocation(locationKey) {
-        Store.dispatch(addBeerToLocation(locationKey));
-    }
-
-    removeBeerFromLocation(locationKey) {
-        Store.dispatch(removeBeerFromLocation(locationKey));
-    }
-
     render() {
         const beers = this.props.beers;
         const types = this.state.types;
@@ -108,108 +108,110 @@ class FilterBeersComponentView extends React.Component {
         const selectedType = this.state.type;
         const selectedStyle = this.state.style;
         const selectedCountry = this.state.country;
-        const handleTypeSelect = this.handleTypeClick.bind(this);
-        const handleStyleSelect = this.handleStyleClick.bind(this);
-        const handleCountrySelect = this.handleCountryClick.bind(this);
-        const handleFilterToggle = this.toggleFilter.bind(this);
-        const filterClasses = this.state.showFilter + ' filter beers';
-        const userSavedBeers = this.props.user.beers.data;
+        const filterClasses = `${this.state.showFilter} filter beers`;
+        const user = this.props.user;
         const createLocations = this.state.createLocations.beers;
 
         // creating the toggle tabs for the beer types
         const typeOptions = types.map((type, i) => {
             const typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
-            return <li key={i} className={typeClass} onClick={() => handleTypeSelect({ type })}>{type}</li>;
+            return <li key={i} className={typeClass} onClick={() => handleTypeClick({ type })}>{type}</li>;
         });
 
         // creating the toggle tabs for the beer styles
         const styleOptions = styles.map((style, i) => {
             const styleClass = selectedStyle.indexOf(style) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleStyleSelect({ style })}>{style}</li>;
+            return <li key={i} className={styleClass} onClick={() => this.handleStyleClick({ style })}>{style}</li>;
         });
 
         // creating the toggle tabs for the beer countries
         const countryOptions = countries.map((country, i) => {
             const styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleCountrySelect({country})}>{country}</li>;
+            return <li key={i} className={styleClass} onClick={() => handleCountryClick({ country })}>{country}</li>;
         });
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
         const beerList = Object.keys(beers).map((beer, i) => {
-
-            let beerItem = beers[beer];
+            const beerItem = beers[beer];
             let beerSaved = null;
+            let toReturn = null;
 
-            if((selectedType.indexOf(beerItem.type) > -1) || (selectedType.length === 0)) {
-                if((selectedStyle.indexOf(beerItem.style) > -1) || (selectedStyle.length === 0)) {
-                    if((selectedCountry.indexOf(beerItem.country) > -1) || (selectedCountry.length === 0)) {
-
+            if ((selectedType.indexOf(beerItem.type) > -1) || (selectedType.length === 0)) {
+                if ((selectedStyle.indexOf(beerItem.style) > -1) || (selectedStyle.length === 0)) {
+                    if ((selectedCountry.indexOf(beerItem.country) > -1) || (selectedCountry.length === 0)) {
                         // if we are on a creation page then we need to display the add/remove location buttons
-                        if(this.state.isCreationPage === true) {
-
+                        if (this.state.isCreationPage === true) {
                             let present = false;
 
-                            for(let addedLocation in createLocations) {
-                                if(createLocations[addedLocation].uid === beer) {
+                            for (const addedLocation in createLocations) {
+                                if (createLocations[addedLocation].uid === beer) {
                                     present = true;
                                 }
                             }
 
-                            return <li key={i}>
-                                        <Link to={'/beers/' + beerItem.url}>
-                                            <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
-                                        </Link>
-                                        {present === true ?
-                                            <span className="button" onClick={() => this.removeBeerFromLocation(beer)}>Remove</span>
-                                            :
-                                            <span className="button" onClick={() => this.addBeerToLocation(beer)}>Add</span>
-                                        }
-                                        <div className="beer-details">
-                                            <h3>
-                                                <Link to={'/beers/' + beerItem.url}
-                                                      className="beer-title">
-                                                    {beerItem.name}
-                                                </Link>
-                                            </h3>
-                                            <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
-                                        </div>
-                                    </li>;
-
+                            toReturn =
+                                <li key={i}>
+                                    <Link to={`/beers/${beerItem.url}`}>
+                                        <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
+                                    </Link>
+                                    {present === true ?
+                                        <span className="button" onClick={() => this.removeBeerFromLocation(beer)}>Remove</span>
+                                        :
+                                        <span className="button" onClick={() => this.addBeerToLocation(beer)}>Add</span>
+                                    }
+                                    <div className="beer-details">
+                                        <h3>
+                                            <Link
+                                                to={`/beers/${beerItem.url}`}
+                                                className="beer-title"
+                                            >
+                                                {beerItem.name}
+                                            </Link>
+                                        </h3>
+                                        <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
+                                    </div>
+                                </li>;
                         } else {
+                            const userBeers = user.beers.data;
 
-                            if((userSavedBeers !== undefined) && (userSavedBeers !==  null)) {
-                                for (let savedBeer in userSavedBeers) {
-                                    if(userSavedBeers[savedBeer].uid === beer) {
+                            if ((userBeers !== undefined) && (userBeers !== null)) {
+                                for (const savedBeer in userBeers) {
+                                    if (userBeers[savedBeer].uid === beer) {
                                         beerSaved = 'saved';
                                     }
                                 }
                             }
 
-                            return <li className={beerSaved} key={i}>
-                                        <Link to={'/beers/' + beerItem.url}>
-                                            <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
-                                        </Link>
-                                        <div className="beer-details">
-                                            <h3>
-                                                <Link to={'/beers/' + beerItem.url}
-                                                      className="beer-title">
-                                                    {beerItem.name}
-                                                </Link>
-                                            </h3>
-                                            <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
-                                        </div>
-                                    </li>;
+                            toReturn =
+                                <li className={beerSaved} key={i}>
+                                    <Link to={`/beers/${beerItem.url}`}>
+                                        <img src={beerItem.photo} alt={beerItem.name} className="beer-image" />
+                                    </Link>
+                                    <div className="beer-details">
+                                        <h3>
+                                            <Link
+                                                to={`/beers/${beerItem.url}`}
+                                                className="beer-title"
+                                            >
+                                                {beerItem.name}
+                                            </Link>
+                                        </h3>
+                                        <span className="italic">{beerItem.type}, {beerItem.style} and brewed in {beerItem.country}</span>
+                                    </div>
+                                </li>;
                         }
                     }
                 }
             }
+
+            return toReturn;
         });
 
         return (
             <div>
                 <section className="area filters">
                     <section className={filterClasses}>
-                        <h3 className="filter-button" onClick={() => handleFilterToggle()}>
+                        <h3 className="filter-button" onClick={() => this.toggleFilter()}>
                             Filters
                             {this.state.showFilter === 'hide' ? <span> +</span> : <span> -</span>}
                         </h3>
@@ -248,6 +250,8 @@ const mapStateToProps = (state) => {
 };
 
 FilterBeersComponentView.propTypes = {
+    user: PropTypes.shape,
+    beers: PropTypes.arrayOf,
     types: PropTypes.arrayOf,
     styles: PropTypes.arrayOf,
     countries: PropTypes.arrayOf,
