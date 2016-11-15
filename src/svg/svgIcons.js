@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 // exporting the GLYPHS to be referenced in the components
 export const GLYPHS = {
@@ -12,6 +12,13 @@ const Icon = ({ glyph, width = 16, height = 16, className = 'icon' }) => {
             <use xlinkHref={glyph} />
         </svg>
     );
+};
+
+Icon.propTypes = {
+    glyph: PropTypes.string.isRequired,
+    width: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired
 };
 
 

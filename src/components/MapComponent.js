@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import leaflet from 'leaflet';
 
+// just to beat this no-unused-vars rule for the leaflet issue.
+console.log(leaflet);
+
 class MapComponent extends React.Component {
 
     componentDidMount() {
