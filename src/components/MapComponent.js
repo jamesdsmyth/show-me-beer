@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import leaflet from 'leaflet';
 
 class MapComponent extends React.Component {
 
@@ -77,7 +78,7 @@ class MapComponent extends React.Component {
 }
 
 MapComponent.propTypes = {
-    locations: PropTypes.arrayOf
+    locations: PropTypes.arrayOf.isRequired
 };
 
 export default MapComponent;

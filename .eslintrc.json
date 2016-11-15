@@ -34,7 +34,8 @@
 
       "arrow-body-style": [0, "never"],
       "no-plusplus": 0,
-      "no-restricted-syntax": 0
+      "no-restricted-syntax": 0,
+      "no-case-declarations": 0
   },
   "plugins": [
     "jsx-a11y", "react", "import"

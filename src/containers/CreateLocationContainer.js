@@ -32,15 +32,6 @@ class CreateBeerContainerView extends React.Component {
         });
     }
 
-    previousButtonClick() {
-        this.setState({
-            formFillCount: this.state.formFillCount - 1,
-            showNextButton: true
-        });
-
-        this.setFieldData();
-    }
-
     // when we navigate through the steps, we want to populate data that the user has already filled out
     setFieldData() {
         setTimeout(() => {
@@ -120,6 +111,15 @@ class CreateBeerContainerView extends React.Component {
         setObject.showNextButton = false;
 
         this.setState(setObject);
+        this.setFieldData();
+    }
+
+    previousButtonClick() {
+        this.setState({
+            formFillCount: this.state.formFillCount - 1,
+            showNextButton: true
+        });
+
         this.setFieldData();
     }
 
@@ -208,14 +208,10 @@ class CreateBeerContainerView extends React.Component {
 
     render() {
         const boroughs = this.props.boroughs;
-        const locations = this.props.locations;
-        const countries = this.props.countries;
-        const beers = this.state.beers || {};
         const sectionToDisplay = this.state.visibleSection;
         const formFillCount = this.state.formFillCount;
 
         let toDisplay = null;
-
 
         console.log(sectionToDisplay);
 
@@ -532,11 +528,8 @@ const MapStateToProps = (state) => {
 };
 
 CreateBeerContainerView.propTypes = {
-    boroughs: PropTypes.arrayOf,
-    locations: PropTypes.arrayOf,
-    countries: PropTypes.arrayOf,
-    beers: PropTypes.arrayOf
-}
+    boroughs: PropTypes.arrayOf.isRequired
+};
 
 const CreateBeerContainer = connect(MapStateToProps)(CreateBeerContainerView);
 

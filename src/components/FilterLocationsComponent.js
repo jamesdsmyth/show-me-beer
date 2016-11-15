@@ -191,8 +191,8 @@ const mapStateToProps = (state) => {
 };
 
 FilterLocationsComponentView.propTypes = {
-    boroughs: PropTypes.arrayOf,
-    firebaseLocations: PropTypes.arrayOf,
+    boroughs: PropTypes.arrayOf.isRequired,
+    firebaseLocations: PropTypes.arrayOf.isRequired,
     creationPage: PropTypes.bool,
     createBeers: PropTypes.bool
 };

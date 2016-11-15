@@ -16,7 +16,7 @@ const LocationsContainer = ({ children }) => (
 );
 
 LocationsContainer.propTypes = {
-    children: PropTypes.arrayOf
+    children: PropTypes.arrayOf.isRequired
 };
 
 export default LocationsContainer;

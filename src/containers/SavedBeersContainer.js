@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
-// some-component.jsx
 import Icon from '../svg/svgIcons';
-// import help from '../images/pin.svg';
 
-const SavedBeersContainerView = () => {
-    console.log(GLYPHS);
-
-    const beers = this.props.beers;
-    const userBeers = this.props.user.beers.data;
+const SavedBeersContainerView = ({ beers, user }) => {
+    const userBeers = user.beers.data;
 
     let toReturn = null;
     let count = 0;
@@ -29,7 +23,8 @@ const SavedBeersContainerView = () => {
                         </Link>
                         <div className="beer-details">
                             <h3>
-                                <Link to={`/beers/${beerItem.url}`}
+                                <Link
+                                    to={`/beers/${beerItem.url}`}
                                     className="beer-title"
                                 >
                                     {beerItem.name}
@@ -67,6 +62,11 @@ const mapStateToProps = (state) => {
         user: state.user,
         beers: state.beers
     };
+};
+
+SavedBeersContainerView.propTypes = {
+    beers: PropTypes.arrayOf.isRequired,
+    user: PropTypes.shape.isRequired
 };
 
 const SavedBeersContainer = connect(mapStateToProps)(SavedBeersContainerView);

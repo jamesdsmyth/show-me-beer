@@ -1,7 +1,3 @@
-// importing firebase dependancy
-import firebase from 'firebase';
-import leaflet from 'leaflet';
-
 // dependancies
 import React from 'react';
 import { render } from 'react-dom';

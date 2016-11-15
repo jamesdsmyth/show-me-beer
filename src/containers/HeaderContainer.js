@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Store from '../reducers/CombinedReducers';
-import * as actions from '../actions/actions';
 import { SignUserIn, SignUserOut } from '../data/FirebaseRef';
 
 import NotificationsComponent from '../components/NotificationsComponent';
@@ -124,8 +122,8 @@ const mapStateToProps = (state) => {
 };
 
 HeaderContainerView.propTypes = {
-    children: PropTypes.arrayOf,
-    user: PropTypes.shape
+    children: PropTypes.arrayOf.isRequired,
+    user: PropTypes.shape.isRequired
 };
 
 const HeaderContainer = connect(mapStateToProps)(HeaderContainerView);

@@ -1,55 +1,49 @@
-import data from '../data/data.js'
+import data from '../data/data';
 
 const UserReducer = (state = data.user, action) => {
-
-    var newState = Object.assign({}, state);
-
-    var user = 'user'
+    let newState = Object.assign({}, state);
 
     switch (action.type) {
 
-        case 'SIGN_IN_USER':
+    case 'SIGN_IN_USER':
 
-            newState = Object.assign({}, state, {
-                userName: action.userName,
-                uid: action.uid,
-                photo: action.photo,
-                email: action.email,
-                beers: action.beers,
-                locations: action.locations
-            });
+        newState = Object.assign({}, state, {
+            userName: action.userName,
+            uid: action.uid,
+            photo: action.photo,
+            email: action.email,
+            beers: action.beers,
+            locations: action.locations
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        case 'SIGN_OUT_USER':
+    case 'SIGN_OUT_USER':
 
-            newState = Object.assign({}, state, {
-                userName: null,
-                email: null,
-                uid: null,
-                photo: null,
-                beers: null,
-                locations: null
-            });
+        newState = Object.assign({}, state, {
+            userName: null,
+            email: null,
+            uid: null,
+            photo: null,
+            beers: null,
+            locations: null
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        case 'SAVE_BEER':
+    case 'SAVE_BEER':
 
-            newState = Object.assign({}, state, {
-                beers: {
-                    data: action.beers.data
-                }
-            });
+        newState = Object.assign({}, state, {
+            beers: {
+                data: action.beers.data
+            }
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        default:
-            return state;
+    default:
+        return state;
     }
-}
+};
 
-export default UserReducer
+export default UserReducer;

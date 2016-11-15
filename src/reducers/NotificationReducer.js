@@ -1,32 +1,30 @@
 const NotificationReducer = (state = {}, action) => {
-
     let newState = null;
 
-    switch(action.type) {
-        case 'SHOW_ADDED_NOTIFICATION':
-            newState = Object.assign({}, state, {
-                beerOrLocation: action.beerOrLocation,
-                name: action.name,
-                added: true,
-                removed: false
-            });
+    switch (action.type) {
+    case 'SHOW_ADDED_NOTIFICATION':
+        newState = Object.assign({}, state, {
+            beerOrLocation: action.beerOrLocation,
+            name: action.name,
+            added: true,
+            removed: false
+        });
 
-            return newState;
+        return newState;
 
-        case 'SHOW_REMOVED_NOTIFICATION':
-            newState = Object.assign({}, state, {
-                beerOrLocation: action.beerOrLocation,
-                name: action.name,
-                added: false,
-                removed: true
-            });
+    case 'SHOW_REMOVED_NOTIFICATION':
+        newState = Object.assign({}, state, {
+            beerOrLocation: action.beerOrLocation,
+            name: action.name,
+            added: false,
+            removed: true
+        });
 
-            return newState;
-            break;
+        return newState;
 
-        default:
-            return state;
+    default:
+        return state;
     }
-}
+};
 
-export default NotificationReducer
+export default NotificationReducer;

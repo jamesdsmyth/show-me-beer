@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import Store from '../reducers/CombinedReducers';
 import * as actions from '../actions/actions';
 

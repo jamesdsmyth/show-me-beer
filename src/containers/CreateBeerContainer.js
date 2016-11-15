@@ -523,9 +523,9 @@ const MapStateToProps = (state) => {
 };
 
 CreateBeerContainerView.propTypes = {
-    types: PropTypes.arrayOf,
-    styles: PropTypes.arrayOf,
-    countries: PropTypes.arrayOf
+    types: PropTypes.arrayOf.isRequired,
+    styles: PropTypes.arrayOf.isRequired,
+    countries: PropTypes.arrayOf.isRequired
 };
 
 const CreateBeerContainer = connect(MapStateToProps)(CreateBeerContainerView);

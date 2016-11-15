@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classnames from 'classnames';
-import { saveBeer } from '../actions/actions';
-import Store from '../reducers/CombinedReducers';
 import { SaveBeer, RemoveBeer } from '../data/FirebaseRef';
 
 import MapComponent from '../components/MapComponent';
@@ -60,7 +58,7 @@ class BeerContainerView extends React.Component {
             if (Object.keys(locations).length > 0) {
                 toReturn =
                     <li key={i} className="basic-location">
-                        <Link to={`/locations/ ${locations[currentBeer.locations[location].uid].url}`}>
+                        <Link to={`/locations/${locations[currentBeer.locations[location].uid].url}`}>
                             {locations[currentBeer.locations[location].uid].name}
                         </Link>
                     </li>;
@@ -141,10 +139,10 @@ const mapStateToProps = (state) => {
 };
 
 BeerContainerView.propTypes = {
-    user: PropTypes.shape,
-    beers: PropTypes.arrayOf,
-    locations: PropTypes.arrayOf,
-    params: PropTypes.arrayOf
+    user: PropTypes.shape.isRequired,
+    beers: PropTypes.arrayOf.isRequired,
+    locations: PropTypes.arrayOf.isRequired,
+    params: PropTypes.arrayOf.isRequired
 };
 
 const BeerContainer = connect(mapStateToProps)(BeerContainerView);

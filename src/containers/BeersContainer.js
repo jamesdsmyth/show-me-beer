@@ -17,7 +17,7 @@ const BeersContainer = ({ children }) => (
     );
 
 BeersContainer.propTypes = {
-    children: PropTypes.arrayOf
+    children: PropTypes.arrayOf.isRequired
 };
 
 export default BeersContainer;

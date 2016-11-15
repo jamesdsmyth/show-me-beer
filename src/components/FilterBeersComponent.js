@@ -250,11 +250,11 @@ const mapStateToProps = (state) => {
 };
 
 FilterBeersComponentView.propTypes = {
-    user: PropTypes.shape,
-    beers: PropTypes.arrayOf,
-    types: PropTypes.arrayOf,
-    styles: PropTypes.arrayOf,
-    countries: PropTypes.arrayOf,
+    user: PropTypes.shape.isRequired,
+    beers: PropTypes.arrayOf.isRequired,
+    types: PropTypes.arrayOf.isRequired,
+    styles: PropTypes.arrayOf.isRequired,
+    countries: PropTypes.arrayOf.isRequired,
     creationPage: PropTypes.bool,
     createLocations: PropTypes.bool
 };

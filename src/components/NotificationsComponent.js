@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 };
 
 NotificationsComponentView.propTypes = {
-    notifications: PropTypes.arrayOf
+    notifications: PropTypes.arrayOf.isRequired
 };
 
 const NotificationsComponent = connect(mapStateToProps)(NotificationsComponentView);

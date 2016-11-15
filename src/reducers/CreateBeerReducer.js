@@ -20,9 +20,12 @@ const CreateBeerReducer = (state = Data.createBeer, action) => {
 
         // filtering the location we need to remove. Then below setting it
         const locationsArray = state.locations.filter((location) => {
+            let toReturn = null;
             if (location.uid !== action.uid) {
-                return location;
+                toReturn = location;
             }
+
+            return toReturn;
         });
 
         newState = Object.assign({}, state, {
