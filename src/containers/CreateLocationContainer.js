@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Store from '../reducers/CombinedReducers';
 import FilterBeersComponent from '../components/FilterBeersComponent';
 import { CreateLocation } from '../data/FirebaseRef';
-import { initialiseLocationCreation, clearBeersFromLocations } from '../actions/actions';
+import { initialiseLocationCreation } from '../actions/actions';
 
 class CreateBeerContainerView extends React.Component {
 
@@ -32,94 +32,7 @@ class CreateBeerContainerView extends React.Component {
         });
     }
 
-    // checks the section to see whether it has been filled out correctly
-    checkFormSection(sectionNumber) {
-        let completed = 0;
-        let inputCount = 0;
-        const section = $(`.form-row. ${sectionNumber}`);
-
-        section.find('.input').each(function () {
-            inputCount++;
-            if ($(this).val() !== ('') && ($(this).val() !== 'Country') && ($(this).val() !== 'Borough')) {
-                completed++;
-            }
-        });
-
-        // if the number of completed fields === the number of inputs, then we can show the next button
-        if(completed === inputCount) {
-            this.setState({
-                showNextButton: true
-            });
-        } else {
-            this.setState({
-                showNextButton: false
-            });
-        }
-    }
-
-    // clicking the next button will change the question section.
-    // this is done by increasing the formFillCount which matches to the section that relates to that number
-    nextButtonClick (section) {
-
-        var setObject = {};
-
-        switch (section) {
-
-            case 'zero':
-
-                setObject = {
-                    name: $('#name').val(),
-                    street: $('#street').val(),
-                    borough: $('#borough').val(),
-                    postcode: $('#postcode').val(),
-                    city: $('#city').val(),
-                    country: $('#country').val()
-                }
-
-                break;
-
-            case 'one':
-
-                setObject = {
-                    phone: $('#phone').val()
-                }
-
-                break;
-
-            case 'two':
-
-                setObject = {
-                    longitude: $('#longitude').val(),
-                    latitude: $('#latitude').val(),
-                }
-
-                break;
-
-            case 'three':
-
-                setObject = {
-                    description: $('#description').val(),
-                }
-
-                break;
-
-            case 'four':
-
-                setObject = {
-                    photo: document.getElementById('photo').files[0]
-                }
-
-                break;
-        }
-
-        setObject.formFillCount = this.state.formFillCount + 1;
-        setObject.showNextButton = false;
-
-        this.setState(setObject);
-        this.setFieldData();
-    }
-
-    previousButtonClick () {
+    previousButtonClick() {
         this.setState({
             formFillCount: this.state.formFillCount - 1,
             showNextButton: true
@@ -129,8 +42,7 @@ class CreateBeerContainerView extends React.Component {
     }
 
     // when we navigate through the steps, we want to populate data that the user has already filled out
-    setFieldData () {
-
+    setFieldData() {
         setTimeout(() => {
             $('#name').val(this.state.name);
             $('#street').val(this.state.street);
@@ -147,8 +59,97 @@ class CreateBeerContainerView extends React.Component {
         }, 250);
     }
 
+    // clicking the next button will change the question section.
+    // this is done by increasing the formFillCount which matches to the section that relates to that number
+    nextButtonClick(section) {
+        let setObject = {};
+
+        switch (section) {
+
+        case 'zero':
+
+            setObject = {
+                name: $('#name').val(),
+                street: $('#street').val(),
+                borough: $('#borough').val(),
+                postcode: $('#postcode').val(),
+                city: $('#city').val(),
+                country: $('#country').val()
+            };
+
+            break;
+
+        case 'one':
+
+            setObject = {
+                phone: $('#phone').val()
+            };
+
+            break;
+
+        case 'two':
+
+            setObject = {
+                longitude: $('#longitude').val(),
+                latitude: $('#latitude').val()
+            };
+
+            break;
+
+        case 'three':
+
+            setObject = {
+                description: $('#description').val()
+            };
+
+            break;
+
+        case 'four':
+
+            setObject = {
+                photo: document.getElementById('photo').files[0]
+            };
+
+            break;
+
+        default:
+            console.log('default');
+        }
+
+        setObject.formFillCount = this.state.formFillCount + 1;
+        setObject.showNextButton = false;
+
+        this.setState(setObject);
+        this.setFieldData();
+    }
+
+    // checks the section to see whether it has been filled out correctly
+    checkFormSection(sectionNumber) {
+        let completed = 0;
+        let inputCount = 0;
+        const section = $(`.form-row. ${sectionNumber}`);
+
+        section.find('.input').each(() => {
+            inputCount++;
+            if ($(this).val() !== ('') && ($(this).val() !== 'Country') && ($(this).val() !== 'Borough')) {
+                completed++;
+            }
+        });
+
+        // if the number of completed fields === the number of inputs, then we can show the next button
+        if (completed === inputCount) {
+            this.setState({
+                showNextButton: true
+            });
+        } else {
+            this.setState({
+                showNextButton: false
+            });
+        }
+    }
+
     // clears the form so no input is populated
-    clearFormData () {
+    clearFormData() {
         this.setState({
             name: null,
             street: null,
@@ -168,21 +169,20 @@ class CreateBeerContainerView extends React.Component {
     }
 
     // removes all selected locations from the beer so a new beer can be created
-    static clearBeers() {
+    clearBeers() {
         Store.dispatch(clearBeersFromLocation());
     }
 
     // navigates the user to the form section again ready to create a new beer
-    static viewForm() {
+    viewForm() {
         Store.dispatch(initialiseLocationCreation());
     }
 
     // creating the object to pass to firebase to add the beer to the list
     createLocationObject(event) {
-
         event.preventDefault();
 
-        let locationObject = {
+        const locationObject = {
             name: this.state.name,
             street: this.state.street,
             borough: this.state.borough,
@@ -199,267 +199,312 @@ class CreateBeerContainerView extends React.Component {
             photo: this.state.photo,
             beers: this.state.createLocations.beers,
             lastEditedBy: this.state.user.uid
-        }
+        };
 
         console.log(locationObject);
         // add to locations list
         CreateLocation(locationObject);
     }
 
-    render () {
+    render() {
+        const boroughs = this.props.boroughs;
+        const locations = this.props.locations;
+        const countries = this.props.countries;
+        const beers = this.state.beers || {};
+        const sectionToDisplay = this.state.visibleSection;
+        const formFillCount = this.state.formFillCount;
 
-        var boroughs = this.props.boroughs,
-            styles = this.props.styles,
-            locations = this.props.locations,
-            countries = this.props.countries,
-            beers = this.state.beers || {},
-            sectionToDisplay = this.state.visibleSection,
-            toDisplay = null,
-            formFillCount = this.state.formFillCount;
+        let toDisplay = null;
 
 
-            console.log(sectionToDisplay);
+        console.log(sectionToDisplay);
 
-        var boroughSelectOptions = boroughs.map((type, i) => {
-            return <option key={i} value={type}>{type}</option>
-        });
+        const boroughSelectOptions = boroughs.map((type, i) => <option key={i} value={type}>{type}</option>);
 
-        var countrySelectOptions = countries.map((country, i) => {
-            return <option key={i} value={country}>{country}</option>
-        });
+        const countrySelectOptions = countries.map((country, i) => <option key={i} value={country}>{country}</option>);
 
-        {/* switch statement for the different panels needed in filling out, submitted and getting the success/failure from submitting a beer*/}
         switch (sectionToDisplay) {
-            case 'form':
-                toDisplay = <form className="add-item-form" onSubmit={this.createLocationObject}>
-                                    {formFillCount < 6 ?
-                                        <section className="area buffer">
-                                            <h2>Tell us about the Location</h2>
-                                            <p>Here you can add a location and tell us what beers are currently being sold there.</p>
+        default:
+            toDisplay =
+                <form className="add-item-form" onSubmit={this.createLocationObject}>
+                    {formFillCount < 6 ?
+                        <section className="area buffer">
+                            <h2>Tell us about the Location</h2>
+                            <p>Here you can add a location and tell us what beers are currently being sold there.</p>
 
-                                            {/* this is section one and is shown only for the first 4 sections */}
-                                            {formFillCount === 0 ?
-                                                <div className="form-row zero">
-                                                    <input id="name"
-                                                           className="input"
-                                                           placeholder="Name of location"
-                                                           onChange={() => this.checkFormSection('zero')}
-                                                           type="text" />
-                                                    <input id="street"
-                                                           className="input"
-                                                           placeholder="Street name"
-                                                           type="text" />
-                                                    <input id="postcode"
-                                                           className="input"
-                                                           placeholder="Postcode"
-                                                           onChange={() => this.checkFormSection('zero')}
-                                                           type="text" />
-                                                    <input id="city"
-                                                           className="input"
-                                                           placeholder="City of origin"
-                                                           onChange={() => this.checkFormSection('zero')}
-                                                           type="text" />
-                                                    <select id="borough"
-                                                            className="select input"
-                                                            onChange={() => this.checkFormSection('zero')}>
-                                                        <option>Borough</option>
-                                                        {boroughSelectOptions}
-                                                    </select>
-                                                    <select id="country"
-                                                            className="select input"
-                                                            onChange={() => this.checkFormSection('zero')}>
-                                                        <option>Country</option>
-                                                        {countrySelectOptions}
-                                                    </select>
-                                                    <div className="buttons">
-                                                        {this.state.showNextButton === true ?
-                                                            <button type="button"
-                                                                className="button secondary"
-                                                                onClick={() => this.nextButtonClick('zero')}>
-                                                                Next
-                                                            </button>
-                                                        :
-                                                        null}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-
-                                            {formFillCount === 1 ?
-                                                <div className="form-row one">
-                                                    <input id="phone"
-                                                           className="input"
-                                                           placeholder="Phone number"
-                                                           onChange={() => this.checkFormSection('one')}
-                                                           type="number" />
-                                                    <div className="buttons">
-                                                        <button type="button"
-                                                            className="button secondary"
-                                                            onClick={() => this.previousButtonClick()}>
-                                                            Previous
-                                                        </button>
-                                                        {this.state.showNextButton === true ?
-                                                            <button type="button"
-                                                                className="button secondary"
-                                                                onClick={() => this.nextButtonClick('one')}>
-                                                                Next
-                                                            </button>
-                                                        :
-                                                        null}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-
-                                            {formFillCount === 2 ?
-                                                <div className="form-row two">
-                                                    <input id="latitude"
-                                                           className="input"
-                                                           placeholder="Location's latitude"
-                                                           onChange={() => this.checkFormSection('two')}
-                                                           type="text" />
-                                                    <input id="longitude"
-                                                           className="input"
-                                                           placeholder="Location's longitude"
-                                                           onChange={() => this.checkFormSection('two')}
-                                                           type="text" />
-                                                    <div className="buttons">
-                                                        <button type="button"
-                                                            className="button secondary"
-                                                            onClick={() => this.previousButtonClick()}>
-                                                            Previous
-                                                        </button>
-                                                        {this.state.showNextButton === true ?
-                                                            <button type="button"
-                                                                className="button secondary"
-                                                                onClick={() => this.nextButtonClick('two')}>
-                                                                Next
-                                                            </button>
-                                                        :
-                                                        null}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-
-                                            {formFillCount === 3 ?
-                                                <div className="form-row three">
-                                                    <textarea id="description"
-                                                              className="input textarea"
-                                                              placeholder="Tell us about the location"
-                                                              onChange={() => this.checkFormSection('three')}
-                                                              type="text" />
-                                                    <div className="buttons">
-                                                        <button type="button"
-                                                            className="button secondary"
-                                                            onClick={() => this.previousButtonClick()}>
-                                                            Previous
-                                                        </button>
-                                                        {this.state.showNextButton === true ?
-                                                            <button type="button"
-                                                                className="button secondary"
-                                                                onClick={() => this.nextButtonClick('three')}>
-                                                                Next
-                                                            </button>
-                                                        :
-                                                        null}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-
-                                            {formFillCount === 4 ?
-                                                <div className="form-row four">
-                                                    <input id="photo"
-                                                           className="input"
-                                                           placeholder="image url"
-                                                           onChange={() => this.checkFormSection('four')}
-                                                           type="file" />
-                                                    <div className="buttons">
-                                                        <button type="button"
-                                                            className="button secondary"
-                                                            onClick={() => this.previousButtonClick()}>
-                                                            Previous
-                                                        </button>
-                                                        {this.state.showNextButton === true ?
-                                                            <button type="button"
-                                                                className="button secondary"
-                                                                onClick={() => this.nextButtonClick('four')}>
-                                                                Next
-                                                            </button>
-                                                        :
-                                                        null}
-                                                    </div>
-                                                </div>
-                                            :
-                                                null
-                                            }
-                                        </section>
-                                    :
-                                    null
-                                    }
-
-                                    {/* this is section one and is shown only for the first 4 sections */}
-                                    {formFillCount === 5 ?
-                                        <section className="area buffer">
-                                            <h2>What beers do they sell?</h2>
-                                            {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
-                                            <FilterBeersComponent creationPage />
-                                            <div className="buttons">
-                                                <button type="button"
-                                                    className="button secondary"
-                                                    onClick={() => this.previousButtonClick()}>
-                                                    Previous
-                                                </button>
-                                                <button type="submit"
-                                                    className="button primary">
-                                                    Create location!
-                                                </button>
-                                            </div>
-                                        </section>
-                                    :
-                                    null
-                                    }
-                                 </form>
-
-                break;
-
-            case 'submitted':
-                toDisplay =  <section className="area buffer">
-                                    <p>Your location is being created...</p>
-                                </section>
-                break;
-
-            case 'success':
-                toDisplay =  <section className="area buffer">
-                                    <p>You have just added a location!</p>
+                            {/* this is section one and is shown only for the first 4 sections */}
+                            {formFillCount === 0 ?
+                                <div className="form-row zero">
+                                    <input
+                                        id="name"
+                                        className="input"
+                                        placeholder="Name of location"
+                                        onChange={() => this.checkFormSection('zero')}
+                                        type="text"
+                                    />
+                                    <input
+                                        id="street"
+                                        className="input"
+                                        placeholder="Street name"
+                                        type="text"
+                                    />
+                                    <input
+                                        id="postcode"
+                                        className="input"
+                                        placeholder="Postcode"
+                                        onChange={() => this.checkFormSection('zero')}
+                                        type="text"
+                                    />
+                                    <input
+                                        id="city"
+                                        className="input"
+                                        placeholder="City of origin"
+                                        onChange={() => this.checkFormSection('zero')}
+                                        type="text"
+                                    />
+                                    <select
+                                        id="borough"
+                                        className="select input"
+                                        onChange={() => this.checkFormSection('zero')}
+                                    >
+                                        <option>Borough</option>
+                                        {boroughSelectOptions}
+                                    </select>
+                                    <select
+                                        id="country"
+                                        className="select input"
+                                        onChange={() => this.checkFormSection('zero')}
+                                    >
+                                        <option>Country</option>
+                                        {countrySelectOptions}
+                                    </select>
                                     <div className="buttons">
-                                        <button type="button"
+                                        {this.state.showNextButton === true ?
+                                            <button
+                                                type="button"
                                                 className="button secondary"
-                                                onClick={() => this.clearFormData(),
-                                                         () => this.clearBeers()}>
-                                            Create another location
-                                        </button>
+                                                onClick={() => this.nextButtonClick('zero')}
+                                            >
+                                                Next
+                                            </button>
+                                        :
+                                        null}
                                     </div>
-                                </section>
-                break;
+                                </div>
+                            :
+                                null
+                            }
 
-            case 'failure':
-                toDisplay =  <section className="area buffer">
-                                    <p>We could not create your location at this time</p>
+                            {formFillCount === 1 ?
+                                <div className="form-row one">
+                                    <input
+                                        id="phone"
+                                        className="input"
+                                        placeholder="Phone number"
+                                        onChange={() => this.checkFormSection('one')}
+                                        type="number"
+                                    />
                                     <div className="buttons">
-                                        <button type="button"
-                                                className="button secondary"
-                                                onClick={() => this.viewForm()}>
-                                            Try again
+                                        <button
+                                            type="button"
+                                            className="button secondary"
+                                            onClick={() => this.previousButtonClick()}
+                                        >
+                                            Previous
                                         </button>
+                                        {this.state.showNextButton === true ?
+                                            <button
+                                                type="button"
+                                                className="button secondary"
+                                                onClick={() => this.nextButtonClick('one')}
+                                            >
+                                                Next
+                                            </button>
+                                        :
+                                        null}
                                     </div>
-                                </section>
-                break;
+                                </div>
+                            :
+                                null
+                            }
+
+                            {formFillCount === 2 ?
+                                <div className="form-row two">
+                                    <input
+                                        id="latitude"
+                                        className="input"
+                                        placeholder="Location's latitude"
+                                        onChange={() => this.checkFormSection('two')}
+                                        type="text"
+                                    />
+                                    <input
+                                        id="longitude"
+                                        className="input"
+                                        placeholder="Location's longitude"
+                                        onChange={() => this.checkFormSection('two')}
+                                        type="text"
+                                    />
+                                    <div className="buttons">
+                                        <button
+                                            type="button"
+                                            className="button secondary"
+                                            onClick={() => this.previousButtonClick()}
+                                        >
+                                            Previous
+                                        </button>
+                                        {this.state.showNextButton === true ?
+                                            <button
+                                                type="button"
+                                                className="button secondary"
+                                                onClick={() => this.nextButtonClick('two')}
+                                            >
+                                                Next
+                                            </button>
+                                        :
+                                        null}
+                                    </div>
+                                </div>
+                            :
+                                null
+                            }
+
+                            {formFillCount === 3 ?
+                                <div className="form-row three">
+                                    <textarea
+                                        id="description"
+                                        className="input textarea"
+                                        placeholder="Tell us about the location"
+                                        onChange={() => this.checkFormSection('three')}
+                                        type="text"
+                                    />
+                                    <div className="buttons">
+                                        <button
+                                            type="button"
+                                            className="button secondary"
+                                            onClick={() => this.previousButtonClick()}
+                                        >
+                                            Previous
+                                        </button>
+                                        {this.state.showNextButton === true ?
+                                            <button
+                                                type="button"
+                                                className="button secondary"
+                                                onClick={() => this.nextButtonClick('three')}
+                                            >
+                                                Next
+                                            </button>
+                                        :
+                                        null}
+                                    </div>
+                                </div>
+                            :
+                                null
+                            }
+
+                            {formFillCount === 4 ?
+                                <div className="form-row four">
+                                    <input
+                                        id="photo"
+                                        className="input"
+                                        placeholder="image url"
+                                        onChange={() => this.checkFormSection('four')}
+                                        type="file"
+                                    />
+                                    <div className="buttons">
+                                        <button
+                                            type="button"
+                                            className="button secondary"
+                                            onClick={() => this.previousButtonClick()}
+                                        >
+                                            Previous
+                                        </button>
+                                        {this.state.showNextButton === true ?
+                                            <button
+                                                type="button"
+                                                className="button secondary"
+                                                onClick={() => this.nextButtonClick('four')}
+                                            >
+                                                Next
+                                            </button>
+                                        :
+                                        null}
+                                    </div>
+                                </div>
+                            :
+                                null
+                            }
+                        </section>
+                    :
+                    null
+                    }
+
+                    {/* this is section one and is shown only for the first 4 sections */}
+                    {formFillCount === 5 ?
+                        <section className="area buffer">
+                            <h2>What beers do they sell?</h2>
+                            {/* passing a prop flag so certain click events are displayed on the FilterLocationsComponent page */}
+                            <FilterBeersComponent creationPage />
+                            <div className="buttons">
+                                <button
+                                    type="button"
+                                    className="button secondary"
+                                    onClick={() => this.previousButtonClick()}
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="button primary"
+                                >
+                                    Create location!
+                                </button>
+                            </div>
+                        </section>
+                    :
+                    null
+                    }
+                </form>;
+
+            break;
+
+        case 'submitted':
+            toDisplay =
+                <section className="area buffer">
+                    <p>Your location is being created...</p>
+                </section>;
+            break;
+
+        case 'success':
+            toDisplay =
+                <section className="area buffer">
+                    <p>You have just added a location!</p>
+                    <div className="buttons">
+                        <button
+                            type="button"
+                            className="button secondary"
+                            onClick={() => (this.clearFormData())(this.clearBeers())}
+                        >
+                            Create another location
+                        </button>
+                    </div>
+                </section>;
+            break;
+
+        case 'failure':
+            toDisplay =
+                <section className="area buffer">
+                    <p>We could not create your location at this time</p>
+                    <div className="buttons">
+                        <button
+                            type="button"
+                            className="button secondary"
+                            onClick={() => this.viewForm()}
+                        >
+                            Try again
+                        </button>
+                    </div>
+                </section>;
+            break;
 
         }
 
@@ -470,24 +515,29 @@ class CreateBeerContainerView extends React.Component {
                 </section>
                 {toDisplay}
             </div>
-        )
+        );
     }
 }
 
 const MapStateToProps = (state) => {
-
     return {
         beers: state.beers,
         types: state.beerTypes,
-        styles: state.beerStyles,
         locations: state.locations,
         countries: state.countries,
         boroughs: state.boroughs,
         createLocations: state.createLocations,
         user: state.user
-    }
+    };
+};
+
+CreateBeerContainerView.propTypes = {
+    boroughs: PropTypes.arrayOf,
+    locations: PropTypes.arrayOf,
+    countries: PropTypes.arrayOf,
+    beers: PropTypes.arrayOf
 }
 
 const CreateBeerContainer = connect(MapStateToProps)(CreateBeerContainerView);
 
-export default CreateBeerContainer
+export default CreateBeerContainer;

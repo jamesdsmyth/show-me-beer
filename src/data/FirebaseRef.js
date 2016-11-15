@@ -14,7 +14,7 @@ const PopulateStore = () => {
 
 // creating the user and adding it to Firebase
 const CreateUser = (uid) => {
-    firebase.database().ref(`users/  ${uid}`).set({
+    firebase.database().ref(`users/${uid}`).set({
         beers: 'currently no beers',
         locations: 'currently no locations'
     });
@@ -22,7 +22,7 @@ const CreateUser = (uid) => {
 
 // getting the user data from Firebase
 const GetUserData = (user) => {
-    const userRef = firebase.database().ref(`/users/ ${user.uid}`);
+    const userRef = firebase.database().ref(`/users/${user.uid}`);
 
     userRef.once('value').then((snapshot) => {
         const data = snapshot.val();
@@ -72,7 +72,7 @@ export function SaveBeer(beerUID, beerName) {
     const beerObject = { uid: beerUID };
 
     const updates = {};
-    updates[`/users/ ${uid} /beers/ ${newBeerKey}`] = beerObject;
+    updates[`/users/${uid}/beers/${newBeerKey}`] = beerObject;
 
     return firebase.database().ref().update(updates).then((value) => {
         console.log(value);
@@ -88,7 +88,7 @@ export function SaveBeer(beerUID, beerName) {
 export function RemoveBeer(beerSavedKey, beerName) {
     const uid = Store.getState().user.uid;
 
-    firebase.database().ref(`users/ ${uid} /beers/ ${beerSavedKey}`).remove().then(() => {
+    firebase.database().ref(`users/${uid}/beers/${beerSavedKey}`).remove().then(() => {
         Store.dispatch(actions.showRemoveNotification(beerName, 'beer'));
     });
 }
@@ -102,7 +102,7 @@ export function CreateBeer(beerObject) {
         contentType: beerObject.photo.type
     };
 
-    const uploadTask = storageRef.child(`images/ ${beerObject.photo.name}`).put(beerObject.photo, metadata);
+    const uploadTask = storageRef.child(`images/${beerObject.photo.name}`).put(beerObject.photo, metadata);
 
     Store.dispatch(actions.beerSubmitted());
 
@@ -140,7 +140,7 @@ export function CreateBeer(beerObject) {
         const newBeerKey = firebase.database().ref().child('beers').push().key;
 
         const updates = {};
-        updates[`/beers/ ${newBeerKey}`] = obj;
+        updates[`/beers/${newBeerKey}`] = obj;
 
 
         // adding the beer reference to the location object
@@ -151,7 +151,7 @@ export function CreateBeer(beerObject) {
 
             const newlocationBeerKey = firebase.database().ref().child('locations/beers').push().key;
 
-            updates[`/locations/ ${obj.locations[i].uid} /beers/ ${newlocationBeerKey}`] = beerUidObject;
+            updates[`/locations/${obj.locations[i].uid}/beers/${newlocationBeerKey}`] = beerUidObject;
         }
 
         return firebase.database().ref().update(updates).then((value) => {
@@ -173,7 +173,7 @@ export function CreateLocation(locationObject) {
         contentType: locationObject.photo.type
     };
 
-    const uploadTask = storageRef.child(`images/ ${locationObject.photo.name}`).put(locationObject.photo, metadata);
+    const uploadTask = storageRef.child(`images/${locationObject.photo.name}`).put(locationObject.photo, metadata);
 
     Store.dispatch(actions.locationSubmitted());
 
@@ -210,7 +210,7 @@ export function CreateLocation(locationObject) {
         const newLocationKey = firebase.database().ref().child('locations').push().key;
 
         const updates = {};
-        updates[`/locations/ ${newLocationKey}`] = obj;
+        updates[`/locations/${newLocationKey}`] = obj;
 
         // adding the beer reference to the location object
         for (let i = 0; i < obj.beers.length; i++) {
@@ -220,7 +220,7 @@ export function CreateLocation(locationObject) {
 
             const newlocationBeerKey = firebase.database().ref().child('beers/locations').push().key;
 
-            updates[`/beers/ ${obj.beers[i].uid} /locations/ ${newlocationBeerKey}`] = locationUidObject;
+            updates[`/beers/${obj.beers[i].uid}/locations/${newlocationBeerKey}`] = locationUidObject;
         }
 
 

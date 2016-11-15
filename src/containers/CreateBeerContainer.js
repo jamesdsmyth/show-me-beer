@@ -213,7 +213,6 @@ class CreateBeerContainerView extends React.Component {
     render() {
         const types = this.props.types;
         const styles = this.props.styles;
-        const locations = this.props.locations;
         const countries = this.props.countries;
         const formFillCount = this.state.formFillCount;
         const sectionToDisplay = this.state.visibleSection;
@@ -517,7 +516,6 @@ const MapStateToProps = (state) => {
         beers: state.beers,
         types: state.beerTypes,
         styles: state.beerStyles,
-        locations: state.locations,
         countries: state.countries,
         createBeers: state.createBeers,
         user: state.user
@@ -527,7 +525,6 @@ const MapStateToProps = (state) => {
 CreateBeerContainerView.propTypes = {
     types: PropTypes.arrayOf,
     styles: PropTypes.arrayOf,
-    locations: PropTypes.arrayOf,
     countries: PropTypes.arrayOf
 };
 

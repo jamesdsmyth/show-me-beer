@@ -10,14 +10,15 @@ import NotificationsComponent from '../components/NotificationsComponent';
 class HeaderContainerView extends React.Component {
 
     // when the user clicks sign in
-    static signIn(event) {
+    signIn(event) {
+        console.log('clickinggggg');
         event.preventDefault();
 
         SignUserIn();
     }
 
     // when the user clicks sign out
-    static signOut(event) {
+    signOut(event) {
         event.preventDefault();
 
         SignUserOut();
