@@ -115,7 +115,7 @@ class FilterBeersComponentView extends React.Component {
         // creating the toggle tabs for the beer types
         const typeOptions = types.map((type, i) => {
             const typeClass = selectedType.indexOf(type) > -1 ? 'selected' : null;
-            return <li key={i} className={typeClass} onClick={() => handleTypeClick({ type })}>{type}</li>;
+            return <li key={i} className={typeClass} onClick={() => this.handleTypeClick({ type })}>{type}</li>;
         });
 
         // creating the toggle tabs for the beer styles
