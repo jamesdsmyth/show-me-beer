@@ -127,7 +127,7 @@ class FilterBeersComponentView extends React.Component {
         // creating the toggle tabs for the beer countries
         const countryOptions = countries.map((country, i) => {
             const styleClass = selectedCountry.indexOf(country) > -1 ? 'selected' : null;
-            return <li key={i} className={styleClass} onClick={() => handleCountryClick({ country })}>{country}</li>;
+            return <li key={i} className={styleClass} onClick={() => this.handleCountryClick({ country })}>{country}</li>;
         });
 
         // filtering out the beers by checking if the selected tabs are indexed in each of the beers properties
