@@ -1,15 +1,12 @@
 module.exports = {
     entry: './src/index.js',
-
     output: {
         filename: 'bundle.js',
         publicPath: ''
     },
-
     devtool: 'source-map',
-
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js?$/,
                 exclude: /node_modules/,
@@ -21,7 +18,11 @@ module.exports = {
             },
             {
                 test: /(\.css|\.scss)$/,
-                loaders: ['style', 'css', 'sass']
+                use: [
+                    'style-loader', 
+                    'css-loader', 
+                    'sass-loader'
+                ]
             },
             // url-loader needed for background images in scss file
             {
@@ -31,7 +32,7 @@ module.exports = {
             // svg-sprite-loader
             {
                 test: /\.svg$/,
-                loader: 'svg-sprite?' + JSON.stringify({
+                loader: 'svg-sprite-loader?' + JSON.stringify({
                     name: '[name]_[hash]',
                     prefixize: true
                 })
