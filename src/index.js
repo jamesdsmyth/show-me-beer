@@ -33,7 +33,9 @@ ReactDOM.render((
     <Provider store={Store}>
 
 
-        
+
+
+
         <Router history={browserHistory}>
             <Route path="/" component={HeaderContainer}>
                 <IndexRoute component={HomeContainer} />
