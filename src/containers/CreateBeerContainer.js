@@ -37,8 +37,8 @@ class CreateBeerContainerView extends React.Component {
         this.setState({
             beers: props.beers,
             createBeers: props.createBeers,
-            visibleSection: props.createBeers.visibleSection,
-            user: props.user
+            user: props.user,
+            visibleSection: props.createBeers.visibleSection
         });
     }
 
@@ -131,10 +131,8 @@ class CreateBeerContainerView extends React.Component {
         const newBeer = $('#name').val().replace(/\s+/g, '-').toLowerCase();
         // let matched = false;
 
-        for (const beer in this.state.beers) {
-            // matched = this.state.beers[beer].url === newBeer ? true : false;
-
-            if (this.state.beers[beer].url === newBeer) {
+        for (const beer in this.props.beers) {
+            if (this.props.beers[beer].url === newBeer) {
                 alert('This beer already exists');
                 // break;
             } else {
@@ -523,6 +521,9 @@ const MapStateToProps = (state) => {
 };
 
 CreateBeerContainerView.propTypes = {
+    beers: PropTypes.shape.isRequired,
+    createBeers: PropTypes.shape.isRequired,
+    user: PropTypes.shape.isRequired,
     types: PropTypes.arrayOf.isRequired,
     styles: PropTypes.arrayOf.isRequired,
     countries: PropTypes.arrayOf.isRequired

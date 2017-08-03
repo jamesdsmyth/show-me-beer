@@ -95,12 +95,12 @@ class BeerContainerView extends React.Component {
 
                         :
 
-                        <img
-                            className="star"
-                            src="../src/images/star-gold.png"
-                            alt="click this beer to remove it from your saved beers"
-                            onClick={() => this.removeBeer(beerSavedKey, currentBeer.name)}
-                        />
+                            <img
+                                className="star"
+                                src="../src/images/star-gold.png"
+                                alt="click this beer to remove it from your saved beers"
+                                onClick={() => this.removeBeer(beerSavedKey, currentBeer.name)}
+                            />
                     }
 
                 </section>

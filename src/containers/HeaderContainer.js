@@ -9,16 +9,13 @@ class HeaderContainerView extends React.Component {
 
     // when the user clicks sign in
     signIn(event) {
-        console.log('clickinggggg');
         event.preventDefault();
-
         SignUserIn();
     }
 
     // when the user clicks sign out
     signOut(event) {
         event.preventDefault();
-
         SignUserOut();
     }
 
@@ -122,7 +119,7 @@ const mapStateToProps = (state) => {
 };
 
 HeaderContainerView.propTypes = {
-    children: PropTypes.arrayOf.isRequired,
+    children: PropTypes.shape,
     user: PropTypes.shape.isRequired
 };
 

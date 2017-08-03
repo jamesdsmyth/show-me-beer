@@ -24,17 +24,8 @@ require('./offline-fallback.js');
 // calling FirebaseRef() to initialise the call to the Firebase DB to get the data
 FirebaseRef();
 
-
-
-
-
-
 ReactDOM.render((
     <Provider store={Store}>
-
-
-
-
 
         <Router history={browserHistory}>
             <Route path="/" component={HeaderContainer}>
