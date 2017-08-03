@@ -1,6 +1,6 @@
 // dependancies
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
@@ -24,7 +24,7 @@ require('./offline-fallback.js');
 // calling FirebaseRef() to initialise the call to the Firebase DB to get the data
 FirebaseRef();
 
-render((
+ReactDOM.render((
     <Provider store={Store}>
         <Router history={browserHistory}>
             <Route path="/" component={HeaderContainer}>

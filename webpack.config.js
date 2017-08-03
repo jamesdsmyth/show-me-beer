@@ -1,8 +1,30 @@
+const path = require('path');
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js'//,
+        // beers: './src/containers/BeersContainer.js',
+        // beer: './src/containers/BeerContainer.js',
+        // createBeers: './src/containers/CreateBeerContainer.js',
+        // createLocation: './src/containers/CreateLocationContainer.js',
+        // location: './src/containers/LocationContainer.js',
+        // locations: './src/containers/LocationsContainer.js',
+        // savedBeers: './src/containers/SavedBeersContainer.js'
+    },
+    plugins: [
+        // new HTMLWebpackPlugin({
+        //     title: 'Code Splitting'
+        // }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'common' // Specify the common bundle's name.
+        // })
+    ],
     output: {
+        // filename: '[name].bundle.js',
         filename: 'bundle.js',
-        publicPath: ''
+        path: path.resolve(__dirname, 'dist')
     },
     devtool: 'source-map',
     module: {
